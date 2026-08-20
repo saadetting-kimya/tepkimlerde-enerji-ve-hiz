@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Standart Oluşum Entalpisi · Kimya 11</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Modül 4 · Enerji</span>
+    <h1>Standart Oluşum Entalpisi</h1>
+    <p class="lead">Bir bileşiğin kendi elementlerinden oluşurken açığa çıkardığı ya da soğurduğu enerjiyi
+      bilmek, o bileşiğin kararlılığı hakkında çok şey söyler. Bu modülde standart oluşum entalpilerinden
+      yararlanarak tepkime entalpisi hesaplamayı öğreneceksin.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <h2><span class="num">1</span>Kavramlar</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Standart Oluşum Entalpisi (ΔH°f)</h3>
+        <p>Bir bileşiğin, kendi standart hâlindeki elementlerinden 1 molünün oluşması sırasındaki entalpi
+          değişimidir. Standart hâldeki elementlerin (H2(g), O2(g), N2(g) gibi) oluşum entalpisi <b>0</b> kabul
+          edilir.</p>
+      </div>
+      <div class="card">
+        <h3>Kararlılıkla İlişkisi</h3>
+        <p>ΔH°f değeri çok negatif olan bir bileşik (örneğin su), oluşurken çok fazla enerji açığa çıkarmıştır
+          ve oldukça kararlıdır — bu yüzden kolayca tekrar ayrışmaz. ΔH°f pozitif olan bileşikler (örneğin NO,
+          HCN) ise oluşurken enerji gerektirmiştir, daha az kararlıdır.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>Matematiksel model:</b>
+        ΔH°<sub>tepkime</sub> = Σn·ΔH°f (ürünler) − Σn·ΔH°f (tepkenler)</p>
+      <p style="margin:8px 0 0;color:var(--ink-soft);font-size:.9rem">Dikkat: Bu, bağ enerjisi formülünün
+        (kırılan − oluşan) tam tersi bir sıralamadır — burada <b>ürünlerden tepkenler çıkarılır</b>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">2</span>Keşfet: Oluşum Entalpisi Hesap Makinesi</h2>
+    <p class="block-lead">Bir tepkime seç; standart oluşum entalpisi tablosundan yararlanarak ΔH°<sub>tepkime</sub>
+      değerini adım adım hesapla.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="rxn-select">Tepkime:</label>
+        <select id="rxn-select"></select>
+      </div>
+      <div id="rxn-detail"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">3</span>Keşfet: Bileşiklerin Kararlılık Sıralaması</h2>
+    <p class="block-lead">Bazı bileşiklerin standart oluşum entalpileri aşağıda karşılaştırılmıştır. Negatif
+      değer, elementlerinden oluşurken ısı açığa çıktığını; pozitif değer ise ısı gerektiğini gösterir.</p>
+    <div class="lab">
+      <div class="lab-stage" style="min-height:280px"><svg id="stability-svg" viewBox="0 0 560 280" style="width:100%;max-width:560px"></svg></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">4</span>Değerlendir</h2>
+    <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
+    <div id="quiz-host"></div>
+  </div>
+</section>
+
+<div id="next-module-root"></div>
+<div id="footer-root"></div>
+
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/quiz-engine.js"></script>
+<script src="../assets/js/quiz-data.js"></script>
+<script>
+  const MODKEY = "m4";
+
+  const FORMATION = {
+    "H2O(g)": -241.8, "H2O(s)": -285.8, "NO2(g)": 33.2, "NO(g)": 90.3,
+    "NH3(g)": -46.1, "HCl(g)": -92.3, "NH4Cl(k)": -314.4, "C2H5OH(s)": -235.1,
+    "CO2(g)": -393.5, "CH4(g)": -74.9, "HCN(g)": 135.1, "H2S(g)": -20.7,
+    "SO2(g)": -296.8, "H2(g)": 0, "O2(g)": 0, "N2(g)": 0,
+  };
+
+  const RXN4 = [
+    {
+      name: "H2(g) + 1/2O2(g) → H2O(g)",
+      reactants: [["H2(g)", 1], ["O2(g)", 0.5]],
+      products: [["H2O(g)", 1]],
+    },
+    {
+      name: "NH3(g) + HCl(g) → NH4Cl(k)",
+      reactants: [["NH3(g)", 1], ["HCl(g)", 1]],
+      products: [["NH4Cl(k)", 1]],
+    },
+    {
+      name: "C2H5OH(s) + 3O2(g) → 2CO2(g) + 3H2O(g)",
+      reactants: [["C2H5OH(s)", 1], ["O2(g)", 3]],
+      products: [["CO2(g)", 2], ["H2O(g)", 3]],
+    },
+    {
+      name: "2CH4(g) + N2(g) → HCN(g) + NH3(g)",
+      reactants: [["CH4(g)", 2], ["N2(g)", 1]],
+      products: [["HCN(g)", 1], ["NH3(g)", 1]],
+    },
+    {
+      name: "2H2S(g) + 3O2(g) → 2H2O(s) + 2SO2(g)",
+      reactants: [["H2S(g)", 2], ["O2(g)", 3]],
+      products: [["H2O(s)", 2], ["SO2(g)", 2]],
+    },
+    {
+      name: "4NH3(g) + 6NO(g) → 5N2(g) + 6H2O(g)",
+      reactants: [["NH3(g)", 4], ["NO(g)", 6]],
+      products: [["N2(g)", 5], ["H2O(g)", 6]],
+    },
+  ];
+
+  function sumF(list) {
+    return list.reduce((acc, [name, n]) => acc + FORMATION[name] * n, 0);
+  }
+
+  function renderRxn4(idx) {
+    const rxn = RXN4[idx];
+    const reactSum = sumF(rxn.reactants);
+    const prodSum = sumF(rxn.products);
+    const dH = Math.round((prodSum - reactSum) * 10) / 10;
+    const detail = document.getElementById("rxn-detail");
+    detail.innerHTML = `
+      <div class="grid-2">
+        <table class="viz-table"><thead><tr><th>Tepken</th><th>n·ΔH°f (kJ)</th></tr></thead><tbody>
+          ${rxn.reactants.map(([name, n]) => `<tr><td>${n}× ${name}</td><td>${(FORMATION[name] * n).toFixed(1)}</td></tr>`).join("")}
+          <tr style="font-weight:700"><td>Toplam</td><td>${reactSum.toFixed(1)}</td></tr>
+        </tbody></table>
+        <table class="viz-table"><thead><tr><th>Ürün</th><th>n·ΔH°f (kJ)</th></tr></thead><tbody>
+          ${rxn.products.map(([name, n]) => `<tr><td>${n}× ${name}</td><td>${(FORMATION[name] * n).toFixed(1)}</td></tr>`).join("")}
+          <tr style="font-weight:700"><td>Toplam</td><td>${prodSum.toFixed(1)}</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card" style="margin-top:12px;text-align:center">
+        <p style="margin:0;font-size:1.05rem">ΔH° = ${prodSum.toFixed(1)} − (${reactSum.toFixed(1)}) =
+          <b style="color:${dH > 0 ? "var(--endo)" : "var(--exo)"}">${dH > 0 ? "+" : ""}${dH} kJ</b>
+          <span class="tag ${dH > 0 ? "endo" : "exo"}" style="margin-left:8px">${dH > 0 ? "Endotermik" : "Ekzotermik"}</span></p>
+      </div>
+    `;
+  }
+
+  function buildRxnLab4() {
+    const sel = document.getElementById("rxn-select");
+    RXN4.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
+    sel.addEventListener("change", () => renderRxn4(sel.value));
+    renderRxn4(0);
+  }
+
+  function drawStabilityChart() {
+    const compounds = [
+      ["CO2(g)", -393.5], ["H2O(s)", -285.8], ["SO2(g)", -296.8], ["C2H5OH(s)", -235.1],
+      ["CH4(g)", -74.9], ["NH3(g)", -46.1], ["NO(g)", 90.3], ["HCN(g)", 135.1],
+    ];
+    const svgEl = document.getElementById("stability-svg");
+    const chart = renderChart({
+      labels: compounds.map((c) => c[0]),
+      values: compounds.map((c) => c[1]),
+      unit: "Standart oluşum entalpisi (kJ/mol)",
+      tone: compounds.map((c) => (c[1] < 0 ? "exo" : "endo")),
+    });
+    chart.id = "stability-svg";
+    svgEl.replaceWith(chart);
+  }
+
+  buildRxnLab4();
+  drawStabilityChart();
+  mountNav(MODKEY);
+  mountNextModule(MODKEY);
+  markVisited(MODKEY);
+  mountFooter();
+  renderQuiz(MODKEY, QUIZ.m4);
+</script>
+</body>
+</html>

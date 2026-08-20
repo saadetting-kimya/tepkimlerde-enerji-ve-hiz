@@ -3,6 +3,7 @@
    Modül 1: Tepkimelerde Meydana Gelen Enerji Değişimi (KİM.11.1.1)
    Modül 2: Maddelerin Enerji Kaynağı Olma Potansiyeli (KİM.11.1.2)
    Modül 3: Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması (KİM.11.1.3)
+   Modül 4: Standart Oluşum Entalpisi (KİM.11.1.4)
    ============================================================ */
 
 const QUIZ = {
@@ -2655,6 +2656,762 @@ const QUIZ = {
       ],
       "correct": 2,
       "explain": "Entalpi bir hâl fonksiyonudur; yani toplam ΔH, izlenen ara basamaklardan bağımsız olarak yalnızca başlangıç (A) ve bitiş (C) durumlarının enerjisine bağlıdır. A→B→C basamaklarının toplamı (180+40=220 kJ) ile A→C yolunun ΔH'si eşit olmalıdır: yaklaşık +220 kJ."
+    }
+  ],
+  "m4": [
+    {
+      "difficulty": "kolay",
+      "text": "Bir bileşiğin, kendi standart hâlindeki elementlerinden 1 molünün oluşması sırasındaki entalpi değişimine ne ad verilir?",
+      "options": [
+        "Bağ enerjisi",
+        "Aktivasyon enerjisi",
+        "Standart oluşum entalpisi",
+        "Yanma ısısı",
+        "Tepkime hızı"
+      ],
+      "correct": 2,
+      "explain": "Bir bileşiğin kendi elementlerinden 1 mol oluşurken meydana gelen entalpi değişimine standart oluşum entalpisi (ΔH°f) denir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Standart hâldeki elementlerin (örneğin H2(g), O2(g), N2(g)) standart oluşum entalpisi kaç kabul edilir?",
+      "options": [
+        "0",
+        "Elemente göre değişir, sabit değildir",
+        "100",
+        "1",
+        "Negatif sonsuz"
+      ],
+      "correct": 0,
+      "explain": "Standart hâldeki elementler zaten kendi kendilerinden oluştuğu için, referans noktası olarak oluşum entalpileri 0 kabul edilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Standart oluşum entalpisi (ΔH°f) çok negatif olan bir bileşik için genel olarak ne söylenebilir?",
+      "options": [
+        "Bileşiğin kütlesi çok küçüktür",
+        "Bileşik yalnızca gaz hâlinde bulunur",
+        "Bileşik hiçbir zaman oluşmaz",
+        "Bileşik oluşurken çok fazla enerji açığa çıkarmıştır ve oldukça kararlıdır",
+        "Bileşik oldukça kararsızdır, kolayca ayrışır"
+      ],
+      "correct": 3,
+      "explain": "ΔH°f değeri çok negatifse, bileşik elementlerinden oluşurken büyük miktarda enerji açığa çıkarmış demektir; bu, bileşiğin düşük enerjili ve oldukça kararlı bir yapıya sahip olduğunu gösterir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Standart oluşum entalpisi (ΔH°f) pozitif olan bir bileşik (örneğin NO gazı) için ne söylenebilir?",
+      "options": [
+        "Bileşik hiç enerji değişimi yaşamamıştır",
+        "Pozitif değer bir hesaplama hatasını gösterir",
+        "Bileşik yalnızca sıvı hâlde bulunur",
+        "Bileşik elementlerinden oluşurken enerji soğurmuştur (gerektirmiştir), genellikle daha az kararlıdır",
+        "Bileşik elementlerinden oluşurken enerji açığa çıkarmıştır"
+      ],
+      "correct": 3,
+      "explain": "ΔH°f pozitifse bileşiğin oluşumu için elementlerden dışarıdan enerji alınması gerekmiştir; bu tür bileşikler (örneğin NO, HCN) genellikle daha az kararlıdır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Standart oluşum entalpileri kullanılarak bir tepkimenin entalpi değişimi hesaplanırken hangi matematiksel bağıntı kullanılır?",
+      "options": [
+        "ΔH°tepkime = Σn·ΔH°f(ürünler) × Σn·ΔH°f(tepkenler)",
+        "ΔH°tepkime = Σn·ΔH°f(ürünler) − Σn·ΔH°f(tepkenler)",
+        "ΔH°tepkime, oluşum entalpilerinden hesaplanamaz",
+        "ΔH°tepkime = Σn·ΔH°f(ürünler) + Σn·ΔH°f(tepkenler)",
+        "ΔH°tepkime = Σn·ΔH°f(tepkenler) − Σn·ΔH°f(ürünler)"
+      ],
+      "correct": 1,
+      "explain": "Standart tepkime entalpisi, ürünlerin oluşum entalpileri toplamından tepkenlerin oluşum entalpileri toplamının çıkarılmasıyla hesaplanır: ΔH°tepkime = Σn·ΔH°f(ürünler) − Σn·ΔH°f(tepkenler)."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "H2O(g)'nin standart oluşum entalpisi -241,8 kJ/mol'dür. 2 mol H2O(g) oluşurken açığa çıkan toplam enerji yaklaşık kaç kJ'dir?",
+      "options": [
+        "+483,6 kJ",
+        "-483,6 kJ",
+        "-967,2 kJ",
+        "-120,9 kJ",
+        "-241,8 kJ"
+      ],
+      "correct": 1,
+      "explain": "2 mol H2O(g) oluşurken açığa çıkan enerji, 1 molün oluşum entalpisinin 2 katıdır: 2 × (-241,8) = -483,6 kJ."
+    },
+    {
+      "difficulty": "kolay",
+      "table": {
+        "headers": [
+          "Bileşik",
+          "ΔH°f (kJ/mol)"
+        ],
+        "rows": [
+          [
+            "CO2(g)",
+            "-393,5"
+          ],
+          [
+            "CH4(g)",
+            "-74,9"
+          ],
+          [
+            "NO(g)",
+            "+90,3"
+          ],
+          [
+            "HCN(g)",
+            "+135,1"
+          ]
+        ]
+      },
+      "text": "Tabloya göre verilen bileşiklerden hangisi elementlerinden oluşurken en fazla enerji açığa çıkarmıştır?",
+      "options": [
+        "HCN(g)",
+        "Hepsi eşittir",
+        "CH4(g)",
+        "CO2(g)",
+        "NO(g)"
+      ],
+      "correct": 3,
+      "explain": "En negatif ΔH°f değeri -393,5 kJ/mol ile CO2(g)'ye aittir; bu, CO2'nin oluşurken en fazla enerji açığa çıkardığını gösterir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Suyun standart oluşum entalpisinin çok negatif olması, suyun günlük hayattaki davranışıyla ilgili ne açıklar?",
+      "options": [
+        "Suyun kütlesinin neden düşük olduğunu",
+        "Suyun neden kolayca kendiliğinden hidrojen ve oksijene ayrıştığını",
+        "Suyun neden oldukça kararlı olduğunu ve kolayca tekrar ayrışmadığını",
+        "Suyun neden sıvı hâlde bulunduğunu",
+        "Suyun neden renksiz olduğunu"
+      ],
+      "correct": 2,
+      "explain": "Su oluşurken çok fazla enerji açığa çıkardığından (ΔH°f çok negatif), su oldukça kararlı bir bileşiktir; bu yüzden kolayca hidrojen ve oksijene geri ayrışmaz."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkimede ürünlerin oluşum entalpileri toplamı -400 kJ, tepkenlerin oluşum entalpileri toplamı -100 kJ olarak hesaplanmıştır. Bu tepkimenin ΔH°tepkime değeri kaç kJ'dir?",
+      "options": [
+        "-100 kJ",
+        "+300 kJ",
+        "-300 kJ",
+        "-500 kJ",
+        "+500 kJ"
+      ],
+      "correct": 2,
+      "explain": "ΔH°tepkime = Ürünler − Tepkenler = (-400) − (-100) = -300 kJ."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkimede ürünlerin oluşum entalpileri toplamı +100 kJ, tepkenlerin oluşum entalpileri toplamı -50 kJ olarak hesaplanmıştır. Bu tepkimenin ΔH°tepkime değeri kaç kJ'dir ve türü nedir?",
+      "options": [
+        "+150 kJ, endotermik",
+        "+150 kJ, ekzotermik",
+        "-150 kJ, ekzotermik",
+        "+50 kJ, endotermik",
+        "-50 kJ, ekzotermik"
+      ],
+      "correct": 0,
+      "explain": "ΔH°tepkime = Ürünler − Tepkenler = (+100) − (-50) = +150 kJ. Değer pozitif olduğu için tepkime endotermiktir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Aynı bileşiğin farklı fiziksel hâllerinin (örneğin H2O(g) ve H2O(s)) standart oluşum entalpileri birbirinden farklı olabilir mi?",
+      "options": [
+        "Evet, fiziksel hâl oluşum entalpisini etkiler; örneğin H2O(s) H2O(g)'den daha negatif bir değere sahiptir",
+        "Hayır, fiziksel hâl oluşum entalpisini etkilemez",
+        "Bu bilgi tablo olmadan belirlenemez",
+        "Hayır, yalnızca element hâlleri farklı değer alabilir",
+        "Evet ama fark her zaman sıfırdır"
+      ],
+      "correct": 0,
+      "explain": "Fiziksel hâl oluşum entalpisini etkiler. H2O(g)'nin ΔH°f'i -241,8 kJ/mol iken H2O(s)'nin ΔH°f'i -285,8 kJ/mol'dür; sıvı su oluşurken ekstra bir yoğuşma enerjisi de açığa çıktığından daha negatif bir değere sahiptir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Standart oluşum entalpisi hangi birimle ifade edilir?",
+      "options": [
+        "kJ",
+        "kJ/mol",
+        "mol/L",
+        "kJ/s",
+        "kJ/g"
+      ],
+      "correct": 1,
+      "explain": "Standart oluşum entalpisi, 1 mol bileşiğin oluşumuna karşılık geldiğinden kJ/mol birimiyle ifade edilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "ΔH°tepkime formülündeki 'n' sembolü neyi ifade eder?",
+      "options": [
+        "Tepkimedeki her bir maddenin katsayısını",
+        "Tepkime süresini",
+        "Tepkime hızını",
+        "Sıcaklığı",
+        "Molekül sayısını (Avogadro sayısı)"
+      ],
+      "correct": 0,
+      "explain": "Formüldeki 'n', tepkime denkleminde ilgili maddenin önündeki katsayıyı (kaç mol olduğunu) ifade eder; her madde kendi katsayısıyla çarpılarak toplama dâhil edilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "NH4Cl(k)'nın standart oluşum entalpisi -314,4 kJ/mol'dür. Bu değer neyi ifade eder?",
+      "options": [
+        "Bu değer NH4Cl'nin erime noktasını gösterir",
+        "1 mol NH4Cl, kendi elementlerinden oluşurken 314,4 kJ enerji açığa çıkarır",
+        "NH4Cl'nin kütlesi 314,4 g/mol'dür",
+        "NH4Cl hiçbir zaman oluşmaz",
+        "NH4Cl'nin 1 molünün ayrışması için 314,4 kJ gerekir"
+      ],
+      "correct": 1,
+      "explain": "Standart oluşum entalpisi, bileşiğin kendi elementlerinden 1 mol oluşurken gerçekleşen entalpi değişimini gösterir; -314,4 kJ/mol, NH4Cl oluşurken bu kadar enerji açığa çıktığı anlamına gelir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Standart oluşum entalpisi ile bağ enerjisi yöntemi arasındaki temel fark nedir?",
+      "options": [
+        "Bağ enerjisi yöntemi yalnızca elementler için geçerlidir",
+        "Standart oluşum entalpisi yönteminde ürünlerden tepkenler çıkarılırken, bağ enerjisi yönteminde kırılandan oluşan çıkarılır",
+        "İkisi de aynı sıralamayı (kırılan − oluşan) kullanır",
+        "Standart oluşum entalpisi yalnızca fiziksel değişimler için kullanılır",
+        "İki yöntem birbirinden tamamen bağımsız sonuçlar üretir ve karşılaştırılamaz"
+      ],
+      "correct": 1,
+      "explain": "Standart oluşum entalpisi yönteminde ΔH°tepkime = Σ(ürünler) − Σ(tepkenler) şeklinde hesaplanırken, bağ enerjisi yönteminde ΔH = Σ(kırılan bağlar) − Σ(oluşan bağlar) şeklinde hesaplanır; sıralama ters yönlüdür. Bu iki yöntem, doğru uygulandığında aynı tepkime için tutarlı sonuçlar verir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "NO2(g)'nin standart oluşum entalpisi +33,2 kJ/mol'dür. Bu bilgiye göre NO2(g)'nin elementlerinden (N2 ve O2) oluşumu için aşağıdakilerden hangisi doğrudur?",
+      "options": [
+        "Oluşum hiçbir enerji değişimi göstermez",
+        "Oluşum sırasında enerji açığa çıkar",
+        "NO2 hiçbir koşulda oluşamaz",
+        "Oluşum sırasında enerji soğurulur (dışarıdan enerji verilmesi gerekir)",
+        "Bu değer NO2'nin kütlesiyle ilgilidir"
+      ],
+      "correct": 3,
+      "explain": "ΔH°f pozitif olduğu için NO2'nin elementlerinden oluşumu enerji soğuran (endotermik) bir süreçtir; oluşabilmesi için dışarıdan enerji verilmesi gerekir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Aşağıdaki maddelerden hangisinin standart oluşum entalpisi tanım gereği kesinlikle sıfırdır?",
+      "options": [
+        "O2(g)",
+        "HCN(g)",
+        "NH3(g)",
+        "H2O(s)",
+        "CO2(g)"
+      ],
+      "correct": 0,
+      "explain": "O2(g), standart hâldeki (oda koşullarında bulunan doğal hâlindeki) bir elementtir; standart hâldeki elementlerin oluşum entalpisi tanım gereği sıfır kabul edilir. Diğer seçeneklerin hepsi bileşiktir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "H2(g) + 1/2O2(g) → H2O(g) tepkimesi için H2O(g)'nin ΔH°f = -241,8 kJ/mol, H2(g) ve O2(g)'nin ΔH°f = 0 olduğuna göre bu tepkimenin ΔH°tepkime değeri kaç kJ'dir?",
+      "options": [
+        "-483,6 kJ",
+        "+241,8 kJ",
+        "-120,9 kJ",
+        "-241,8 kJ",
+        "0 kJ"
+      ],
+      "correct": 3,
+      "explain": "ΔH°tepkime = ΔH°f(ürünler) − ΔH°f(tepkenler) = (-241,8) − [1×0 + 0,5×0] = -241,8 kJ. Elementlerin oluşum entalpisi sıfır olduğundan tepkime entalpisi doğrudan ürünün oluşum entalpisine eşit çıkar."
+    },
+    {
+      "difficulty": "orta",
+      "statements": {
+        "items": [
+          "Standart hâldeki bir elementin oluşum entalpisi her zaman sıfırdır.",
+          "Bir bileşiğin oluşum entalpisi, o bileşiğin bulunduğu fiziksel hâlden bağımsızdır.",
+          "Bir tepkimenin katsayıları 2 ile çarpılırsa, ΔH°tepkime değeri de 2 ile çarpılır."
+        ]
+      },
+      "text": "Verilen önermelerden hangileri doğrudur?",
+      "options": [
+        "I ve III",
+        "II ve III",
+        "I, II ve III",
+        "Yalnız I",
+        "Yalnız II"
+      ],
+      "correct": 0,
+      "explain": "I doğrudur; standart hâldeki elementlerin oluşum entalpisi referans olarak sıfır kabul edilir. II yanlıştır; H2O(g) ve H2O(s) örneğinde görüldüğü gibi fiziksel hâl oluşum entalpisini etkiler. III doğrudur; H2(g)+1/2O2(g)→H2O(g) (-241,8 kJ) ile 2H2(g)+O2(g)→2H2O(g) (-483,6 kJ) örneğinde katsayılar 2 katına çıkınca ΔH da 2 katına çıkmıştır."
+    },
+    {
+      "difficulty": "orta",
+      "context": "NH3(g)'nin ΔH°f = -46,1 kJ/mol, HCl(g)'nin ΔH°f = -92,3 kJ/mol, NH4Cl(k)'nın ΔH°f = -314,4 kJ/mol'dür.",
+      "text": "NH3(g) + HCl(g) → NH4Cl(k) tepkimesinin ΔH°tepkime değeri kaç kJ'dir?",
+      "options": [
+        "-176,0 kJ",
+        "+138,4 kJ",
+        "-452,8 kJ",
+        "-138,4 kJ",
+        "+176,0 kJ"
+      ],
+      "correct": 0,
+      "explain": "ΔH°tepkime = ΔH°f(NH4Cl) − [ΔH°f(NH3) + ΔH°f(HCl)] = (-314,4) − [(-46,1) + (-92,3)] = -314,4 − (-138,4) = -176,0 kJ."
+    },
+    {
+      "difficulty": "orta",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "ΔH°tepkime hesabında formülü 'tepkenler − ürünler' şeklinde kullandım, bağ enerjisi formülüyle karıştırmışım galiba."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Evet, oluşum entalpisi formülünde sıra 'ürünler − tepkenler' şeklindedir; bağ enerjisinde ise 'kırılan − oluşan' yani tepken taraflı düşünülür. İki formülü karıştırmamak gerekiyor."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrencinin son ifadesi doğrudur?",
+      "options": [
+        "İkisi de aynı formülü kullanmıştır",
+        "Yalnız Öğrenci A'nın ilk cümlesi",
+        "İkisi de yanlıştır",
+        "Öğrenci B'nin açıklaması",
+        "Verilen bilgiyle karar verilemez"
+      ],
+      "correct": 3,
+      "explain": "Öğrenci B doğru açıklıyor: standart oluşum entalpisi yönteminde ΔH°tepkime = Σ(ürünler) − Σ(tepkenler) sırası kullanılır; bu, bağ enerjisi yöntemindeki 'kırılan − oluşan' sırasıyla karıştırılmamalıdır."
+    },
+    {
+      "difficulty": "orta",
+      "matchPairs": {
+        "leftHeader": "Bileşik",
+        "rightHeader": "ΔH°f (kJ/mol)",
+        "pairs": [
+          [
+            "H2O(s)",
+            "-285,8"
+          ],
+          [
+            "CO2(g)",
+            "-393,5"
+          ],
+          [
+            "HCN(g)",
+            "+135,1"
+          ]
+        ]
+      },
+      "text": "Yukarıdaki eşleştirmeye göre verilen bileşiklerden hangisi elementlerinden oluşurken enerji soğurmuştur (endotermik oluşum)?",
+      "options": [
+        "Hepsi ekzotermik oluşmuştur",
+        "H2O(s)",
+        "CO2(g)",
+        "Hiçbiri",
+        "HCN(g)"
+      ],
+      "correct": 4,
+      "explain": "HCN(g)'nin oluşum entalpisi pozitiftir (+135,1 kJ/mol); bu, HCN'nin elementlerinden oluşurken enerji soğurduğunu (dışarıdan enerji aldığını) gösterir. Diğer iki bileşiğin ΔH°f değeri negatiftir, yani oluşumları ekzotermiktir."
+    },
+    {
+      "difficulty": "orta",
+      "checklist": {
+        "items": [
+          "Standart oluşum entalpisi tablosundaki değerler yalnızca element hâlindeki maddeler için verilir.",
+          "Bir tepkimenin ΔH°tepkime değeri, ürünlerin ve tepkenlerin oluşum entalpileri kullanılarak hesaplanabilir.",
+          "Bir bileşiğin oluşum entalpisi negatifse, bu bileşiğin elementlerinden oluşumu ekzotermiktir."
+        ]
+      },
+      "text": "Yukarıdaki ifadelerden kaç tanesi doğrudur?",
+      "options": [
+        "Verilenlerle belirlenemez",
+        "3",
+        "2",
+        "1",
+        "0"
+      ],
+      "correct": 2,
+      "explain": "Birinci ifade yanlıştır; oluşum entalpisi tablosu bileşikler için verilir, elementler için referans olarak sıfır kabul edilir. İkinci ve üçüncü ifadeler doğrudur. Doğru ifade sayısı 2'dir."
+    },
+    {
+      "difficulty": "orta",
+      "chart": {
+        "labels": [
+          "H2O(g)",
+          "H2O(s)"
+        ],
+        "values": [
+          -241.8,
+          -285.8
+        ],
+        "unit": "ΔH°f (kJ/mol)",
+        "tone": [
+          "exo",
+          "exo"
+        ]
+      },
+      "text": "Grafikte suyun gaz ve sıvı hâllerinin oluşum entalpileri karşılaştırılmıştır. Aradaki farkın (-285,8 − (-241,8) = -44 kJ) en olası açıklaması nedir?",
+      "options": [
+        "Sıvı ve gaz suyun kimyasal formülleri farklıdır",
+        "Gaz hâldeki su daha fazla atom içerir",
+        "Sıvı su oluşurken ek olarak yoğuşma sırasında da enerji açığa çıkar, bu da toplam değeri daha negatif yapar",
+        "Ölçüm hatasından kaynaklanmaktadır",
+        "Bu fark rastgele bir değerdir, açıklaması yoktur"
+      ],
+      "correct": 2,
+      "explain": "H2O(g) oluşumundan sonra su buharının yoğuşarak H2O(s) hâline geçmesi ekstra bir ekzotermik adımdır; bu ek enerji açığa çıkışı, sıvı suyun oluşum entalpisini gaz sudan daha negatif yapar."
+    },
+    {
+      "difficulty": "orta",
+      "text": "1/2N2(g) + O2(g) → NO2(g) tepkimesinin ΔH°tepkime değeri +33,2 kJ, 1/2N2(g) + 1/2O2(g) → NO(g) tepkimesinin ΔH°tepkime değeri +90,3 kJ olarak veriliyor. Buna göre NO2(g) → NO(g) + 1/2O2(g) tepkimesinin ΔH°tepkime değeri kaç kJ'dir?",
+      "options": [
+        "-57,1 kJ",
+        "+123,5 kJ",
+        "+33,2 kJ",
+        "+57,1 kJ",
+        "-123,5 kJ"
+      ],
+      "correct": 3,
+      "explain": "NO2 → NO + 1/2O2 tepkimesi, NO oluşum tepkimesinden NO2 oluşum tepkimesinin çıkarılmasıyla elde edilebilir: ΔH = ΔH°f(NO) − ΔH°f(NO2) = 90,3 − 33,2 = +57,1 kJ."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin ΔH°tepkime değeri hesaplanırken bir öğrenci yanlışlıkla elementlerin (H2, O2, N2) oluşum entalpisini sıfır yerine tabloda bulamadığı için 'hesaplanamaz' olarak bırakıyor. Bu yaklaşımdaki hata nedir?",
+      "options": [
+        "Standart hâldeki elementlerin oluşum entalpisi tanım gereği sıfır kabul edilir ve bu değer doğrudan hesaplamada kullanılabilir",
+        "Hata yoktur, elementler için gerçekten hesaplama yapılamaz",
+        "Elementler tepkime denklemlerinde hiç yer almaz",
+        "Bu hata yalnızca gaz hâlindeki elementler için geçerlidir",
+        "Elementlerin oluşum entalpisi her zaman pozitiftir"
+      ],
+      "correct": 0,
+      "explain": "Standart hâldeki elementlerin oluşum entalpisi, tanım gereği referans noktası olarak sıfır kabul edilir; bu değer tabloda aranmaz, doğrudan 0 olarak hesaplamaya dâhil edilir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir bileşiğin ΔH°f değeri -50 kJ/mol'den -500 kJ/mol'e daha negatif bir bileşiğe geçildiğinde, bu bileşiklerin göreli kararlılığı hakkında ne söylenebilir?",
+      "options": [
+        "Daha negatif değer, bileşiğin daha hızlı tepkimeye gireceğini gösterir",
+        "-500 kJ/mol'lük bileşik daha az kararlıdır",
+        "-500 kJ/mol'lük bileşik, elementlerinden oluşurken daha fazla enerji açığa çıkardığından genellikle daha kararlıdır",
+        "İki bileşik de aynı kararlılığa sahiptir",
+        "Kararlılık yalnızca kütleyle ilgilidir, ΔH°f ile ilgisizdir"
+      ],
+      "correct": 2,
+      "explain": "Genel olarak ΔH°f değeri ne kadar negatifse, bileşik o kadar düşük enerjili ve kararlı bir yapıya sahiptir. -500 kJ/mol'lük bileşik, -50 kJ/mol'lük bileşiğe göre elementlerinden oluşurken daha fazla enerji açığa çıkarmıştır, bu da genellikle daha yüksek kararlılığa işaret eder."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede iki mol tepken ve iki mol ürün bulunuyor; her bir maddenin oluşum entalpisi biliniyor ancak bir öğrenci yalnızca 1'er mol üzerinden (katsayıları çarpmadan) toplama yapıyor. Bu yaklaşımın sonucu nasıl etkiler?",
+      "options": [
+        "Sonucu etkilemez, çünkü katsayılar önemsizdir",
+        "Yanlış bir ΔH°tepkime değeri hesaplanır, çünkü her maddenin katkısı kendi mol sayısıyla (katsayısıyla) orantılı olmalıdır",
+        "Yalnızca ürünler için katsayı önemlidir, tepkenler için önemsizdir",
+        "Katsayılar yalnızca gaz hâlindeki maddeler için önemlidir",
+        "Sonuç otomatik olarak iki katına çıkar"
+      ],
+      "correct": 1,
+      "explain": "ΔH°tepkime formülündeki 'n' katsayısı, her maddenin tepkimedeki mol sayısına göre katkısını doğru şekilde hesaba katmak için gereklidir. Katsayılar çarpılmadan yapılan bir toplama, gerçek ΔH°tepkime değerinden farklı (genellikle küçük) bir sonuç verir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir bileşiğin standart oluşum entalpisi 0 kJ/mol olarak veriliyor ve bu bileşiğin element olmadığı biliniyor (bir bileşik olduğu belirtiliyor). Bu durum için en makul açıklama hangisidir?",
+      "options": [
+        "Bu, hesaplamada bir hata olduğunu kesin olarak gösterir",
+        "Yalnızca elementlerin ΔH°f'i 0 olabilir, bu yüzden bilgi çelişkilidir ve göz ardı edilmelidir",
+        "ΔH°f 0 olan her madde element sayılmalıdır",
+        "Bu bileşik hiçbir zaman var olamaz",
+        "Bazı bileşiklerin oluşum entalpisi, oluşum sırasında açığa çıkan ve soğurulan enerjilerin birbirini dengelemesi sonucunda sıfıra çok yakın çıkabilir; bu, bileşiğin element olduğu anlamına gelmez"
+      ],
+      "correct": 4,
+      "explain": "Bir bileşiğin oluşum entalpisinin sıfıra yakın çıkması, o bileşiğin oluşumu sırasında açığa çıkan ve soğurulan enerjilerin tesadüfen birbirini dengelemesinden kaynaklanabilir; bu durum, o maddenin element olduğu anlamına gelmez — yalnızca standart hâldeki elementler tanım gereği tam olarak sıfır kabul edilir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin ΔH°tepkime değeri +238,8 kJ olarak hesaplanıyor (2CH4(g) + N2(g) → HCN(g) + NH3(g)). Bu büyük pozitif değer, tepkimenin gerçekleşme koşulları hakkında ne düşündürür?",
+      "options": [
+        "Tepkime hiçbir koşulda gerçekleşemez",
+        "Tepkimenin gerçekleşebilmesi için büyük miktarda enerji girişi (örneğin yüksek sıcaklık) gerekebilir",
+        "Tepkime kendiliğinden ve hızlı gerçekleşir",
+        "Pozitif değer bir hesaplama hatasına işaret eder",
+        "Bu değer tepkimenin ekzotermik olduğunu gösterir"
+      ],
+      "correct": 1,
+      "explain": "Büyük pozitif bir ΔH°tepkime değeri, tepkimenin gerçekleşmesi için ürünlerin oluşabilmesine yetecek kadar büyük miktarda enerjinin dışarıdan (örneğin yüksek sıcaklık koşullarında) sağlanması gerektiğini düşündürür."
+    },
+    {
+      "difficulty": "orta",
+      "text": "2H2S(g) + 3O2(g) → 2H2O(s) + 2SO2(g) tepkimesinde H2S(g)'nin ΔH°f = -20,7 kJ/mol, H2O(s)'nin ΔH°f = -285,8 kJ/mol, SO2(g)'nin ΔH°f = -296,8 kJ/mol'dür (O2 elementtir, ΔH°f=0). Ürünlerin oluşum entalpileri toplamı kaç kJ'dir?",
+      "options": [
+        "-1165,2 kJ",
+        "+1165,2 kJ",
+        "-582,6 kJ",
+        "-41,4 kJ",
+        "-1123,8 kJ"
+      ],
+      "correct": 0,
+      "explain": "Ürünler: 2 × (-285,8) + 2 × (-296,8) = -571,6 + (-593,6) = -1165,2 kJ."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir öğrenci standart oluşum entalpisi tablosunda bir bileşiği bulamıyor ve bu bileşiğin ΔH°f değerini tahmin ederek 0 olarak kabul ediyor. Bu yaklaşımın olası sonucu nedir?",
+      "options": [
+        "Bu yaklaşım her zaman güvenlidir",
+        "Bu, yalnızca söz konusu madde gerçekten standart hâldeki bir element ise doğrudur; bir bileşik için bu varsayım hesaplamayı hatalı hâle getirir",
+        "ΔH°f değeri tabloda olmayan maddeler hesaplamaya hiç dâhil edilmemelidir",
+        "Sonuç her zaman doğru çıkar çünkü tüm maddelerin ΔH°f'i sıfırdır",
+        "Bu durum yalnızca gaz hâlindeki bileşikler için sorun yaratır"
+      ],
+      "correct": 1,
+      "explain": "Yalnızca standart hâldeki elementlerin ΔH°f değeri tanım gereği sıfırdır. Bir bileşiğin ΔH°f değerini bilmeden sıfır varsaymak, o bileşiğin gerçek enerji katkısını hesaba katmamak anlamına gelir ve hesaplanan ΔH°tepkime değerini yanlış çıkarır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "2H2(g) + O2(g) → 2H2O(g) tepkimesi ile H2(g) + 1/2O2(g) → H2O(g) tepkimesi karşılaştırıldığında, ikinci tepkime birincinin katsayılarının yarısı alınarak elde edilmiştir. Bu iki tepkimenin ΔH°tepkime değerleri arasındaki oran nedir?",
+      "options": [
+        "Birbirinden tamamen bağımsızdır, herhangi bir oran yoktur",
+        "İkinci tepkimenin ΔH°'si, birincinin iki katıdır",
+        "Oran yalnızca deneysel olarak belirlenebilir, hesaplanamaz",
+        "İki tepkimenin ΔH°'si her zaman eşittir",
+        "İkinci tepkimenin ΔH°'si, birincinin tam yarısıdır (-483,6 kJ'nin yarısı -241,8 kJ)"
+      ],
+      "correct": 4,
+      "explain": "Bir tepkimenin tüm katsayıları belirli bir sayıyla çarpılır/bölünürse (burada 1/2 ile), ΔH°tepkime değeri de aynı oranda değişir. 2H2+O2→2H2O tepkimesinin ΔH°'si -483,6 kJ; katsayılar yarıya indirildiğinde ΔH° da yarıya iner: -241,8 kJ."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede tepkenlerden biri element (ΔH°f=0), diğeri ise ΔH°f'i pozitif bir bileşiktir. Ürün ise ΔH°f'i negatif bir bileşiktir. Bu tepkimenin ΔH°tepkime işareti hakkında ne söylenebilir (sayısal değerler olmadan yalnızca eğilim olarak)?",
+      "options": [
+        "Kesinlikle negatiftir",
+        "Kesinlikle pozitiftir",
+        "Tepkenlerin toplamı (pozitif + 0) ile ürünün (negatif) değeri arasındaki fark hesaplanmadan kesin işaret söylenemez, ancak ürün negatif tepken pozitifse ekzotermik olma eğilimi güçlüdür",
+        "ΔH°tepkime her zaman sıfırdır",
+        "Bu bilgiyle hiçbir çıkarım yapılamaz"
+      ],
+      "correct": 2,
+      "explain": "ΔH°tepkime = Ürünler − Tepkenler olduğundan, ürün negatif ve tepkenler toplamı pozitifse (negatif) − (pozitif) işlemi güçlü bir şekilde negatif çıkma eğilimindedir; yani tepkime ekzotermik olma eğilimindedir. Ancak kesin işaret, sayısal değerler hesaplanmadan garanti edilemez."
+    },
+    {
+      "difficulty": "zor",
+      "context": "C2H5OH(s)'nin ΔH°f = -235,1 kJ/mol, CO2(g)'nin ΔH°f = -393,5 kJ/mol, H2O(g)'nin ΔH°f = -241,8 kJ/mol'dür (O2 elementtir).",
+      "text": "C2H5OH(s) + 3O2(g) → 2CO2(g) + 3H2O(g) tepkimesinin ΔH°tepkime değeri kaç kJ'dir?",
+      "options": [
+        "-1512,4 kJ",
+        "-970,4 kJ",
+        "+1277,3 kJ",
+        "-1277,3 kJ",
+        "-235,1 kJ"
+      ],
+      "correct": 3,
+      "explain": "Ürünler: 2×(-393,5) + 3×(-241,8) = -787,0 + (-725,4) = -1512,4 kJ. Tepkenler: -235,1 + 3×0 = -235,1 kJ. ΔH°tepkime = -1512,4 − (-235,1) = -1277,3 kJ. Etanolün yanması, oluşum entalpisi yöntemiyle hesaplandığında da güçlü bir ekzotermik tepkime olarak çıkar."
+    },
+    {
+      "difficulty": "zor",
+      "text": "4NH3(g) + 6NO(g) → 5N2(g) + 6H2O(g) tepkimesinde NH3(g)'nin ΔH°f = -46,1 kJ/mol, NO(g)'nin ΔH°f = +90,3 kJ/mol, H2O(g)'nin ΔH°f = -241,8 kJ/mol'dür (N2 elementtir). Bu tepkimenin ΔH°tepkime değeri kaç kJ'dir?",
+      "options": [
+        "-1093,4 kJ",
+        "-1450,8 kJ",
+        "+1808,2 kJ",
+        "+357,4 kJ",
+        "-1808,2 kJ"
+      ],
+      "correct": 4,
+      "explain": "Ürünler: 5×0 + 6×(-241,8) = -1450,8 kJ. Tepkenler: 4×(-46,1) + 6×(90,3) = -184,4 + 541,8 = +357,4 kJ. ΔH°tepkime = -1450,8 − 357,4 = -1808,2 kJ. Bu, çok büyük ve ekzotermik bir tepkime entalpisidir."
+    },
+    {
+      "difficulty": "zor",
+      "statements": {
+        "items": [
+          "Standart oluşum entalpisi yöntemiyle hesaplanan ΔH°tepkime değeri, aynı tepkime için bağ enerjisi yöntemiyle hesaplanan değere yaklaşık olarak eşit çıkmalıdır, çünkü ikisi de aynı fiziksel gerçekliği farklı yollardan hesaplar.",
+          "Bir tepkimenin ΔH°tepkime değeri yalnızca ürünlerin oluşum entalpileri toplamına eşittir, tepkenler hesaba katılmaz.",
+          "Katsayısı 1'den farklı olan (örneğin 2, 3, 4 gibi) maddelerin oluşum entalpisi, o katsayıyla çarpılmadan doğrudan toplanabilir."
+        ]
+      },
+      "text": "Bu önermelerden hangileri doğrudur?",
+      "options": [
+        "I ve III",
+        "Yalnız III",
+        "I ve II",
+        "Yalnız I",
+        "I, II ve III"
+      ],
+      "correct": 3,
+      "explain": "I doğrudur; her iki yöntem de tepkimenin gerçek entalpi değişimini farklı hesaplama yollarıyla tahmin ettiğinden sonuçlar birbirine yakın çıkar. II yanlıştır; tepkenlerin oluşum entalpileri de mutlaka çıkarılmalıdır. III yanlıştır; her maddenin katkısı kendi katsayısıyla çarpılarak hesaplanmalıdır."
+    },
+    {
+      "difficulty": "zor",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "2CH4(g)+N2(g)→HCN(g)+NH3(g) tepkimesinin ΔH°'si +238,8 kJ çıktı; bu tepkime hiç gerçekleşmeyecek demektir."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Pozitif ΔH, tepkimenin imkânsız olduğu anlamına gelmez; yalnızca tepkimenin gerçekleşmesi için enerji girişi gerektiğini gösterir. Uygun koşullar (örneğin yüksek sıcaklık) sağlanırsa endotermik tepkimeler de gerçekleşebilir."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrencinin değerlendirmesi bilimsel olarak daha doğrudur?",
+      "options": [
+        "İkisi de haksızdır",
+        "İkisi de aynı derecede haklıdır",
+        "Yalnız Öğrenci B",
+        "Yalnız Öğrenci A",
+        "Verilen bilgiyle karar verilemez"
+      ],
+      "correct": 2,
+      "explain": "Öğrenci B haklıdır. ΔH°tepkime'nin pozitif olması yalnızca tepkimenin endotermik olduğunu, yani gerçekleşmesi için enerji girişi gerektiğini gösterir; bu, tepkimenin imkânsız olduğu anlamına gelmez."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir araştırmacı iki farklı yoldan aynı ürüne ulaşan iki tepkime dizisi kuruyor: 1. yol tek basamakta ΔH°=-500 kJ veriyor; 2. yol iki basamakta sırasıyla ΔH°1=-300 kJ ve ΔH°2=-200 kJ veriyor. Bu iki yolun toplam ΔH° değerleri karşılaştırıldığında ne beklenir?",
+      "options": [
+        "Basamak sayısı arttıkça toplam ΔH° de artar",
+        "Bu karşılaştırma yapılamaz çünkü basamak sayıları farklıdır",
+        "2. yolun toplamı her zaman 1. yoldan daha büyük çıkar",
+        "1. yolun ΔH°'si 2. yoldan çok farklı olmalıdır çünkü basamak sayısı farklıdır",
+        "İki yolun toplam ΔH°'si eşit olmalıdır (-500 kJ), çünkü entalpi yalnızca başlangıç ve bitiş durumuna bağlı bir büyüklüktür"
+      ],
+      "correct": 4,
+      "explain": "Entalpi bir hâl fonksiyonu olduğundan, aynı başlangıç ve bitiş durumları arasındaki toplam ΔH° değeri, izlenen yoldan (basamak sayısından) bağımsızdır. 2. yolun toplamı (-300)+(-200)=-500 kJ, 1. yolun değeriyle (-500 kJ) tutarlıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tablo, X bileşiğinin ΔH°f değerini +5 kJ/mol, Y bileşiğinin ΔH°f değerini -5 kJ/mol olarak veriyor. Bu iki değerin birbirine bu kadar yakın (mutlak değerce eşit ama zıt işaretli) olması hakkında en dikkatli yorum hangisidir?",
+      "options": [
+        "X ve Y aynı bileşiktir",
+        "Bu, yalnızca bir sayısal yakınlıktır; X'in oluşumu hafifçe endotermik, Y'nin oluşumu hafifçe ekzotermiktir, ancak bu tesadüfi yakınlık iki bileşik arasında özel bir kimyasal ilişki olduğu anlamına gelmez",
+        "X ve Y birbirinin tam tersi tepkimeleridir",
+        "X ve Y'nin molekül ağırlıkları da eşit olmalıdır",
+        "Bu değerler mutlaka hatalıdır çünkü birbirine çok yakındır"
+      ],
+      "correct": 1,
+      "explain": "ΔH°f değerlerinin yakınlığı yalnızca sayısal bir gözlemdir; her bileşiğin oluşum entalpisi kendi kimyasal yapısından kaynaklanır. X'in hafifçe endotermik (+5), Y'nin hafifçe ekzotermik (-5) oluşması, aralarında zorunlu bir kimyasal ilişki olduğu anlamına gelmez."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin ΔH°tepkime değeri hem bağ enerjisi yöntemiyle hem standart oluşum entalpisi yöntemiyle hesaplanıyor ve iki sonuç birbirine çok yakın (örneğin -674 kJ ve -676 kJ) çıkıyor. Bu küçük farkın en olası nedeni nedir?",
+      "options": [
+        "Fark, tepkimenin gerçekleşmediğini gösterir",
+        "İki yöntem farklı tepkimeler için tasarlanmıştır, karşılaştırılamazlar",
+        "Oluşum entalpisi yöntemi hiçbir zaman doğru sonuç vermez",
+        "Yöntemlerden biri kesinlikle yanlış uygulanmıştır",
+        "Bağ enerjisi tablosundaki değerler farklı moleküllerden elde edilen ortalamalar olduğundan, iki yöntem arasında küçük farklar beklenir"
+      ],
+      "correct": 4,
+      "explain": "Bağ enerjisi tablosundaki değerler birçok farklı molekülden elde edilen ortalama değerlerdir; standart oluşum entalpisi değerleri ise doğrudan deneysel ölçümlerdir. Bu nedenle iki yöntemle hesaplanan ΔH değerleri birbirine yakın ama birebir aynı çıkmayabilir; bu, yöntemlerin doğasından kaynaklanan beklenen bir durumdur."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin tersi alındığında (ürünler tepken, tepkenler ürün olduğunda) ΔH°tepkime değeri nasıl değişir? H2(g)+1/2O2(g)→H2O(g) tepkimesi için ΔH°=-241,8 kJ olduğuna göre, H2O(g)→H2(g)+1/2O2(g) tepkimesinin ΔH°tepkime değeri kaç kJ'dir?",
+      "options": [
+        "-241,8 kJ",
+        "+241,8 kJ",
+        "+120,9 kJ",
+        "-483,6 kJ",
+        "0 kJ"
+      ],
+      "correct": 1,
+      "explain": "Bir tepkime tersine çevrildiğinde ürün ve tepken rolleri değiştiği için ΔH°tepkime = Σ(ürünler)−Σ(tepkenler) ifadesindeki terimler yer değiştirir ve işaret tersine döner: -241,8 kJ → +241,8 kJ. Suyun ayrışması, oluşumunun tam tersi olduğundan endotermiktir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir kimya öğretmeni öğrencilerine 'yalnızca ΔH°tepkime değerinin büyüklüğüne (mutlak değerine) bakarak bir tepkimenin ne kadar hızlı gerçekleşeceğini söyleyebilir misiniz?' diye soruyor. Bu soruya en doğru yanıt hangisidir?",
+      "options": [
+        "Hayır, çünkü ΔH°tepkime yalnızca fiziksel değişimler için anlamlıdır",
+        "Evet, negatif ΔH her zaman hızlı tepkime anlamına gelir",
+        "Evet, ama yalnızca ekzotermik tepkimeler için geçerlidir",
+        "Evet, ΔH°tepkime ne kadar büyükse tepkime o kadar hızlı gerçekleşir",
+        "Hayır; ΔH°tepkime tepkimenin ne kadar enerji alıp verdiğini gösterir, tepkimenin hızıyla ilgili doğrudan bilgi vermez"
+      ],
+      "correct": 4,
+      "explain": "ΔH°tepkime, bir tepkimenin başlangıç ve bitiş durumları arasındaki enerji farkını gösterir; tepkimenin ne kadar hızlı gerçekleştiği (tepkime hızı) ayrı bir kavramdır ve farklı etkenlere (derişim, sıcaklık, katalizör vb.) bağlıdır. Büyük bir ΔH değeri, tepkimenin hızlı ya da yavaş olacağı konusunda doğrudan bilgi vermez."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir bileşiğin ΔH°f değeri bilinmiyor ancak bu bileşiğin yer aldığı bir tepkimenin ΔH°tepkime değeri ve tepkimedeki diğer tüm maddelerin ΔH°f değerleri biliniyor. Bilinmeyen ΔH°f değerine nasıl ulaşılabilir?",
+      "options": [
+        "Bu tür bir hesaplama yalnızca elementler için mümkündür",
+        "Bilinmeyen değer asla bulunamaz",
+        "Bilinmeyen değer, diğer tüm değerlerin ortalaması alınarak bulunur",
+        "Bilinmeyen değer her zaman sıfır kabul edilir",
+        "ΔH°tepkime = Σ(ürünler) − Σ(tepkenler) denklemi, bilinmeyen ΔH°f cebirsel olarak yalnız bırakılacak şekilde yeniden düzenlenerek çözülebilir"
+      ],
+      "correct": 4,
+      "explain": "ΔH°tepkime = Σn·ΔH°f(ürünler) − Σn·ΔH°f(tepkenler) denklemi bir cebirsel denklemdir. Bilinmeyen tek değişken bilinmeyen ΔH°f olduğunda, bu denklem bilinmeyen için çözülerek değeri hesaplanabilir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "İki farklı tepkimenin ΔH°tepkime değerleri -1277,3 kJ (etanol yanması) ve -1123,8 kJ (hidrojen sülfür yanması) olarak hesaplanmıştır. Bu iki değeri doğrudan karşılaştırıp 'etanol yanması her zaman daha fazla ısı üretir' sonucuna varmak neden dikkatli yapılmalıdır?",
+      "options": [
+        "Çünkü hidrojen sülfür yanmaz",
+        "Çünkü bu değerler yanlış hesaplanmıştır",
+        "Çünkü etanol bir element değildir",
+        "Çünkü bu değerler tepkime denklemlerinde belirtilen mol miktarları içindir; birim kütle (kJ/g) bazında karşılaştırma yapılmadan hangisinin 'daha verimli' olduğu söylenemez",
+        "Bu karşılaştırma her koşulda geçerlidir, dikkatli olmaya gerek yoktur"
+      ],
+      "correct": 3,
+      "explain": "Verilen ΔH°tepkime değerleri, tepkime denklemindeki belirli mol miktarları için geçerlidir (örneğin 1 mol etanol ile 2 mol H2S). Farklı miktarlardaki maddeler için toplam ısıyı karşılaştırmak, tıpkı yakıt karşılaştırmasında olduğu gibi, birim kütle (kJ/g) bazında yapılmadıkça yanıltıcı olabilir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin ΔH°tepkime değeri sıfıra çok yakın (örneğin +2 kJ) çıkıyor. Bu durumda tepkimenin potansiyel enerji-tepkime koordinatı grafiğinde tepken ve ürün enerji düzeyleri nasıl görünür?",
+      "options": [
+        "Tepken ve ürün enerji düzeyleri birbirine çok yakın (neredeyse aynı yükseklikte) çizilir",
+        "Ürün düzeyi tepkenden çok daha yüksekte olur",
+        "Grafik çizilemez çünkü ΔH sıfıra yakındır",
+        "Tepken düzeyi görünmez",
+        "Ürün düzeyi tepkenden çok daha düşükte olur"
+      ],
+      "correct": 0,
+      "explain": "ΔH sıfıra yakın küçük bir değerse, tepken ve ürünlerin potansiyel enerji düzeyleri arasındaki fark da küçüktür; bu yüzden grafikte iki düzey birbirine çok yakın (neredeyse aynı yükseklikte) gösterilir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede tepkenlerin oluşum entalpileri toplamı pozitif, ürünlerin oluşum entalpileri toplamı ise daha büyük bir pozitif değer olarak hesaplanmıştır. Bu durumda tepkimenin ΔH°tepkime işareti ve türü nedir?",
+      "options": [
+        "Negatif, ekzotermik",
+        "Negatif, endotermik (çelişkili bir durum)",
+        "Sıfır, nötr",
+        "İşaret her iki değerin de pozitif olmasından dolayı belirlenemez",
+        "Pozitif, endotermik"
+      ],
+      "correct": 4,
+      "explain": "ΔH°tepkime = Ürünler − Tepkenler'dir. Her iki değer de pozitifse ama ürünler tepkenlerden daha büyükse, fark yine pozitif çıkar (örneğin 500−300=+200). Bu durumda tepkime endotermiktir; değerlerin pozitif olması işaretin doğrudan belirlenmesini engellemez, yalnızca fark hesaplanmalıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "N2(g) + 2O2(g) → 2NO2(g) tepkimesi için NO2(g)'nin ΔH°f = +33,2 kJ/mol olduğuna göre bu tepkimenin ΔH°tepkime değeri kaç kJ'dir? Bu değeri, 1/2N2(g)+O2(g)→NO2(g) tepkimesinin ΔH° değeriyle (+33,2 kJ) karşılaştırınız.",
+      "options": [
+        "+33,2 kJ; katsayılar ΔH°'yi etkilemez",
+        "-66,4 kJ; tepkime ekzotermiktir",
+        "+66,4 kJ; verilen tepkimenin katsayıları, tek mol NO2 oluşum tepkimesinin 2 katı olduğundan ΔH° de 2 katına çıkar",
+        "+16,6 kJ; katsayılar yarıya iner",
+        "0 kJ; azot ve oksijen element olduğundan ΔH° sıfırdır"
+      ],
+      "correct": 2,
+      "explain": "N2(g)+2O2(g)→2NO2(g) tepkimesi, 1/2N2(g)+O2(g)→NO2(g) tepkiminin tüm katsayılarının 2 ile çarpılmasıyla elde edilir. ΔH°tepkime = 2 × (+33,2) = +66,4 kJ. Ürünler açısından da doğrulanabilir: 2×(33,2) − [0+0] = +66,4 kJ."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin ΔH°tepkime değeri hem standart oluşum entalpisi yöntemiyle hem de doğrudan kalorimetre ile deneysel olarak ölçülüyor ve iki değer neredeyse birebir örtüşüyor. Bu örtüşme, standart oluşum entalpisi tablosundaki değerler hakkında ne düşündürür?",
+      "options": [
+        "Bu örtüşme tesadüftür ve hiçbir anlam taşımaz",
+        "Standart oluşum entalpisi yöntemi artık kullanılmamalıdır",
+        "Tablo değerleri kesinlikle hatalıdır",
+        "Kalorimetre ölçümü güvenilmezdir",
+        "Tablo değerleri, gerçek deneysel verilerle tutarlı, güvenilir referans değerlerdir"
+      ],
+      "correct": 4,
+      "explain": "Hesaplanan ve deneysel değerlerin örtüşmesi, standart oluşum entalpisi tablosundaki değerlerin dikkatli deneysel ölçümlerden elde edilmiş güvenilir referans değerler olduğunu ve bu yöntemin tepkime entalpisini tahmin etmek için güvenle kullanılabileceğini gösterir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede tepkenler A ve B, ürün ise yalnızca C'dir (A + B → C). ΔH°f(A) = -80 kJ/mol, ΔH°f(B) = -40 kJ/mol'dür ve tepkime ekzotermik olup ΔH°tepkime = -60 kJ olarak ölçülmüştür. Buna göre ΔH°f(C) kaç kJ/mol'dür?",
+      "options": [
+        "-60 kJ/mol",
+        "-20 kJ/mol",
+        "-180 kJ/mol",
+        "-120 kJ/mol",
+        "+60 kJ/mol"
+      ],
+      "correct": 2,
+      "explain": "ΔH°tepkime = ΔH°f(C) − [ΔH°f(A) + ΔH°f(B)] eşitliğinden: -60 = ΔH°f(C) − [(-80) + (-40)] = ΔH°f(C) − (-120) = ΔH°f(C) + 120. Buradan ΔH°f(C) = -60 − 120 = -180 kJ/mol bulunur."
     }
   ]
 };
