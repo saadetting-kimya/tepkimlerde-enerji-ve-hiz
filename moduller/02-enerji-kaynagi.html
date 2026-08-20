@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enerji Kaynağı Olma Potansiyeli · Kimya 11</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Modül 2 · Enerji</span>
+    <h1>Maddelerin Enerji Kaynağı Olma Potansiyeli</h1>
+    <p class="lead">Bir maddenin "iyi bir yakıt" sayılması için birim kütlesinin yanmasıyla ne kadar ısı açığa
+      çıkardığına bakılır. Bu modülde yanma ısısı kavramını ve yakıt seçiminde rol oynayan ölçütleri keşfedeceksin.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <h2><span class="num">1</span>Kavramlar</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3><span class="tag exo">Yakıt</span></h3>
+        <p>Yanma yoluyla ısı ya da enerji üreten maddelere yakıt denir. Günlük hayatta enerji gereksiniminin
+          büyük bölümü yakıtların yakılmasıyla karşılanır.</p>
+      </div>
+      <div class="card">
+        <h3><span class="tag rate">Yanma Isısı</span></h3>
+        <p>Belirli miktardaki (genellikle 1 g) bir maddenin tamamen yanması sırasında açığa çıkan ısı miktarıdır;
+          kJ/g birimiyle ifade edilir. Bir yakıtın "iyiliği", toplam ısıya değil <b>birim kütle başına</b>
+          açığa çıkan ısıya göre değerlendirilir.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>Sık yapılan hata:</b> İki farklı tepkimenin açığa çıkardığı toplam ısıyı (kJ)
+        doğrudan karşılaştırmak yanıltıcıdır — çünkü tepkimeye giren madde miktarları (mol/gram) farklı olabilir.
+        Doğru karşılaştırma, açığa çıkan ısının madde kütlesine bölünmesiyle (kJ/g) yapılır.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">2</span>Keşfet: Yakıtları Karşılaştır</h2>
+    <p class="block-lead">Bazı yakıtların 1 gramının tam yanması sonucu açığa çıkan ısı değerleri aşağıda
+      verilmiştir. İki yakıt seçerek birim kütle başına verdikleri enerjiyi karşılaştır.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="fuel-a">1. Yakıt:</label>
+        <select id="fuel-a"></select>
+        <label for="fuel-b">2. Yakıt:</label>
+        <select id="fuel-b"></select>
+      </div>
+      <div class="lab-stage" style="min-height:300px"><svg id="fuel-svg" viewBox="0 0 520 260" style="width:100%;max-width:520px"></svg></div>
+      <div class="lab-readout" id="fuel-readout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">3</span>Keşfet: Kütle Arttıkça Açığa Çıkan Isı</h2>
+    <p class="block-lead">Bir yakıtın toplam olarak verdiği ısı, kütlesiyle birlikte artar. Aşağıda iki yakıtın
+      kütle arttıkça açığa çıkardığı toplam ısının nasıl değiştiğini gösteren grafiği incele; kütle kaydırıcısını
+      hareket ettirerek belirli bir kütlede açığa çıkan ısıyı oku.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="mass-range">Kütle: <span id="mass-label">5</span> g</label>
+        <input type="range" id="mass-range" min="1" max="10" value="5" step="1">
+      </div>
+      <div class="lab-stage" style="min-height:340px"><svg id="mass-svg" viewBox="0 0 560 300" style="width:100%;max-width:560px"></svg></div>
+      <div class="lab-readout" id="mass-readout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">4</span>Değerlendir</h2>
+    <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
+    <div id="quiz-host"></div>
+  </div>
+</section>
+
+<div id="next-module-root"></div>
+<div id="footer-root"></div>
+
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/quiz-engine.js"></script>
+<script src="../assets/js/quiz-data.js"></script>
+<script>
+  const MODKEY = "m2";
+
+  const FUELS = [
+    { name: "Selüloz", value: 17.5, group: "Biyolojik" },
+    { name: "Çam odunu", value: 21.2, group: "Biyolojik" },
+    { name: "Turba kömürü", value: 20.8, group: "Fosil" },
+    { name: "Taş kömürü", value: 28.3, group: "Fosil" },
+    { name: "İzooktan (benzin bileşeni)", value: 47.8, group: "Fosil" },
+    { name: "Metanol", value: 22.7, group: "Biyolojik/sentetik" },
+    { name: "Doğal gaz", value: 49.5, group: "Fosil" },
+    { name: "Hidrojen gazı", value: 142.9, group: "Temiz enerji adayı" },
+  ];
+
+  function drawFuelCompare() {
+    const a = FUELS[document.getElementById("fuel-a").value];
+    const b = FUELS[document.getElementById("fuel-b").value];
+    const svgEl = document.getElementById("fuel-svg");
+    const maxV = Math.max(a.value, b.value) * 1.15;
+    const barH = (v) => (v / maxV) * 180;
+    svgEl.innerHTML = `
+      <line x1="60" y1="220" x2="480" y2="220" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <rect x="140" y="${220 - barH(a.value)}" width="90" height="${barH(a.value)}" fill="var(--energy)" rx="4"/>
+      <text x="185" y="${220 - barH(a.value) - 10}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--energy)">${a.value} kJ/g</text>
+      <text x="185" y="240" text-anchor="middle" font-size="12" fill="var(--ink)">${a.name}</text>
+      <rect x="330" y="${220 - barH(b.value)}" width="90" height="${barH(b.value)}" fill="var(--rate)" rx="4"/>
+      <text x="375" y="${220 - barH(b.value) - 10}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--rate)">${b.value} kJ/g</text>
+      <text x="375" y="240" text-anchor="middle" font-size="12" fill="var(--ink)">${b.name}</text>
+    `;
+    const ratio = (Math.max(a.value, b.value) / Math.min(a.value, b.value)).toFixed(1);
+    document.getElementById("fuel-readout").innerHTML = `
+      <div><b>${a.value > b.value ? a.name : b.name}</b>Birim kütlede daha fazla ısı verir</div>
+      <div><b>${ratio}×</b>Aradaki oran</div>
+    `;
+  }
+
+  function buildFuelLab() {
+    const selA = document.getElementById("fuel-a");
+    const selB = document.getElementById("fuel-b");
+    FUELS.forEach((f, i) => {
+      selA.appendChild(new Option(f.name, i));
+      selB.appendChild(new Option(f.name, i));
+    });
+    selA.value = 1; // çam odunu
+    selB.value = 6; // doğal gaz
+    selA.addEventListener("change", drawFuelCompare);
+    selB.addEventListener("change", drawFuelCompare);
+    drawFuelCompare();
+  }
+
+  const MASS_FUELS = [
+    { name: "Çam odunu", value: 21.2, color: "var(--energy)" },
+    { name: "Doğal gaz", value: 49.5, color: "var(--rate)" },
+  ];
+
+  function drawMassChart() {
+    const mass = Number(document.getElementById("mass-range").value);
+    document.getElementById("mass-label").textContent = mass;
+    const xLabels = Array.from({ length: 10 }, (_, i) => `${i + 1} g`);
+    const series = MASS_FUELS.map((f) => ({
+      name: f.name,
+      values: xLabels.map((_, i) => Math.round(f.value * (i + 1))),
+      color: f.color,
+    }));
+    const newChart = renderCompareLineChart({ xLabels, series });
+    newChart.id = "mass-svg";
+    document.getElementById("mass-svg").replaceWith(newChart);
+    const readout = document.getElementById("mass-readout");
+    readout.innerHTML = MASS_FUELS.map((f) => `<div><b>${Math.round(f.value * mass)} kJ</b>${f.name} · ${mass} g</div>`).join("");
+  }
+
+  function buildMassSim() {
+    document.getElementById("mass-range").addEventListener("input", drawMassChart);
+    drawMassChart();
+  }
+
+  buildFuelLab();
+  buildMassSim();
+  mountNav(MODKEY);
+  mountNextModule(MODKEY);
+  markVisited(MODKEY);
+  mountFooter();
+  renderQuiz(MODKEY, QUIZ.m2);
+</script>
+</body>
+</html>
