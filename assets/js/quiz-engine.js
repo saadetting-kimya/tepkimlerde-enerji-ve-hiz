@@ -188,9 +188,6 @@ const RENDERERS = {
 function progressKey(moduleKey) {
   return `khiz_progress_${moduleKey}`;
 }
-function wrongKey() {
-  return "khiz_wrong_list";
-}
 
 function loadProgress(moduleKey) {
   try {
@@ -203,15 +200,98 @@ function saveProgress(moduleKey, data) {
   localStorage.setItem(progressKey(moduleKey), JSON.stringify(data));
 }
 
-function recordWrong(moduleKey, q, idx) {
-  let list = [];
+/* ---------------- kazanım / öğrenme analizi verisi ---------------- */
+/* Bu proje her modülü tam olarak bir kazanıma karşılık getirir
+   (bkz. CLAUDE.md madde 14); bu yüzden kazanım kodu, modül anahtarına
+   bakılarak sabit bir tablodan okunur. */
+const MODULE_KAZANIM = {
+  m1: "KİM.11.1.1",
+  m2: "KİM.11.1.2",
+  m3: "KİM.11.1.3",
+  m4: "KİM.11.1.4",
+  m5: "KİM.11.1.5",
+  m6: "KİM.11.1.6",
+  m7: "KİM.11.1.7",
+  m8: "KİM.11.1.8",
+};
+
+const ERROR_KEY = "khiz_errors";
+const LEARNING_KEY = "khiz_learning";
+const HISTORY_KEY = "khiz_learning_history";
+
+function safeParse(key, fallback) {
   try {
-    list = JSON.parse(localStorage.getItem(wrongKey())) || [];
+    return JSON.parse(localStorage.getItem(key)) ?? fallback;
   } catch {
-    list = [];
+    return fallback;
   }
-  list.push({ moduleKey, qid: idx, text: q.text, correct: q.correct });
-  localStorage.setItem(wrongKey(), JSON.stringify(list.slice(-300)));
+}
+function safeSave(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function readErrors() {
+  return safeParse(ERROR_KEY, {});
+}
+
+function saveWrongQuestion(moduleKey, question, questionIndex) {
+  const errors = readErrors();
+  if (!errors[moduleKey]) errors[moduleKey] = {};
+  const key = `${moduleKey}_${questionIndex}`;
+  if (!errors[moduleKey][key]) {
+    errors[moduleKey][key] = {
+      questionIndex,
+      context: question.context || "",
+      kazanim: MODULE_KAZANIM[moduleKey] || "",
+      text: question.text || "",
+      options: question.options || [],
+      correct: question.correct,
+      explain: question.explain || "",
+      wrongCount: 1,
+      lastWrong: Date.now(),
+    };
+  } else {
+    errors[moduleKey][key].wrongCount = (errors[moduleKey][key].wrongCount || 0) + 1;
+    errors[moduleKey][key].lastWrong = Date.now();
+  }
+  safeSave(ERROR_KEY, errors);
+}
+
+function readLearning() {
+  return safeParse(LEARNING_KEY, {});
+}
+function saveLearning(learning) {
+  safeSave(LEARNING_KEY, learning);
+}
+function readHistory() {
+  return safeParse(HISTORY_KEY, []);
+}
+function saveHistory(history) {
+  safeSave(HISTORY_KEY, history);
+}
+
+function registerAnswer(question, isCorrect, moduleKey) {
+  const kazanim = MODULE_KAZANIM[moduleKey] || "Kazanım belirtilmemiş";
+  const learning = readLearning();
+  if (!learning[kazanim]) {
+    learning[kazanim] = { kazanim, attempts: 0, correct: 0, wrong: 0, modules: {} };
+  }
+  const data = learning[kazanim];
+  data.attempts++;
+  if (isCorrect) data.correct++;
+  else data.wrong++;
+
+  if (!data.modules[moduleKey]) data.modules[moduleKey] = { attempts: 0, correct: 0, wrong: 0 };
+  data.modules[moduleKey].attempts++;
+  if (isCorrect) data.modules[moduleKey].correct++;
+  else data.modules[moduleKey].wrong++;
+
+  saveLearning(learning);
+
+  const history = readHistory();
+  history.push({ time: Date.now(), moduleKey, kazanim, correct: isCorrect, question: question.text || "" });
+  if (history.length > 500) history.splice(0, history.length - 500);
+  saveHistory(history);
 }
 
 function buildQuestionCard(q, idx, moduleKey, onAnswered) {
@@ -240,7 +320,8 @@ function buildQuestionCard(q, idx, moduleKey, onAnswered) {
       const exp = card.querySelector(".explain");
       exp.classList.add("show");
       const wasCorrect = i === correctIdx;
-      if (!wasCorrect) recordWrong(moduleKey, q, idx);
+      registerAnswer(q, wasCorrect, moduleKey);
+      if (!wasCorrect) saveWrongQuestion(moduleKey, q, idx);
       onAnswered(idx, wasCorrect);
     });
     opts.appendChild(row);
