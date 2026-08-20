@@ -158,16 +158,16 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
-      "text": "Bir demir-kükürt karışımı ısıtıldığında parlak kızıl bir ışıma ile birlikte demir sülfür oluşur ve tepkime başladıktan sonra dışarıdan ısı verilmese de kendiliğinden devam eder. Bu gözlem tepkimenin türü hakkında ne söyler?",
+      "text": "Demir(III) oksit ile alüminyum tozu karıştırılıp tutuşturulduğunda Fe2O3 + 2Al → Al2O3 + 2Fe + ısı tepkimesi gerçekleşir ve açığa çıkan ısı, tren raylarının kaynak işlemlerinde eritme için kullanılacak kadar yüksek olur (termit tepkimesi). Bu tepkime için aşağıdakilerden hangisi doğrudur?",
       "options": [
-        "Tepkime fizikseldir çünkü ışık açığa çıkmıştır",
-        "Tepkime ekzotermiktir çünkü kendi ürettiği ısıyla devam etmektedir",
-        "Tepkime yalnızca fiziksel bir karışım oluşturur",
-        "Tepkime ısı alışverişi yapmamaktadır",
-        "Tepkime endotermiktir çünkü başlangıçta ısıtma gerekmiştir"
+        "Fiziksel bir değişimdir çünkü yalnızca iki katı karışmıştır",
+        "Kimyasal ve ekzotermik bir değişimdir; alüminyum oksit ve demir gibi yeni maddeler oluşurken çok fazla ısı açığa çıkar",
+        "Kimyasal ve endotermik bir değişimdir çünkü tutuşturmak için ısı verilmiştir",
+        "Isı alışverişi yapmayan bir değişimdir",
+        "Fiziksel ve ekzotermik bir değişimdir"
       ],
       "correct": 1,
-      "explain": "Tepkimenin, başlatıldıktan sonra dışarıdan ısı almadan kendi ürettiği ısıyla ilerlemesi, açığa çıkardığı enerjinin tepkimeyi sürdürmeye yettiğini gösterir; bu ekzotermik tepkimelerin tipik bir özelliğidir. Demir ve kükürtten farklı bir bileşiğin (demir sülfür) oluşması da değişimin kimyasal olduğunu gösterir."
+      "explain": "Demir(III) oksit ve alüminyumdan alüminyum oksit ile demir gibi kimlikleri farklı yeni maddelerin oluşması bu değişimin kimyasal olduğunu gösterir. Açığa çıkan ısının rayları eritecek kadar yüksek olması ise tepkimenin güçlü bir ekzotermik tepkime olduğunu gösterir; başlangıçtaki tutuşturma yalnızca tepkimeyi başlatır, tepkimenin kendisinin ısı alışverişi yönünü belirlemez."
     },
     {
       "difficulty": "kolay",
@@ -210,16 +210,16 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
-      "text": "Aşağıdaki olaylardan hangisinde madde, ortamdan ısı alarak hâl değiştirir?",
+      "text": "Ateş böceği, karnındaki bir maddenin enzim yardımıyla oksijenle tepkimeye girmesi sonucu ışık üretir (biyolüminesans); bu ışık üretimi sırasında çevreye çok az ısı yayılır. Bu olay için aşağıdakilerden hangisi doğrudur?",
       "options": [
-        "Erimiş mumun katılaşması",
-        "Sıvı yağın donması",
-        "Su buharının yoğuşması",
-        "Suyun kaynayarak buharlaşması",
-        "Sıvı azotun donması"
+        "Fiziksel bir değişimdir çünkü yalnızca ışık üretilmiştir",
+        "Kimyasal ve endotermik bir değişimdir çünkü enzim harcanır",
+        "Kimyasal ve ekzotermik bir değişimdir; enzimle oksijenin tepkimesi sonucu yeni maddeler oluşur ve az miktarda da olsa ısı açığa çıkar",
+        "Isı alışverişi yapmayan bir değişimdir",
+        "Fiziksel ve endotermik bir değişimdir"
       ],
-      "correct": 3,
-      "explain": "Kaynama sırasında sıvı tanecikleri gaz hâline geçmek için ortamdan enerji alır; bu yüzden kaynama endotermik bir hâl değişimidir. Diğer seçeneklerin tümü ısı vererek gerçekleşen (ekzotermik) hâl değişimleridir."
+      "correct": 2,
+      "explain": "Karın bölgesindeki maddenin enzim yardımıyla oksijenle tepkimeye girip kimliği farklı ürünler oluşturması bu değişimin kimyasal olduğunu gösterir. Işıkla birlikte az da olsa ısının açığa çıkması, tepkimenin ekzotermik olduğunu gösterir; bu yüzden ateş böceğinin ışığına 'soğuk ışık' denir."
     },
     {
       "difficulty": "kolay",
@@ -398,7 +398,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
-      "text": "Bir sodyum asetat cep sobası kristalleştirilerek harekete geçirildiğinde elle hissedilir biçimde ısınır; soba tekrar kullanılabilmesi için kaynar suda ısıtılarak katı hâlden aşırı doymuş sıvı hâle geri döndürülür. Buna göre sobanın kristalleşme ve yeniden sıvılaştırma adımları için aşağıdakilerden hangisi doğrudur?",
+      "text": "Jel bazlı bir cep sobası içindeki metal diskin tıklatılmasıyla sodyum asetat hızla kristalleşir ve sobanın sıcaklığı 50-55°C'ye kadar yükselir; soba tekrar kullanılabilmesi için kaynar suda ısıtılarak katı hâlden aşırı doymuş sıvı hâle geri döndürülür. Buna göre sobanın kristalleşme ve yeniden sıvılaştırma adımları için aşağıdakilerden hangisi doğrudur?",
       "options": [
         "Kristalleşme endotermik, sıvılaştırma ekzotermiktir",
         "Her iki adım da endotermiktir",
@@ -407,7 +407,7 @@ const QUIZ = {
         "Adımların ısı yönü belirlenemez"
       ],
       "correct": 2,
-      "explain": "Kristalleşme sırasında elle hissedilecek kadar ısı açığa çıkması, bu adımın ekzotermik olduğunu gösterir. Sobayı tekrar sıvı hâle döndürmek için dışarıdan (kaynar sudan) ısı verilmesi gerekmesi, bu adımın endotermik olduğunu gösterir; iki adım birbirinin tersidir."
+      "explain": "Kristalleşme sırasında sıcaklığın 50-55°C'ye kadar yükselecek kadar ısı açığa çıkması, bu adımın ekzotermik olduğunu gösterir. Sobayı tekrar sıvı hâle döndürmek için dışarıdan (kaynar sudan) ısı verilmesi gerekmesi, bu adımın endotermik olduğunu gösterir; iki adım birbirinin tersidir."
     },
     {
       "difficulty": "orta",
@@ -431,16 +431,16 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
-      "text": "Bir kimyager, aynı miktarda iki farklı tuzu ayrı beherlerdeki eşit miktarda suda çözüyor ve her iki beherin sıcaklığını da çözünmeden önce ve sonra ölçüyor. 1. beherin sıcaklığı 3°C düşerken 2. beherin sıcaklığı 5°C artıyor. Bu ölçümlere dayanarak hangi sonuca varılabilir?",
+      "text": "Bir tıbbi soğutma paketi deneyinde 100 mL, 25°C'deki suya 20 g amonyum klorür eklenip karıştırılıyor; katı tamamen çözününce çözeltinin sıcaklığı 12°C'ye düşüyor. Bu ölçümlere dayanarak amonyum klorürün suda çözünmesi hakkında hangi sonuca varılabilir?",
       "options": [
-        "1. tuzun çözünmesi endotermik, 2. tuzun çözünmesi ekzotermiktir",
-        "1. tuzun çözünmesi ekzotermik, 2. tuzun çözünmesi endotermiktir",
-        "Her iki çözünme de ekzotermiktir",
-        "Sıcaklık verileri ısı yönünü belirlemek için yeterli değildir",
-        "Her iki çözünme de endotermiktir"
+        "Çözünme endotermiktir; katı, sudan yaklaşık 13°C'lik bir sıcaklık düşüşüne yol açacak kadar ısı almıştır",
+        "Çözünme ekzotermiktir; katı suya ısı vermiştir",
+        "Çözünme ısı alışverişi yapmamıştır, sıcaklık değişimi ölçüm hatasıdır",
+        "Sıcaklık verisi tek başına ısı yönünü belirlemek için yeterli değildir",
+        "Çözünme kimyasal bir değişimdir çünkü sıcaklık değişmiştir"
       ],
       "correct": 0,
-      "explain": "Sıcaklığın düşmesi (1. beher), çözünen maddenin ortamdan ısı aldığını, yani endotermik bir süreci gösterir. Sıcaklığın artması (2. beher) ise madde çözünürken ortama ısı verdiğini, yani ekzotermik bir süreci gösterir."
+      "explain": "Sıcaklığın 25°C'den 12°C'ye, yani 13°C düşmesi, amonyum klorürün suda çözünürken ortamdan (sudan) ısı aldığını gösterir; bu da çözünmenin endotermik olduğunun somut kanıtıdır. Çözünme, madde kimliğini değiştirmediği için fiziksel bir olaydır."
     },
     {
       "difficulty": "orta",
@@ -470,16 +470,16 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
-      "text": "Bir öğretmen sınıfta iki farklı deney düzeneği kuruyor: 1. düzenekte katı bir madde ısıtılınca renk değiştirip gaz çıkışı gözleniyor; 2. düzenekte aynı madde ısıtılınca sadece sıvı hâle geçiyor. Isıtmanın kesilmesi hâlinde her iki düzenekte beklenen davranış nedir?",
+      "text": "Fotoselli bir bataryada, üzerine düşen ışığın enerjisi metal yüzeydeki bir elektronu atomdan koparmaya yetecek kadar yüksek olduğunda elektron serbest kalır ve akım oluşur. Elektronun atomdan koparılması olayı için aşağıdakilerden hangisi doğrudur?",
       "options": [
-        "Her iki düzenekte de değişim tamamen tersine döner",
-        "Her iki düzenekte de değişim geri döndürülemez",
-        "Isıtmanın kesilmesi değişim türünü etkilemez, bu yüzden ikisi de aynı davranışı gösterir",
-        "1. düzenekte tepkime tersine döner, 2. düzenekte madde katı hâle döner",
-        "1. düzenekte oluşan yeni ürünler kendiliğinden eski maddeye dönüşmez, 2. düzenekte madde soğuyunca tekrar katılaşabilir"
+        "Kimyasal bir değişimdir çünkü elektron sayısı değişmektedir",
+        "Fiziksel ve endotermik bir değişimdir; elektron, atomdan ayrılabilmek için fotondan enerji almaktadır",
+        "Fiziksel ve ekzotermik bir değişimdir çünkü ışık kullanılmaktadır",
+        "Isı alışverişi yapmayan bir değişimdir",
+        "Kimyasal ve endotermik bir değişimdir çünkü yeni bir madde oluşmaktadır"
       ],
-      "correct": 4,
-      "explain": "1. düzenekte renk değişimi ve gaz çıkışı, yeni madde oluşan bir kimyasal değişime işaret eder; bu tür değişimler kendiliğinden eski hâline dönmez. 2. düzenekteki erime ise fizikseldir ve soğutulduğunda madde tekrar katı hâle (donarak) geri dönebilir."
+      "correct": 1,
+      "explain": "Elektronun kopması metalin atom/iyon kimliğini değiştirmediği için fizikseldir. Elektronun atoma bağlayan çekim kuvvetini yenip ayrılabilmesi için fotondan enerji alması gerekir; bu yüzden olay endotermiktir."
     },
     {
       "difficulty": "orta",
@@ -779,16 +779,16 @@ const QUIZ = {
     },
     {
       "difficulty": "zor",
-      "text": "Bir tarihçi kaynağa göre eski dönemlerde bazı el ısıtıcıları, demir tozunun nemli ortamda yavaşça oksitlenmesi ilkesiyle çalışırdı; ısıtıcı paket açıldığında havayla temas eden demir tozu saatlerce düşük şiddette ısı üretirdi. Bu bilgiye dayanarak aşağıdaki yorumlardan hangisi en doğrudur?",
+      "text": "Termit tepkimesinde (Fe2O3 + 2Al → Al2O3 + 2Fe + ısı) açığa çıkan ısı tren raylarını eritecek kadar yüksekken, tıbbi soğutma paketinde amonyum klorürün suda çözünmesi çevreyi belirgin biçimde soğutur. İki olay da 'sistemde bir değişim gerçekleşirken çevreyle ısı alışverişi olur' ortak ilkesine örnektir. Bu iki olayın karşılaştırılmasıyla ilgili en doğru değerlendirme hangisidir?",
       "options": [
-        "Tepkimenin yavaş ilerlemesi, ekzotermik olup olmadığını değil yalnızca ısının ne kadar sürede açığa çıktığını etkiler",
-        "Tepkime yavaş ilerlediği için ekzotermik olamaz",
-        "Isının saatlerce sürmesi, tepkimenin endotermik olduğunu gösterir",
-        "Bu tepkimede madde kimliği değişmez",
-        "Tepkime fizikseldir çünkü sadece demir tozu kullanılmaktadır"
+        "Her iki olayda da madde kimliği değişmediği için ikisi de fizikseldir",
+        "İki olay da ekzotermiktir çünkü ikisinde de gözlenebilir bir sıcaklık değişimi vardır",
+        "Termit tepkimesi kimyasal ve ekzotermik, soğutma paketindeki çözünme fiziksel ve endotermiktir; ikisi de ısı alışverişi yönü bakımından birbirinin zıttıdır ama değişim türü bakımından farklı kategorilere aittir",
+        "Soğutma paketindeki olay da kimyasaldır çünkü sıcaklık değişmiştir",
+        "İki olayın karşılaştırılması mümkün değildir çünkü biri katı-katı, diğeri katı-sıvı sistemdir"
       ],
-      "correct": 0,
-      "explain": "Bir tepkimenin ekzotermik olup olmadığı, açığa çıkan ısının toplam miktarı ve yönüyle ilgilidir; tepkimenin hızı (ısının hızlı mı yoksa saatlere yayılarak mı açığa çıktığı) bu sınıflandırmayı değiştirmez. Demir tozunun oksijenle tepkimeye girip demir oksit oluşturması kimyasal bir değişimdir ve açığa çıkan ısı, sürece yayılsa da tepkimenin ekzotermik olduğunu gösterir."
+      "correct": 2,
+      "explain": "Termit tepkimesinde Fe2O3 ve Al'den kimliği farklı yeni maddeler (Al2O3, Fe) oluşur; bu kimyasaldır ve açığa çıkan yüksek ısı onu ekzotermik yapar. Soğutma paketindeki amonyum klorürün çözünmesinde madde kimliği değişmez (fizikseldir) ve çözelti ortamdan ısı aldığı için endotermiktir. İki olay hem değişim türü hem ısı yönü bakımından birbirinden bağımsız iki farklı eksende karşıt uçlardadır; 'ısı alışverişi var' ortak gözlemi tek başına ikisinin aynı kategoriye ait olduğu anlamına gelmez."
     },
     {
       "difficulty": "zor",
@@ -818,16 +818,16 @@ const QUIZ = {
     },
     {
       "difficulty": "zor",
-      "text": "Bir mağara içinde binlerce yıl boyunca çok yavaş damlayan sudaki çözünmüş kalsiyum bileşiklerinin çökelerek sarkıt oluşturması sırasında ortama az miktarda ısı yayıldığı belirleniyor. Bu sürecin, laboratuvarda saniyeler içinde gerçekleşen bir çökelme tepkimesiyle temel ısı-alışverişi sınıflandırması açısından karşılaştırılması için en doğru yaklaşım hangisidir?",
+      "text": "Karlı bir yola serpilen kalsiyum klorür hem suda çözünürken ortama ısı vererek çevresindeki buzu doğrudan eritmeye yardımcı olur hem de oluşan derişik tuzlu çözeltinin donma noktasını saf suyunkinden daha düşük bir değere çeker; bu yüzden ortam sıcaklığı 0°C'nin biraz altında olsa bile çözelti sıvı kalmaya devam edebilir. Bu iki etkinin birlikte değerlendirilmesiyle ilgili en doğru yorum hangisidir?",
       "options": [
-        "Yalnızca laboratuvar koşullarında gerçekleşen tepkimeler sınıflandırılabilir",
-        "Mağaradaki süreç kimyasal değil fizikseldir, bu yüzden karşılaştırma geçersizdir",
-        "Süre farkı, iki sürecin ısı alışverişi yönünü karşılaştırılamaz kılar",
-        "Yavaş süreç endotermik, hızlı süreç ekzotermik kabul edilmelidir",
-        "Isının yayılma süresi ne olursa olsun, ortama ısı verilmesi her iki süreci de ekzotermik olarak sınıflandırmak için yeterlidir"
+        "İki etki de aynı fiziksel olaydan (çözünmeden) kaynaklanır; çözünme ısı açığa çıkarır (ekzotermik) ve ayrıca çözeltinin donma noktasını düşürerek 0°C altında bile sıvı kalmasını sağlar",
+        "Isı açığa çıkması kimyasal bir tepkime olduğunu, donma noktası düşüşü ise fiziksel olduğunu gösterir; bu yüzden olay hem kimyasal hem fizikseldir",
+        "Donma noktası düşüşü, çözünmenin endotermik olduğunun kanıtıdır",
+        "İki etki birbirini geçersiz kılar; biri ısıtırken diğeri soğutur, net sonuç sıfırdır",
+        "Isı açığa çıkması yalnızca sıcaklık termometreyle ölçüldüğünde gerçek kabul edilebilir, donma noktası değişimi ayrı bir olaydır"
       ],
-      "correct": 4,
-      "explain": "Isı alışverişinin yönünü belirleyen, sürecin ortama ısı verip vermediğidir; bu sürecin binlerce yılda mı yoksa saniyeler içinde mi gerçekleştiği sınıflandırmayı değiştirmez. Her iki süreçte de (kalsiyum bileşiklerinin çökelmesi) ortama ısı verildiği için ikisi de ekzotermik kabul edilir; süre yalnızca sürecin hızını gösterir."
+      "correct": 0,
+      "explain": "Kalsiyum klorürün suda çözünmesi tek bir fiziksel olaydır ve iki gözlenebilir sonucu vardır: çözünme sırasında ısı açığa çıkması (ekzotermik olduğunu gösterir) ve oluşan derişik çözeltinin donma noktasının saf sudan daha düşük olması (bu yüzden 0°C altında bile donmadan kalabilir). İkisi de aynı çözünme olayının farklı sonuçlarıdır; biri ısı yönüyle, diğeri hâl değişimi sıcaklığıyla ilgilidir ve birbirini geçersiz kılmaz, tam tersine buzlanmayla mücadelede birlikte işe yarar."
     },
     {
       "difficulty": "zor",

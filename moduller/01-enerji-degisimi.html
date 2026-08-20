@@ -87,21 +87,21 @@
   const MODKEY = "m1";
 
   const CLASSIFY_ITEMS = [
-    { label: "Buz küpünün elde erimesi", physical: "Fiziksel", thermic: "Endotermik", why: "Katı hâlden sıvı hâle geçiş bir hâl değişimidir (fiziksel); erime sırasında buz, elden ısı alır." },
-    { label: "Odunun yanması", physical: "Kimyasal", thermic: "Ekzotermik", why: "Yanma sonucunda yeni maddeler (kül, gazlar) oluşur (kimyasal); açığa çıkan ısı çevreye yayılır." },
-    { label: "Amonyum klorürün suda çözünmesi", physical: "Fiziksel", thermic: "Endotermik", why: "Çözünme bir hâl/dağılma olayıdır (fiziksel); bu tuzun çözünmesi ortamdan ısı çeker, çözelti soğur." },
-    { label: "Soğuk bir şişenin yüzeyinde su damlacıkları oluşması", physical: "Fiziksel", thermic: "Ekzotermik", why: "Havadaki su buharının yoğuşarak sıvı hâle geçmesi fizikseldir; yoğuşma sırasında çevreye ısı verilir." },
-    { label: "Demirin paslanması", physical: "Kimyasal", thermic: "Ekzotermik", why: "Demirin oksijenle tepkimeye girip demir oksit oluşturması kimyasaldır; bu tepkime ısı açığa çıkarır." },
-    { label: "Spor yaparken vücut sıcaklığının artması", physical: "Kimyasal", thermic: "Ekzotermik", why: "Vücuttaki besin moleküllerinin enerji üretmek üzere parçalanması kimyasal bir süreçtir ve ısı açığa çıkarır." },
+    { label: "Tıbbi soğutma paketinin sıkılması (amonyum klorür ve suyun karışması)", physical: "Fiziksel", thermic: "Endotermik", why: "Amonyum klorürün suda çözünmesi bir çözünme (fiziksel) olayıdır; çözünme karışımı hızla soğutur — deneyde 100 mL 25°C'lik su, 20 g amonyum klorür eklenince 12°C'ye kadar düşer." },
+    { label: "Jel bazlı cep sobasının tıklatılıp katılaşması (sodyum asetatın kristalleşmesi)", physical: "Fiziksel", thermic: "Ekzotermik", why: "Kristalleşme bir hâl/yapı değişimidir (fiziksel); sodyum asetat trihidrat kristalleşirken yaklaşık 50-55°C'lik bir sıcaklık sağlanacak kadar ısı açığa çıkarır." },
+    { label: "Termit tepkimesi (demir(III) oksit ile alüminyumun tepkimesi, tren rayı kaynağı)", physical: "Kimyasal", thermic: "Ekzotermik", why: "Fe2O3 + 2Al → Al2O3 + 2Fe + ısı denklemine göre yeni maddeler (alüminyum oksit, demir) oluşur (kimyasal); açığa çıkan ısı, tren raylarının kaynak işlemlerinde kullanılacak kadar yüksektir." },
+    { label: "Ateş böceğinin karnında ışık üretmesi (biyolüminesans)", physical: "Kimyasal", thermic: "Ekzotermik", why: "Karın bölgesindeki kimyasal maddenin enzim yardımıyla oksijenle tepkimeye girmesi kimyasaldır; bu 'soğuk ışık' sırasında çok az da olsa ısı açığa çıkar, bu yüzden yine ekzotermiktir." },
+    { label: "Fotoselli bataryada ışığın metal yüzeyden elektron koparması", physical: "Fiziksel", thermic: "Endotermik", why: "Elektronun atomdan kopması madde kimliğini değiştirmez (fiziksel); elektronun bağlı olduğu atomdan ayrılabilmesi için fotondan enerji alması gerekir, bu yüzden endotermiktir." },
+    { label: "Kalsiyum klorürün karda/buzda serpilip çözünmesi (buzlanmayla mücadele)", physical: "Fiziksel", thermic: "Ekzotermik", why: "Çözünme fiziksel bir olaydır; kalsiyum klorür suda çözünürken ısı açığa çıkarır ve bu ısı çevresindeki buzu eritmeye yardımcı olur." },
   ];
 
   const HEAT_EVENTS = [
-    { name: "Buzun erimesi", dir: "in", note: "Sistem (buz) çevreden ısı alır; çevre soğur." },
-    { name: "Amonyum nitratın suda çözünmesi (soğutucu paket)", dir: "in", note: "Sistem çözeltiden ısı alır; çözelti ve çevresi soğur." },
-    { name: "Demirin havada yükseltgenmesi (ısıtıcı paket)", dir: "out", note: "Tepkime ısı üretir; sistem çevreye ısı verir, çevre ısınır." },
+    { name: "Tıbbi soğutma paketi (amonyum klorürün suda çözünmesi)", dir: "in", note: "Sistem çözeltiden ısı alır; deneyde su 25°C'den 12°C'ye kadar soğur." },
+    { name: "Jel bazlı cep sobası (sodyum asetatın kristalleşmesi)", dir: "out", note: "Kristalleşen madde biriktirdiği enerjiyi çevreye verir; sıcaklık 50-55°C'ye kadar yükselir." },
+    { name: "Termit tepkimesi (Fe2O3 + 2Al → Al2O3 + 2Fe + ısı)", dir: "out", note: "Tepkime çok yüksek ısı üretir; sistem çevreye ısı verir, tren rayı kaynağında kullanılacak kadar ısınır." },
     { name: "Mumun yanması", dir: "out", note: "Yanma tepkimesi ısı ve ışık açığa çıkarır; çevre ısınır." },
     { name: "Suyun buharlaşması", dir: "in", note: "Sıvı molekülleri gaz hâle geçmek için ısı alır; çevre soğur." },
-    { name: "Sodyum asetatlı cep sobasının katılaşması", dir: "out", note: "Aşırı doymuş çözelti kristalleşirken biriktirdiği enerjiyi çevreye verir; çevre ısınır." },
+    { name: "Fotoselli bataryada elektron koparılması", dir: "in", note: "Elektron atomdan kopmak için fotondan enerji alır; sistem enerji kazanır." },
   ];
 
   function buildClassifyGrid() {
