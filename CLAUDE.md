@@ -1,11 +1,21 @@
-# AtomLab 9 — Kalıcı Kurallar
+# Tepkimelerde Enerji ve Hız — Kalıcı Kurallar
 
 Bu dosya her oturumun başında otomatik okunur. Buradaki kurallar,
 kullanıcının (Saadettin) aynı talimatları tekrar tekrar yazmak zorunda
 kalmaması için kalıcı hale getirilmiştir ve benim kendi varsayılan
-alışkanlıklarımdan **önceliklidir**. Yeni bir standing-rule (tek
-seferlik görev değil, kalıcı tercih) verildiğinde, aynı oturumda bu
-dosyaya eklenir (bkz. madde 13).
+alışkanlıklarımdan **önceliklidir**. Madde 1-11, AtomLab 9 projesinde
+(Atomdan Periyodik Tabloya) geliştirilmiş, konudan bağımsız/genel
+geçer davranış kurallarıdır — buradaki somut vakalar (piktogram,
+kuantum sayısı) o projeye ait örnekler olsa da, çıkardıkları GENEL
+KURAL bu projede de aynı şekilde bağlayıcıdır. Madde 14+ bu projeye
+(11. sınıf Enerji ve Kimyasal Tepkimelerde Hız) özeldir. Yeni bir
+standing-rule (tek seferlik görev değil, kalıcı tercih) verildiğinde,
+aynı oturumda bu dosyaya eklenir (bkz. madde 13).
+
+**Bu projenin resmî müfredat kaynağı** (madde 5'teki "MEB kitabı"
+kuralının bu projedeki karşılığı): `enerji ve hız meb.pdf` — Türkiye
+Yüzyılı Maarif Modeli 11. sınıf Kimya ders kitabının "Enerji" (1.1.x)
+ve "Kimyasal Tepkimelerde Hız" (1.2.x) bölümü. Bkz. madde 14.
 
 ## 1. PİKTOGRAM OLAYI — somut ders çıkarılan vaka (telif + doğruluk)
 
@@ -238,8 +248,56 @@ hemen** bu dosyaya yeni bir madde olarak eklenir. Kural eklenirken:
   sorusu tekrar sorulmasın diye.
 - Dosya güncellemesi commit + push edilir.
 
-## 14. Genel iş akışı
+## 14. Konu kapsamı ve kazanım kodu — bu projeye özel
 
-- Branch: `claude/burdan-devam-a2wg3u`.
+**Kaynak tarama sonucu (2026-08-20):** Yüklenen 9 PDF'ten yalnızca 3
+tanesi (`enerji ve hız meb.pdf` = asıl MEB ders kitabı bölümü, Aydın
+Yayınları'nın Enerji-1/2 ve Hız-1/2 öğrenci kitapları) gerçek/çıkarılabilir
+metin katmanı içeriyor. `kimya dersi 11. sınıf müfredat içeriği.pdf`
+(resmî öğretim programı — kazanım kodlarının asıl kaynağı olması
+beklenen belge) özel/glyph-ID kodlamalı bir font kullanıyor; bu ortamda
+OCR aracı (poppler-utils/tesseract) kurulamıyor (ağ politikası PyPI/
+npm/apt-get'i 403 ile engelliyor) ve dosya bu yüzden okunamadı.
+`11.SINIF KİMYA SORU BANKASI...pdf` ve `kimya soru örnekleri.pdf`
+büyük ölçüde taranmış görsel sayfalar, metin katmanı yok.
+
+**Sonuç:** Hiçbir kaynakta (ne MEB kitabında ne 3 yayınevi kitabında)
+yazılı "KİM.11.X.Y" formatında bir kazanım kodu bulunamadı — yeni
+Maarif Modeli öğrenci kitapları bu kodları öğrenci metnine basmıyor.
+
+**Kullanıcı kararı:** `KİM.11.1.1`–`KİM.11.1.8` içi referans kodu
+olarak kullanılır (modülün MEB kitabındaki gerçek alt-başlık sırasına
+birebir karşılık gelir — bkz. aşağıki liste). Bu kod **resmî öğretim
+programı belgesinden doğrulanmış bir kod DEĞİLDİR**, yalnızca modül
+sıralaması için içi bir etikettir. Eğer kullanıcı ileride öğretim
+programı PDF'inin metnini/kazanım kodlarını elle sağlarsa, bu madde
+ve `nav.js`/`quiz-data.js`'teki kodlar buna göre güncellenir.
+
+**MEB kitabından doğrulanan 8 alt-konu (madde 3.1 gereği bağlayıcı
+kapsam sınırı):**
+
+1. KİM.11.1.1 — Tepkimelerde Meydana Gelen Enerji Değişimi (fiziksel/
+   kimyasal olay, endotermik/ekzotermik)
+2. KİM.11.1.2 — Maddelerin Enerji Kaynağı Olma Potansiyeli (yakıt
+   karşılaştırma, kJ/g)
+3. KİM.11.1.3 — Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması
+4. KİM.11.1.4 — Standart Oluşum Entalpisi (**dikkat:** kitap "Hess
+   Yasası" terimini HİÇ kullanmıyor, yalnızca "standart oluşum
+   entalpilerine göre tepkime entalpisi hesaplama" diyor — bu isim
+   uygulamada/deftede/sorularda kullanılmaz, madde 5 ihlali olur)
+5. KİM.11.1.5 — Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli
+   Şartlar (çarpışma teorisi, ileri/geri aktivasyon enerjisi)
+6. KİM.11.1.6 — Tepken ve Ürün Derişimleriyle Ortalama Tepkime
+   Hızlarının Hesaplanması
+7. KİM.11.1.7 — Tepkime Hızına Etki Eden Faktörler (kitapta tam
+   olarak 6 ayrı deney/etken: madde cinsi, fiziksel hâl, derişim,
+   sıcaklık, katalizör, temas yüzeyi — 7. değil, gerçekten 6)
+8. KİM.11.1.8 — Kimyasal Tepkimelerin Hız Denklemi (hız denklemi,
+   tepkime derecesi/mertebesi, hız sabiti "k" — "Arrhenius" veya
+   "yarı ömür" gibi kitapta GEÇMEYEN üniversite terimleri YASAK)
+
+## 15. Genel iş akışı
+
+- Branch: `claude/reaction-energy-speed-course-etubf6`.
 - Küçük, odaklı commit'ler, açıklayıcı Türkçe commit mesajlarıyla.
 - Her modül bitince: QA script → görsel test → commit → push.
