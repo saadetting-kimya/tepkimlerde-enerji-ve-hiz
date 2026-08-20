@@ -176,6 +176,22 @@ demektir.
   kullanılır — yalnızca bar chart'a saplanıp kalınmaz. Hangi grafik
   türünün kullanılacağı, piyasadaki ders kitaplarının o konuyu hangi
   grafik türüyle işlediğine bakılarak seçilir.
+
+  **Bu projeye özel vurgu (kullanıcı talimatı, 2026-08-20):** Enerji
+  ve Tepkime Hızı konusunda çizgi grafikleri ÖZEL bir önem taşır —
+  piyasa kitaplarında bu konu doğası gereği çizgi/eğri grafiklerle
+  anlatılır: potansiyel enerji-tepkime koordinatı eğrileri (aktivasyon
+  enerjisi, ileri/geri aktivasyon enerjisi — modül 5), derişim-zaman
+  grafikleri (ortalama hız hesaplama — modül 6), hız-derişim ve
+  derişim-zaman ilişkileri (etki eden faktörler ve hız denklemi —
+  modül 7-8). Soru bankası tamamlanmadan önce her modülde "bu veri
+  zaman/derişim serisi mi, yoksa kategorik karşılaştırma mı?" sorusu
+  sorulur — zaman/derişim serisi ise `compareChart` (çizgi) kullanılır,
+  `chart` (bar) yalnızca kategorik karşılaştırmalarda (örn. farklı
+  maddelerin kJ/g değeri) tercih edilir. Somut düzeltme: Modül 1'de
+  bir soruda sıcaklık-zaman verisi yanlışlıkla bar chart ile çizilmişti
+  (zaman serisi olduğu hâlde), fark edilince `compareChart`'a
+  çevrildi.
 - **Şekil/görsel benzerliği:** Yeni bir şekil/diyagram oluşturulacaksa,
   **piyasadaki (farklı yayınevlerinin ve MEB'in) ders kitaplarında o
   konu için kullanılan şekillerden ÇOK FARKLI olmayacak** — aynı

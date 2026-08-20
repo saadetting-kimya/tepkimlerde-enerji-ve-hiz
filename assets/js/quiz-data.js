@@ -593,20 +593,20 @@ const QUIZ = {
   },
   {
     "difficulty": "zor",
-    "chart": {
-      "labels": [
+    "compareChart": {
+      "xLabels": [
         "0. dk",
         "2. dk",
         "4. dk",
         "6. dk"
       ],
-      "values": [
-        24,
-        24,
-        24,
-        18
-      ],
-      "unit": "Karışım sıcaklığı (°C)"
+      "series": [
+        {
+          "name": "Karışım sıcaklığı (°C)",
+          "values": [24, 24, 24, 18],
+          "color": "var(--endo)"
+        }
+      ]
     },
     "text": "Bir deneyde katı bir madde suya eklendikten sonra karışımın sıcaklığı 2 dakika arayla ölçülüyor; grafiğe göre sıcaklık ilk 4 dakika sabit kalıp 6. dakikada düşüyor. Bu veriler için en tutarlı açıklama hangisidir?",
     "options": [
