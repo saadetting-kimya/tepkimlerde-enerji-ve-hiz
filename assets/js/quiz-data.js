@@ -6,6 +6,7 @@
    Modül 4: Standart Oluşum Entalpisi (KİM.11.1.4)
    Modül 5: Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli Şartlar (KİM.11.1.5)
    Modül 6: Tepken ve Ürün Derişimleriyle Ortalama Tepkime Hızlarının Hesaplanması (KİM.11.1.6)
+   Modül 7: Tepkime Hızına Etki Eden Faktörler (KİM.11.1.7)
    ============================================================ */
 
 const QUIZ = {
@@ -4924,6 +4925,749 @@ const QUIZ = {
       ],
       "correct": 2,
       "explain": "Eğrinin hiçbir noktada yatay bir düzlüğe (sıfır eğime, yani sıfır hıza) ulaşmaması, gösterilen zaman aralığı boyunca tepkenin hâlâ harcanmakta olduğunu, yani tepkimenin bu süre içinde tamamlanmadığını gösterir."
+    }
+  ],
+  "m7": [
+    {
+      "difficulty": "kolay",
+      "text": "Aşağıdakilerden hangisi tepkime hızını etkileyen altı temel etkenden biri DEĞİLDİR?",
+      "options": [
+        "Derişim",
+        "Temas yüzeyi",
+        "Tepkimenin gerçekleştiği günün adı",
+        "Sıcaklık",
+        "Katalizör"
+      ],
+      "correct": 2,
+      "explain": "Tepkime hızını etkileyen temel etkenler madde cinsi, fiziksel hâl, derişim, sıcaklık, katalizör ve temas yüzeyidir. Günün adı gibi bir özellik tepkime hızını bilimsel olarak etkilemez."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Aynı koşullarda propanın (C3H8) yanması, metanın (CH4) yanmasından neden daha yavaştır?",
+      "options": [
+        "Propanın yanması daha fazla bağın kırılmasını gerektirir",
+        "Propan daha soğuktur",
+        "Propan katı hâldedir",
+        "Propan daha az bağ içerir",
+        "Metan daha ağırdır"
+      ],
+      "correct": 0,
+      "explain": "Propanın yanma tepkimesi, metana göre daha fazla sayıda bağın kırılmasını gerektirir. Bir tepkimede kırılan bağ sayısı ne kadar çoksa tepkimenin yavaş gerçekleşme olasılığı o kadar fazladır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Zıt yüklü iyonlar arasında gerçekleşen nötralleşme ve çökelme tepkimeleri genellikle nasıl gerçekleşir?",
+      "options": [
+        "Yalnızca katalizörle gerçekleşir",
+        "Yalnızca düşük sıcaklıkta gerçekleşir",
+        "Hiç gerçekleşmez",
+        "Çok hızlı",
+        "Çok yavaş"
+      ],
+      "correct": 3,
+      "explain": "Zıt yüklü iyonlar arasındaki elektrostatik çekim kuvveti nedeniyle nötralleşme (HCl+NaOH→NaCl+H2O) ve çökelme (KI+Pb(NO3)2→PbI2+KNO3) gibi tepkimeler genellikle çok hızlı gerçekleşir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Ca(k) + H2O(g) → Ca(OH)2(k) + H2(g) tepkimesi, Ca(k) + H2O(s) → Ca(OH)2(suda) + H2(g) tepkimesinden neden daha hızlıdır?",
+      "options": [
+        "Gaz hâlindeki su daha soğuktur",
+        "Bu iki tepkime aynı hızdadır",
+        "Katı kalsiyum suyla hiç tepkimeye girmez",
+        "Gaz hâlindeki su molekülleri daha hareketli olduğundan kalsiyumla çarpışma sıklığı daha fazladır",
+        "Sıvı su daha az saftır"
+      ],
+      "correct": 3,
+      "explain": "Gaz fazındaki moleküller sıvı fazdakilerden daha hareketlidir; bu da kalsiyumla çarpışma sıklığını ve dolayısıyla tepkime hızını artırır. Genel olarak gaz fazındaki tepkimeler sıvı/katı fazlardakinden daha hızlı gerçekleşir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Derişimin tepkime hızına etkisiyle ilgili aşağıdakilerden hangisi doğrudur?",
+      "options": [
+        "Derişim yalnızca katı maddelerde etkilidir",
+        "Derişim arttıkça birim hacimdeki tanecik sayısı ve çarpışma sayısı artar, tepkime hızlanır",
+        "Derişim yalnızca sıcaklığı etkiler",
+        "Derişimin tepkime hızıyla ilgisi yoktur",
+        "Derişim arttıkça tepkime hızı azalır"
+      ],
+      "correct": 1,
+      "explain": "Derişim arttıkça birim hacimdeki tanecik sayısı artar; bu da taneciklerin çarpışma sıklığını ve dolayısıyla etkin çarpışma sayısını artırarak tepkimeyi hızlandırır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Nemli havada demirin paslanmasının kuru havaya göre daha hızlı olmasının nedeni nedir?",
+      "options": [
+        "Nemin paslanma hızıyla hiçbir ilgisi yoktur",
+        "Nemli havada su buharı derişiminin daha fazla olması, oksidasyon sürecini hızlandırır",
+        "Nemli hava demiri soğutur",
+        "Nem, demirin rengini değiştirir",
+        "Nem, oksijeni ortamdan uzaklaştırır"
+      ],
+      "correct": 1,
+      "explain": "Nemli havada su buharı derişimi daha fazladır; bu, demirin yüzeyinde daha fazla su bulunmasına ve elektrokimyasal paslanma sürecinin hızlanmasına yol açar."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Sıcaklık arttığında tepkenlerin kinetik enerjisinde ne olur?",
+      "options": [
+        "Sıfıra düşer",
+        "Yalnızca ürünlerin kinetik enerjisi değişir",
+        "Azalır",
+        "Artar",
+        "Değişmez"
+      ],
+      "correct": 3,
+      "explain": "Sıcaklık artışı, tepkimeye giren taneciklerin kinetik enerjisinde artışa neden olur."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Sıcaklık artışının tepkime hızını artırmasının temel nedeni nedir?",
+      "options": [
+        "Sıcaklık artışı tepkime entalpisini değiştirir",
+        "Sıcaklık artışı aktivasyon enerjisini düşürür",
+        "Sıcaklık artışı çarpışma sıklığını ve şiddetini artırarak eşik değerini aşan tanecik sayısını yükseltir",
+        "Sıcaklık artışı tepkimenin izlediği yolu kısaltır",
+        "Sıcaklık artışı tepkenlerin derişimini artırır"
+      ],
+      "correct": 2,
+      "explain": "Sıcaklık arttığında taneciklerin kinetik enerjisi artar; bu da çarpışma sıklığını ve şiddetini artırarak eşik değerini aşan (etkin çarpışma yapabilecek) tanecik sayısını yükseltir. Sıcaklık aktivasyon enerjisini düşürmez, yalnızca ona ulaşan tanecik oranını artırır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Kimyasal tepkimelerde tepkime hızını artıran ama tepkime sonunda değişmeden çıkan maddelere ne ad verilir?",
+      "options": [
+        "İzomer",
+        "Çözücü",
+        "Katalizör",
+        "İndikatör",
+        "Elektrolit"
+      ],
+      "correct": 2,
+      "explain": "Tepkime hızını artıran ve tepkime sonunda kimyasal olarak değişmeden tepkimeden çıkan maddelere katalizör denir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Katalizörler tepkime hızını hangi mekanizma ile artırır?",
+      "options": [
+        "Aktivasyon enerjisini düşürerek",
+        "Ürünlerin miktarını artırarak",
+        "Tepkenlerin derişimini artırarak",
+        "Tepkime entalpisini değiştirerek",
+        "Sıcaklığı düşürerek"
+      ],
+      "correct": 0,
+      "explain": "Katalizörler, tepkimenin aktivasyon enerjisini düşürerek daha fazla tanecığin bu düşük eşiği aşmasını ve tepkimenin daha hızlı gerçekleşmesini sağlar."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Araç egzoz sistemlerinde kullanılan katalitik konvertörler hangi metalleri katalizör olarak içerir?",
+      "options": [
+        "Platin, paladyum, rodyum",
+        "Demir, bakır, çinko",
+        "Karbon, azot, oksijen",
+        "Altın, gümüş, kurşun",
+        "Sodyum, potasyum, kalsiyum"
+      ],
+      "correct": 0,
+      "explain": "Katalitik konvertörler; platin, paladyum ve rodyum gibi metaller aracılığıyla egzoz gazlarındaki zararlı bileşikleri (CO, hidrokarbonlar, NOx) daha az zararlı bileşiklere (CO2, H2O, N2, O2) dönüştürür."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Katı bir tepkenin ince toz hâline getirilmesi tepkime hızını nasıl etkiler?",
+      "options": [
+        "Hızı azaltır",
+        "Hızı artırır, çünkü yüzey alanı artarak çarpışabilecek bölge genişler",
+        "Tepkimeyi tamamen durdurur",
+        "Yalnızca renk değişimine neden olur",
+        "Hızı etkilemez"
+      ],
+      "correct": 1,
+      "explain": "Katı bir maddenin toz hâline getirilmesi yüzey alanını büyük ölçüde artırır; bu da tepkimenin gerçekleşebileceği bölgeyi genişleterek çarpışma sıklığını ve tepkime hızını artırır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Zn(k) + 2HCl(suda) → ZnCl2(suda) + H2(g) tepkimesinde parça hâlindeki çinko yerine aynı kütlede toz hâlinde çinko kullanılırsa tepkime hızı nasıl değişir?",
+      "options": [
+        "Artar, tepkime çok daha şiddetli gerçekleşir",
+        "Azalır",
+        "Değişmez",
+        "Tepkime tamamen durur",
+        "Yalnızca renk değişir"
+      ],
+      "correct": 0,
+      "explain": "Toz hâlindeki çinkonun yüzey alanı parça hâlindekinden çok daha büyük olduğundan çinko-HCl çarpışmalarının sıklığı artar; tepkime çok daha şiddetli ve hızlı gerçekleşir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "2NO(g) + H2(g) → N2(g) + H2O2(g) tepkimesi üç molekülün aynı anda çarpışmasını gerektirdiği için nasıl bir tepkimedir?",
+      "options": [
+        "Yalnızca düşük sıcaklıkta gerçekleşir",
+        "Yavaş",
+        "Anlık",
+        "Katalizörsüz gerçekleşemez",
+        "Çok hızlı"
+      ],
+      "correct": 1,
+      "explain": "Üç molekülün aynı anda, uygun geometride çarpışması istatistiksel olarak iki molekülün çarpışmasından çok daha düşük olasılıklıdır; bu yüzden bu tür tepkimeler genellikle yavaş gerçekleşir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "H2O2(g) + H2(g) → 2H2O(g) tepkimesi, yalnızca iki molekülün çarpışmasını gerektirdiği için 2NO+H2→N2+H2O2 tepkimesine göre nasıldır?",
+      "options": [
+        "Karşılaştırılamaz",
+        "Daha hızlıdır",
+        "Daha yavaştır",
+        "Aynı hızdadır",
+        "Hiç gerçekleşmez"
+      ],
+      "correct": 1,
+      "explain": "İki molekülün aynı anda uygun şekilde çarpışması, üç molekülün aynı anda çarpışmasından istatistiksel olarak daha olasıdır; bu yüzden H2O2+H2→2H2O tepkimesi, üç molekül gerektiren tepkimeden daha hızlı gerçekleşir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "MnO2 katısı, H2O2'nin ayrışma tepkimesinde hangi rolü oynar?",
+      "options": [
+        "Ürün olarak oluşur",
+        "Tepken olarak harcanır",
+        "Tepkimeyi tamamen durdurur",
+        "Katalizör olarak tepkimeyi hızlandırır ve değişmeden kalır",
+        "Yalnızca rengi değiştirir"
+      ],
+      "correct": 3,
+      "explain": "MnO2, 2H2O2(suda) → 2H2O(s) + O2(g) ayrışma tepkimesinde katalizör görevi görür; tepkimeyi hızlandırır ama kendisi tepkime sonunda değişmeden kalır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Kireç taşından (CaCO3) yapılmış maket yapılar üzerine eşit derişimde asit püskürtülerek farklı sıcaklıklarda aşınma hızı ölçülüyor. Bu deneyde araştırılan etken hangisidir?",
+      "options": [
+        "Sıcaklık",
+        "Madde cinsi",
+        "Temas yüzeyi",
+        "Derişim",
+        "Katalizör"
+      ],
+      "correct": 0,
+      "explain": "Deneyde derişim ve madde cinsi sabit tutulup yalnızca sıcaklık değiştirildiğinden, araştırılan etken sıcaklığın tepkime hızına etkisidir."
+    },
+    {
+      "difficulty": "orta",
+      "statements": {
+        "items": [
+          "Aynı sıcaklıkta ve derişimde, gaz fazındaki bir tepkime genellikle sıvı fazdaki benzer bir tepkimeden daha hızlı gerçekleşir.",
+          "Katalizörler tepkimenin ürünlerini ve tepkime entalpisini değiştirir.",
+          "Derişimin artması, birim hacimdeki tanecik sayısını artırarak çarpışma sıklığını yükseltir."
+        ]
+      },
+      "text": "Verilen önermelerden hangileri doğrudur?",
+      "options": [
+        "I, II ve III",
+        "Yalnız I",
+        "Yalnız II",
+        "I ve III",
+        "II ve III"
+      ],
+      "correct": 3,
+      "explain": "I doğrudur; gaz fazındaki moleküller daha hareketli olduğundan çarpışma sıklığı daha yüksektir. II yanlıştır; katalizörler yalnızca aktivasyon enerjisini düşürür, ürünleri ve tepkime entalpisini değiştirmez. III doğrudur; derişim arttıkça çarpışma sıklığı artar."
+    },
+    {
+      "difficulty": "orta",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "Katı yakıtların sıvı yakıtlardan daha yavaş yanması, sıcaklığın tepkime hızına etkisiyle açıklanabilir."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Bence bu yanlış; katı ve sıvı yakıtlar arasındaki hız farkı fiziksel hâlin etkisiyle ilgilidir, sıcaklıkla değil. Sıcaklık sabit tutulsa bile katı ve sıvı arasında bu fark gözlenir."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrenci bilimsel olarak haklıdır?",
+      "options": [
+        "Yalnız Öğrenci B",
+        "İkisi de haklıdır",
+        "Verilen bilgiyle karar verilemez",
+        "Yalnız Öğrenci A",
+        "İkisi de haksızdır"
+      ],
+      "correct": 0,
+      "explain": "Öğrenci B haklıdır. Katı yakıtların sıvı yakıtlardan daha yavaş yanması, taneciklerin hareketliliği ve çarpışma sıklığıyla ilgili olan fiziksel hâl etkisiyle açıklanır; bu, sıcaklığın etkisinden farklı bir etkendir."
+    },
+    {
+      "difficulty": "orta",
+      "checklist": {
+        "items": [
+          "'Temas yüzeyinin artması tepkimenin hızını artırır' hipotezi bilimsel bilgilerle doğrulanabilir bir hipotezdir.",
+          "Kalsiyumun farklı sıcaklıklardaki su ile verdiği tepkimeleri gözlemlemek üzere planlanan bir deney, katalizörün etkisini açıklayan bir deneydir.",
+          "'Katı yakıtlar sıvı yakıtlara göre neden daha yavaş yanar?' sorusu sıcaklığın tepkime hızına etkisiyle ilgili araştırılabilir bir sorudur."
+        ]
+      },
+      "text": "Yukarıdaki ifadelerden kaç tanesi doğrudur?",
+      "options": [
+        "1",
+        "Verilenlerle belirlenemez",
+        "3",
+        "2",
+        "0"
+      ],
+      "correct": 0,
+      "explain": "Yalnızca birinci ifade doğrudur. İkinci ifade yanlıştır; kalsiyumun farklı sıcaklıklardaki su ile tepkimesi katalizörün değil sıcaklığın etkisini araştırır. Üçüncü ifade de yanlıştır; katı-sıvı yakıt karşılaştırması sıcaklığın değil fiziksel hâlin etkisiyle ilgilidir."
+    },
+    {
+      "difficulty": "orta",
+      "table": {
+        "headers": [
+          "Kap",
+          "Fe Miktarı",
+          "Fe Biçimi",
+          "HCl Derişimi"
+        ],
+        "rows": [
+          [
+            "I",
+            "10 g",
+            "Levha",
+            "0,1 M"
+          ],
+          [
+            "II",
+            "10 g",
+            "Talaş",
+            "0,1 M"
+          ],
+          [
+            "III",
+            "10 g",
+            "Toz",
+            "0,1 M"
+          ]
+        ]
+      },
+      "text": "Fe(k) + 2HCl(suda) → FeCl2(suda) + H2(g) tepkimesi için verilen tabloya göre birim zamanda en fazla FeCl2 hangi kapta üretilir?",
+      "options": [
+        "Üçünde de eşit üretilir",
+        "I. kap (levha)",
+        "II. kap (talaş)",
+        "III. kap (toz)",
+        "Belirlenemez"
+      ],
+      "correct": 3,
+      "explain": "Üç kapta da Fe kütlesi ve HCl derişimi aynı olduğundan tek değişken temas yüzeyidir. Toz hâlindeki demirin yüzey alanı en büyük olduğundan III. kapta birim zamanda en fazla FeCl2 üretilir."
+    },
+    {
+      "difficulty": "orta",
+      "matchPairs": {
+        "leftHeader": "Deney Senaryosu",
+        "rightHeader": "Araştırılan Etken",
+        "pairs": [
+          [
+            "Aynı sıcaklıkta 3 farklı derişimde HCl ile Zn tepkimesi",
+            "Derişim"
+          ],
+          [
+            "10 g Fe'yi levha, talaş, toz hâlinde HCl ile tepkimeye sokma",
+            "Temas yüzeyi"
+          ],
+          [
+            "MnO2 varlığında ve yokluğunda H2O2 ayrışması",
+            "Katalizör"
+          ]
+        ]
+      },
+      "text": "Yukarıdaki eşleştirmeye göre bir deneyde yalnızca sıcaklık değiştirilip diğer tüm değişkenler sabit tutuluyorsa bu deney hangi etkeni araştırır?",
+      "options": [
+        "Katalizör",
+        "Derişim",
+        "Temas yüzeyi",
+        "Madde cinsi",
+        "Sıcaklık"
+      ],
+      "correct": 4,
+      "explain": "Bir deneyde yalnızca sıcaklık değiştirilip diğer tüm değişkenler (derişim, temas yüzeyi, madde cinsi vb.) sabit tutuluyorsa, bu deney sıcaklığın tepkime hızına etkisini araştırıyor demektir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Grafik 1.9'a göre sıcaklık T1'den T2'ye (T2>T1) yükseltildiğinde kinetik enerji dağılım eğrisinin altındaki toplam alan nasıl değişir?",
+      "options": [
+        "Alan yalnızca eşik değerinin sağında değişir",
+        "Alan sıfıra iner",
+        "Alan değişmez, çünkü tanecik sayısı sabittir; yalnızca dağılım sağa kayar",
+        "Alan azalır, çünkü bazı tanecikler yok olur",
+        "Alan artar, çünkü daha fazla tanecik oluşur"
+      ],
+      "correct": 2,
+      "explain": "Sıcaklık artışı tanecik sayısını değiştirmez, yalnızca taneciklerin kinetik enerji dağılımını daha yüksek enerjilere doğru kaydırır. Bu yüzden T1 ve T2'deki eğrilerin altındaki toplam alan (toplam tanecik sayısını temsil eder) aynı kalır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Sıcaklık artışının aktivasyon enerjisi (Ea) üzerindeki etkisi nedir?",
+      "options": [
+        "Sıcaklık Ea'yı düşürür",
+        "Sıcaklık Ea'yı sıfırlar",
+        "Sıcaklık Ea'yı ve tepkimenin izlediği yolu değiştirmez; yalnızca Ea'yı aşabilecek tanecik sayısını artırır",
+        "Sıcaklık Ea'yı yükseltir",
+        "Sıcaklığın Ea ile hiçbir ilişkisi araştırılmamıştır"
+      ],
+      "correct": 2,
+      "explain": "Sıcaklık, tepkimenin aktivasyon enerjisini ve izlediği reaksiyon yolunu değiştirmez (bu yalnızca katalizörle değişir). Sıcaklık artışı yalnızca taneciklerin kinetik enerjisini artırarak eşik değerini aşabilecek tanecik sayısını (oranını) yükseltir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Katalizörün etkisiyle ilgili Grafik 1.11 ve 1.12 incelendiğinde katalizörün neyi değiştirdiği, neyi değiştirmediği söylenebilir?",
+      "options": [
+        "Tepkime entalpisini değiştirir; aktivasyon enerjisini değiştirmez",
+        "Hem aktivasyon enerjisini hem tepkime entalpisini değiştirir",
+        "Yalnızca tepkenlerin miktarını azaltır",
+        "Aktivasyon enerjisini düşürür; tepken/ürün enerjilerini ve tepkime entalpisini değiştirmez",
+        "Yalnızca ürünlerin miktarını artırır"
+      ],
+      "correct": 3,
+      "explain": "Katalizör, tepkimenin aktivasyon enerjisini düşürerek tepkimeyi hızlandırır; ancak tepken ve ürünlerin enerji düzeylerini ve dolayısıyla tepkime entalpisini (ΔH) değiştirmez."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir kimyager, katalizörlü ve katalizörsüz aynı tepkimenin potansiyel enerji-tepkime koordinatı grafiklerini üst üste çiziyor. İki eğri arasında beklenen fark nedir?",
+      "options": [
+        "Katalizörlü eğrinin tepe noktası (aktivasyon enerjisi zirvesi) daha düşük olur, ama tepken ve ürün enerji düzeyleri aynı kalır",
+        "Katalizörlü eğrinin tepken enerji düzeyi daha yüksek olur",
+        "İki eğri arasında hiçbir fark olmaz",
+        "Katalizörlü eğri daha geniş bir tepkime koordinatına sahip olur",
+        "Katalizörlü eğrinin ürün enerji düzeyi daha düşük olur"
+      ],
+      "correct": 0,
+      "explain": "Katalizör yalnızca aktivasyon enerjisi engelinin yüksekliğini (tepe noktasını) düşürür; tepken ve ürünlerin potansiyel enerji düzeyleri, dolayısıyla ΔH değişmeden kalır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "FeCl2 üretim deneyinde yalnızca demirin biçimi (levha/talaş/toz) değiştirilip HCl derişimi ve demir kütlesi sabit tutuluyor. Bu deneyin bağımsız değişkeni nedir?",
+      "options": [
+        "Üretilen FeCl2 miktarı",
+        "HCl derişimi",
+        "Demirin biçimi (temas yüzeyi)",
+        "Demir kütlesi",
+        "Sıcaklık"
+      ],
+      "correct": 2,
+      "explain": "Bağımsız değişken, araştırmacının kasıtlı olarak değiştirdiği değişkendir; bu deneyde bu, demirin biçimidir (temas yüzeyini belirler). HCl derişimi ve demir kütlesi kontrol değişkenleridir; üretilen FeCl2 miktarı ise bağımlı değişkendir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Direkt sentez yöntemiyle H2(g) + Cl2(g) → 2HCl(g) tepkimesinde üç özdeş kapta aynı koşullarda farklı derişimlerde H2 ve Cl2 gazları bulunuyor. En yüksek derişime sahip kapta beklenen sonuç nedir?",
+      "options": [
+        "En yavaş tepkime ve en az HCl üretimi",
+        "En hızlı tepkime ve birim zamanda en fazla HCl üretimi",
+        "Derişimin tepkime hızıyla ilgisi yoktur, sonuç aynı olur",
+        "Yalnızca sıcaklık artarsa hızlanır",
+        "Tepkime hiç gerçekleşmez"
+      ],
+      "correct": 1,
+      "explain": "En yüksek derişime sahip kapta birim hacimdeki H2 ve Cl2 tanecik sayısı en fazla olduğundan çarpışma sıklığı en yüksektir; bu da en hızlı tepkimeyi ve birim zamanda en fazla HCl üretimini sağlar."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede hem sıcaklık hem derişim aynı anda artırılıyor. Tepkime hızındaki değişim hakkında ne söylenebilir?",
+      "options": [
+        "İki etken birbirini götürür, hız değişmez",
+        "Yalnızca sıcaklığın etkisi geçerli olur, derişim önemsizdir",
+        "Yalnızca derişimin etkisi geçerli olur, sıcaklık önemsizdir",
+        "Tepkime hızı kesinlikle azalır",
+        "Her iki etken de tepkime hızını artırıcı yönde çalıştığından tepkime hızının artması beklenir"
+      ],
+      "correct": 4,
+      "explain": "Sıcaklık artışı (kinetik enerjiyi artırarak) ve derişim artışı (çarpışma sıklığını artırarak) her ikisi de ayrı ayrı tepkime hızını artırıcı etkenlerdir; birlikte uygulandıklarında toplam etkinin tepkime hızını artırması beklenir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir deney tasarımında 'bağımsız değişken', 'bağımlı değişken' ve 'kontrol değişkenleri' kavramları neden önemlidir?",
+      "options": [
+        "Yalnızca raporun uzunluğunu artırmak için kullanılır",
+        "Yalnızca bir etkenin (bağımsız değişken) etkisini net olarak gözlemleyebilmek için diğer tüm etkenlerin (kontrol değişkenleri) sabit tutulması gerekir; sonuç bağımlı değişkende gözlenir",
+        "Bu kavramların tepkime hızıyla hiçbir ilgisi yoktur",
+        "Yalnızca sıcaklık deneylerinde kullanılır",
+        "Kontrol değişkenleri her deneyde değiştirilmelidir"
+      ],
+      "correct": 1,
+      "explain": "Bilimsel bir deneyde, incelenen etkenin (bağımsız değişken) sonuç (bağımlı değişken) üzerindeki etkisini güvenilir biçimde belirlemek için, o etken dışındaki tüm diğer değişkenlerin (kontrol değişkenleri) sabit tutulması gerekir; aksi hâlde gözlenen etkinin hangi değişkenden kaynaklandığı belirsizleşir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir kimyager, oda sıcaklığında yavaş ilerleyen bir tepkimeyi hem sıcaklığı artırarak hem de katalizör ekleyerek hızlandırmayı deniyor. Bu iki yöntemin tepkimeyi hızlandırma mekanizmaları arasındaki temel fark nedir?",
+      "options": [
+        "Sıcaklık artışı taneciklerin kinetik enerjisini artırarak eşik değerini aşan tanecik oranını yükseltirken; katalizör aktivasyon enerjisinin kendisini düşürür",
+        "İkisi de tepkime entalpisini değiştirir",
+        "İkisi de aynı mekanizmayla çalışır, fark yoktur",
+        "Katalizör sıcaklığı düşürür, sıcaklık artışı katalizörü etkisiz hâle getirir",
+        "Sıcaklık artışı yalnızca ürünleri etkiler, katalizör yalnızca tepkenleri etkiler"
+      ],
+      "correct": 0,
+      "explain": "Sıcaklık artışı, aktivasyon enerjisi engelini olduğu gibi bırakıp taneciklerin kinetik enerjisini artırarak bu engeli aşabilecek tanecik oranını yükseltir. Katalizör ise engelin kendisini (aktivasyon enerjisini) düşürerek daha fazla taneciğin bu düşük engeli aşmasını sağlar. İki mekanizma farklıdır ama sonuç olarak ikisi de etkin çarpışma sayısını artırır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede yalnızca katı tepkenin parça büyüklüğü değiştiriliyor, diğer tüm koşullar (kütle, derişim, sıcaklık) sabit tutuluyor. Gözlenen hız farkının nedeni olarak hangi etken gösterilebilir?",
+      "options": [
+        "Derişim",
+        "Temas yüzeyi",
+        "Katalizör",
+        "Sıcaklık",
+        "Madde cinsi"
+      ],
+      "correct": 1,
+      "explain": "Parça büyüklüğündeki değişiklik doğrudan katı maddenin yüzey alanını (temas yüzeyini) etkiler; diğer tüm koşullar sabit tutulduğundan gözlenen hız farkının nedeni temas yüzeyidir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Fotoğraf makinesindeki eski film teknolojisinde, gümüş bileşiklerinin ışığa duyarlı tepkimesi soğuk ortamda saklandığında yavaşlar. Bu gözlem hangi etkenle açıklanır?",
+      "options": [
+        "Temas yüzeyi",
+        "Katalizör",
+        "Madde cinsi",
+        "Derişim",
+        "Sıcaklık"
+      ],
+      "correct": 4,
+      "explain": "Soğuk ortamda taneciklerin kinetik enerjisi düşer, eşik değerini aşabilecek tanecik oranı azalır; bu yüzden düşük sıcaklık tepkimeyi yavaşlatır. Bu, sıcaklığın tepkime hızına etkisiyle açıklanan bir durumdur."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir öğrenci 'katalizör eklemek, tepkenlerin derişimini artırmakla aynı etkiyi yaratır, ikisi birbirinin yerine geçebilir' diyor. Bu ifadenin mekanizma açısından eksikliği nedir?",
+      "options": [
+        "Katalizör her zaman derişimden daha güçlü bir etkendir",
+        "İfade tamamen doğrudur, eksiklik yoktur",
+        "Derişim artışı çarpışma sıklığını artırırken katalizör aktivasyon enerjisini düşürür; ikisi tepkimeyi hızlandırma sonucunda benzeşse de farklı mekanizmalarla çalışır ve her durumda birbirinin yerini tam tutmayabilir",
+        "Derişim artışı hiçbir zaman tepkimeyi hızlandırmaz",
+        "Katalizör ve derişim aynı fiziksel büyüklüktür"
+      ],
+      "correct": 2,
+      "explain": "Derişim artışı ve katalizör ekleme, tepkimeyi hızlandırma SONUCU açısından benzer görünse de birbirinden tamamen farklı mekanizmalarla çalışır: derişim çarpışma SIKLIĞINI artırırken katalizör aktivasyon enerjisi ENGELİNİ düşürür. Bu yüzden 'birbirinin yerine geçebilir' genellemesi mekanizma düzeyinde yanıltıcıdır."
+    },
+    {
+      "difficulty": "zor",
+      "statements": {
+        "items": [
+          "Sıcaklık artışı ile katalizör eklenmesi, ikisi de tepkime hızını artırsa da birbirinden farklı mekanizmalarla çalışır.",
+          "Bir tepkimenin hızı yalnızca tek bir etkenden değil, birden fazla etkenin bir arada etkisinden belirlenebilir.",
+          "Temas yüzeyi etkisi yalnızca gaz fazındaki tepkimeler için geçerlidir."
+        ]
+      },
+      "text": "Bu önermelerden hangileri doğrudur?",
+      "options": [
+        "II ve III",
+        "I, II ve III",
+        "Yalnız I",
+        "I ve II",
+        "Yalnız III"
+      ],
+      "correct": 3,
+      "explain": "I doğrudur; sıcaklık kinetik enerjiyi artırırken katalizör aktivasyon enerjisini düşürür, farklı mekanizmalardır. II doğrudur; gerçek koşullarda birden fazla etken aynı anda etkili olabilir. III yanlıştır; temas yüzeyi etkisi özellikle katı tepkenlerin bulunduğu heterojen tepkimeler için geçerlidir, gaz fazıyla sınırlı değildir."
+    },
+    {
+      "difficulty": "zor",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "Katalizör eklemek her zaman en iyi çözüm, çünkü tepkimeyi hızlandırırken hiçbir yan etkisi yok."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Bu tam doğru olmayabilir; katalizörler genellikle belirli tepkimelere özgüdür (seçicidir), her tepkime için uygun bir katalizör bulunamayabilir. Ayrıca bazı endüstriyel katalizörler pahalı veya zehirlenmeye (etkisiz hâle gelmeye) açık olabilir."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrencinin görüşü daha temkinli ve gerçekçidir?",
+      "options": [
+        "Verilen bilgiyle karar verilemez",
+        "İkisi de aynı derecede haklıdır",
+        "Yalnız Öğrenci A",
+        "İkisi de haksızdır",
+        "Yalnız Öğrenci B"
+      ],
+      "correct": 4,
+      "explain": "Öğrenci B'nin görüşü daha gerçekçidir. Katalizörler tepkimeyi hızlandırsa da her tepkime için uygun bir katalizör bulunması garanti değildir; ayrıca katalizörlerin maliyeti, seçiciliği ve zamanla etkisini yitirmesi (zehirlenmesi) gibi pratik kısıtlar da göz önünde bulundurulmalıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir araştırmacı aynı kütledeki bir katı maddeyi (a) tek bir büyük küp, (b) 8 eşit küçük küp, (c) toz hâline getiriyor. Toplam kütle ve hacim aynı kalırken bu üç durumda toplam yüzey alanı nasıl sıralanır ve tepkime hızı beklentisi nedir?",
+      "options": [
+        "Yüzey alanı: büyük küp > küçük küpler > toz; tepkime hızı da bu sırayla azalır",
+        "Yüzey alanı yalnızca hacme bağlıdır, parçalanma miktarına bağlı değildir",
+        "Yüzey alanı üçünde de aynıdır, çünkü toplam kütle ve hacim değişmemiştir",
+        "Yüzey alanı: toz > küçük küpler > büyük küp; tepkime hızı da bu sırayla azalır",
+        "Bu senaryoda yüzey alanı hesaplanamaz"
+      ],
+      "correct": 3,
+      "explain": "Aynı hacimdeki bir katı küçük parçalara bölündükçe toplam yüzey alanı artar (hacim sabit kalsa da yüzey/hacim oranı büyür); toz hâli en büyük toplam yüzey alanına sahiptir. Bu nedenle tepkime hızı toz > küçük küpler > büyük küp sırasıyla azalır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir kimyager, iki farklı tepkimeyi karşılaştırıyor: 1. tepkime yalnızca 2 molekülün çarpışmasıyla, 2. tepkime ise 3 molekülün AYNI ANDA çarpışmasıyla gerçekleşiyor. Aynı derişim ve sıcaklık koşullarında hangi tepkimenin genellikle daha yavaş olması beklenir ve nedeni nedir?",
+      "options": [
+        "2. tepkime her zaman daha hızlıdır çünkü daha fazla molekül çarpışır",
+        "İkisi de aynı hızda gerçekleşir, molekül sayısı önemsizdir",
+        "2. tepkime, çünkü üç molekülün aynı anda uygun geometride ve yeterli enerjiyle çarpışması, iki molekülün çarpışmasından istatistiksel olarak çok daha düşük olasılıklıdır",
+        "1. tepkime, çünkü daha az molekül içerir",
+        "Molekül sayısının tepkime hızıyla hiçbir ilgisi yoktur"
+      ],
+      "correct": 2,
+      "explain": "Üç ayrı taneciğin tam olarak aynı anda, uygun geometride ve yeterli enerjiyle çarpışması, iki taneciğin çarpışmasından çok daha düşük bir olasılığa sahiptir (üçlü çarpışmalar istatistiksel olarak nadirdir). Bu yüzden çok sayıda tanecik gerektiren tepkimeler genellikle yavaş gerçekleşir; bu tür tepkimeler genellikle birden fazla basit basamak (mekanizma) üzerinden ilerler."
+    },
+    {
+      "difficulty": "zor",
+      "text": "'Sıcaklık arttıkça bir tepkimenin aktivasyon enerjisi de düşer, bu yüzden hızlanır' iddiası öne sürülüyor. Bu ifadedeki kavram yanılgısı nedir?",
+      "options": [
+        "Aktivasyon enerjisi kavramı sıcaklıkla hiç ilişkili değildir",
+        "Sıcaklık aktivasyon enerjisini artırır, düşürmez",
+        "Sıcaklık yalnızca tepkime entalpisini düşürür",
+        "İfade tamamen doğrudur, kavram yanılgısı yoktur",
+        "Sıcaklık aktivasyon enerjisini DEĞİŞTİRMEZ; yalnızca bu enerjiye ulaşabilen tanecik oranını artırır. Öğrenci, sıcaklığın etkisini katalizörün etkisiyle karıştırmaktadır"
+      ],
+      "correct": 4,
+      "explain": "Bu, sık yapılan bir kavram yanılgısıdır: sıcaklık artışı aktivasyon enerjisinin kendisini düşürmez, tepkimenin izlediği yolu da değiştirmez. Sıcaklık yalnızca taneciklerin kinetik enerji dağılımını değiştirerek eşik değerini (aktivasyon enerjisini) aşabilecek tanecik oranını artırır. Aktivasyon enerjisini gerçekten düşüren etken katalizördür."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede yalnızca temas yüzeyi artırılıyor (derişim, sıcaklık, madde cinsi sabit). Bu değişikliğin tepkimenin aktivasyon enerjisi üzerindeki etkisi nedir?",
+      "options": [
+        "Aktivasyon enerjisini düşürür",
+        "Aktivasyon enerjisini değiştirmez; yalnızca birim zamandaki çarpışma sayısını (dolayısıyla etkin çarpışma sayısını) artırır",
+        "Temas yüzeyinin aktivasyon enerjisiyle hiçbir ilişkisi yoktur, bu yüzden karşılaştırma anlamsızdır",
+        "Aktivasyon enerjisini yükseltir",
+        "Aktivasyon enerjisini sıfırlar"
+      ],
+      "correct": 1,
+      "explain": "Temas yüzeyinin artması, tepkimenin doğasını (aktivasyon enerjisini) değiştirmez; yalnızca tepken tanecikleri arasında birim zamanda gerçekleşen çarpışma sayısını artırarak etkin çarpışma sayısını yükseltir. Bu, sıcaklığın etkisine benzer bir mantıkla (Ea sabit, çarpışma/erişim sayısı artıyor) çalışır ama farklı bir fiziksel nedene (geometrik erişilebilirlik) dayanır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir fabrika, bir tepkimenin hızını artırmak için üç seçenek arasında karar veriyor: (1) sıcaklığı yükseltmek, (2) katalizör eklemek, (3) tepkenleri toz hâline getirmek. Enerji maliyeti ve ürün kalitesi açısından bu üç yöntemin ortak noktası nedir?",
+      "options": [
+        "Bu üç yöntemin hiçbiri etkin çarpışmayla ilgili değildir",
+        "Yalnızca katalizör etkin çarpışma sayısını artırır, diğer ikisi artırmaz",
+        "Üçü de birbirinin tam eşdeğeridir, hangisi seçilirse seçilsin sonuç aynıdır",
+        "Üçü de tepkimenin ΔH değerini değiştirir",
+        "Üçü de sonuçta etkin çarpışma sayısını artırarak tepkimeyi hızlandırır, ancak farklı mekanizmalar ve farklı pratik maliyetler (enerji, malzeme, ekipman) içerir"
+      ],
+      "correct": 4,
+      "explain": "Sıcaklık artırma (kinetik enerjiyi artırarak), katalizör ekleme (aktivasyon enerjisini düşürerek) ve toz hâline getirme (çarpışma sıklığını artırarak) farklı mekanizmalarla çalışsa da hepsi sonuçta etkin çarpışma sayısını artırır. Ancak enerji maliyeti (sıcaklık artırmak enerji gerektirir), malzeme maliyeti (katalizör pahalı olabilir) ve uygulanabilirlik (toz hâline getirme her madde için pratik olmayabilir) açısından farklı pratik sonuçları vardır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir deneyde 'temas yüzeyinin artması tepkime hızını artırır' hipotezi test ediliyor, ancak deney sırasında sıcaklık da kontrolsüz şekilde yükseliyor (örneğin ortam güneşe maruz kalıyor). Bu durumun deneyin geçerliliğine etkisi nedir?",
+      "options": [
+        "Hiçbir etkisi yoktur, sonuç yine de yalnızca temas yüzeyine atfedilebilir",
+        "Deneyin geçerliliği zedelenir; gözlenen hız artışının temas yüzeyinden mi yoksa kontrolsüz sıcaklık artışından mı kaynaklandığı ayırt edilemez",
+        "Sıcaklık değişimi yalnızca gaz tepkimelerini etkiler, bu deneyi etkilemez",
+        "Bu durumda hipotez kesinlikle doğrulanmış sayılır",
+        "Sıcaklık değişimi deneyi otomatik olarak geçersiz kılmaz, çünkü sıcaklık zaten önemsiz bir etkendir"
+      ],
+      "correct": 1,
+      "explain": "Bilimsel bir deneyde incelenen etken (burada temas yüzeyi) dışındaki tüm değişkenlerin (burada sıcaklık) sabit tutulması gerekir. Sıcaklık kontrolsüz şekilde değişirse, gözlenen hız artışının temas yüzeyinden mi yoksa sıcaklıktan mı kaynaklandığı ayırt edilemez; bu, deneyin iç geçerliliğini zedeler."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir kimyager, oda sıcaklığında çok yavaş ilerleyen bir tepkimenin hızını hem katalizör kullanarak hem de derişimi çok yükselterek artırmayı deniyor ve her iki yöntemle de benzer bir hız artışı elde ediyor. Bu iki yöntemin 'benzer sonucu farklı yollardan elde etmesi' ne anlama gelir?",
+      "options": [
+        "Katalizör ve derişim değişikliği matematiksel olarak birbirinin yerine tam olarak geçebilir her durumda",
+        "Bu sonuç, katalizörün aslında bir derişim etkisi olduğunu kanıtlar",
+        "Bu bir tesadüftür ve hiçbir genel ilke ile açıklanamaz",
+        "İki yöntem aslında aynı fiziksel mekanizmaya sahiptir",
+        "Tepkime hızı tek bir etkene indirgenemeyen, birden fazla farklı mekanizmayla (aktivasyon enerjisini düşürme, çarpışma sıklığını artırma) etkilenebilen bir büyüklüktür"
+      ],
+      "correct": 4,
+      "explain": "Tepkime hızı, farklı fiziksel mekanizmalarla (aktivasyon enerjisini düşürme, çarpışma sıklığını artırma, kinetik enerjiyi artırma vb.) benzer sonuçlara ulaşılabilen çok yönlü bir büyüklüktür. Katalizör aktivasyon enerjisini düşürürken, derişim artışı çarpışma sıklığını artırır; farklı yollardan olsa da ikisi de etkin çarpışma sayısını yükselterek benzer bir hız artışına yol açabilir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir öğrenci, 'temas yüzeyi etkisi yalnızca katı-sıvı ya da katı-gaz tepkimelerinde önemlidir, iki gaz ya da iki sıvı arasındaki tepkimelerde temas yüzeyinden söz edilemez' diyor. Bu ifade için en doğru değerlendirme hangisidir?",
+      "options": [
+        "Doğrudur, ama yalnızca gazlar için geçerlidir, sıvılar için geçerli değildir",
+        "Yanlıştır; temas yüzeyi kavramı her tepkime türü için aynı derecede geçerlidir",
+        "Bu konuda genel bir ilke yoktur",
+        "Yanlıştır; sıvı ve gazların yüzey alanı hiçbir zaman değişmez",
+        "Doğrudur; temas yüzeyi etkisi özellikle katı tepkenlerin bulunduğu heterojen tepkimelerde belirgindir, çünkü katı yüzeyler homojen sıvı/gaz karışımlarından farklı olarak sabit bir sınır oluşturur"
+      ],
+      "correct": 4,
+      "explain": "Temas yüzeyi kavramı, tepkimenin gerçekleştiği sınır bölgesiyle ilgilidir. İki gaz ya da iki sıvı birbiri içinde karıştığında (homojen karışım) tanecikler ortam boyunca dağılır ve ayrı bir 'yüzey' sınırı belirgin değildir. Ancak bir katı tepken söz konusu olduğunda (heterojen tepkime), tepkime yalnızca katının yüzeyinde gerçekleşebilir; bu yüzden katı tepkenlerin yüzey alanı (parça büyüklüğü) tepkime hızını belirgin biçimde etkiler."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede madde cinsinin etkisini incelemek için demir, çinko ve magnezyum parçaları ayrı ayrı aynı derişimdeki HCl ile tepkimeye sokuluyor. Üç metalin tepkime hızlarının farklı çıkması hangi düzeyde açıklanabilir?",
+      "options": [
+        "Üç metalin de tepkime hızı mutlaka aynı olmalıdır, farklıysa deney hatalıdır",
+        "Yalnızca metallerin rengiyle açıklanabilir",
+        "Yalnızca metallerin kütlesiyle açıklanabilir",
+        "Metallerin atom düzeyindeki reaktiviteleri (elektron verme eğilimleri, bağ/etkileşim güçleri) farklı olduğundan, aynı asitle etkin çarpışma sonucu tepkimeye girme olasılıkları da farklıdır",
+        "Metallerin sıcaklığı farklı olduğu için farklıdır"
+      ],
+      "correct": 3,
+      "explain": "Madde cinsi etkisi, farklı metallerin atom düzeyindeki kimyasal reaktivitesinden (elektron verme eğilimi, oluşan bağların gücü vb.) kaynaklanır. Aynı derişim ve sıcaklık koşullarında bile farklı metaller HCl ile farklı hızlarda tepkimeye girer; bu, madde cinsinin bağımsız bir etken olarak tepkime hızını belirlediğini gösterir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede sıcaklık iki katına çıkarılıyor ama tepkime hızı yalnızca hafifçe artıyor (örneğin %10). Bu, 'sıcaklık artışının tepkimeyi her zaman büyük oranda hızlandırdığı' genellemesiyle çelişir mi?",
+      "options": [
+        "Hayır; sıcaklığın etkisinin büyüklüğü tepkimeden tepkimeye değişebilir (örneğin aktivasyon enerjisi çok düşükse etkin çarpışma oranı zaten yüksektir, artışın etkisi görece küçük kalabilir); nitel eğilim (artış) korunur ama büyüklüğü değişkendir",
+        "Evet, bu durum imkânsızdır ve genellemeyi tamamen geçersiz kılar",
+        "Sıcaklığın hiçbir etkisi olmadığı sonucuna varılmalıdır",
+        "Bu, ölçüm cihazının bozuk olduğunu gösterir",
+        "Bu durumda tepkime kesinlikle katalizörlüdür"
+      ],
+      "correct": 0,
+      "explain": "Sıcaklık artışının tepkime hızına etkisinin büyüklüğü, tepkimenin aktivasyon enerjisine ve diğer koşullara bağlı olarak değişebilir. Genel nitel eğilim (sıcaklık artınca hız artar) çoğu tepkime için geçerli olsa da, artışın büyüklüğü tepkimeden tepkimeye farklılık gösterebilir; bu bir çelişki değil, doğal bir değişkenliktir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir kimyager, katalizörün tepkime hızını artırdığını ama tepkimenin ürün verimini (elde edilen ürün miktarını) DEĞİŞTİRMEDİĞİNİ gözlemliyor. Bu gözlem, katalizörün etki mekanizmasıyla nasıl tutarlıdır?",
+      "options": [
+        "Tutarsızdır; katalizör ürün miktarını da artırmalıdır",
+        "Katalizörün ürün miktarıyla hiçbir ilişkisi tanımsızdır",
+        "Tutarsızdır; katalizör tepkime entalpisini değiştirdiği için ürün miktarı da değişmelidir",
+        "Bu gözlem katalizörün aslında bir tepken olduğunu gösterir",
+        "Tutarlıdır; katalizör yalnızca tepkimenin ne kadar HIZLI dengeye/tamamlanmaya ulaştığını etkiler, tepken ve ürünlerin enerji düzeylerini (dolayısıyla nihai denge durumunu) değiştirmediği için nihai ürün miktarı aynı kalır"
+      ],
+      "correct": 4,
+      "explain": "Katalizör yalnızca aktivasyon enerjisini düşürerek tepkimenin daha hızlı ilerlemesini sağlar; tepken ve ürünlerin potansiyel enerji düzeylerini değiştirmediğinden nihai olarak elde edilecek ürün miktarını (yalnızca ona ULAŞMA süresini) etkilemez. Bu, katalizörün 'hız değiştirir, denge/verim değiştirmez' ilkesiyle tutarlıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir deneyde, aynı miktardaki bir katı tepken hem çok küçük parçalara bölünmüş hem de çok yüksek sıcaklığa çıkarılmış olarak test ediliyor ve tepkime aşırı hızlı, kontrolsüz biçimde (patlama gibi) gerçekleşiyor. Bu durum, temas yüzeyi ve sıcaklık etkenlerinin birlikte çalışması hakkında ne gösterir?",
+      "options": [
+        "İki etken birbirini iptal eder, tepkime yavaşlamalıydı",
+        "Bu sonuç yalnızca gazlar için geçerlidir, katılar için geçerli değildir",
+        "Birden fazla hızlandırıcı etkenin (yüksek temas yüzeyi + yüksek sıcaklık) aynı anda uygulanması, etkilerin toplanarak/birikerek çok büyük bir hız artışına (ve güvenlik riskine) yol açabilir",
+        "Sıcaklığın temas yüzeyiyle hiçbir etkileşimi yoktur",
+        "Patlama, kimyasal tepkimelerle asla ilişkilendirilemez"
+      ],
+      "correct": 2,
+      "explain": "Temas yüzeyinin artırılması (çarpışma sıklığını artırarak) ve sıcaklığın yükseltilmesi (kinetik enerjiyi artırarak) her ikisi de bağımsız olarak tepkimeyi hızlandırır. Bu iki etkenin aynı anda ve aşırı derecede uygulanması, etkin çarpışma sayısında çok büyük bir artışa yol açarak tepkimenin kontrolsüz derecede hızlanmasına (örneğin toz patlamalarında görülen duruma) neden olabilir; bu, endüstriyel güvenlik açısından önemli bir husustur."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir öğrenci, 'bir tepkimenin hızını artırmak için mutlaka bu altı etkenden en az birini değiştirmek gerekir; başka hiçbir yol yoktur' diyor. Bu iddia için en dikkatli değerlendirme hangisidir?",
+      "options": [
+        "Yanlıştır, çünkü hiçbir etken tepkime hızını gerçekten değiştiremez",
+        "Bu konuda kesin bir yargıya varmak mümkün değildir",
+        "Yanlıştır, çünkü tepkime hızını değiştirmenin bu altı etkenle ilgisi olmayan başka yolları da her zaman vardır",
+        "Doğrudur, ama yalnızca gaz tepkimeleri için",
+        "Doğrudur, çünkü tepkime hızı yalnızca bu altı etkenle açıklanabilecek şekilde tanımlanmıştır; bu etkenlerin hepsi de temelde çarpışma sıklığını veya etkinliğini değiştirerek çalışır"
+      ],
+      "correct": 4,
+      "explain": "Bu modülde ele alınan altı etken (madde cinsi, fiziksel hâl, derişim, sıcaklık, katalizör, temas yüzeyi), tepkime hızını etkileyen bilinen temel yolları kapsar; hepsi nihayetinde etkin çarpışma sayısını (sıklığını ya da başarı oranını) değiştirerek çalışır. Bu çerçevede iddia doğrudur."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir endüstriyel süreçte hem yüksek sıcaklık hem yüksek basınç (gazlar için derişimi artıran bir etken) kullanılarak bir tepkime hızlandırılıyor, ancak maliyet ve güvenlik nedeniyle yalnızca bir tanesi seçilmek zorunda kalınıyorsa katalizör kullanımı neden genellikle tercih edilen bir alternatif olur?",
+      "options": [
+        "Katalizör hiçbir maliyet gerektirmez",
+        "Katalizör kullanımı sıcaklık ve basıncın etkisini tamamen ortadan kaldırır",
+        "Katalizör, yüksek sıcaklık/basınç gibi enerji yoğun ve riskli koşullara ihtiyaç duymadan aktivasyon enerjisini düşürerek benzer bir hız artışını daha güvenli ve enerji açısından daha verimli biçimde sağlayabilir",
+        "Katalizör tepkimenin ürün miktarını da katbekat artırır",
+        "Katalizör yalnızca laboratuvar ölçeğinde kullanılabilir, endüstride kullanılamaz"
+      ],
+      "correct": 2,
+      "explain": "Yüksek sıcaklık ve basınç uygulamak enerji yoğun ve ekipman açısından maliyetli/riskli olabilir. Katalizör kullanmak, bu zorlu koşullara ihtiyaç duymadan aktivasyon enerjisini düşürerek tepkimeyi hızlandırabildiğinden, birçok endüstriyel süreçte (örneğin Haber-Bosch amonyak sentezi, katalitik konvertörler) tercih edilen, enerji ve maliyet açısından daha verimli bir yoldur."
     }
   ]
 };
