@@ -356,6 +356,33 @@ section.block > .container > h2 .num {
 }
 
 /* =========================================================
+   DENEY İSTASYONU (ölçer + canlı grafik + kendin sınıflandır)
+   ========================================================= */
+.exp-stage { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+.exp-gauge-wrap { flex: none; width: 140px; text-align: center; }
+.exp-gauge-wrap svg { width: 100%; height: auto; }
+.exp-readout { margin-top: 10px; min-height: 40px; font-size: .85rem; color: var(--ink-soft); }
+.exp-readout b { display: block; font-size: 1.3rem; color: var(--ink); }
+.exp-chart-wrap { flex: 1; min-width: 260px; }
+.exp-chart-wrap svg { width: 100%; height: auto; }
+
+.exp-classify { margin-top: 20px; }
+.exp-question p { margin: 0 0 10px; }
+.exp-btn-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.exp-btn-row button.correct { border-color: var(--ok); background: #eaf7ef; color: var(--ok); }
+.exp-btn-row button.wrong { border-color: var(--bad); background: #fceded; color: var(--bad); }
+.exp-feedback { margin-top: 14px; padding: 14px 16px; border-radius: var(--radius-sm); display: none; }
+.exp-feedback.show { display: block; }
+.exp-feedback.ok { background: #eaf7ef; }
+.exp-feedback.partial { background: #fdf1da; }
+.exp-feedback p { margin: 0 0 6px; }
+.exp-feedback p:last-child { margin-bottom: 0; color: var(--ink-soft); font-size: .92rem; }
+
+@media (max-width: 640px) {
+  .exp-gauge-wrap { width: 100px; margin: 0 auto; }
+}
+
+/* =========================================================
    ÖĞRENCİ PDF ANALİZ RAPORU
    ========================================================= */
 

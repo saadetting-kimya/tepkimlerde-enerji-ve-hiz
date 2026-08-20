@@ -44,34 +44,32 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Keşfet: Olayı Sınıflandır</h2>
-    <p class="block-lead">Aşağıdaki günlük hayat olaylarından birine tıkla; olayın fiziksel/kimyasal türünü ve
-      ısı alışverişi yönünü birlikte belirlemeye çalış, sonra cevabı kontrol et.</p>
-    <div class="lab">
-      <div id="classify-grid" class="grid-3"></div>
-    </div>
-  </div>
-</section>
-
-<section class="block">
-  <div class="container">
-    <h2><span class="num">3</span>Keşfet: Isı Alışverişinin Yönü</h2>
-    <p class="block-lead">Bir olay seç; sistemin (olayın gerçekleştiği maddenin) çevresiyle hangi yönde ısı
-      alışverişi yaptığını ve çevre sıcaklığındaki değişimi gözlemle.</p>
+    <h2><span class="num">2</span>Deney İstasyonu: Ölçer Odası</h2>
+    <p class="block-lead">Bir olay seç ve deneyi başlat; ölçüm cihazındaki değişimi ve çizilen grafiği izle.
+      Deney bitince olayı SEN sınıflandır — cevabını işaretledikten sonra doğru olup olmadığını göreceksin.</p>
     <div class="lab">
       <div class="lab-controls">
-        <label for="event-select">Olay:</label>
-        <select id="event-select"></select>
+        <label for="exp-select">Olay:</label>
+        <select id="exp-select"></select>
+        <button id="exp-start" class="btn primary" type="button">▶ Deneyi Başlat</button>
       </div>
-      <div class="lab-stage"><svg id="heat-svg" viewBox="0 0 480 220" style="width:100%;max-width:480px"></svg></div>
-      <div class="lab-readout" id="heat-readout"></div>
+      <div class="exp-stage">
+        <div class="exp-gauge-wrap">
+          <svg id="exp-gauge" viewBox="0 0 140 260"></svg>
+          <div class="exp-readout" id="exp-readout">Deneyi başlatmak için düğmeye bas</div>
+        </div>
+        <div class="exp-chart-wrap">
+          <svg id="exp-chart" viewBox="0 0 440 240" class="viz-chart"></svg>
+        </div>
+      </div>
+      <div class="exp-classify" id="exp-classify"></div>
     </div>
   </div>
 </section>
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">4</span>Değerlendir</h2>
+    <h2><span class="num">3</span>Değerlendir</h2>
     <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
     <div id="quiz-host"></div>
   </div>
@@ -86,85 +84,237 @@
 <script>
   const MODKEY = "m1";
 
-  const CLASSIFY_ITEMS = [
-    { label: "Tıbbi soğutma paketinin sıkılması (amonyum klorür ve suyun karışması)", physical: "Fiziksel", thermic: "Endotermik", why: "Amonyum klorürün suda çözünmesi bir çözünme (fiziksel) olayıdır; çözünme karışımı hızla soğutur — deneyde 100 mL 25°C'lik su, 20 g amonyum klorür eklenince 12°C'ye kadar düşer." },
-    { label: "Jel bazlı cep sobasının tıklatılıp katılaşması (sodyum asetatın kristalleşmesi)", physical: "Fiziksel", thermic: "Ekzotermik", why: "Kristalleşme bir hâl/yapı değişimidir (fiziksel); sodyum asetat trihidrat kristalleşirken yaklaşık 50-55°C'lik bir sıcaklık sağlanacak kadar ısı açığa çıkarır." },
-    { label: "Termit tepkimesi (demir(III) oksit ile alüminyumun tepkimesi, tren rayı kaynağı)", physical: "Kimyasal", thermic: "Ekzotermik", why: "Fe2O3 + 2Al → Al2O3 + 2Fe + ısı denklemine göre yeni maddeler (alüminyum oksit, demir) oluşur (kimyasal); açığa çıkan ısı, tren raylarının kaynak işlemlerinde kullanılacak kadar yüksektir." },
-    { label: "Ateş böceğinin karnında ışık üretmesi (biyolüminesans)", physical: "Kimyasal", thermic: "Ekzotermik", why: "Karın bölgesindeki kimyasal maddenin enzim yardımıyla oksijenle tepkimeye girmesi kimyasaldır; bu 'soğuk ışık' sırasında çok az da olsa ısı açığa çıkar, bu yüzden yine ekzotermiktir." },
-    { label: "Fotoselli bataryada ışığın metal yüzeyden elektron koparması", physical: "Fiziksel", thermic: "Endotermik", why: "Elektronun atomdan kopması madde kimliğini değiştirmez (fiziksel); elektronun bağlı olduğu atomdan ayrılabilmesi için fotondan enerji alması gerekir, bu yüzden endotermiktir." },
-    { label: "Kalsiyum klorürün karda/buzda serpilip çözünmesi (buzlanmayla mücadele)", physical: "Fiziksel", thermic: "Ekzotermik", why: "Çözünme fiziksel bir olaydır; kalsiyum klorür suda çözünürken ısı açığa çıkarır ve bu ısı çevresindeki buzu eritmeye yardımcı olur." },
+  /* Her deneyin başlangıç/bitiş okuması ve gerçek MEB kaynağına dayanan
+     açıklaması. "temp" türündeki deneyler bir sıcaklık ölçer, "energy"
+     türündeki deney (fotoselli batarya) ise bir foton-enerjisi göstergesi
+     kullanır — ikisi de aynı sıcaklık ölçüsüyle temsil edilemeyecek farklı
+     fiziksel büyüklükler olduğu için tek bir cihaza zorlanmaz (bkz. CLAUDE.md
+     madde 3). Sayısal değerler yalnızca kaynakta geçen gerçek verilerde
+     (soğutma paketi, cep sobası) kesin; diğerlerinde ölçüm yönünü/büyüklüğünü
+     göstermek için makul, temkinli örnek değerler kullanılır.
+     capped: true → ölçüm cihazının üst sınırını aşan (termit) deney. */
+  const EXPERIMENTS = [
+    {
+      id: "soğutma", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60,
+      label: "Tıbbi soğutma paketi (amonyum klorür + su)",
+      start: 25, end: 12,
+      physical: "Fiziksel", thermic: "Endotermik",
+      why: "Amonyum klorürün suda çözünmesi bir çözünme (fiziksel) olayıdır; madde kimliği değişmez. Çözünen katı çevresinden (sudan) ısı aldığı için deneyde su 25°C'den 12°C'ye kadar soğur — bu yüzden endotermiktir.",
+    },
+    {
+      id: "sobası", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60,
+      label: "Jel bazlı cep sobası (sodyum asetatın kristalleşmesi)",
+      start: 24, end: 53,
+      physical: "Fiziksel", thermic: "Ekzotermik",
+      why: "Kristalleşme bir hâl/yapı değişimidir (fiziksel); madde kimliği değişmez. Sodyum asetat trihidrat kristalleşirken biriktirdiği enerjiyi çevreye verir; sıcaklık yaklaşık 50-55°C'ye kadar yükselir — bu yüzden ekzotermiktir.",
+    },
+    {
+      id: "termit", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, capped: true,
+      label: "Termit tepkimesi (Fe2O3 + 2Al → Al2O3 + 2Fe + ısı)",
+      start: 24, end: 900,
+      physical: "Kimyasal", thermic: "Ekzotermik",
+      why: "Fe2O3 ve alüminyumdan alüminyum oksit ile demir gibi kimliği farklı yeni maddeler oluşur; bu kimyasaldır. Açığa çıkan ısı, tren raylarını eritecek kadar yüksektir — ölçer bu deneyde üst sınırını aşar; tepkime güçlü bir ekzotermik tepkimedir.",
+    },
+    {
+      id: "ateşböceği", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, tiny: true,
+      label: "Ateş böceğinin karnında ışık üretmesi (biyolüminesans)",
+      start: 24, end: 24.3,
+      physical: "Kimyasal", thermic: "Ekzotermik",
+      why: "Karın bölgesindeki maddenin enzim yardımıyla oksijenle tepkimeye girip kimliği farklı ürünler oluşturması kimyasaldır. Işıkla birlikte az da olsa ısı açığa çıkması (ölçer neredeyse hiç kımıldamaz) tepkimenin yine de ekzotermik olduğunu gösterir; bu yüzden 'soğuk ışık' denir.",
+    },
+    {
+      id: "fotosel", kind: "energy", unit: "birim", gaugeMin: 0, gaugeMax: 100, pop: true,
+      label: "Fotoselli batarya (ışığın metal yüzeyden elektron koparması)",
+      start: 0, end: 100,
+      physical: "Fiziksel", thermic: "Endotermik",
+      why: "Elektronun atomdan kopması madde kimliğini değiştirmez; bu fizikseldir. Gösterge, elektronun atoma bağlayan çekim kuvvetini yenip kopabilmesi için fotondan enerji almasını gösterir — enerji dışarıdan sisteme aktarıldığı için endotermiktir.",
+    },
+    {
+      id: "cacl2", kind: "temp", unit: "°C", gaugeMin: -20, gaugeMax: 60,
+      label: "Kalsiyum klorürün karda/buzda serpilip çözünmesi",
+      start: -3, end: 5,
+      physical: "Fiziksel", thermic: "Ekzotermik",
+      why: "Çözünme fiziksel bir olaydır, madde kimliği değişmez. Kalsiyum klorür suda çözünürken ısı açığa çıkarır; ölçer yerel bir sıcaklık artışı gösterir ve bu ısı çevresindeki buzu eritmeye yardımcı olur — bu yüzden ekzotermiktir.",
+    },
   ];
 
-  const HEAT_EVENTS = [
-    { name: "Tıbbi soğutma paketi (amonyum klorürün suda çözünmesi)", dir: "in", note: "Sistem çözeltiden ısı alır; deneyde su 25°C'den 12°C'ye kadar soğur." },
-    { name: "Jel bazlı cep sobası (sodyum asetatın kristalleşmesi)", dir: "out", note: "Kristalleşen madde biriktirdiği enerjiyi çevreye verir; sıcaklık 50-55°C'ye kadar yükselir." },
-    { name: "Termit tepkimesi (Fe2O3 + 2Al → Al2O3 + 2Fe + ısı)", dir: "out", note: "Tepkime çok yüksek ısı üretir; sistem çevreye ısı verir, tren rayı kaynağında kullanılacak kadar ısınır." },
-    { name: "Mumun yanması", dir: "out", note: "Yanma tepkimesi ısı ve ışık açığa çıkarır; çevre ısınır." },
-    { name: "Suyun buharlaşması", dir: "in", note: "Sıvı molekülleri gaz hâle geçmek için ısı alır; çevre soğur." },
-    { name: "Fotoselli bataryada elektron koparılması", dir: "in", note: "Elektron atomdan kopmak için fotondan enerji alır; sistem enerji kazanır." },
-  ];
+  let currentExp = EXPERIMENTS[0];
+  let chartPoints = [];
+  let animTimer = null;
 
-  function buildClassifyGrid() {
-    const grid = document.getElementById("classify-grid");
-    CLASSIFY_ITEMS.forEach((item) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.style.cursor = "pointer";
-      card.innerHTML = `<p style="margin:0 0 10px;font-weight:600">${item.label}</p>
-        <div class="answer" style="display:none">
-          <p style="margin:0 0 8px"><span class="tag orta">${item.physical}</span> <span class="tag ${item.thermic === "Endotermik" ? "endo" : "exo"}">${item.thermic}</span></p>
-          <p style="margin:0;color:var(--ink-soft);font-size:.88rem">${item.why}</p>
+  function easeSteps(start, end, n) {
+    const out = [];
+    for (let i = 0; i <= n; i++) {
+      const t = i / n;
+      const eased = 1 - Math.pow(1 - t, 2.2);
+      out.push(start + (end - start) * eased);
+    }
+    return out;
+  }
+
+  function drawGauge(exp, value) {
+    const svgEl = document.getElementById("exp-gauge");
+    const frac = Math.max(0, Math.min(1, (value - exp.gaugeMin) / (exp.gaugeMax - exp.gaugeMin)));
+    const overflow = exp.capped && value >= exp.gaugeMax;
+    const tubeTop = 26, tubeBottom = 210, tubeH = tubeBottom - tubeTop;
+    const fillH = tubeH * (overflow ? 1 : frac);
+    const fillY = tubeBottom - fillH;
+    const color = exp.kind === "energy" ? "var(--energy)" : value >= exp.start ? "var(--exo)" : "var(--endo)";
+
+    if (exp.kind === "temp") {
+      svgEl.innerHTML = `
+        <rect x="55" y="${tubeTop}" width="30" height="${tubeH}" rx="15" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
+        <circle cx="70" cy="228" r="26" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
+        <rect x="58" y="${fillY}" width="24" height="${tubeBottom - fillY + 26}" rx="12" fill="${color}"/>
+        <circle cx="70" cy="228" r="20" fill="${color}"/>
+        ${overflow ? `<text x="70" y="14" text-anchor="middle" font-size="18" fill="var(--bad)">⚠</text>` : ""}
+        ${[0, 0.25, 0.5, 0.75, 1].map((f) => `<line x1="86" y1="${tubeBottom - tubeH * f}" x2="94" y2="${tubeBottom - tubeH * f}" stroke="var(--ink-soft)" stroke-width="1.5"/>`).join("")}
+      `;
+    } else {
+      svgEl.innerHTML = `
+        <rect x="50" y="${tubeTop}" width="40" height="${tubeH}" rx="8" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
+        <rect x="52" y="${fillY}" width="36" height="${tubeBottom - fillY}" rx="6" fill="${color}"/>
+        <text x="70" y="18" text-anchor="middle" font-size="16">⚡</text>
+        ${exp.pop && frac >= 1 ? `<circle cx="70" cy="${tubeTop - 6}" r="6" fill="var(--endo)"><animate attributeName="cy" from="${tubeTop - 6}" to="-20" dur="0.6s" fill="freeze"/><animate attributeName="opacity" from="1" to="0" dur="0.6s" fill="freeze"/></circle><text x="70" y="${tubeTop - 16}" text-anchor="middle" font-size="10" fill="var(--endo)">e⁻</text>` : ""}
+      `;
+    }
+
+    const readoutEl = document.getElementById("exp-readout");
+    if (overflow) {
+      readoutEl.innerHTML = `<b style="color:var(--bad)">ÖLÇÜM SINIRINI AŞTI ⚠</b>`;
+    } else if (exp.tiny) {
+      readoutEl.innerHTML = `<b>≈ ${exp.start}${exp.unit}</b><span>Ölçülebilir değişim çok küçük</span>`;
+    } else if (exp.kind === "energy") {
+      readoutEl.innerHTML = `<b>%${Math.round(value)}</b><span>${value >= 100 ? "Elektron koptu!" : "Foton enerjisi aktarılıyor"}</span>`;
+    } else {
+      readoutEl.innerHTML = `<b>${value.toFixed(1)}${exp.unit}</b><span>Anlık ölçüm</span>`;
+    }
+  }
+
+  function drawChart(exp, points) {
+    const svgEl = document.getElementById("exp-chart");
+    const W = 440, H = 240, padL = 44, padB = 30, padT = 14, padR = 14;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+    const yMin = exp.gaugeMin, yMax = exp.gaugeMax;
+    const n = points.length;
+    const xAt = (i) => padL + (n <= 1 ? 0 : (plotW * i) / (EXPERIMENTS_STEPS - 1));
+    const yAt = (v) => padT + plotH - ((Math.min(v, yMax) - yMin) / (yMax - yMin)) * plotH;
+
+    let grid = "";
+    for (let i = 0; i <= 4; i++) {
+      const y = padT + (plotH * i) / 4;
+      grid += `<line x1="${padL}" x2="${W - padR}" y1="${y}" y2="${y}" class="gridline"/>`;
+      const val = yMax - ((yMax - yMin) * i) / 4;
+      grid += `<text x="${padL - 6}" y="${y + 3}" text-anchor="end" font-size="9">${Math.round(val)}</text>`;
+    }
+    const pts = points.map((v, i) => `${xAt(i)},${yAt(v)}`).join(" ");
+    svgEl.innerHTML = `
+      ${grid}
+      <line x1="${padL}" x2="${padL}" y1="${padT}" y2="${H - padB}" class="axis"/>
+      <line x1="${padL}" x2="${W - padR}" y1="${H - padB}" y2="${H - padB}" class="axis"/>
+      ${points.length > 1 ? `<polyline points="${pts}" class="line" style="stroke:${exp.kind === "energy" ? "var(--energy)" : "var(--exo)"}"/>` : ""}
+      ${points.map((v, i) => `<circle cx="${xAt(i)}" cy="${yAt(v)}" r="3" style="fill:${exp.kind === "energy" ? "var(--energy)" : "var(--exo)"}"/>`).join("")}
+      <text x="${padL}" y="${H - 6}" font-size="9">zaman →</text>
+      <text x="6" y="12" font-size="9">${exp.unit}</text>
+    `;
+  }
+
+  const EXPERIMENTS_STEPS = 10;
+
+  function resetStage(exp) {
+    if (animTimer) clearInterval(animTimer);
+    chartPoints = [];
+    drawGauge(exp, exp.start);
+    drawChart(exp, []);
+    document.getElementById("exp-readout").innerHTML = "Deneyi başlatmak için düğmeye bas";
+    document.getElementById("exp-classify").innerHTML = "";
+    document.getElementById("exp-start").disabled = false;
+  }
+
+  function runExperiment(exp) {
+    const btn = document.getElementById("exp-start");
+    btn.disabled = true;
+    const steps = easeSteps(exp.start, exp.end, EXPERIMENTS_STEPS - 1);
+    chartPoints = [];
+    let i = 0;
+    animTimer = setInterval(() => {
+      const v = steps[i];
+      chartPoints.push(v);
+      drawGauge(exp, v);
+      drawChart(exp, chartPoints);
+      i++;
+      if (i >= steps.length) {
+        clearInterval(animTimer);
+        btn.disabled = false;
+        showClassifyPrompt(exp);
+      }
+    }, 220);
+  }
+
+  function showClassifyPrompt(exp) {
+    const host = document.getElementById("exp-classify");
+    host.innerHTML = `
+      <div class="exp-question">
+        <p><b>Deney bitti — sen sınıflandır:</b></p>
+        <div class="exp-btn-row" data-answer="physical">
+          <button class="btn" data-val="Fiziksel">Fiziksel</button>
+          <button class="btn" data-val="Kimyasal">Kimyasal</button>
         </div>
-        <button class="btn" style="margin-top:8px;font-size:.8rem;padding:6px 12px">Cevabı göster</button>`;
-      const btn = card.querySelector("button");
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        card.querySelector(".answer").style.display = "block";
-        btn.style.display = "none";
+        <div class="exp-btn-row" data-answer="thermic">
+          <button class="btn" data-val="Endotermik">Endotermik</button>
+          <button class="btn" data-val="Ekzotermik">Ekzotermik</button>
+        </div>
+      </div>
+      <div class="exp-feedback" id="exp-feedback"></div>
+    `;
+    const chosen = { physical: null, thermic: null };
+    host.querySelectorAll(".exp-btn-row").forEach((row) => {
+      const kind = row.dataset.answer;
+      row.querySelectorAll("button").forEach((b) => {
+        b.addEventListener("click", () => {
+          if (chosen[kind]) return;
+          chosen[kind] = b.dataset.val;
+          row.querySelectorAll("button").forEach((x) => (x.disabled = true));
+          const isRight = b.dataset.val === exp[kind];
+          b.classList.add(isRight ? "correct" : "wrong");
+          if (!isRight) {
+            row.querySelectorAll("button").forEach((x) => {
+              if (x.dataset.val === exp[kind]) x.classList.add("correct");
+            });
+          }
+          if (chosen.physical && chosen.thermic) revealFeedback(exp, chosen);
+        });
       });
-      grid.appendChild(card);
     });
   }
 
-  function drawHeatDiagram(ev) {
-    const svgEl = document.getElementById("heat-svg");
-    const dirIn = ev.dir === "in";
-    const arrowColor = dirIn ? "var(--endo)" : "var(--exo)";
-    svgEl.innerHTML = `
-      <rect x="170" y="60" width="140" height="100" rx="14" fill="${dirIn ? "var(--endo-soft)" : "var(--exo-soft)"}" stroke="${arrowColor}" stroke-width="2"/>
-      <text x="240" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="${arrowColor}">SİSTEM</text>
-      <text x="70" y="30" font-size="12" fill="var(--ink-soft)">ÇEVRE</text>
-      ${dirIn
-        ? `<line x1="90" y1="110" x2="165" y2="110" stroke="${arrowColor}" stroke-width="4" marker-end="url(#arrow)"/>
-           <text x="60" y="180" font-size="12" fill="${arrowColor}">Isı sisteme giriyor →</text>`
-        : `<line x1="165" y1="110" x2="90" y2="110" stroke="${arrowColor}" stroke-width="4" marker-end="url(#arrow)"/>
-           <text x="30" y="180" font-size="12" fill="${arrowColor}">← Isı çevreye çıkıyor</text>`}
-      <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="${dirIn ? "auto" : "auto-start-reverse"}">
-        <path d="M0,0 L6,3 L0,6 Z" fill="${arrowColor}"/></marker></defs>
-      <circle cx="400" cy="110" r="26" fill="none" stroke="${arrowColor}" stroke-width="3"/>
-      <text x="400" y="116" text-anchor="middle" font-size="20" fill="${arrowColor}">${dirIn ? "↓T" : "↑T"}</text>
-    `;
-    document.getElementById("heat-readout").innerHTML = `
-      <div><b>${dirIn ? "Endotermik" : "Ekzotermik"}</b>Süreç türü</div>
-      <div><b>${dirIn ? "Azalır" : "Artar"}</b>Çevre sıcaklığı</div>
-      <div style="max-width:260px"><span style="color:var(--ink-soft)">${ev.note}</span></div>
+  function revealFeedback(exp, chosen) {
+    const fb = document.getElementById("exp-feedback");
+    const allCorrect = chosen.physical === exp.physical && chosen.thermic === exp.thermic;
+    fb.className = "exp-feedback show " + (allCorrect ? "ok" : "partial");
+    fb.innerHTML = `
+      <p><b>${allCorrect ? "✓ Doğru sınıflandırdın!" : "Doğru cevap:"} <span class="tag orta">${exp.physical}</span> <span class="tag ${exp.thermic === "Endotermik" ? "endo" : "exo"}">${exp.thermic}</span></b></p>
+      <p>${exp.why}</p>
     `;
   }
 
-  function buildHeatSim() {
-    const sel = document.getElementById("event-select");
-    HEAT_EVENTS.forEach((ev, i) => {
+  function buildExperimentStation() {
+    const sel = document.getElementById("exp-select");
+    EXPERIMENTS.forEach((exp, i) => {
       const opt = document.createElement("option");
       opt.value = i;
-      opt.textContent = ev.name;
+      opt.textContent = exp.label;
       sel.appendChild(opt);
     });
-    sel.addEventListener("change", () => drawHeatDiagram(HEAT_EVENTS[sel.value]));
-    drawHeatDiagram(HEAT_EVENTS[0]);
+    sel.addEventListener("change", () => {
+      currentExp = EXPERIMENTS[sel.value];
+      resetStage(currentExp);
+    });
+    document.getElementById("exp-start").addEventListener("click", () => runExperiment(currentExp));
+    resetStage(currentExp);
   }
 
-  buildClassifyGrid();
-  buildHeatSim();
+  buildExperimentStation();
   mountNav(MODKEY);
   mountNextModule(MODKEY);
   markVisited(MODKEY);
