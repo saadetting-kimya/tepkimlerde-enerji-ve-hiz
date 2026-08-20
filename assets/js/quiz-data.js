@@ -5,6 +5,7 @@
    Modül 3: Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması (KİM.11.1.3)
    Modül 4: Standart Oluşum Entalpisi (KİM.11.1.4)
    Modül 5: Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli Şartlar (KİM.11.1.5)
+   Modül 6: Tepken ve Ürün Derişimleriyle Ortalama Tepkime Hızlarının Hesaplanması (KİM.11.1.6)
    ============================================================ */
 
 const QUIZ = {
@@ -4151,6 +4152,778 @@ const QUIZ = {
       ],
       "correct": 2,
       "explain": "Tepkime hızı hem çarpışma sıklığından hem de çarpışmaların etkin olma oranından (aktivasyon enerjisiyle ilişkili) etkilenir. Aktivasyon enerjisi düşük olsa da ortamda çarpışma sıklığı düşükse (örneğin seyreltik bir karışımda), gerçekleşen toplam etkin çarpışma sayısı azalır ve tepkime hızı düşük kalabilir; iki etken birlikte değerlendirilmelidir."
+    }
+  ],
+  "m6": [
+    {
+      "difficulty": "kolay",
+      "text": "Kimyasal bir tepkimede belirli bir sürede madde miktarındaki değişimin ölçüsüne ne ad verilir?",
+      "options": [
+        "Tepkime entalpisi",
+        "Eşik değeri",
+        "Tepkime hızı",
+        "Aktivasyon enerjisi",
+        "Bağ enerjisi"
+      ],
+      "correct": 2,
+      "explain": "Kimyasal bir tepkimede belirli bir sürede madde miktarındaki değişimin ölçüsüne tepkime hızı denir; 'r' sembolüyle gösterilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "SI birim sisteminde tepkime hızının birimi nedir?",
+      "options": [
+        "M/s",
+        "L",
+        "mol",
+        "g/s",
+        "kJ/s"
+      ],
+      "correct": 0,
+      "explain": "Madde miktarı derişim (M=mol/L) olarak ifade edildiğinde ve zaman saniye alındığında, tepkime hızının SI birimi M/s'dir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepken derişiminin zamanla azalma hızına ne ad verilir?",
+      "options": [
+        "Denge hızı",
+        "Bağ kırılma hızı",
+        "Aktivasyon hızı",
+        "Harcanma hızı",
+        "Oluşma hızı"
+      ],
+      "correct": 3,
+      "explain": "Tepkenlerin derişiminin birim zamandaki azalışına harcanma hızı denir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir ürün derişiminin zamanla artma hızına ne ad verilir?",
+      "options": [
+        "Eşik hızı",
+        "Denge hızı",
+        "Aktivasyon hızı",
+        "Oluşma hızı",
+        "Harcanma hızı"
+      ],
+      "correct": 3,
+      "explain": "Ürünlerin derişiminin birim zamandaki artışına oluşma hızı denir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Tepken derişimindeki değişim hesaplanırken hız ifadesinin önüne neden eksi işareti konur?",
+      "options": [
+        "Eksi işareti bir yazım geleneğidir, matematiksel bir anlamı yoktur",
+        "Tepken derişimi zamanla azaldığından, Δ[tepken] negatif çıkar; eksi işareti bu değeri pozitif bir hız değerine çevirir",
+        "Ürünler için de aynı eksi işareti kullanılır",
+        "Eksi işareti yalnızca gazlar için kullanılır",
+        "Tepken derişimi her zaman negatiftir"
+      ],
+      "correct": 1,
+      "explain": "Tepken derişimi zamanla azaldığı için son derişimden ilk derişim çıkarıldığında (Δ[tepken]) negatif bir değer elde edilir. Hızın pozitif bir büyüklük olarak ifade edilebilmesi için bu ifadenin önüne eksi işareti konur."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "'Δ' sembolü (değişim farkı) nasıl hesaplanır?",
+      "options": [
+        "İlk ve son değer çarpılarak",
+        "Son değerden ilk değer çıkarılarak",
+        "Yalnızca son değer alınarak",
+        "İlk değerden son değer çıkarılarak",
+        "İlk ve son değer toplanarak"
+      ],
+      "correct": 1,
+      "explain": "'Δ' (değişim farkı), son değerden ilk değerin çıkarılmasıyla bulunur: Δ[X] = [X]son − [X]ilk."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "H2O2(suda) → H2O(s) + 1/2O2(g) tepkimesinde belirli bir zaman aralığında [H2O2] derişimi 2,00 M'dan 1,70 M'a düşüyor. Bu aralıktaki Δ[H2O2] kaç M'dır?",
+      "options": [
+        "-3,70 M",
+        "0 M",
+        "+0,30 M",
+        "-0,30 M",
+        "+3,70 M"
+      ],
+      "correct": 3,
+      "explain": "Δ[H2O2] = son derişim − ilk derişim = 1,70 − 2,00 = -0,30 M. Değerin negatif çıkması, derişimin azaldığını gösterir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkende Δ[X] = -0,40 M, Δt = 200 s olarak ölçülüyor. Bu tepkenin ortalama harcanma hızı kaç M/s'dir?",
+      "options": [
+        "200 M/s",
+        "-0,40 M/s",
+        "0,002 M/s",
+        "0,40 M/s",
+        "-0,002 M/s"
+      ],
+      "correct": 2,
+      "explain": "r = -Δ[X]/Δt = -(-0,40)/200 = 0,40/200 = 0,002 M/s. Eksi işareti negatif Δ[X] değerini pozitif bir hıza çevirir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir üründe Δ[Y] = +0,60 M, Δt = 300 s olarak ölçülüyor. Bu ürünün ortalama oluşma hızı kaç M/s'dir?",
+      "options": [
+        "0,0018 M/s",
+        "0,60 M/s",
+        "0,002 M/s",
+        "-0,002 M/s",
+        "300 M/s"
+      ],
+      "correct": 2,
+      "explain": "Ürünler için r = +Δ[Y]/Δt = 0,60/300 = 0,002 M/s. Ürün derişimi arttığı için Δ[Y] zaten pozitiftir, eksi işareti gerekmez."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "N2(g) + 3H2(g) → 2NH3(g) tepkimesinde N2'nin harcanma hızı ifadesi hangisidir?",
+      "options": [
+        "r_N2 = -Δ[N2]/Δt",
+        "r_N2 = -Δ[H2]/Δt",
+        "r_N2 = Δ[NH3]/Δt",
+        "r_N2 = +Δ[N2]/Δt",
+        "r_N2, hesaplanamaz"
+      ],
+      "correct": 0,
+      "explain": "N2 bir tepken olduğundan derişimi zamanla azalır; harcanma hızı r_N2 = -Δ[N2]/Δt şeklinde ifade edilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "aA(g) + bB(g) → cC(g) + dD(g) genel tepkimesinde tepkime hızı ile C maddesinin oluşma hızı arasındaki ilişki nasıl ifade edilir?",
+      "options": [
+        "r_tepkime = (1/c)·Δ[C]/Δt",
+        "r_tepkime = c·Δ[C]/Δt",
+        "r_tepkime = Δ[C]/c·Δt değil, sadece Δ[C]",
+        "r_tepkime = -Δ[C]/Δt",
+        "r_tepkime = c·r_C ile ilgisizdir"
+      ],
+      "correct": 0,
+      "explain": "Genel bağıntıya göre r_tepkime = (1/c)·Δ[C]/Δt'dir; yani C'nin oluşma hızı, kendi katsayısına bölünerek tepkime hızına dönüştürülür."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Belirli bir zaman aralığında madde miktarındaki değişime dayanan hıza ne ad verilir?",
+      "options": [
+        "Anlık hız",
+        "Ortalama hız",
+        "Maksimum hız",
+        "Denge hızı",
+        "Aktivasyon hızı"
+      ],
+      "correct": 1,
+      "explain": "Belirli bir zaman aralığında madde miktarındaki değişime dayanan hıza ortalama hız denir; bu modülde hesaplanan hızlar ortalama hızlardır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Tepkime hızının birimi, kullanılan madde miktarı türüne göre değişebilir mi?",
+      "options": [
+        "Evet; derişim (M/s), kütle (g/dk. vb.), mol (mol/sa. vb.) veya hacim (L/gün vb.) kullanılabilir",
+        "Hayır, yalnızca mol kullanılabilir",
+        "Hayır, her zaman M/s'dir",
+        "Evet ama yalnızca gazlar için",
+        "Hız birimsizdir"
+      ],
+      "correct": 0,
+      "explain": "Tepkime hızının birimi, kullanılan madde miktarı türüne (derişim, kütle, mol, hacim) ve zaman birimine (saniye, dakika, saat, gün) göre değişebilir; örneğin M/s, g/dk., mol/sa. veya L/gün gibi birimler kullanılabilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir kimyasal tepkimede tepkenlerin ve ürünlerin harcanma/oluşma hızları her zaman birbirine eşit midir?",
+      "options": [
+        "Bu, yalnızca sıcaklığa bağlıdır",
+        "Hayır; tepkime denklemindeki katsayılara göre farklı büyüklükte olabilirler",
+        "Evet ama yalnızca gaz tepkimelerinde",
+        "Hayır, hiçbir zaman eşit olamazlar",
+        "Evet, her zaman eşittir"
+      ],
+      "correct": 1,
+      "explain": "Madde miktarlarının harcanma ve oluşma hızları, tepkime denklemindeki katsayılara göre değişiklik gösterir; katsayıları farklı olan maddelerin hızları da farklı büyüklükte olur (ama hepsi aynı r_tepkime değerine karşılık gelir)."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Kâğıdın yanması ile gümüşün kararması karşılaştırıldığında hangisi daha hızlı bir tepkimedir?",
+      "options": [
+        "Karşılaştırma yapılamaz",
+        "Kâğıdın yanması",
+        "Gümüşün kararması",
+        "İkisi de aynı hızdadır",
+        "İkisi de anlık gerçekleşir"
+      ],
+      "correct": 1,
+      "explain": "Kâğıdın yanması saniyeler içinde gerçekleşen hızlı bir tepkimeyken, gümüşün kararması (gümüş sülfür oluşumu) günler/haftalar süren yavaş bir tepkimedir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Demirin paslanması ve bitkilerin yapraklarının solması gibi olaylar hangi hız kategorisine örnektir?",
+      "options": [
+        "Anlık tepkimeler",
+        "Çok hızlı tepkimeler",
+        "Tepkime hızıyla ilgisiz olaylar",
+        "Yavaş tepkimeler",
+        "Yalnızca fiziksel olaylar"
+      ],
+      "correct": 3,
+      "explain": "Demirin paslanması ve yaprakların solması, günler-aylar süren yavaş kimyasal tepkimelere örnektir."
+    },
+    {
+      "difficulty": "kolay",
+      "chart": {
+        "labels": [
+          "0 s",
+          "200 s",
+          "400 s",
+          "600 s"
+        ],
+        "values": [
+          2.3,
+          2,
+          1.7,
+          1.5
+        ],
+        "unit": "[H2O2] (M)"
+      },
+      "text": "Grafiğe göre H2O2 derişimi zaman ilerledikçe nasıl bir eğilim göstermektedir?",
+      "options": [
+        "Sürekli azalmaktadır",
+        "Rastgele değişmektedir",
+        "Önce artıp sonra azalmaktadır",
+        "Sürekli artmaktadır",
+        "Sabit kalmaktadır"
+      ],
+      "correct": 0,
+      "explain": "Grafikte [H2O2] değeri zamanla sürekli azalmaktadır (2,30 → 2,00 → 1,70 → 1,50 M); bu, H2O2'nin tepken olarak harcandığını gösterir."
+    },
+    {
+      "difficulty": "orta",
+      "compareChart": {
+        "xLabels": [
+          "0 s",
+          "200 s",
+          "400 s",
+          "600 s"
+        ],
+        "series": [
+          {
+            "name": "[H2O2] (M)",
+            "values": [
+              2.3,
+              2,
+              1.7,
+              1.5
+            ],
+            "color": "var(--energy)"
+          }
+        ]
+      },
+      "text": "Grafiğe göre 200-400 s aralığında H2O2'nin ortalama harcanma hızı kaç M/s'dir?",
+      "options": [
+        "0,30 M/s",
+        "0,0010 M/s",
+        "0,15 M/s",
+        "0,0015 M/s",
+        "0,0030 M/s"
+      ],
+      "correct": 3,
+      "explain": "r = -Δ[H2O2]/Δt = -(1,70-2,00)/(400-200) = -(-0,30)/200 = 0,0015 M/s."
+    },
+    {
+      "difficulty": "orta",
+      "text": "H2O2(suda) → H2O(s) + 1/2O2(g) tepkimesinde 400-600 s aralığında [H2O2] derişimi 1,70 M'dan 1,50 M'a düşüyor. Bu aralıktaki ortalama harcanma hızı kaç M/s'dir?",
+      "options": [
+        "0,0010 M/s",
+        "0,0020 M/s",
+        "0,0002 M/s",
+        "0,0005 M/s",
+        "0,20 M/s"
+      ],
+      "correct": 0,
+      "explain": "r = -Δ[H2O2]/Δt = -(1,50-1,70)/(600-400) = -(-0,20)/200 = 0,0010 M/s. Hızın 200-400 s aralığındaki değere (0,0015 M/s) göre azalmış olması, derişim düştükçe tepkime hızının da azaldığını gösterir."
+    },
+    {
+      "difficulty": "orta",
+      "statements": {
+        "items": [
+          "Zaman ilerledikçe H2O2'nin derişimi azaldıkça, hesaplanan ortalama harcanma hızı da azalma eğilimi gösterir.",
+          "Ortalama hız, yalnızca tepkimenin başlangıcındaki andaki hızı temsil eder.",
+          "Bir tepkenin derişim-zaman grafiğindeki eğrinin dikliği (eğimi), o andaki hızla ilişkilidir; eğri ne kadar dikse hız o kadar büyüktür."
+        ]
+      },
+      "text": "Verilen önermelerden hangileri doğrudur?",
+      "options": [
+        "I ve III",
+        "I, II ve III",
+        "Yalnız II",
+        "II ve III",
+        "Yalnız I"
+      ],
+      "correct": 0,
+      "explain": "I doğrudur; H2O2 verilerinde 0,0015 M/s'den 0,0010 M/s'ye, 0,000833 M/s'ye kadar azalan bir eğilim görülür. II yanlıştır; ortalama hız, seçilen zaman aralığının tamamını temsil eder, yalnızca başlangıç anını değil. III doğrudur; derişim-zaman grafiğinde eğrinin dikliği (eğimin büyüklüğü) hızın büyüklüğünü yansıtır."
+    },
+    {
+      "difficulty": "orta",
+      "table": {
+        "headers": [
+          "Zaman (s)",
+          "[N2O5] (M)",
+          "[NO2] (M)",
+          "[O2] (M)"
+        ],
+        "rows": [
+          [
+            "0",
+            "0,200",
+            "0",
+            "0"
+          ],
+          [
+            "100",
+            "0,169",
+            "0,063",
+            "0,016"
+          ]
+        ]
+      },
+      "text": "2N2O5(g) → 4NO2(g) + O2(g) tepkimesine ait tabloya göre 0-100 s aralığında N2O5'in ortalama harcanma hızı kaç M/s'dir?",
+      "options": [
+        "0,031 M/s",
+        "0,00016 M/s",
+        "0,00063 M/s",
+        "0,00031 M/s",
+        "0,169 M/s"
+      ],
+      "correct": 3,
+      "explain": "r_N2O5 = -Δ[N2O5]/Δt = -(0,169-0,200)/100 = 0,031/100 = 0,00031 M/s."
+    },
+    {
+      "difficulty": "orta",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "2N2O5→4NO2+O2 tepkimesinde N2O5'in harcanma hızı ile NO2'nin oluşma hızı birbirine eşit olmalı, çünkü aynı tepkimedeler."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Tam olarak eşit değil; NO2'nin katsayısı N2O5'in katsayısının 2 katı olduğundan, NO2 derişimi N2O5'e göre yaklaşık 2 kat daha hızlı değişir. Tepkime hızına dönüştürmek için her ikisi de kendi katsayısına bölünmeli."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrenci doğru söylemektedir?",
+      "options": [
+        "İkisi de yanlış söylemektedir",
+        "Yalnız Öğrenci A",
+        "İkisi de doğru söylemektedir",
+        "Verilen bilgiyle karar verilemez",
+        "Yalnız Öğrenci B"
+      ],
+      "correct": 4,
+      "explain": "Öğrenci B haklıdır. r_NO2 = -2·r_N2O5 (yani NO2 oluşma hızı, N2O5 harcanma hızının yaklaşık 2 katıdır) çünkü NO2'nin katsayısı (4) N2O5'in katsayısının (2) iki katıdır. Ortak tepkime hızına ulaşmak için her ikisi de kendi katsayısına bölünmelidir: r_tepkime = r_N2O5/2 = r_NO2/4."
+    },
+    {
+      "difficulty": "orta",
+      "matchPairs": {
+        "leftHeader": "Madde",
+        "rightHeader": "Tepkime Hızıyla İlişkisi (2N2O5→4NO2+O2)",
+        "pairs": [
+          [
+            "N2O5",
+            "r_tepkime = r_N2O5 ÷ 2"
+          ],
+          [
+            "NO2",
+            "r_tepkime = r_NO2 ÷ 4"
+          ],
+          [
+            "O2",
+            "r_tepkime = r_O2 ÷ 1"
+          ]
+        ]
+      },
+      "text": "Yukarıdaki eşleştirmeye göre, O2'nin oluşma hızı doğrudan tepkime hızına eşit olan tek madde olmasının nedeni nedir?",
+      "options": [
+        "O2'nin renksiz olması",
+        "O2'nin bir ürün olması",
+        "O2'nin tepkime denklemindeki katsayısının 1 olması",
+        "O2'nin gaz hâlinde bulunması",
+        "O2'nin molekül ağırlığının en düşük olması"
+      ],
+      "correct": 2,
+      "explain": "Tepkime hızı, her maddenin hızının kendi katsayısına bölünmesiyle bulunur. O2'nin katsayısı 1 olduğundan, r_tepkime = r_O2 ÷ 1 = r_O2'dir; yani O2'nin oluşma hızı doğrudan tepkime hızına eşittir."
+    },
+    {
+      "difficulty": "orta",
+      "checklist": {
+        "items": [
+          "Tepkime hızı zamanla sabit kalır, hiçbir zaman değişmez.",
+          "Bir tepkenin derişimi azaldıkça genellikle tepkimenin hızı da azalma eğilimi gösterir.",
+          "Ortalama hız hesaplamak için yalnızca bir andaki derişim yeterlidir, iki nokta gerekmez."
+        ]
+      },
+      "text": "Yukarıdaki ifadelerden kaç tanesi doğrudur?",
+      "options": [
+        "0",
+        "3",
+        "1",
+        "2",
+        "Verilenlerle belirlenemez"
+      ],
+      "correct": 2,
+      "explain": "Yalnızca ikinci ifade doğrudur: H2O2 örneğinde görüldüğü gibi derişim azaldıkça hız da genellikle azalır. Birinci ifade yanlıştır (hız zamanla değişebilir); üçüncü ifade de yanlıştır (ortalama hız hesaplamak için bir başlangıç ve bir bitiş noktası, yani iki nokta gereklidir)."
+    },
+    {
+      "difficulty": "orta",
+      "text": "600-1200 s aralığında H2O2 derişimi 1,50 M'dan 1,00 M'a düşüyor. Bu aralıktaki ortalama harcanma hızı kaç M/s'dir?",
+      "options": [
+        "0,0015 M/s",
+        "0,0005 M/s",
+        "0,50 M/s",
+        "0,000833 M/s",
+        "0,00125 M/s"
+      ],
+      "correct": 3,
+      "explain": "r = -Δ[H2O2]/Δt = -(1,00-1,50)/(1200-600) = 0,50/600 ≈ 0,000833 M/s."
+    },
+    {
+      "difficulty": "orta",
+      "text": "2N2O5(g) → 4NO2(g) + O2(g) tepkimesinde 100-200 s aralığında [O2] derişimi 0,016 M'dan 0,029 M'a çıkıyor. Bu aralıkta O2'nin ortalama oluşma hızı kaç M/s'dir ve bu değer aynı zamanda tepkime hızına (r_tepkime) eşit midir?",
+      "options": [
+        "0,00013 M/s; evet, O2'nin katsayısı 1 olduğu için doğrudan tepkime hızına eşittir",
+        "0,00013 M/s; hayır, hiçbir zaman tepkime hızına eşit olamaz",
+        "0,29 M/s; hayır, eşit değildir",
+        "0,00013 M/s; yalnızca 4 ile çarpılırsa eşit olur",
+        "0,013 M/s; evet, tepkime hızına eşittir"
+      ],
+      "correct": 0,
+      "explain": "r_O2 = Δ[O2]/Δt = (0,029-0,016)/100 = 0,00013 M/s. O2'nin katsayısı 1 olduğundan r_tepkime = r_O2 ÷ 1 = r_O2; yani bu değer doğrudan tepkime hızına eşittir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede A maddesinin katsayısı 2, B maddesinin katsayısı 1'dir (2A → ürünler). A'nın harcanma hızı 0,006 M/s olarak ölçülüyorsa tepkime hızı (r_tepkime) kaç M/s'dir?",
+      "options": [
+        "0,60 M/s",
+        "0,006 M/s",
+        "0,003 M/s",
+        "0,012 M/s",
+        "0,002 M/s"
+      ],
+      "correct": 2,
+      "explain": "r_tepkime = r_A ÷ (A'nın katsayısı) = 0,006 ÷ 2 = 0,003 M/s."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede ürün C'nin katsayısı 3'tür ve C'nin oluşma hızı 0,009 M/s olarak ölçülüyor. Tepkime hızı (r_tepkime) kaç M/s'dir?",
+      "options": [
+        "0,027 M/s",
+        "0,003 M/s",
+        "0,0009 M/s",
+        "3 M/s",
+        "0,009 M/s"
+      ],
+      "correct": 1,
+      "explain": "r_tepkime = r_C ÷ (C'nin katsayısı) = 0,009 ÷ 3 = 0,003 M/s."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir öğrenci hız hesaplarken tepken için Δ[X] değerini eksi işareti koymadan doğrudan kullanıyor ve negatif bir hız değeri buluyor. Bu sonucun yorumu için en doğru yaklaşım hangisidir?",
+      "options": [
+        "Negatif hız değeri doğrudan kullanılabilir, düzeltmeye gerek yoktur",
+        "Bu durumda tepkime hiç gerçekleşmemiştir",
+        "Negatif işaret yalnızca gazlar için anlamlıdır",
+        "Negatif hız, tepkimenin tersine döndüğünü gösterir",
+        "Hesaplama biçimsel olarak eksik; tepkenler için formülün başında eksi işareti kullanılmalı, böylece hız pozitif bir büyüklük olarak ifade edilir"
+      ],
+      "correct": 4,
+      "explain": "Tepken derişimi azaldığından Δ[tepken] matematiksel olarak negatif çıkar. Hız tanım gereği pozitif bir büyüklük olduğundan, tepkenler için formülün başına eksi işareti konularak bu değer pozitife çevrilmelidir; öğrencinin eksi işaretini atlaması bir hesaplama eksikliğidir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "1200-1800 s aralığında H2O2 derişimi 1,00 M'dan 0,60 M'a düşüyor. Bu aralıktaki ortalama harcanma hızı, 0-200 s aralığındaki hızla (0,0015 M/s) karşılaştırıldığında nasıldır?",
+      "options": [
+        "Yaklaşık 0,0015 M/s'dir ve önceki aralıkla aynıdır",
+        "Yaklaşık 0,000667 M/s'dir ve önceki aralığa göre daha düşüktür",
+        "Yaklaşık 0,003 M/s'dir ve önceki aralıktan daha yüksektir",
+        "Hesaplanamaz",
+        "Yaklaşık 0,60 M/s'dir"
+      ],
+      "correct": 1,
+      "explain": "r = -Δ[H2O2]/Δt = -(0,60-1,00)/(1800-1200) = 0,40/600 ≈ 0,000667 M/s. Bu değer, 0-200 s aralığındaki hızdan (0,0015 M/s) belirgin biçimde düşüktür; bu da derişim azaldıkça tepkime hızının da azaldığını doğrular."
+    },
+    {
+      "difficulty": "orta",
+      "text": "2N2O5(g) → 4NO2(g) + O2(g) tepkimesinde 300-400 s aralığında N2O5 derişimi 0,120 M'dan 0,101 M'a düşüyor. Bu aralıktaki tepkime hızı (r_tepkime) yaklaşık kaç M/s'dir?",
+      "options": [
+        "0,000095 M/s",
+        "0,00009 M/s",
+        "0,00019 M/s",
+        "0,00038 M/s",
+        "0,019 M/s"
+      ],
+      "correct": 0,
+      "explain": "r_N2O5 = -Δ[N2O5]/Δt = -(0,101-0,120)/100 = 0,019/100 = 0,00019 M/s. r_tepkime = r_N2O5 ÷ 2 = 0,00019 ÷ 2 = 0,000095 M/s."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Aşağıdaki tepkime hızı birimlerinden hangisi zaman birimi olarak 'saat' kullanmaktadır?",
+      "options": [
+        "r = Δ(kütle)/Δt (g/dk.)",
+        "r = Δ(mol)/Δt (mol/sa.)",
+        "r = Δ(hacim)/Δt (L/gün)",
+        "r = Δ[derişim]/Δt (M/s)",
+        "Hiçbiri saat birimini kullanmaz"
+      ],
+      "correct": 1,
+      "explain": "Tabloya göre mol cinsinden madde miktarı değişimi saat (sa.) zaman birimiyle kullanıldığında hız birimi mol/sa. olur."
+    },
+    {
+      "difficulty": "orta",
+      "text": "2N2O5(g) → 4NO2(g) + O2(g) tepkimesinde 100-200 s aralığında N2O5 derişimi 0,169 M'dan 0,142 M'a düşüyor. Bu aralıktaki r_tepkime değeri yaklaşık kaç M/s'dir?",
+      "options": [
+        "0,00027 M/s",
+        "0,00054 M/s",
+        "0,000068 M/s",
+        "0,027 M/s",
+        "0,000135 M/s"
+      ],
+      "correct": 4,
+      "explain": "r_N2O5 = -Δ[N2O5]/Δt = -(0,142-0,169)/100 = 0,027/100 = 0,00027 M/s. r_tepkime = r_N2O5 ÷ 2 = 0,00027 ÷ 2 = 0,000135 M/s."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede aynı zaman aralığı için hem tepken hem ürün derişim verileri mevcuttur. Yalnızca tepken verisini kullanarak hesaplanan r_tepkime ile yalnızca ürün verisini kullanarak hesaplanan r_tepkime'nin (katsayılar doğru uygulandığında) birbirine yakın çıkması beklenir mi?",
+      "options": [
+        "Yalnızca tepkime ekzotermikse tutarlı çıkar",
+        "Hayır, tepken ve ürün verileri hiçbir zaman aynı r_tepkime'yi vermez",
+        "Evet, çünkü her ikisi de aynı tepkimenin hızını farklı maddeler üzerinden ifade eder; katsayılar doğru uygulandığında sonuçlar tutarlı olmalıdır",
+        "Yalnızca gaz fazındaki tepkimelerde tutarlı çıkar",
+        "Bu, tepkimenin sıcaklığına bağlıdır"
+      ],
+      "correct": 2,
+      "explain": "r_tepkime tek bir büyüklüktür; hangi maddenin verisi kullanılırsa kullanılsın (kendi katsayısına bölünerek), doğru uygulandığında aynı r_tepkime değerine ulaşılması beklenir. N2O5 verilerinde bu tutarlılık çoğu aralıkta gözlenmektedir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "1800-2600 s aralığında H2O2 derişimi 0,60 M'dan 0,30 M'a düşüyor. Bu aralıktaki ortalama harcanma hızını, 0-200 s ve 600-1200 s aralıklarındaki hızlarla (sırasıyla 0,0015 ve 0,000833 M/s) karşılaştırarak bir örüntü ifade ediniz.",
+      "options": [
+        "Yaklaşık 0,0015 M/s; hız artmaktadır",
+        "Hesaplanamaz, veriler yetersizdir",
+        "Yaklaşık 0,00075 M/s; hız sabit kalmaktadır",
+        "Yaklaşık 0,000375 M/s; hız zamanla sürekli azalmaktadır, bu derişim düştükçe hızın da düştüğü örüntüsünü doğrular",
+        "Yaklaşık 0,0003 M/s; hız rastgele değişmektedir"
+      ],
+      "correct": 3,
+      "explain": "r = -Δ[H2O2]/Δt = -(0,30-0,60)/(2600-1800) = 0,30/800 = 0,000375 M/s. Bu değer, önceki aralıklardaki 0,0015 ve 0,000833 M/s değerleriyle karşılaştırıldığında sürekli azalan bir örüntü göstermektedir: derişim azaldıkça tepkime hızı da azalmaktadır."
+    },
+    {
+      "difficulty": "zor",
+      "statements": {
+        "items": [
+          "Bir tepkimenin ortalama hızı, seçilen zaman aralığı ne kadar küçültülürse gerçek anlık hıza o kadar yaklaşır.",
+          "İki farklı zaman aralığında hesaplanan ortalama hızların birbirinden farklı çıkması, hesaplamada hata yapıldığını gösterir.",
+          "Bir tepkimenin derişim-zaman grafiğinde eğri zamanla düzleşiyorsa (yataya yaklaşıyorsa) bu, tepkime hızının azaldığını gösterir."
+        ]
+      },
+      "text": "Bu önermelerden hangileri doğrudur?",
+      "options": [
+        "I, II ve III",
+        "II ve III",
+        "Yalnız I",
+        "Yalnız II",
+        "I ve III"
+      ],
+      "correct": 4,
+      "explain": "I doğrudur; zaman aralığı küçüldükçe ortalama hız, o andaki anlık hıza yaklaşır. II yanlıştır; farklı aralıklarda farklı ortalama hız çıkması normaldir ve genellikle hesaplama hatası değil, tepkime hızının zamanla gerçekten değiştiğinin göstergesidir. III doğrudur; eğrinin eğimi hızı temsil eder, eğri yataya yaklaştıkça (düzleştikçe) eğim küçülür, yani hız azalır."
+    },
+    {
+      "difficulty": "zor",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "H2O2 verilerinde hız sürekli azalıyor; demek ki tepkime bir süre sonra tamamen duracak ve H2O2 derişimi sıfıra inecek."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Hızın azalması, tepkimenin durduğu anlamına gelmez; yalnızca derişim azaldıkça birim zamandaki değişimin küçüldüğünü gösterir. Tepkime teorik olarak çok uzun sürede çok düşük derişimlere yaklaşmaya devam edebilir."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrencinin yorumu daha temkinli ve doğrudur?",
+      "options": [
+        "İkisi de aynı derecede haklıdır",
+        "İkisi de haksızdır",
+        "Yalnız Öğrenci A",
+        "Yalnız Öğrenci B",
+        "Verilen bilgiyle karar verilemez"
+      ],
+      "correct": 3,
+      "explain": "Öğrenci B'nin yorumu daha temkinlidir. Ortalama hızın azalması, birim zamandaki değişimin küçüldüğünü gösterir; bu, tepkimenin aniden 'duracağı' anlamına gelmez. Bu modülün verileriyle tepkimenin tam olarak ne zaman biteceği hakkında kesin bir sonuca varılamaz."
+    },
+    {
+      "difficulty": "zor",
+      "text": "2N2O5(g) → 4NO2(g) + O2(g) tepkimesinde 400-500 s aralığında N2O5 derişimi 0,101 M'dan 0,086 M'a düşerken NO2 derişimi 0,197 M'dan 0,229 M'a çıkıyor. Bu iki veriden hesaplanan r_tepkime değerlerinin (N2O5 üzerinden ve NO2 üzerinden) birbirine yakın çıkması ne anlama gelir?",
+      "options": [
+        "Bu, tepkimenin dengede olduğunu gösterir",
+        "Bu, N2O5 ve NO2'nin aynı hızda tükendiğini gösterir",
+        "Bu, r_tepkime = r_N2O5÷2 = r_NO2÷4 bağıntısının bu veri seti için tutarlı olduğunu, yani ölçümlerin ve stokiyometrik ilişkinin birbirini doğruladığını gösterir",
+        "Bu bir tesadüftür, hiçbir anlamı yoktur",
+        "Bu, katsayıların yanlış yazıldığını gösterir"
+      ],
+      "correct": 2,
+      "explain": "r_N2O5 = -(0,086-0,101)/100 = 0,00015 M/s → r_tepkime = 0,000075 M/s. r_NO2 = (0,229-0,197)/100 = 0,00032 M/s → r_tepkime = 0,00008 M/s. Bu iki değerin birbirine yakın çıkması, genel bağıntının (r_tepkime = r_N2O5÷2 = r_NO2÷4) bu veri seti için tutarlı olduğunu ve farklı maddeler üzerinden hesaplansa da aynı tepkime hızına ulaşıldığını doğrular."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede A maddesinin katsayısı 1, B maddesinin katsayısı 2'dir (A + 2B → ürünler). A'nın harcanma hızı ölçülüyor ve 0,004 M/s bulunuyor. B'nin harcanma hızı kaç M/s olmalıdır?",
+      "options": [
+        "0,016 M/s",
+        "0,001 M/s",
+        "0,004 M/s",
+        "0,002 M/s",
+        "0,008 M/s"
+      ],
+      "correct": 4,
+      "explain": "r_tepkime = r_A ÷ 1 = r_B ÷ 2 eşitliğinden r_B = 2 × r_A = 2 × 0,004 = 0,008 M/s bulunur. B'nin katsayısı A'nın 2 katı olduğundan B, A'dan 2 kat daha hızlı harcanır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir deneyde tepkime hızı mol/saat biriminde 0,6 olarak ölçülüyor. Bu değeri M/s birimine çevirmek isteyen bir öğrencinin karşılaşacağı temel zorluk nedir?",
+      "options": [
+        "Hiçbir zorluk yoktur, doğrudan aynı sayı kullanılabilir",
+        "Birim dönüşümü için hem zaman biriminin (saat→saniye) hem de madde miktarı biriminin (mol→derişim, hacim bilgisi gerektirir) dönüştürülmesi gerekir",
+        "Bu dönüşüm yalnızca gazlar için mümkündür",
+        "mol/saat birimi hiçbir zaman M/s'ye çevrilemez",
+        "Yalnızca zaman birimini çevirmek yeterlidir, madde miktarı birimi otomatik uyumludur"
+      ],
+      "correct": 1,
+      "explain": "mol/saat biriminden M/s'ye (derişim/saniye) geçmek için hem zaman birimi (saat → saniye, 3600'e bölünerek) hem de madde miktarı birimi (mol → derişim; bunun için çözeltinin veya gazın hacmi bilinmelidir, M=mol/L) dönüştürülmelidir. Yalnızca hacim bilgisi olmadan bu dönüşüm tam yapılamaz."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin derişim-zaman grafiğinde tepkenin eğrisi başlangıçta çok dik, ilerledikçe giderek yataylaşan bir şekil çiziyor. Bu şeklin ortalama hız hesaplarına etkisi nedir?",
+      "options": [
+        "Yatay kısımdan alınan hız her zaman negatif çıkar",
+        "Eğrinin şekli yalnızca grafiğin estetiği ile ilgilidir, hızla ilgisizdir",
+        "Başlangıca yakın aralıklarda hesaplanan hız her zaman sıfır çıkar",
+        "Grafiğin şekli ortalama hız hesabını etkilemez, her zaman aynı sonucu verir",
+        "Başlangıca yakın (dik kısımdan alınan) zaman aralıklarında hesaplanan ortalama hız, sona yakın (yatay kısımdan alınan) aralıklara göre daha büyük çıkar"
+      ],
+      "correct": 4,
+      "explain": "Eğrinin dikliği (eğimi) o bölgedeki hızı yansıtır. Başlangıçta eğri dik olduğundan (derişim hızla değiştiğinden) bu bölgeden alınan zaman aralığının ortalama hızı büyük çıkar; eğri yataylaştıkça (derişim yavaş değiştikçe) sonraki aralıkların ortalama hızı küçülür. H2O2 verileri de bu örüntüyü doğrulamaktadır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede yalnızca ürünün derişim-zaman verisi mevcuttur, tepkenin verisi yoktur. Tepkenin harcanma hızı, ürünün oluşma hızından ve tepkime denkleminden yararlanılarak hesaplanabilir mi?",
+      "options": [
+        "Hayır, tepkenin kendi verisi olmadan hiçbir şey söylenemez",
+        "Evet; tepkime denklemindeki katsayılar bilindiğinde, ürünün hızı kendi katsayısına bölünüp tepkime hızı bulunur, ardından bu değer tepkenin katsayısıyla çarpılarak tepkenin hızı hesaplanabilir",
+        "Bu hesaplama yalnızca gazlar için geçerlidir",
+        "Evet ama yalnızca katsayılar eşitse mümkündür",
+        "Hayır, yalnızca deneysel ölçümle bulunabilir"
+      ],
+      "correct": 1,
+      "explain": "Genel bağıntı (r_tepkime = r_A/a = r_B/b = r_C/c = r_D/d) sayesinde, bir maddenin hızı ve tüm katsayılar bilindiğinde diğer tüm maddelerin hızları hesaplanabilir. Önce ürünün hızından r_tepkime bulunur, sonra bu değer istenen tepkenin katsayısıyla çarpılarak o tepkenin hızına ulaşılır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir öğrenci 0-600 s aralığındaki (tüm aralığı kapsayan) H2O2 ortalama harcanma hızını hesaplıyor: r = -(1,50-2,30)/600 = 0,00133 M/s. Bu değeri, aynı aralığı oluşturan üç alt aralığın (0-200, 200-400, 400-600) ayrı ayrı hesaplanan hızlarıyla (0,0015; 0,0015; 0,0010 M/s) karşılaştırdığında ne gözlemlenir?",
+      "options": [
+        "Bu karşılaştırma anlamsızdır, hiçbir ilişki yoktur",
+        "Sonuçlar birbiriyle çelişir, bu bir hesaplama hatasına işaret eder",
+        "Tüm aralığın hızı, alt aralıklardan her zaman daha küçük olmalıdır",
+        "Tüm aralığın hızı, alt aralıklardan her zaman daha büyük olmalıdır",
+        "Tüm aralığın ortalama hızı, alt aralıkların ortalamasına yakın bir ara değerdir; bu, ortalama hızın seçilen zaman aralığına bağlı olduğunu gösterir"
+      ],
+      "correct": 4,
+      "explain": "0-600 s için hesaplanan 0,00133 M/s değeri, 0,0015, 0,0015 ve 0,0010 M/s değerlerinin arasında (yaklaşık ortalamasına yakın) bir değerdir. Bu, ortalama hızın hesaplandığı zaman aralığının seçimine bağlı olduğunu; geniş bir aralığın ortalamasının, o aralığı oluşturan daha küçük aralıkların hızlarını 'yumuşatarak' ortalamasını yansıttığını gösterir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede X maddesinin katsayısı a, Y maddesinin katsayısı b'dir. r_X = k·r_Y ilişkisi biliniyor (k bir sabit). Buna göre a ve b arasındaki ilişki nasıl ifade edilir?",
+      "options": [
+        "k = a + b",
+        "b = k·a",
+        "a ve b arasında hiçbir ilişki yoktur",
+        "a/b = k, yani a = k·b ile aynı şeydir bu yüzden bu doğrudur",
+        "a = k·b"
+      ],
+      "correct": 4,
+      "explain": "r_tepkime = r_X/a = r_Y/b eşitliğinden r_X = (a/b)·r_Y elde edilir. Verilen r_X = k·r_Y ile karşılaştırıldığında k = a/b, yani a = k·b bulunur."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir araştırmacı, 2N2O5(g) → 4NO2(g) + O2(g) tepkimesinde 500-600 s aralığında hesapladığı r_tepkime değerlerinin (N2O5, NO2 ve O2 üzerinden ayrı ayrı hesaplandığında) birbirinden belirgin şekilde farklı çıktığını fark ediyor; oysa önceki tüm aralıklarda bu değerler birbirine çok yakın çıkmıştı. Bu durumda en bilimsel yaklaşım hangisidir?",
+      "options": [
+        "Stokiyometrik bağıntının bu aralıkta geçersiz olduğu sonucuna varmak",
+        "Sonucu sorgulamadan olduğu gibi kabul etmek",
+        "Tüm önceki hesaplamaları da güvenilmez ilan etmek",
+        "Bu son aralıktaki ölçüm ya da veri kaydında bir tutarsızlık/hata olabileceğini göz önünde bulundurup veriyi ve ölçüm yöntemini yeniden incelemek",
+        "Bu farkı görmezden gelip yalnızca N2O5 verisini kullanmaya devam etmek"
+      ],
+      "correct": 3,
+      "explain": "Bilimsel yaklaşım, beklenmedik bir tutarsızlıkla karşılaşıldığında veriyi ve ölçüm sürecini sorgulamaktır. Önceki tüm aralıklarda tutarlı çıkan bir bağıntının bir aralıkta aniden bozulması, o aralıktaki ölçüm veya kayıt sürecinde bir hata/tutarsızlık olabileceğine işaret eder; bağıntının kendisinin geçersiz olduğu sonucuna hemen varmak yerine veri kalitesi sorgulanmalıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "2N2O5(g) → 4NO2(g) + O2(g) tepkimesinde 200-300 s aralığında N2O5 derişimi 0,142 M'dan 0,120 M'a düşüyor. Aynı aralıkta beklenen O2 oluşma hızının yaklaşık kaç M/s olması gerekir (stokiyometrik ilişkiye göre)?",
+      "options": [
+        "0,00011 M/s",
+        "0,00022 M/s",
+        "0,022 M/s",
+        "0,00055 M/s",
+        "0,00044 M/s"
+      ],
+      "correct": 0,
+      "explain": "r_N2O5 = -(0,120-0,142)/100 = 0,022/100 = 0,00022 M/s. r_tepkime = r_N2O5 ÷ 2 = 0,00011 M/s. O2'nin katsayısı 1 olduğundan r_O2 = r_tepkime = 0,00011 M/s olması beklenir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "0-2600 s'lik toplam süre boyunca H2O2 derişimi 2,30 M'dan 0,30 M'a düşüyor. Bu tüm sürecin ortalama harcanma hızı kaç M/s'dir? Bu değer, sürecin başındaki (0-200 s: 0,0015 M/s) ve sonundaki (1800-2600 s: 0,000375 M/s) hızlarla karşılaştırıldığında nasıl bir konumdadır?",
+      "options": [
+        "Yaklaşık 0,00077 M/s; başlangıç hızından daha yüksektir",
+        "Hesaplanamaz",
+        "Yaklaşık 0,00231 M/s; tüm hızlardan daha yüksektir",
+        "Yaklaşık 0,00038 M/s; tüm hızlardan daha düşüktür",
+        "Yaklaşık 0,00077 M/s; başlangıç ve bitiş hızlarının arasında bir değerdir, bu da hızın süreç boyunca kademeli olarak azaldığını yansıtır"
+      ],
+      "correct": 4,
+      "explain": "r = -Δ[H2O2]/Δt = -(0,30-2,30)/2600 = 2,00/2600 ≈ 0,00077 M/s. Bu değer, sürecin başındaki hızdan (0,0015 M/s) düşük, sonundaki hızdan (0,000375 M/s) yüksektir; tüm sürecin ortalaması, sürekli azalan anlık hızların bir tür 'ara değeri' olarak ortaya çıkar."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede X'in katsayısı 2, Y'nin katsayısı 3, Z'nin katsayısı 1'dir (2X + 3Y → Z + ...). X'in harcanma hızı 0,010 M/s ise Y'nin harcanma hızı ve Z'nin oluşma hızı sırasıyla kaç M/s olmalıdır?",
+      "options": [
+        "Y=0,010 M/s, Z=0,010 M/s",
+        "Y=0,030 M/s, Z=0,002 M/s",
+        "Y=0,015 M/s, Z=0,005 M/s",
+        "Y=0,0067 M/s, Z=0,020 M/s",
+        "Y=0,005 M/s, Z=0,015 M/s"
+      ],
+      "correct": 2,
+      "explain": "r_tepkime = r_X/2 = 0,010/2 = 0,005 M/s. Buradan r_Y = 3 × r_tepkime = 3 × 0,005 = 0,015 M/s ve r_Z = 1 × r_tepkime = 0,005 M/s bulunur."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir kimyager, bir tepkimenin hızını hem 'derişim değişimi/zaman' hem de 'kütle değişimi/zaman' yöntemiyle ayrı ayrı hesaplıyor ve iki farklı sayısal değer buluyor (örneğin 0,002 M/s ve 0,5 g/s). Bu iki değerin sayısal olarak farklı çıkması bir çelişki midir?",
+      "options": [
+        "Hayır, çünkü kütle ve derişim birbiriyle hiç ilişkili değildir",
+        "Bu karşılaştırma anlamsızdır",
+        "Evet, aynı tepkimenin hızı her zaman aynı sayısal değere sahip olmalıdır",
+        "Evet, bu durum bir ölçüm hatasını gösterir",
+        "Hayır; farklı madde miktarı türleri (derişim, kütle) farklı birimlere ve dolayısıyla farklı sayısal değerlere sahiptir, ikisi de aynı fiziksel süreci farklı ölçeklerde tarif eder"
+      ],
+      "correct": 4,
+      "explain": "Tepkime hızı, kullanılan madde miktarı türüne (derişim, kütle, mol, hacim) göre farklı birimlerde ve dolayısıyla farklı sayısal değerlerde ifade edilebilir. M/s ve g/s gibi farklı birimlerdeki iki değerin sayıca farklı olması bir çelişki değildir; ikisi de aynı fiziksel süreci farklı ölçüm birimleriyle tarif etmektedir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin derişim-zaman grafiğinde tepkenin eğrisi t=0'da y eksenini kestiği noktadan itibaren monoton (sürekli) azalmaktadır ve hiçbir noktada yatay bir düzlüğe (sıfır eğime) ulaşmamaktadır. Bu gözlem, tepkimenin durumu hakkında ne düşündürür?",
+      "options": [
+        "Tepkime aniden durmuştur",
+        "Grafik hatalıdır",
+        "Grafiğin gösterdiği süre boyunca tepken hâlâ harcanmaya devam etmektedir, yani tepkime bu süre içinde tamamlanmamıştır",
+        "Tepkenin derişimi negatif olmuştur",
+        "Tepkime tersine dönmüştür"
+      ],
+      "correct": 2,
+      "explain": "Eğrinin hiçbir noktada yatay bir düzlüğe (sıfır eğime, yani sıfır hıza) ulaşmaması, gösterilen zaman aralığı boyunca tepkenin hâlâ harcanmakta olduğunu, yani tepkimenin bu süre içinde tamamlanmadığını gösterir."
     }
   ]
 };

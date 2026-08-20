@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ortalama Tepkime Hızının Hesaplanması · Kimya 11</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Modül 6 · Hız</span>
+    <h1>Tepken ve Ürün Derişimleriyle Ortalama Tepkime Hızlarının Hesaplanması</h1>
+    <p class="lead">Bir tepkimenin hızını, tepken ya da ürünlerin derişiminin zamanla nasıl değiştiğini
+      izleyerek hesaplayabiliriz. Bu modülde derişim-zaman grafiklerinden ortalama hız hesaplamayı öğreneceksin.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <h2><span class="num">1</span>Kavramlar</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Tepkime Hızı</h3>
+        <p>Kimyasal bir tepkimede belirli bir sürede madde miktarındaki değişimin ölçüsüdür; <b>r</b> ile
+          gösterilir, SI biriminde <b>M/s</b>'dir. Tepkenler harcandığı (derişimleri azaldığı) için hız ifadesinin
+          önüne eksi işareti konur — böylece hız değeri her zaman pozitif çıkar.</p>
+      </div>
+      <div class="card">
+        <h3>Harcanma / Oluşma Hızı</h3>
+        <p>Tepkenlerin derişiminin birim zamandaki azalışına <b>harcanma hızı</b>; ürünlerin derişiminin birim
+          zamandaki artışına <b>oluşma hızı</b> denir. Bu hızlar, tepkime denklemindeki katsayılara göre
+          birbirinden farklı büyüklükte olabilir.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>Genel bağıntı:</b> aA(g) + bB(g) → cC(g) + dD(g) tepkimesi için
+        r<sub>tepkime</sub> = −(1/a)·Δ[A]/Δt = −(1/b)·Δ[B]/Δt = (1/c)·Δ[C]/Δt = (1/d)·Δ[D]/Δt</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">2</span>Keşfet: Derişim-Zaman Grafiğinden Ortalama Hız</h2>
+    <p class="block-lead">H2O2(suda) → H2O(s) + 1/2O2(g) tepkimesinde H2O2 derişiminin zamanla azalışı aşağıda
+      gösterilmiştir. Bir zaman aralığı seç; H2O2'nin o aralıktaki ortalama harcanma hızını hesapla.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="interval-select">Zaman aralığı:</label>
+        <select id="interval-select"></select>
+      </div>
+      <div class="lab-stage" style="min-height:300px"><svg id="h2o2-svg" viewBox="0 0 520 280" style="width:100%;max-width:520px"></svg></div>
+      <div class="lab-readout" id="h2o2-readout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">3</span>Keşfet: Tepken/Ürün Hız İlişkisi</h2>
+    <p class="block-lead">2N2O5(g) → 4NO2(g) + O2(g) tepkimesinde üç maddenin derişimi de aynı anda izlenmiştir.
+      Bir zaman aralığı seç; her maddenin hızını ve bunların tepkime hızıyla ilişkisini incele.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="n2o5-interval">Zaman aralığı:</label>
+        <select id="n2o5-interval"></select>
+      </div>
+      <div class="lab-stage" style="min-height:300px"><svg id="n2o5-svg" viewBox="0 0 520 280" style="width:100%;max-width:520px"></svg></div>
+      <div id="n2o5-detail"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">4</span>Değerlendir</h2>
+    <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
+    <div id="quiz-host"></div>
+  </div>
+</section>
+
+<div id="next-module-root"></div>
+<div id="footer-root"></div>
+
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/quiz-engine.js"></script>
+<script src="../assets/js/quiz-data.js"></script>
+<script>
+  const MODKEY = "m6";
+
+  const H2O2_DATA = [
+    { t: 0, c: 2.30 }, { t: 200, c: 2.00 }, { t: 400, c: 1.70 }, { t: 600, c: 1.50 },
+    { t: 1200, c: 1.00 }, { t: 1800, c: 0.60 }, { t: 2600, c: 0.30 },
+  ];
+
+  function drawH2O2(idx) {
+    const a = H2O2_DATA[idx], b = H2O2_DATA[idx + 1];
+    const chart = renderCompareLineChart({
+      xLabels: H2O2_DATA.map((d) => d.t + " s"),
+      series: [{ name: "[H2O2] (M)", values: H2O2_DATA.map((d) => d.c), color: "var(--energy)" }],
+    });
+    chart.id = "h2o2-svg";
+    document.getElementById("h2o2-svg").replaceWith(chart);
+    const dC = b.c - a.c;
+    const dt = b.t - a.t;
+    const rate = (-dC / dt).toFixed(5);
+    document.getElementById("h2o2-readout").innerHTML = `
+      <div><b>Δ[H2O2] = ${b.c.toFixed(2)} − ${a.c.toFixed(2)} = ${dC.toFixed(2)} M</b>${a.t}-${b.t} s aralığı</div>
+      <div><b>r = −Δ[H2O2]/Δt = ${rate} M/s</b>Ortalama harcanma hızı</div>
+    `;
+  }
+
+  function buildH2O2Lab() {
+    const sel = document.getElementById("interval-select");
+    for (let i = 0; i < H2O2_DATA.length - 1; i++) {
+      sel.appendChild(new Option(`${H2O2_DATA[i].t}-${H2O2_DATA[i + 1].t} s`, i));
+    }
+    sel.addEventListener("change", () => drawH2O2(Number(sel.value)));
+    drawH2O2(0);
+  }
+
+  const N2O5_DATA = [
+    { t: 0, n2o5: 0.200, no2: 0, o2: 0 },
+    { t: 100, n2o5: 0.169, no2: 0.063, o2: 0.016 },
+    { t: 200, n2o5: 0.142, no2: 0.115, o2: 0.029 },
+    { t: 300, n2o5: 0.120, no2: 0.160, o2: 0.040 },
+    { t: 400, n2o5: 0.101, no2: 0.197, o2: 0.049 },
+    { t: 500, n2o5: 0.086, no2: 0.229, o2: 0.057 },
+    { t: 600, n2o5: 0.072, no2: 0.278, o2: 0.070 },
+  ];
+
+  function drawN2O5(idx) {
+    const a = N2O5_DATA[idx], b = N2O5_DATA[idx + 1];
+    const chart = renderCompareLineChart({
+      xLabels: N2O5_DATA.map((d) => d.t + " s"),
+      series: [
+        { name: "[N2O5]", values: N2O5_DATA.map((d) => d.n2o5), color: "var(--endo)" },
+        { name: "[NO2]", values: N2O5_DATA.map((d) => d.no2), color: "var(--exo)" },
+        { name: "[O2]", values: N2O5_DATA.map((d) => d.o2), color: "var(--rate)" },
+      ],
+    });
+    chart.id = "n2o5-svg";
+    document.getElementById("n2o5-svg").replaceWith(chart);
+
+    const dt = b.t - a.t;
+    const rN2O5 = -(b.n2o5 - a.n2o5) / dt;
+    const rNO2 = (b.no2 - a.no2) / dt;
+    const rO2 = (b.o2 - a.o2) / dt;
+    const rTepkime = rN2O5 / 2;
+    document.getElementById("n2o5-detail").innerHTML = `
+      <table class="viz-table">
+        <thead><tr><th>Madde</th><th>r (M/s)</th><th>r_tepkime ile ilişki</th></tr></thead>
+        <tbody>
+          <tr><td>N2O5 (harcanma)</td><td>${rN2O5.toFixed(6)}</td><td>r_tepkime = r_N2O5 ÷ 2</td></tr>
+          <tr><td>NO2 (oluşma)</td><td>${rNO2.toFixed(6)}</td><td>r_tepkime = r_NO2 ÷ 4</td></tr>
+          <tr><td>O2 (oluşma)</td><td>${rO2.toFixed(6)}</td><td>r_tepkime = r_O2 ÷ 1</td></tr>
+        </tbody>
+      </table>
+      <div class="card" style="text-align:center">
+        <p style="margin:0">r<sub>tepkime</sub> ≈ <b style="color:var(--energy)">${rTepkime.toFixed(6)} M/s</b>
+          (${a.t}-${b.t} s aralığında)</p>
+      </div>
+    `;
+  }
+
+  function buildN2O5Lab() {
+    const sel = document.getElementById("n2o5-interval");
+    for (let i = 0; i < N2O5_DATA.length - 1; i++) {
+      sel.appendChild(new Option(`${N2O5_DATA[i].t}-${N2O5_DATA[i + 1].t} s`, i));
+    }
+    sel.addEventListener("change", () => drawN2O5(Number(sel.value)));
+    drawN2O5(0);
+  }
+
+  buildH2O2Lab();
+  buildN2O5Lab();
+  mountNav(MODKEY);
+  mountNextModule(MODKEY);
+  markVisited(MODKEY);
+  mountFooter();
+  renderQuiz(MODKEY, QUIZ.m6);
+</script>
+</body>
+</html>
