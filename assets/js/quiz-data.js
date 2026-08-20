@@ -4,6 +4,7 @@
    Modül 2: Maddelerin Enerji Kaynağı Olma Potansiyeli (KİM.11.1.2)
    Modül 3: Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması (KİM.11.1.3)
    Modül 4: Standart Oluşum Entalpisi (KİM.11.1.4)
+   Modül 5: Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli Şartlar (KİM.11.1.5)
    ============================================================ */
 
 const QUIZ = {
@@ -3412,6 +3413,744 @@ const QUIZ = {
       ],
       "correct": 2,
       "explain": "ΔH°tepkime = ΔH°f(C) − [ΔH°f(A) + ΔH°f(B)] eşitliğinden: -60 = ΔH°f(C) − [(-80) + (-40)] = ΔH°f(C) − (-120) = ΔH°f(C) + 120. Buradan ΔH°f(C) = -60 − 120 = -180 kJ/mol bulunur."
+    }
+  ],
+  "m5": [
+    {
+      "difficulty": "kolay",
+      "text": "Bir çarpışmanın 'etkin çarpışma' sayılabilmesi için tanecikler hangi iki koşulu birlikte sağlamalıdır?",
+      "options": [
+        "Yalnızca yüksek sıcaklıkta olmalıdır",
+        "Yalnızca renkli olmalıdır",
+        "Uygun geometride (doğru yönelimde) ve yeterli kinetik enerjiyle çarpışmalıdır",
+        "Yalnızca aynı fazda (katı/sıvı/gaz) olmalıdır",
+        "Yalnızca eşit kütleli olmalıdır"
+      ],
+      "correct": 2,
+      "explain": "Etkin çarpışma, ürün oluşturan çarpışmadır. Bunun için tanecikler hem uygun geometride (doğru yönelimde) hem de yeterli kinetik enerjiyle çarpışmalıdır; bu iki koşuldan biri eksikse ürün oluşmaz."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Tepkimeye giren tanecikler arasındaki her çarpışma ürün oluşturur mu?",
+      "options": [
+        "Hayır, yalnızca etkin çarpışmalar ürün oluşturur",
+        "Yalnızca katı tanecikler arasındaki çarpışmalar ürün oluşturur",
+        "Yalnızca gaz fazındaki çarpışmalar ürün oluşturur",
+        "Evet, her çarpışma mutlaka ürün oluşturur",
+        "Çarpışma ürün oluşumuyla ilgisizdir"
+      ],
+      "correct": 0,
+      "explain": "Her çarpışma ürün oluşturmaz; yalnızca uygun geometride ve yeterli kinetik enerjiyle gerçekleşen etkin çarpışmalar ürün oluşturur."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Tepkimeye giren taneciklerin etkin çarpışma yapabilmesi için sahip olması gereken minimum kinetik enerjiye ne ad verilir?",
+      "options": [
+        "Bağ enerjisi",
+        "Oluşum entalpisi",
+        "Tepkime entalpisi",
+        "Eşik değeri",
+        "Aktivasyon enerjisi"
+      ],
+      "correct": 3,
+      "explain": "Tepkimeye giren taneciklerin etkin çarpışma yapabilmesi için sahip olması gereken minimum kinetik enerjiye eşik değeri (eşik enerjisi) denir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkimenin gerçekleşebilmesi için gereken minimum potansiyel enerjiye ne ad verilir?",
+      "options": [
+        "Bağ enerjisi",
+        "Oluşum entalpisi",
+        "Tepkime hızı",
+        "Aktivasyon enerjisi",
+        "Eşik değeri"
+      ],
+      "correct": 3,
+      "explain": "Bir tepkimenin gerçekleşebilmesi için gereken minimum potansiyel enerjiye aktivasyon enerjisi denir; bu enerji tepkenlerin kinetik enerjilerinden karşılanır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Tepkenlerin ürünlere dönüşmesine ne ad verilir?",
+      "options": [
+        "Tersinmez tepkime",
+        "İleri tepkime",
+        "Katalitik tepkime",
+        "Denge tepkimesi",
+        "Geri tepkime"
+      ],
+      "correct": 1,
+      "explain": "Tepkenlerin ürünlere dönüşmesine ileri tepkime; ürünlerin tekrar tepkenlere dönüşmesine ise geri tepkime denir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Tepkime entalpisi (ΔH_tepkime), ileri aktivasyon enerjisi (Eai) ve geri aktivasyon enerjisi (Eag) arasındaki ilişki hangi bağıntıyla ifade edilir?",
+      "options": [
+        "ΔH = Eai × Eag",
+        "ΔH = Eai − Eag",
+        "ΔH, Eai ve Eag ile ilişkisizdir",
+        "ΔH = Eai + Eag",
+        "ΔH = Eag − Eai"
+      ],
+      "correct": 1,
+      "explain": "Tepkime entalpisi, ileri tepkimenin aktivasyon enerjisinden geri tepkimenin aktivasyon enerjisi çıkarılarak hesaplanır: ΔH_tepkime = Eai − Eag."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Endotermik bir tepkimede ileri aktivasyon enerjisi (Eai) ile geri aktivasyon enerjisi (Eag) arasındaki ilişki nasıldır?",
+      "options": [
+        "Eai ve Eag karşılaştırılamaz",
+        "Eag her zaman sıfırdır",
+        "Eai = Eag",
+        "Eai > Eag",
+        "Eai < Eag"
+      ],
+      "correct": 3,
+      "explain": "Endotermik tepkimelerde Eai > Eag'dir; bu durum ΔH = Eai − Eag > 0 sonucunu verir, yani tepkime endotermiktir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Ekzotermik bir tepkimede ileri aktivasyon enerjisi (Eai) ile geri aktivasyon enerjisi (Eag) arasındaki ilişki nasıldır?",
+      "options": [
+        "Eai her zaman sıfırdır",
+        "Eai = Eag",
+        "Eai < Eag",
+        "Eai ve Eag karşılaştırılamaz",
+        "Eai > Eag"
+      ],
+      "correct": 2,
+      "explain": "Ekzotermik tepkimelerde Eai < Eag'dir; bu durum ΔH = Eai − Eag < 0 sonucunu verir, yani tepkime ekzotermiktir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Aktivasyon enerjisi büyük olan tepkimeler genellikle nasıl gerçekleşir?",
+      "options": [
+        "Hiç gerçekleşmez",
+        "Anlık olarak",
+        "Genellikle yavaş",
+        "Çok hızlı",
+        "Tersinmez biçimde"
+      ],
+      "correct": 2,
+      "explain": "Aktivasyon enerjisi büyük olan tepkimelerde, taneciklerin bu yüksek enerji eşiğini aşabilmesi zor olduğundan tepkime genellikle yavaş gerçekleşir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Kimyasal tepkimelerin gerçekleşebilmesi için ortamın hangi özelliklerinin uygun olması gerekir?",
+      "options": [
+        "pH, sıcaklık ve basınç gibi çevresel koşullar",
+        "Yalnızca hacmi",
+        "Yalnızca kokusu",
+        "Yalnızca rengi",
+        "Ortam koşulları tepkimeyi etkilemez"
+      ],
+      "correct": 0,
+      "explain": "Kimyasal tepkimelerin gerçekleşebilmesi için ortamın pH, sıcaklık ve basınç gibi değişkenlerinin uygun olması gerekir; rüzgâr hızı, nem oranı, güneş ışığı gibi etkenler de tepkimeleri etkileyebilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Demirin paslanma tepkimesi nem varlığında neden hızlanır?",
+      "options": [
+        "Nem, elektrokimyasal paslanma süreci için gereken iyonların taşınmasını sağlar",
+        "Nem, demiri oksijenden korur",
+        "Nemin paslanma hızıyla ilgisi yoktur",
+        "Nem, demirin rengini değiştirir",
+        "Nem, oksijeni ortamdan uzaklaştırır"
+      ],
+      "correct": 0,
+      "explain": "Nem, demir ile oksijen arasındaki elektrokimyasal paslanma süreci için gereken iyonların taşınmasını sağladığından paslanmayı hızlandırır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "NO(g) + O3(g) → NO2(g) + O2(g) tepkimesinde çarpışma uygun geometride gerçekleşmezse ne olur?",
+      "options": [
+        "Ürün her zaman oluşur",
+        "Ürün oluşmaz",
+        "Yalnızca NO2 oluşur",
+        "Tepkime hızlanır",
+        "Tepkime tersine döner"
+      ],
+      "correct": 1,
+      "explain": "Çarpışma uygun geometride gerçekleşmezse taneciklerdeki bağların kırılıp yeniden düzenlenmesi mümkün olmaz, bu yüzden ürün (NO2 ve O2) oluşmaz."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Orman yangınlarındaki temel yanma tepkimesinde organik maddeler (ağaç, yaprak vb.) atmosferdeki hangi gazla hızlı biçimde tepkimeye girer?",
+      "options": [
+        "Oksijen (O2)",
+        "Hidrojen (H2)",
+        "Azot (N2)",
+        "Karbon dioksit (CO2)",
+        "Argon (Ar)"
+      ],
+      "correct": 0,
+      "explain": "Orman yangınlarında organik maddeler atmosferdeki oksijen (O2) ile hızlı bir şekilde tepkimeye girerek karbon dioksit, su buharı ve enerji açığa çıkarır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir roket motorunda yakıt olarak hidrazin (N2H4), yakıcı (oksitleyici) olarak diazot tetraoksit (N2O4) kullanılan tepkime 1168 kJ ısı açığa çıkarmaktadır. Bu tepkime hangi türdedir?",
+      "options": [
+        "Tersinmez ama ısı alışverişsizdir",
+        "Ekzotermik",
+        "Isı alışverişi yapmaz",
+        "Yalnızca fiziksel bir değişimdir",
+        "Endotermik"
+      ],
+      "correct": 1,
+      "explain": "Tepkime sonucunda 1168 kJ ısı açığa çıktığı belirtildiğinden bu tepkime ekzotermiktir; roket motorunda gereken yüksek ısı ve hızlı egzoz gazı bu ekzotermik tepkimeyle elde edilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Kinetik enerjisi eşik değerinin altında olan iki tanecik çarpışırsa ne olması beklenir?",
+      "options": [
+        "Çarpışma kesinlikle etkin çarpışma sayılır",
+        "Taneciklerdeki bağların kırılması olası değildir, ürün oluşmaz",
+        "Taneciklerdeki bağların kırılması ve ürün oluşması beklenir",
+        "Tanecikler birleşerek yeni bir element oluşturur",
+        "Bu durumda tepkime tersine döner"
+      ],
+      "correct": 1,
+      "explain": "Kinetik enerjisi eşik değerinin altında olan taneciklerin çarpışması sonucunda bağların kırılması olası değildir; bu yüzden ürün oluşmaz, çarpışma etkin değildir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Aktivasyon enerjisi, tepkimeye giren taneciklerin hangi enerji türünden karşılanır?",
+      "options": [
+        "Bağ enerjilerinden",
+        "Potansiyel enerjilerinden",
+        "Işık enerjisinden her zaman",
+        "Kinetik enerjilerinden",
+        "Kimyasal enerjilerinden değil, dışarıdan verilen ısıdan"
+      ],
+      "correct": 3,
+      "explain": "Aktivasyon enerjisi, çarpışan taneciklerin kinetik enerjilerinden karşılanır; çarpışma sırasında bu kinetik enerji, bağların kırılmasına yol açarak taneciklerin potansiyel enerjisini değiştirir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Potansiyel enerji-tepkime koordinatı grafiği temel olarak neyi gösterir?",
+      "options": [
+        "Tepkenlerin ve ürünlerin enerji düzeylerini ve birbirlerine dönüşebilmeleri için aşmaları gereken enerji engelini",
+        "Yalnızca tepkimenin kütle korunumunu",
+        "Tepkimede kullanılan katalizör miktarını",
+        "Yalnızca tepkimenin süresini",
+        "Yalnızca tepkimenin renk değişimini"
+      ],
+      "correct": 0,
+      "explain": "Potansiyel enerji-tepkime koordinatı grafiği, tepkenlerin ve ürünlerin enerji düzeylerini ve aralarındaki dönüşüm için aşılması gereken enerji engelini (aktivasyon enerjisini) görselleştirir."
+    },
+    {
+      "difficulty": "orta",
+      "statements": {
+        "items": [
+          "Kinetik enerjisi eşik değerine eşit ya da eşik değerinden büyük olan tanecikler etkin çarpışma yapabilir.",
+          "Uygun geometride ama düşük kinetik enerjili bir çarpışma her zaman ürün oluşturur.",
+          "Aktivasyon enerjisi, tepkenlerin kinetik enerjilerinden karşılanan bir potansiyel enerji engelidir."
+        ]
+      },
+      "text": "Verilen önermelerden hangileri doğrudur?",
+      "options": [
+        "I, II ve III",
+        "Yalnız I",
+        "Yalnız II",
+        "I ve III",
+        "II ve III"
+      ],
+      "correct": 3,
+      "explain": "I doğrudur; eşik değerine eşit ya da üstünde kinetik enerjiye sahip tanecikler etkin çarpışma yapabilir. II yanlıştır; geometri uygun olsa da kinetik enerji yetersizse bağlar kırılamaz, ürün oluşmaz. III doğrudur; aktivasyon enerjisi, kinetik enerjinin bağları kırmak için kullanılmasıyla aşılan bir potansiyel enerji engelidir."
+    },
+    {
+      "difficulty": "orta",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "Bir tepkimenin aktivasyon enerjisi büyükse bu tepkime kesinlikle gerçekleşmez."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Gerçekleşmez demek doğru değil; büyük aktivasyon enerjisi yalnızca tepkimenin daha yavaş gerçekleşeceğini gösterir, imkânsız olduğunu değil."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrenci bilimsel olarak haklıdır?",
+      "options": [
+        "Yalnız Öğrenci B",
+        "İkisi de haklıdır",
+        "Verilen bilgiyle karar verilemez",
+        "Yalnız Öğrenci A",
+        "İkisi de haksızdır"
+      ],
+      "correct": 0,
+      "explain": "Öğrenci B haklıdır. Büyük aktivasyon enerjisi, tepkimenin gerçekleşmesinin zor ve yavaş olacağını gösterir; ancak yeterli kinetik enerjiye sahip tanecikler varsa (örneğin yüksek sıcaklıkta) tepkime yine de gerçekleşebilir."
+    },
+    {
+      "difficulty": "orta",
+      "matchPairs": {
+        "leftHeader": "Kavram",
+        "rightHeader": "Tanım",
+        "pairs": [
+          [
+            "Eşik değeri",
+            "Etkin çarpışma için gereken minimum kinetik enerji"
+          ],
+          [
+            "Aktivasyon enerjisi",
+            "Tepkimenin gerçekleşmesi için gereken minimum potansiyel enerji"
+          ],
+          [
+            "Etkin çarpışma",
+            "Uygun geometride ve yeterli enerjiyle gerçekleşen, ürün oluşturan çarpışma"
+          ]
+        ]
+      },
+      "text": "Yukarıdaki eşleştirmeye göre bir tanecik kinetik enerji açısından yeterli olsa bile ürün oluşmaması hangi durumdan kaynaklanabilir?",
+      "options": [
+        "Çarpışmanın uygun geometride gerçekleşmemesinden",
+        "Tepkimenin ekzotermik olmasından",
+        "Eşik değerinin negatif olmasından",
+        "Aktivasyon enerjisinin sıfır olmasından",
+        "Kinetik enerjinin çok yüksek olmasından"
+      ],
+      "correct": 0,
+      "explain": "Kinetik enerji yeterli olsa bile çarpışma uygun geometride (doğru yönelimde) gerçekleşmezse taneciklerdeki bağlar doğru şekilde etkileşemez ve ürün oluşmaz; etkin çarpışma için her iki koşulun birlikte sağlanması gerekir."
+    },
+    {
+      "difficulty": "orta",
+      "checklist": {
+        "items": [
+          "Endotermik bir tepkimede ileri aktivasyon enerjisi geri aktivasyon enerjisinden büyüktür.",
+          "Ekzotermik bir tepkime başladıktan sonra kendiliğinden devam edebilir.",
+          "Ortam sıcaklığı, basıncı ve pH değeri tepkimelerin gerçekleşmesini etkileyebilir."
+        ]
+      },
+      "text": "Yukarıdaki ifadelerden kaç tanesi doğrudur?",
+      "options": [
+        "2",
+        "0",
+        "1",
+        "3",
+        "Verilenlerle belirlenemez"
+      ],
+      "correct": 3,
+      "explain": "Üç ifade de doğrudur: endotermik tepkimede Eai>Eag'dir; ekzotermik tepkimeler genellikle kendi ürettikleri enerjiyle kendiliğinden devam edebilir; ve ortam koşulları (sıcaklık, basınç, pH) tepkimelerin gerçekleşmesini etkiler."
+    },
+    {
+      "difficulty": "orta",
+      "table": {
+        "headers": [
+          "Tepkime Türü",
+          "Eai – Eag İlişkisi",
+          "ΔH İşareti",
+          "Kararlı Taraf"
+        ],
+        "rows": [
+          [
+            "Endotermik",
+            "Eai > Eag",
+            "ΔH > 0",
+            "Tepkenler"
+          ],
+          [
+            "Ekzotermik",
+            "Eai < Eag",
+            "ΔH < 0",
+            "Ürünler"
+          ]
+        ]
+      },
+      "text": "Tabloya göre bir tepkimede ürünler tepkenlerden daha kararlıysa bu tepkime hakkında ne söylenebilir?",
+      "options": [
+        "Tepkime hakkında bilgi edinilemez",
+        "Tepkime endotermiktir, Eai < Eag'dir",
+        "Tepkime endotermiktir, Eai > Eag'dir",
+        "ΔH sıfırdır",
+        "Tepkime ekzotermiktir, Eai < Eag'dir"
+      ],
+      "correct": 4,
+      "explain": "Tabloya göre ürünlerin tepkenlerden daha kararlı olduğu durum ekzotermik tepkimeye karşılık gelir; bu durumda Eai < Eag'dir ve ΔH < 0'dır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede tanecikler arasındaki çarpışma sayısı artırılıyor ama taneciklerin ortalama kinetik enerjisi değiştirilmiyor. Bu durumda etkin çarpışma sayısı hakkında ne beklenir?",
+      "options": [
+        "Bu durumda hiçbir çarpışma etkin olamaz",
+        "Etkin çarpışma tamamen ortadan kalkar",
+        "Etkin çarpışma sayısı artar, çünkü daha fazla çarpışmadan bazıları etkin çarpışma koşullarını sağlayabilir",
+        "Etkin çarpışma sayısı azalır",
+        "Etkin çarpışma sayısı değişmez, çünkü yalnızca kinetik enerji önemlidir"
+      ],
+      "correct": 2,
+      "explain": "Toplam çarpışma sayısı artarsa, aynı oranda etkin çarpışma koşullarını (uygun geometri + yeterli kinetik enerji) sağlayan çarpışmaların sayısı da artar; bu, tepkimenin daha hızlı ilerlemesine katkıda bulunur."
+    },
+    {
+      "difficulty": "orta",
+      "context": "Bir roket motorunda yükseklik arttıkça atmosferdeki oksijen derişimi azalır.",
+      "text": "Atmosferdeki oksijen derişiminin azalması, oksijenle gerçekleşen bir tepkimedeki etkin çarpışma sayısını nasıl etkiler?",
+      "options": [
+        "Etkin çarpışma sayısını artırır, çünkü daha az tanecik daha kolay çarpışır",
+        "Etkin çarpışma sayısı yalnızca sıcaklığa bağlıdır, derişimden etkilenmez",
+        "Etkin çarpışma sayısını azaltır, çünkü ortamdaki oksijen taneciği sayısı azaldıkça toplam çarpışma olasılığı da azalır",
+        "Etkin çarpışma sayısını etkilemez",
+        "Oksijen derişimi etkin çarpışmayla ilgisizdir"
+      ],
+      "correct": 2,
+      "explain": "Ortamdaki oksijen tanecik sayısı (derişimi) azaldıkça, oksijen tanecikleriyle gerçekleşecek toplam çarpışma sayısı da azalır; bu da etkin çarpışma sayısının azalmasına yol açar. Bu nedenle roketler yükseklerde yakıtla birlikte kendi oksitleyicilerini taşır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin ileri aktivasyon enerjisi 120 kJ, geri aktivasyon enerjisi 80 kJ olarak ölçülüyor. Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir ve tepkime türü nedir?",
+      "options": [
+        "-40 kJ, ekzotermik",
+        "+200 kJ, endotermik",
+        "0 kJ, nötr",
+        "+40 kJ, endotermik",
+        "-200 kJ, ekzotermik"
+      ],
+      "correct": 3,
+      "explain": "ΔH_tepkime = Eai − Eag = 120 − 80 = +40 kJ. Değer pozitif olduğu için tepkime endotermiktir; bu aynı zamanda Eai>Eag ilişkisiyle de tutarlıdır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin ileri aktivasyon enerjisi 60 kJ, geri aktivasyon enerjisi 150 kJ olarak ölçülüyor. Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir ve tepkime türü nedir?",
+      "options": [
+        "-90 kJ, ekzotermik",
+        "+90 kJ, endotermik",
+        "+210 kJ, endotermik",
+        "0 kJ, nötr",
+        "-210 kJ, ekzotermik"
+      ],
+      "correct": 0,
+      "explain": "ΔH_tepkime = Eai − Eag = 60 − 150 = -90 kJ. Değer negatif olduğu için tepkime ekzotermiktir; bu aynı zamanda Eai<Eag ilişkisiyle de tutarlıdır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Fosgen gazı (COCl2), güneş ışığı varlığında CO(g) + Cl2(g) → COCl2(g) tepkimesine göre sentezlenebilmektedir. Güneş ışığının bu tepkimede oynadığı rol için en makul açıklama hangisidir?",
+      "options": [
+        "Güneş ışığı tepkimenin ürününü değiştirir",
+        "Güneş ışığı tepkimeyi tamamen durdurur",
+        "Güneş ışığı, taneciklere gereken aktivasyon enerjisinin sağlanmasına katkıda bulunan bir enerji kaynağı olabilir",
+        "Güneş ışığının tepkimeyle hiçbir ilgisi yoktur",
+        "Güneş ışığı yalnızca rengi değiştirir"
+      ],
+      "correct": 2,
+      "explain": "Bazı tepkimelerin gerçekleşmesi için gereken aktivasyon enerjisi ışık enerjisiyle sağlanabilir; güneş ışığı burada taneciklere enerji aktararak tepkimenin başlamasına katkıda bulunan bir etken olarak değerlendirilebilir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir kimyager, iki farklı tepkimenin eşik değerlerini karşılaştırıyor: A tepkimesinin eşik değeri düşük, B tepkimesinin eşik değeri yüksektir. Aynı taneciklerin kinetik enerji dağılımı için hangi tepkimede etkin çarpışma yapabilecek tanecik oranı daha fazladır?",
+      "options": [
+        "B tepkimesinde, çünkü eşik değeri yüksektir",
+        "A tepkimesinde, çünkü daha düşük bir eşik değerini aşan tanecik oranı daha fazladır",
+        "Bu bilgiyle karşılaştırma yapılamaz",
+        "Eşik değeri etkin çarpışma oranını etkilemez",
+        "İkisinde de aynıdır"
+      ],
+      "correct": 1,
+      "explain": "Eşik değeri düşük olan bir tepkimede, kinetik enerji dağılımındaki taneciklerin daha büyük bir kısmı bu düşük eşiği aşabilir; bu yüzden A tepkimesinde etkin çarpışma yapabilecek tanecik oranı daha fazladır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin potansiyel enerji-tepkime koordinatı grafiğinde tepkenler ile ürünler arasındaki 'tepe nokta' (en yüksek enerji noktası) neyi temsil eder?",
+      "options": [
+        "Tepkimenin başlangıç noktasını",
+        "Katalizörün etkisini",
+        "Tepkimenin hızını doğrudan sayısal olarak",
+        "Tepkimenin son ürününü",
+        "Tepkenlerin ve ürünlerin geçmesi gereken en yüksek enerjili ara durumu (aktivasyon enerjisi zirvesini)"
+      ],
+      "correct": 4,
+      "explain": "Grafikteki tepe nokta, tepkenlerin ürünlere (veya tam tersi) dönüşebilmesi için aşmaları gereken en yüksek enerjili ara durumu temsil eder; bu noktanın tepken/ürün düzeylerine göre yüksekliği aktivasyon enerjilerini (Eai, Eag) verir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir öğrenci 'geometri uygun değilse kinetik enerji ne kadar yüksek olursa olsun ürün oluşmaz' diyor. Bu ifade için en doğru değerlendirme hangisidir?",
+      "options": [
+        "Yanlıştır; kinetik enerji yeterince yüksekse geometri önemsizdir",
+        "Doğrudur; etkin çarpışma için her iki koşulun (uygun geometri VE yeterli kinetik enerji) birlikte sağlanması gerekir",
+        "Yanlıştır; yalnızca kinetik enerji önemlidir, geometri gereksizdir",
+        "Doğrudur ama yalnızca gaz fazındaki tepkimeler için geçerlidir",
+        "Bu konuda genel bir kural yoktur"
+      ],
+      "correct": 1,
+      "explain": "İfade doğrudur. Etkin çarpışma tanımı gereği hem uygun geometri hem yeterli kinetik enerji birlikte sağlanmalıdır; taneciklerin kinetik enerjisi çok yüksek olsa bile yanlış yönelimde çarpışıyorlarsa bağlar doğru şekilde etkileşemez ve ürün oluşmaz."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Ekzotermik bir tepkimede 'tepkime başladıktan sonra kendiliğinden devam edebilir' ifadesi hangi gözlemle açıklanabilir?",
+      "options": [
+        "Açığa çıkan ısı, tepkimenin devamı için gereken aktivasyon enerjisinin bir kısmını karşılayarak sonraki çarpışmaları destekleyebilir",
+        "Ekzotermik tepkimelerde aktivasyon enerjisi sıfırdır",
+        "Tepkime dışarıdan sürekli enerji almadan devam edemez",
+        "Ekzotermik tepkimeler asla kendiliğinden durmaz",
+        "Bu ifade yalnızca katalizörlü tepkimeler için geçerlidir"
+      ],
+      "correct": 0,
+      "explain": "Ekzotermik bir tepkimede açığa çıkan ısı, komşu taneciklerin kinetik enerjisini artırarak onların da eşik değerini aşmasına ve etkin çarpışma yapmasına katkıda bulunabilir; bu, tepkimenin dışarıdan sürekli enerji verilmeden kendiliğinden ilerlemesini açıklar (örneğin demir-kükürt tepkimesinde görüldüğü gibi)."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin gerçekleşmesi için gereken ortam koşulları (pH, sıcaklık, basınç) uygun değilse ne beklenir?",
+      "options": [
+        "Tepkime türü (endo/ekzotermik) değişir",
+        "Tepkimenin gerçekleşmesi engellenebilir veya önemli ölçüde yavaşlayabilir",
+        "Aktivasyon enerjisi otomatik olarak sıfırlanır",
+        "Tepkime her koşulda aynı hızda gerçekleşir",
+        "Ortam koşullarının tepkimeyle hiçbir ilgisi yoktur"
+      ],
+      "correct": 1,
+      "explain": "Uygun olmayan pH, sıcaklık veya basınç koşulları taneciklerin etkin çarpışma yapma olasılığını azaltabilir; bu da tepkimenin gerçekleşmesini engelleyebilir ya da önemli ölçüde yavaşlatabilir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir öğretmen sınıfa 'ekzotermik tepkimeler her zaman kendiliğinden ve hızlı gerçekleşir' önermesini tartışmaya açıyor. Demirin paslanması ekzotermik olduğu hâlde çok yavaş ilerlediğine göre bu önerme için ne söylenebilir?",
+      "options": [
+        "Önerme doğrudur, paslanma bir istisnadır ve göz ardı edilmelidir",
+        "Paslanma aslında endotermiktir, bu yüzden önerme etkilenmez",
+        "Hız ve ısı alışverişi yönü arasında hiçbir zaman ilişki yoktur",
+        "Önerme yalnızca gaz tepkimeleri için geçerlidir",
+        "Önerme yanlıştır; bir tepkimenin ekzotermik olması (ΔH<0) ile hızlı gerçekleşmesi farklı kavramlardır, paslanma gibi yüksek aktivasyon enerjili ekzotermik tepkimeler yavaş ilerleyebilir"
+      ],
+      "correct": 4,
+      "explain": "Bir tepkimenin ekzotermik olması yalnızca ürünlerin tepkenlerden daha düşük enerjili olduğunu (ΔH<0) gösterir; tepkimenin hızı ise aktivasyon enerjisine bağlıdır. Paslanma ekzotermik olsa da göreli olarak yüksek bir enerji engeline sahip olduğundan yavaş ilerler."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin kinetik enerji dağılım eğrisinde eşik değeri işaretleniyor. Eğrinin eşik değerinin SOLUNDA kalan (daha düşük enerjili) taneciklerle ilgili en doğru ifade hangisidir?",
+      "options": [
+        "Bu tanecikler tepkimeye hiç katılmaz, ortamda hiç bulunmazlar",
+        "Bu tanecikler etkin çarpışma yapabilir",
+        "Bu taneciklerin kinetik enerjisi eşik değerinin altında olduğundan, çarpıştıklarında bağları kıramazlar ve ürün oluşturamazlar",
+        "Bu tanecikler yalnızca katalizör varlığında etkin çarpışma yapabilir",
+        "Bu taneciklerin sayısı sıcaklıktan etkilenmez"
+      ],
+      "correct": 2,
+      "explain": "Eşik değerinin solunda kalan tanecikler, etkin çarpışma için gereken minimum kinetik enerjiye sahip değildir; bu yüzden çarpıştıklarında taneciklerdeki bağları kıracak enerjiye sahip olmadıklarından ürün oluşturamazlar."
+    },
+    {
+      "difficulty": "zor",
+      "statements": {
+        "items": [
+          "Bir tepkimenin aktivasyon enerjisi negatif olamaz; en düşük değeri sıfıra yaklaşabilir ama tanım gereği bir enerji engelidir.",
+          "İleri aktivasyon enerjisi ile geri aktivasyon enerjisi arasındaki fark, o tepkimenin hızını doğrudan sayısal olarak belirler.",
+          "Aynı tepkimenin ileri ve geri yönleri farklı aktivasyon enerjilerine sahip olabilir, ancak aynı 'tepe noktasını' (aynı geçiş durumunu) paylaşırlar."
+        ]
+      },
+      "text": "Bu önermelerden hangileri doğrudur?",
+      "options": [
+        "II ve III",
+        "I, II ve III",
+        "Yalnız I",
+        "I ve III",
+        "Yalnız III"
+      ],
+      "correct": 3,
+      "explain": "I doğrudur; aktivasyon enerjisi bir enerji engelidir ve negatif olamaz. II yanlıştır; Eai−Eag farkı tepkime entalpisini (ΔH) verir, tepkime hızını doğrudan sayısal olarak belirlemez (hız ayrı etkenlere bağlıdır). III doğrudur; potansiyel enerji-tepkime koordinatı grafiğinde tek bir tepe noktası hem ileri hem geri tepkime için ortak geçiş durumunu temsil eder, yalnızca hangi taraftan ölçüldüğüne göre Eai ya da Eag farklı çıkar."
+    },
+    {
+      "difficulty": "zor",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "Bir tepkimenin ΔH'si negatifse (ekzotermikse) bu tepkime aktivasyon enerjisine hiç ihtiyaç duymaz, kendiliğinden başlar."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Yanlış olabilir; ΔH'nin işareti yalnızca tepken-ürün enerji farkını gösterir. Ekzotermik bir tepkime de başlaması için bir miktar aktivasyon enerjisine ihtiyaç duyabilir, örneğin bir kibritin yanması için önce çakılması gerekir."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrencinin görüşü bilimsel olarak daha doğrudur?",
+      "options": [
+        "Verilen bilgiyle karar verilemez",
+        "İkisi de haklıdır",
+        "Yalnız Öğrenci A",
+        "İkisi de haksızdır",
+        "Yalnız Öğrenci B"
+      ],
+      "correct": 4,
+      "explain": "Öğrenci B haklıdır. ΔH'nin negatif olması tepkimenin ekzotermik olduğunu gösterir ama aktivasyon enerjisine hiç ihtiyaç duyulmadığı anlamına gelmez; birçok ekzotermik tepkime (örneğin yanma tepkimeleri) başlaması için dışarıdan bir miktar başlangıç enerjisi (kıvılcım, ısıtma vb.) gerektirir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede Eai = 200 kJ, ΔH_tepkime = -150 kJ olarak veriliyor. Bu tepkimenin Eag değeri kaç kJ'dir?",
+      "options": [
+        "150 kJ",
+        "-350 kJ",
+        "50 kJ",
+        "350 kJ",
+        "200 kJ"
+      ],
+      "correct": 3,
+      "explain": "ΔH = Eai − Eag eşitliğinden: -150 = 200 − Eag. Buradan Eag = 200 − (-150) = 350 kJ bulunur. Eag'nin Eai'den büyük olması (350>200), tepkimenin ekzotermik olmasıyla (Eai<Eag) tutarlıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede Eag = 90 kJ, ΔH_tepkime = +45 kJ olarak veriliyor. Bu tepkimenin Eai değeri kaç kJ'dir?",
+      "options": [
+        "90 kJ",
+        "-45 kJ",
+        "135 kJ",
+        "45 kJ",
+        "180 kJ"
+      ],
+      "correct": 2,
+      "explain": "ΔH = Eai − Eag eşitliğinden: +45 = Eai − 90. Buradan Eai = 45 + 90 = 135 kJ bulunur. Eai'nin Eag'den büyük olması (135>90), tepkimenin endotermik olmasıyla (Eai>Eag) tutarlıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir araştırmacı aynı iki tepken kullanılan iki farklı tepkime yolunu karşılaştırıyor: 1. yolda aktivasyon enerjisi çok yüksek, 2. yolda (bir katalizör kullanılarak) aktivasyon enerjisi daha düşük. Her iki yolun da aynı ürünlere ve aynı ΔH değerine sahip olduğu biliniyor. Bu bilgiye dayanarak en doğru çıkarım hangisidir?",
+      "options": [
+        "Katalizör kullanımı tepkimenin türünü (endo/ekzotermik) değiştirir",
+        "İki yol karşılaştırılamaz çünkü aktivasyon enerjileri farklıdır",
+        "Düşük aktivasyon enerjili yol daha az ürün verir",
+        "İki yolun ΔH değeri farklı olmalıdır çünkü aktivasyon enerjileri farklıdır",
+        "Aktivasyon enerjisindeki fark tepkimenin hızını etkileyebilir, ancak ΔH yalnızca başlangıç ve bitiş enerji düzeylerine bağlı olduğundan iki yolda da aynı kalır"
+      ],
+      "correct": 4,
+      "explain": "ΔH, yalnızca tepkenlerin ve ürünlerin başlangıç ve bitiş enerji düzeylerine bağlı bir büyüklüktür; izlenen yoldan (dolayısıyla aktivasyon enerjisinden) bağımsızdır. Aktivasyon enerjisindeki fark yalnızca tepkimenin hızını etkiler, ΔH aynı kalır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede taneciklerin kinetik enerji dağılım eğrisi biliniyor ve eşik değerinin sağındaki alan (etkin çarpışma yapabilecek tanecik oranı) çok küçük çıkıyor. Buna karşın tepkime hâlâ gözle görülür bir hızda ilerliyor. Bu durum için en makul açıklama hangisidir?",
+      "options": [
+        "Bu durum imkânsızdır, dağılım eğrisiyle çelişir",
+        "Ortamda çok büyük sayıda tanecik bulunduğunda, oranı küçük olsa bile eşik değerini aşan mutlak tanecik sayısı yine de gözle görülür bir tepkime hızı için yeterli olabilir",
+        "Bu durumda tepkime aslında hiç gerçekleşmemektedir",
+        "Eşik değeri bu durumda geçersizdir",
+        "Tepkime hızı yalnızca oranla belirlenir, tanecik sayısından etkilenmez"
+      ],
+      "correct": 1,
+      "explain": "Kimyasal miktarlardaki (mol mertebesindeki) tanecik sayıları o kadar büyüktür ki (Avogadro sayısı mertebesinde), dağılım eğrisinin eşik değerini aşan kısmı oransal olarak küçük görünse bile, bu kısma karşılık gelen mutlak tanecik sayısı yine de gözle görülür bir tepkime hızını sağlamaya yetebilir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin PE-tepkime koordinatı grafiğinde tepe noktası ile tepkenlerin enerji düzeyi arasındaki fark 180 kJ, tepe noktası ile ürünlerin enerji düzeyi arasındaki fark 60 kJ olarak ölçülüyor. Bu tepkimenin türü ve ΔH değeri nedir?",
+      "options": [
+        "Nötr, ΔH=0 kJ",
+        "Ekzotermik, ΔH=-240 kJ",
+        "Endotermik, ΔH=+240 kJ",
+        "Ekzotermik, ΔH=-120 kJ",
+        "Endotermik, ΔH=+120 kJ"
+      ],
+      "correct": 4,
+      "explain": "Tepe ile tepkenler arasındaki fark Eai=180 kJ, tepe ile ürünler arasındaki fark Eag=60 kJ'dir. ΔH_tepkime = Eai − Eag = 180 − 60 = +120 kJ. Ürünün tepeye tepkenden daha yakın olması (60<180), ürünün tepkenden daha yüksek enerjili olduğunu gösterir; bu da tepkimenin endotermik olduğunu doğrular."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir kimyager, X tepkimesinin oda sıcaklığında son derece yavaş, neredeyse gözlemlenemeyecek kadar yavaş ilerlediğini, ancak termodinamik hesaplamalara göre ΔH_tepkime'nin çok negatif (-400 kJ gibi) olduğunu buluyor. Bu durum nasıl açıklanabilir?",
+      "options": [
+        "Bu durum imkânsızdır; ΔH çok negatifse tepkime her zaman hızlı olmalıdır",
+        "Tepkimenin çok negatif bir ΔH'ye sahip olması onun kendiliğinden enerjik olarak uygun olduğunu gösterir, ancak yüksek bir aktivasyon enerjisi (Eai) varsa oda sıcaklığında bu engeli aşan tanecik oranı çok düşük kalabilir ve tepkime yavaş ilerler",
+        "Yavaş tepkimeler her zaman düşük ΔH değerine sahiptir",
+        "Bu tepkime aslında endotermiktir, hesaplama hatalıdır",
+        "ΔH negatifse aktivasyon enerjisi otomatik olarak sıfırdır"
+      ],
+      "correct": 1,
+      "explain": "ΔH_tepkime (termodinamik bir büyüklük) ile tepkime hızı (kinetik bir büyüklük) birbirinden bağımsızdır. Çok negatif bir ΔH, tepkimenin enerjik olarak uygun (nihayetinde gerçekleşmesi olası) olduğunu gösterir, ancak yüksek bir aktivasyon enerjisi varsa oda sıcaklığında bu engeli aşabilecek tanecik oranı çok düşük kalır ve tepkime gözle görülür ölçüde yavaş ilerler. Elmasın grafite dönüşümü bu duruma örnek olarak düşünülebilir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede sıcaklık artırıldığında, taneciklerin ortalama kinetik enerjisi artar ve kinetik enerji dağılım eğrisi sağa doğru kayar. Bu durumun eşik değerini aşan tanecik oranına etkisi nedir?",
+      "options": [
+        "Eşik değerinin kendisi sıcaklıkla birlikte artar",
+        "Sıcaklık, kinetik enerji dağılımını etkilemez",
+        "Eşik değerini aşan tanecik oranı değişmez",
+        "Eşik değerini aşan tanecik oranı azalır",
+        "Eşik değerini aşan tanecik oranı artar, çünkü dağılımın daha büyük bir kısmı eşik değerinin sağında kalır"
+      ],
+      "correct": 4,
+      "explain": "Sıcaklık arttıkça taneciklerin ortalama kinetik enerjisi artar ve dağılım eğrisi sağa (daha yüksek enerjilere) doğru kayar; bu durumda eğrinin eşik değerini aşan kısmının altında kalan alan (yani etkin çarpışma yapabilecek tanecik oranı) artar."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir öğrenci, 'aktivasyon enerjisi sıfır olan bir tepkime, taneciklerin çarpışması anında anında gerçekleşir, hiçbir enerji engeli yoktur' diyor. Bu ifadenin gerçek tepkimeler için ne kadar geçerli olduğu konusunda en dikkatli değerlendirme hangisidir?",
+      "options": [
+        "Aktivasyon enerjisi kavramı yalnızca teorik bir kavramdır, gerçek tepkimelerde geçerli değildir",
+        "Bu ifade tüm tepkimeler için geçerlidir",
+        "Bu ifade yalnızca endotermik tepkimeler için geçerlidir",
+        "Aktivasyon enerjisi hiçbir zaman sıfır olamaz, bu yüzden ifade tamamen anlamsızdır",
+        "Gerçek kimyasal tepkimelerin çoğunda ölçülebilir bir aktivasyon enerjisi vardır; aktivasyon enerjisi sıfıra çok yakın olan tepkimeler nadir ve özel durumlardır, bu yüzden ifade genel bir kural olarak abartılı olur"
+      ],
+      "correct": 4,
+      "explain": "Gerçek kimyasal tepkimelerin büyük çoğunluğunda ölçülebilir bir aktivasyon enerjisi (enerji engeli) bulunur; bu yüzden taneciklerin sırf çarpışması yetmez, yeterli kinetik enerjiye de sahip olmaları gerekir. Aktivasyon enerjisinin sıfıra çok yakın olduğu durumlar nadirdir; bu yüzden 'her çarpışma anında gerçekleşir' genellemesi gerçek tepkimelerin çoğu için geçerli değildir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin ileri aktivasyon enerjisi 3 katına çıkarılıyor ama ΔH_tepkime değeri değişmeden aynı kalıyor. Bu durumda geri aktivasyon enerjisi (Eag) nasıl değişmiş olmalıdır?",
+      "options": [
+        "Eag sıfıra düşmelidir",
+        "Eag değişmemelidir",
+        "Eag negatif olmalıdır",
+        "Eag da, Eai ile ΔH arasındaki farkı koruyacak şekilde, Eai'deki artışla orantılı olarak artmalıdır (Eag_yeni = Eai_yeni − ΔH)",
+        "Bu durumda ΔH da değişmek zorundadır, senaryo çelişkilidir"
+      ],
+      "correct": 3,
+      "explain": "ΔH = Eai − Eag eşitliği sabit kalması gerektiğinden, Eai değiştiğinde Eag da bu eşitliği koruyacak şekilde değişmelidir: Eag_yeni = Eai_yeni − ΔH. Eai artarken ΔH sabit kalıyorsa, Eag de aynı miktarda artmalıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede iki basamaklı bir mekanizma öneriliyor: 1. basamağın aktivasyon enerjisi çok yüksek (yavaş basamak), 2. basamağın aktivasyon enerjisi çok düşük (hızlı basamak). Tüm tepkimenin hızı hakkında en makul çıkarım hangisidir?",
+      "options": [
+        "Tüm tepkimenin hızı, yavaş olan 1. basamak tarafından belirlenir; çünkü ürünün oluşabilmesi bu yavaş basamağın tamamlanmasını bekler",
+        "Tüm tepkimenin hızı, hızlı olan 2. basamak tarafından belirlenir",
+        "Basamak sayısı tepkime hızını etkilemez",
+        "Aktivasyon enerjisi ile basamak hızı arasında ilişki yoktur",
+        "İki basamağın hızı ortalaması alınarak toplam hız bulunur"
+      ],
+      "correct": 0,
+      "explain": "Çok basamaklı bir tepkimede, en yüksek aktivasyon enerjisine sahip (en yavaş) basamak, tüm tepkimenin hızını sınırlayan 'darboğaz' basamaktır; tüm tepkimenin hızı bu en yavaş basamağın hızına yakın olur, çünkü sonraki basamak ne kadar hızlı olursa olsun bu yavaş basamağın tamamlanmasını beklemek zorundadır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin ΔH_tepkime değeri -60 kJ, Eai değeri Eag değerinin tam yarısı kadardır. Buna göre Eai ve Eag değerleri kaç kJ'dir?",
+      "options": [
+        "Eai=30, Eag=90",
+        "Eai=120, Eag=60",
+        "Eai=40, Eag=100",
+        "Eai=60, Eag=0",
+        "Eai=60, Eag=120"
+      ],
+      "correct": 4,
+      "explain": "Eai = Eag/2 olduğuna göre ΔH = Eai − Eag = (Eag/2) − Eag = -Eag/2 = -60 eşitliğinden Eag = 120 kJ, buradan Eai = 120/2 = 60 kJ bulunur. Kontrol: 60 − 120 = -60 kJ ✓."
+    },
+    {
+      "difficulty": "zor",
+      "text": "İki farklı katalizörsüz tepkime karşılaştırılıyor: 1. tepkimenin aktivasyon enerjisi 50 kJ, 2. tepkimenin aktivasyon enerjisi 150 kJ'dir. Aynı sıcaklıkta, hangi tepkimede etkin çarpışma yapabilecek tanecik oranının daha yüksek olması ve dolayısıyla tepkimenin daha hızlı ilerlemesi beklenir?",
+      "options": [
+        "2. tepkime, çünkü aktivasyon enerjisi daha yüksektir",
+        "2. tepkime, çünkü daha fazla enerji biriktirir",
+        "1. tepkime, çünkü daha düşük bir enerji eşiğini aşan tanecik oranı aynı sıcaklıkta daha fazladır",
+        "İkisi de aynı hızda ilerler, aktivasyon enerjisi hızı etkilemez",
+        "Bu karşılaştırma için sıcaklık bilgisi yeterli değildir"
+      ],
+      "correct": 2,
+      "explain": "Aynı sıcaklıkta taneciklerin kinetik enerji dağılımı aynıdır. Daha düşük bir aktivasyon enerjisi (eşik değeri), dağılım eğrisinin daha büyük bir kısmının bu eşiği aşması anlamına gelir; bu yüzden 1. tepkimede etkin çarpışma yapabilecek tanecik oranı daha yüksektir ve tepkime daha hızlı ilerlemesi beklenir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin ileri aktivasyon enerjisi Eai, geri aktivasyon enerjisiyle Eag tam olarak eşit çıkıyor (Eai = Eag). Bu durumda tepkime ve potansiyel enerji grafiği hakkında ne söylenebilir?",
+      "options": [
+        "Bu durum hiçbir gerçek tepkimede görülemez",
+        "Aktivasyon enerjisi tanımsız hâle gelir",
+        "Tepkime kesinlikle endotermiktir",
+        "Tepkime kesinlikle ekzotermiktir",
+        "ΔH_tepkime = 0 olur; tepkenler ve ürünler aynı potansiyel enerji düzeyinde bulunur"
+      ],
+      "correct": 4,
+      "explain": "ΔH_tepkime = Eai − Eag olduğundan, Eai = Eag ise ΔH = 0 olur. Bu, tepkenlerin ve ürünlerin potansiyel enerji düzeylerinin birbirine eşit olduğu, tepkimenin ısı alışverişi açısından yaklaşık nötr bir durum olduğu anlamına gelir (H2+I2→2HI tepkimesinin ΔH'sinin sıfıra çok yakın çıkması buna benzer bir örnektir)."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin gerçekleşmesi için gereken minimum enerji (aktivasyon enerjisi) çok düşükse, ancak tanecikler arasındaki çarpışma sıklığı da çok düşükse (örneğin çok seyreltik bir gaz karışımında), tepkime hızı hakkında ne söylenebilir?",
+      "options": [
+        "Aktivasyon enerjisi düşük olduğu için tepkime kesinlikle çok hızlıdır",
+        "Bu durumda tepkime hiç gerçekleşmez",
+        "Düşük aktivasyon enerjisi etkin çarpışma olasılığını artırsa da, toplam çarpışma sayısı azsa gerçekleşen etkin çarpışma sayısı (ve dolayısıyla tepkime hızı) yine de düşük kalabilir",
+        "Çarpışma sıklığının tepkime hızıyla hiçbir ilgisi yoktur",
+        "Aktivasyon enerjisi düşükse çarpışma sıklığı otomatik olarak yükselir"
+      ],
+      "correct": 2,
+      "explain": "Tepkime hızı hem çarpışma sıklığından hem de çarpışmaların etkin olma oranından (aktivasyon enerjisiyle ilişkili) etkilenir. Aktivasyon enerjisi düşük olsa da ortamda çarpışma sıklığı düşükse (örneğin seyreltik bir karışımda), gerçekleşen toplam etkin çarpışma sayısı azalır ve tepkime hızı düşük kalabilir; iki etken birlikte değerlendirilmelidir."
     }
   ]
 };
