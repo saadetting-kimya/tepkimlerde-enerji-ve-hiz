@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bağ Enerjisiyle Tepkime Entalpisi · Kimya 11</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Modül 3 · Enerji</span>
+    <h1>Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması</h1>
+    <p class="lead">Bir tepkime sırasında hangi bağlar kırılıyor, hangi bağlar oluşuyor? Bu modülde bağ
+      enerjisi tablosunu kullanarak bir tepkimenin endotermik mi ekzotermik mi olacağını hesaplamayı öğreneceksin.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <h2><span class="num">1</span>Kavramlar</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Bağ Enerjisi</h3>
+        <p>Gaz hâlindeki taneciklerde 1 mol kimyasal bağın kırılması için gereken enerjidir (kJ/mol). Bağ
+          kırmak enerji <b>gerektiren</b> (endotermik) bir olaydır; bağ oluşumu ise enerji <b>açığa çıkaran</b>
+          (ekzotermik) bir olaydır. Bir bağın enerjisi ne kadar yüksekse o bağ o kadar kararlı ve sağlamdır.</p>
+      </div>
+      <div class="card">
+        <h3>Tepkime Entalpisi (ΔH)</h3>
+        <p>Sabit basınç altında bir tepkimede gerçekleşen ısı değişimidir. <b>ΔH &gt; 0</b> ise tepkime
+          endotermiktir (çevreden ısı alır); <b>ΔH &lt; 0</b> ise tepkime ekzotermiktir (çevreye ısı verir).</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>Matematiksel model:</b>
+        ΔH<sub>tepkime</sub> = (Kırılan bağların enerjileri toplamı) − (Oluşan bağların enerjileri toplamı)</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">2</span>Keşfet: Bağ Enerjisi Hesap Makinesi</h2>
+    <p class="block-lead">Bir tepkime seç; tepkenlerde kırılan ve ürünlerde oluşan bağların enerjilerini bağ
+      enerjisi tablosundan okuyup ΔH değerini adım adım hesapla.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="rxn-select">Tepkime:</label>
+        <select id="rxn-select"></select>
+      </div>
+      <div id="rxn-detail"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">3</span>Keşfet: Potansiyel Enerji – Tepkime Koordinatı</h2>
+    <p class="block-lead">Aynı tepkimenin tepken ve ürün potansiyel enerji düzeylerini karşılaştıran grafiği
+      incele. Ürün, tepkenden daha mı yüksek yoksa daha mı düşük enerjili?</p>
+    <div class="lab">
+      <div class="lab-stage" style="min-height:320px"><svg id="pe-svg" viewBox="0 0 480 300" style="width:100%;max-width:480px"></svg></div>
+      <div class="lab-readout" id="pe-readout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">4</span>Değerlendir</h2>
+    <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
+    <div id="quiz-host"></div>
+  </div>
+</section>
+
+<div id="next-module-root"></div>
+<div id="footer-root"></div>
+
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/quiz-engine.js"></script>
+<script src="../assets/js/quiz-data.js"></script>
+<script>
+  const MODKEY = "m3";
+
+  const BOND_ENERGIES = {
+    "H-H": 436, "N-N": 163, "I-I": 151, "C-H": 414, "N=N": 418, "C-C": 347,
+    "N-H": 389, "N≡N": 946, "C=C": 611, "O-H": 464, "N-O": 222, "C≡C": 837,
+    "H-S": 368, "N=O": 590, "C-N": 305, "H-F": 565, "O-O": 142, "C=N": 615,
+    "H-Cl": 431, "O=O": 498, "C-O": 360, "H-Br": 364, "F-F": 159, "C=O": 736,
+    "H-I": 297, "Cl-Cl": 243, "C-Cl": 339, "S-S": 266, "Br-Br": 193, "C-I": 238,
+  };
+
+  const REACTIONS = [
+    { name: "H2O(g) → H2(g) + 1/2 O2(g)", broken: [["O-H", 2]], formed: [["H-H", 1], ["O=O", 0.5]] },
+    { name: "CH4(g) + 2O2(g) → CO2(g) + 2H2O(g)", broken: [["C-H", 4], ["O=O", 2]], formed: [["C=O", 2], ["O-H", 4]] },
+    { name: "N2(g) + 2H2(g) → N2H4(g)", broken: [["N≡N", 1], ["H-H", 2]], formed: [["N-N", 1], ["N-H", 4]] },
+    { name: "H2(g) + F2(g) → 2HF(g)", broken: [["H-H", 1], ["F-F", 1]], formed: [["H-F", 2]] },
+    { name: "H2(g) + Cl2(g) → 2HCl(g)", broken: [["H-H", 1], ["Cl-Cl", 1]], formed: [["H-Cl", 2]] },
+    { name: "N2(g) + O2(g) → 2NO(g)", broken: [["N≡N", 1], ["O=O", 1]], formed: [["N=O", 2]] },
+    { name: "H2(g) + I2(g) → 2HI(g)", broken: [["H-H", 1], ["I-I", 1]], formed: [["H-I", 2]] },
+  ];
+
+  function sumEnergy(list) {
+    return list.reduce((acc, [bond, n]) => acc + BOND_ENERGIES[bond] * n, 0);
+  }
+
+  function renderReaction(idx) {
+    const rxn = REACTIONS[idx];
+    const brokenSum = sumEnergy(rxn.broken);
+    const formedSum = sumEnergy(rxn.formed);
+    const dH = Math.round(brokenSum - formedSum);
+    const detail = document.getElementById("rxn-detail");
+    detail.innerHTML = `
+      <div class="grid-2">
+        <table class="viz-table"><thead><tr><th>Kırılan Bağ</th><th>Enerji (kJ)</th></tr></thead><tbody>
+          ${rxn.broken.map(([b, n]) => `<tr><td>${n}× ${b}</td><td>${Math.round(BOND_ENERGIES[b] * n)}</td></tr>`).join("")}
+          <tr style="font-weight:700"><td>Toplam</td><td>${Math.round(brokenSum)}</td></tr>
+        </tbody></table>
+        <table class="viz-table"><thead><tr><th>Oluşan Bağ</th><th>Enerji (kJ)</th></tr></thead><tbody>
+          ${rxn.formed.map(([b, n]) => `<tr><td>${n}× ${b}</td><td>${Math.round(BOND_ENERGIES[b] * n)}</td></tr>`).join("")}
+          <tr style="font-weight:700"><td>Toplam</td><td>${Math.round(formedSum)}</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card" style="margin-top:12px;text-align:center">
+        <p style="margin:0;font-size:1.05rem">ΔH = ${Math.round(brokenSum)} − ${Math.round(formedSum)} =
+          <b style="color:${dH > 0 ? "var(--endo)" : "var(--exo)"}">${dH > 0 ? "+" : ""}${dH} kJ</b>
+          <span class="tag ${dH > 0 ? "endo" : "exo"}" style="margin-left:8px">${dH > 0 ? "Endotermik" : "Ekzotermik"}</span></p>
+      </div>
+    `;
+    drawPEDiagram(dH, rxn.name);
+  }
+
+  function drawPEDiagram(dH, name) {
+    const svgEl = document.getElementById("pe-svg");
+    const endo = dH > 0;
+    const reactY = 200, prodY = endo ? 110 : 260;
+    const color = endo ? "var(--endo)" : "var(--exo)";
+    svgEl.innerHTML = `
+      <line x1="50" y1="270" x2="50" y2="40" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <text x="20" y="35" font-size="12" fill="var(--ink-soft)">Potansiyel Enerji</text>
+      <text x="380" y="290" font-size="12" fill="var(--ink-soft)">Tepkime Koordinatı</text>
+      <line x1="60" y1="${reactY}" x2="180" y2="${reactY}" stroke="var(--ink)" stroke-width="3"/>
+      <text x="120" y="${reactY + 20}" text-anchor="middle" font-size="12">Tepkenler</text>
+      <line x1="300" y1="${prodY}" x2="420" y2="${prodY}" stroke="var(--ink)" stroke-width="3"/>
+      <text x="360" y="${prodY + (endo ? -10 : 20)}" text-anchor="middle" font-size="12">Ürün</text>
+      <path d="M180,${reactY} C 240,${reactY} 240,${prodY} 300,${prodY}" fill="none" stroke="${color}" stroke-width="2" stroke-dasharray="4 3"/>
+      <line x1="440" y1="${reactY}" x2="440" y2="${prodY}" stroke="${color}" stroke-width="2" marker-end="url(#pearrow)"/>
+      <text x="450" y="${(reactY + prodY) / 2}" font-size="12" fill="${color}" font-weight="700">ΔH</text>
+      <defs><marker id="pearrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+        <path d="M0,0 L4,4 L0,8 Z" fill="${color}"/></marker></defs>
+    `;
+    document.getElementById("pe-readout").innerHTML = `
+      <div><b>${endo ? "Ürün > Tepken" : "Ürün < Tepken"}</b>Potansiyel enerji karşılaştırması</div>
+      <div><b>${endo ? "Endotermik" : "Ekzotermik"}</b>${name}</div>
+    `;
+  }
+
+  function buildRxnLab() {
+    const sel = document.getElementById("rxn-select");
+    REACTIONS.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
+    sel.addEventListener("change", () => renderReaction(sel.value));
+    renderReaction(0);
+  }
+
+  buildRxnLab();
+  mountNav(MODKEY);
+  mountNextModule(MODKEY);
+  markVisited(MODKEY);
+  mountFooter();
+  renderQuiz(MODKEY, QUIZ.m3);
+</script>
+</body>
+</html>

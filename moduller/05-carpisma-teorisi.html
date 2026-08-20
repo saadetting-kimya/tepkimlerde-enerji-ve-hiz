@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tepkimenin Gerçekleşme Şartları · Kimya 11</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Modül 5 · Hız</span>
+    <h1>Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli Şartlar</h1>
+    <p class="lead">Tanecikler çarpışsa bile her çarpışma bir ürün oluşturmaz. Bu modülde çarpışma teorisini,
+      eşik değerini ve aktivasyon enerjisini keşfedeceksin.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <h2><span class="num">1</span>Kavramlar</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Etkin Çarpışma</h3>
+        <p>Ürün oluşturan çarpışmadır. Etkin çarpışma için tanecikler <b>uygun geometride</b> (doğru yönelimde)
+          ve <b>yeterli kinetik enerjiyle</b> çarpışmalıdır. Uygun olmayan geometrideki ya da düşük enerjili
+          çarpışmalar ürün oluşturmaz.</p>
+      </div>
+      <div class="card">
+        <h3>Eşik Değeri ve Aktivasyon Enerjisi</h3>
+        <p>Etkin çarpışma için gereken minimum kinetik enerjiye <b>eşik değeri</b> denir. Tepkimenin
+          gerçekleşmesi için gereken minimum potansiyel enerjiye ise <b>aktivasyon enerjisi</b> denir.
+          Aktivasyon enerjisi büyük olan tepkimeler genellikle yavaş gerçekleşir.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>İleri/geri aktivasyon enerjisi:</b> Tepkenlerin ürünlere dönüşmesi <i>ileri
+        tepkime</i>, ürünlerin tepkenlere dönüşmesi <i>geri tepkime</i>dir. İleri aktivasyon enerjisi (E<sub>ai</sub>)
+        ve geri aktivasyon enerjisi (E<sub>ag</sub>) arasındaki fark tepkime entalpisini verir:
+        ΔH<sub>tepkime</sub> = E<sub>ai</sub> − E<sub>ag</sub>. Endotermik tepkimede E<sub>ai</sub> &gt; E<sub>ag</sub>;
+        ekzotermik tepkimede E<sub>ai</sub> &lt; E<sub>ag</sub>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">2</span>Keşfet: Çarpışma Geometrisi</h2>
+    <p class="block-lead">NO(g) + O3(g) → NO2(g) + O2(g) tepkimesinde çarpışmanın yönelimi ürün oluşup
+      oluşmayacağını belirler. Aşağıdaki iki durumu karşılaştır.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="geo-select">Çarpışma yönelimi:</label>
+        <select id="geo-select">
+          <option value="good">Uygun geometri</option>
+          <option value="bad">Uygun olmayan geometri</option>
+        </select>
+      </div>
+      <div class="lab-stage" style="min-height:180px"><svg id="geo-svg" viewBox="0 0 420 160" style="width:100%;max-width:420px"></svg></div>
+      <div class="lab-readout" id="geo-readout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">3</span>Keşfet: Kinetik Enerji Dağılımı ve Eşik Değeri</h2>
+    <p class="block-lead">Bir örnekteki tanecikler aynı anda aynı kinetik enerjiye sahip değildir; bazıları
+      düşük, bazıları yüksek enerjilidir. Eğri, tanecik sayısının kinetik enerjiye göre dağılımını gösterir.
+      Yalnızca eşik değerini aşan (taralı alandaki) tanecikler etkin çarpışma yapabilir.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="threshold-select">Tepkimenin eşik değeri:</label>
+        <select id="threshold-select">
+          <option value="low">Düşük eşik değerli tepkime</option>
+          <option value="high">Yüksek eşik değerli tepkime</option>
+        </select>
+      </div>
+      <div class="lab-stage" style="min-height:280px"><svg id="dist-svg" viewBox="0 0 480 260" style="width:100%;max-width:480px"></svg></div>
+      <div class="lab-readout" id="dist-readout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">4</span>Keşfet: Aktivasyon Enerjisi Diyagramı</h2>
+    <p class="block-lead">Endotermik ve ekzotermik bir tepkimenin potansiyel enerji-tepkime koordinatı
+      grafiklerini karşılaştır; ileri ve geri aktivasyon enerjilerinin büyüklük ilişkisine dikkat et.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="ea-select">Tepkime türü:</label>
+        <select id="ea-select">
+          <option value="endo">Endotermik</option>
+          <option value="exo">Ekzotermik</option>
+        </select>
+      </div>
+      <div class="lab-stage" style="min-height:300px"><svg id="ea-svg" viewBox="0 0 480 300" style="width:100%;max-width:480px"></svg></div>
+      <div class="lab-readout" id="ea-readout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">5</span>Değerlendir</h2>
+    <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
+    <div id="quiz-host"></div>
+  </div>
+</section>
+
+<div id="next-module-root"></div>
+<div id="footer-root"></div>
+
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/quiz-engine.js"></script>
+<script src="../assets/js/quiz-data.js"></script>
+<script>
+  const MODKEY = "m5";
+
+  function drawGeo(kind) {
+    const good = kind === "good";
+    const svgEl = document.getElementById("geo-svg");
+    svgEl.innerHTML = `
+      <text x="30" y="30" font-size="13" font-weight="700">NO</text>
+      <circle cx="45" cy="60" r="12" fill="var(--endo)"/>
+      <circle cx="70" cy="60" r="8" fill="var(--ink-soft)"/>
+      <text x="150" y="30" font-size="13" font-weight="700">O3</text>
+      ${good
+        ? `<circle cx="180" cy="55" r="9" fill="var(--exo)"/><circle cx="200" cy="55" r="9" fill="var(--exo)"/><circle cx="220" cy="55" r="9" fill="var(--exo)"/>
+           <text x="300" y="60" font-size="30">→</text>
+           <text x="350" y="55" font-size="13" fill="var(--rate)" font-weight="700">NO2 + O2</text>
+           <text x="340" y="75" font-size="20">✔️</text>`
+        : `<circle cx="220" cy="40" r="9" fill="var(--exo)"/><circle cx="220" cy="60" r="9" fill="var(--exo)"/><circle cx="220" cy="80" r="9" fill="var(--exo)"/>
+           <text x="300" y="60" font-size="30">→</text>
+           <text x="345" y="55" font-size="13" fill="var(--ink-soft)" font-weight="700">Ürün yok</text>
+           <text x="350" y="80" font-size="20">❌</text>`}
+    `;
+    document.getElementById("geo-readout").innerHTML = good
+      ? `<div><b>Ürün oluşur</b>Etkin çarpışma — NO'nun azot ucu O3'ün uygun oksijenine yönelmiş.</div>`
+      : `<div><b>Ürün oluşmaz</b>Etkin olmayan çarpışma — moleküller doğru yönelimde temas etmemiş.</div>`;
+  }
+
+  function drawDistribution(kind) {
+    const svgEl = document.getElementById("dist-svg");
+    const W = 480, H = 260, padL = 46, padB = 40, padT = 20;
+    const plotW = W - padL - 20, plotH = H - padT - padB;
+    // basit çan eğrisi benzeri yol (Maxwell-Boltzmann tarzı: hızlı çıkış, uzun kuyruk)
+    const pts = [];
+    const n = 60;
+    for (let i = 0; i <= n; i++) {
+      const x = i / n;
+      const y = Math.pow(x, 1.6) * Math.exp(-x * 2.6) * 4.4;
+      pts.push([padL + x * plotW, padT + plotH - y * plotH]);
+    }
+    const pathD = "M " + pts.map((p) => p.join(",")).join(" L ");
+    const thresholdX = kind === "low" ? 0.32 : 0.62;
+    const thresholdPx = padL + thresholdX * plotW;
+    const shaded = pts.filter((p) => p[0] >= thresholdPx);
+    const areaD = `M ${thresholdPx},${padT + plotH} L ` + shaded.map((p) => p.join(",")).join(" L ") + ` L ${padL + plotW},${padT + plotH} Z`;
+
+    svgEl.innerHTML = `
+      <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <line x1="${padL}" y1="${padT + plotH}" x2="${padL + plotW}" y2="${padT + plotH}" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <text x="8" y="16" font-size="12" fill="var(--ink-soft)">Tanecik sayısı</text>
+      <text x="${padL + plotW - 90}" y="${H - 8}" font-size="12" fill="var(--ink-soft)">Kinetik enerji →</text>
+      <path d="${areaD}" fill="var(--exo-soft)"/>
+      <path d="${pathD}" fill="none" stroke="var(--energy)" stroke-width="2.4"/>
+      <line x1="${thresholdPx}" y1="${padT}" x2="${thresholdPx}" y2="${padT + plotH}" stroke="var(--exo)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="${thresholdPx + 4}" y="${padT + 14}" font-size="12" fill="var(--exo)" font-weight="700">Eşik değeri</text>
+    `;
+    const pct = kind === "low" ? "~%38" : "~%12";
+    document.getElementById("dist-readout").innerHTML = `
+      <div><b>${pct}</b>Etkin çarpışma yapabilecek tanecik oranı (taralı alan, yaklaşık)</div>
+      <div><b>${kind === "low" ? "Daha hızlı" : "Daha yavaş"}</b>Beklenen tepkime hızı</div>
+    `;
+  }
+
+  function drawEaDiagram(kind) {
+    const endo = kind === "endo";
+    const svgEl = document.getElementById("ea-svg");
+    const reactY = 220, prodY = endo ? 130 : 260, peakY = endo ? 70 : 110;
+    const color = endo ? "var(--endo)" : "var(--exo)";
+    svgEl.innerHTML = `
+      <line x1="50" y1="270" x2="50" y2="30" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <text x="15" y="25" font-size="12" fill="var(--ink-soft)">Potansiyel Enerji</text>
+      <text x="360" y="290" font-size="12" fill="var(--ink-soft)">Tepkime Koordinatı</text>
+      <line x1="60" y1="${reactY}" x2="150" y2="${reactY}" stroke="var(--ink)" stroke-width="3"/>
+      <text x="105" y="${reactY + 20}" text-anchor="middle" font-size="12">Tepkenler</text>
+      <line x1="330" y1="${prodY}" x2="420" y2="${prodY}" stroke="var(--ink)" stroke-width="3"/>
+      <text x="375" y="${prodY + (endo ? -10 : 20)}" text-anchor="middle" font-size="12">Ürünler</text>
+      <path d="M150,${reactY} Q 240,${peakY} 330,${prodY}" fill="none" stroke="${color}" stroke-width="2.4"/>
+      <line x1="105" y1="${reactY}" x2="105" y2="${peakY}" stroke="var(--energy)" stroke-width="1.6" stroke-dasharray="3 3"/>
+      <text x="112" y="${(reactY + peakY) / 2}" font-size="11" fill="var(--energy)" font-weight="700">Eai</text>
+      <line x1="375" y1="${prodY}" x2="375" y2="${peakY}" stroke="var(--rate)" stroke-width="1.6" stroke-dasharray="3 3"/>
+      <text x="382" y="${(prodY + peakY) / 2}" font-size="11" fill="var(--rate)" font-weight="700">Eag</text>
+      <line x1="440" y1="${reactY}" x2="440" y2="${prodY}" stroke="${color}" stroke-width="2" marker-end="url(#eaarrow)"/>
+      <text x="446" y="${(reactY + prodY) / 2}" font-size="11" fill="${color}" font-weight="700">ΔH</text>
+      <defs><marker id="eaarrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+        <path d="M0,0 L4,4 L0,8 Z" fill="${color}"/></marker></defs>
+    `;
+    document.getElementById("ea-readout").innerHTML = `
+      <div><b>${endo ? "Eai > Eag" : "Eai < Eag"}</b>Aktivasyon enerjileri ilişkisi</div>
+      <div><b>${endo ? "Tepkenler daha kararlı" : "Ürünler daha kararlı"}</b></div>
+    `;
+  }
+
+  document.getElementById("geo-select").addEventListener("change", (e) => drawGeo(e.target.value));
+  document.getElementById("threshold-select").addEventListener("change", (e) => drawDistribution(e.target.value));
+  document.getElementById("ea-select").addEventListener("change", (e) => drawEaDiagram(e.target.value));
+  drawGeo("good");
+  drawDistribution("low");
+  drawEaDiagram("endo");
+
+  mountNav(MODKEY);
+  mountNextModule(MODKEY);
+  markVisited(MODKEY);
+  mountFooter();
+  renderQuiz(MODKEY, QUIZ.m5);
+</script>
+</body>
+</html>

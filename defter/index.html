@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ders Defteri · Kimya 11 Enerji ve Tepkime Hızı</title>
+<style>
+  :root {
+    --ink: #16202a; --ink-soft: #4b5b68; --line: #c9d2d9;
+    --energy: #d9622b; --energy-soft: #fbe6d8;
+    --endo: #2b6fd9; --endo-soft: #dbe8fb;
+    --exo: #d9422b; --exo-soft: #fbdcd8;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Noto Sans", sans-serif; color: var(--ink); margin: 0; background: #ececec; }
+  .toolbar { position: sticky; top: 0; background: #fff; border-bottom: 1px solid var(--line); padding: 10px 20px; display: flex; gap: 10px; align-items: center; z-index: 10; }
+  .toolbar a, .toolbar button { font-size: .88rem; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; cursor: pointer; text-decoration: none; color: var(--ink); }
+  .toolbar button.primary { background: var(--energy); color: #fff; border-color: var(--energy); }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 24px auto; background: #fff;
+    padding: 18mm 16mm; box-shadow: 0 4px 18px rgba(0,0,0,.15);
+  }
+  h1 { font-size: 1.7rem; margin: 0 0 6px; }
+  h2 { font-size: 1.25rem; margin: 26px 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--energy); }
+  h3 { font-size: 1.02rem; margin: 18px 0 8px; }
+  p { line-height: 1.6; }
+  .cover { text-align: center; padding-top: 30mm; }
+  .cover .eyebrow { display: inline-block; font-size: .8rem; font-weight: 700; color: var(--energy); background: var(--energy-soft); border-radius: 999px; padding: 4px 14px; margin-bottom: 18px; }
+  .box { border-radius: 10px; padding: 14px 16px; margin: 14px 0; border: 1px solid var(--line); }
+  .box.kavram { background: var(--endo-soft); border-color: var(--endo); }
+  .box.kavram .box-label { color: var(--endo); }
+  .box.ornek { background: #f4f6f8; border-left: 4px solid var(--energy); }
+  .box.notlarim { background: #fffceb; border: 1px dashed #d8c26a; min-height: 60px; }
+  .box-label { font-weight: 800; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; display: block; }
+  .worksheet { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin: 10px 0; }
+  .worksheet ol { padding-left: 20px; }
+  .worksheet li { margin-bottom: 10px; }
+  .answer-line { display: inline-block; border-bottom: 1px solid var(--ink-soft); min-width: 60px; }
+  table.dtable { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: .92rem; }
+  table.dtable th, table.dtable td { border: 1px solid var(--line); padding: 6px 9px; text-align: center; }
+  table.dtable th { background: #f0f2f4; }
+  .tag { display: inline-block; font-size: .74rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; }
+  .tag.endo { background: var(--endo-soft); color: var(--endo); }
+  .tag.exo { background: var(--exo-soft); color: var(--exo); }
+  .answer-key { columns: 2; column-gap: 30px; font-size: .92rem; }
+  .answer-key div { break-inside: avoid; margin-bottom: 4px; }
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none; }
+    .page { box-shadow: none; margin: 0; width: auto; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <a href="../index.html">← Ana Sayfa</a>
+  <button class="primary" onclick="window.print()">🖨️ Yazdır / PDF Kaydet</button>
+</div>
+
+<!-- KAPAK -->
+<div class="page cover">
+  <span class="eyebrow">11. Sınıf Kimya</span>
+  <h1 style="font-size:2.4rem">Enerji ve Tepkime Hızı</h1>
+  <p style="font-size:1.1rem;color:var(--ink-soft)">Ders Defteri</p>
+  <p style="margin-top:60px;color:var(--ink-soft);font-size:.9rem">Konu anlatımı · Kavram kutuları · Çözümlü örnekler<br>Çalışma yaprakları · Cevap anahtarı</p>
+</div>
+
+<!-- MODÜL 1 -->
+<div class="page">
+  <span class="tag endo" style="margin-bottom:8px">Modül 1</span>
+  <h1>Tepkimelerde Meydana Gelen Enerji Değişimi</h1>
+  <p>Her fiziksel veya kimyasal olay, çevresiyle bir enerji alışverişi içindedir. Bu ilişkinin yönünü tanımlamak
+    için iki temel kavram kullanılır: endotermik ve ekzotermik değişim.</p>
+
+  <div class="box kavram">
+    <span class="box-label">Kavram</span>
+    <p style="margin:0"><b>Endotermik değişim:</b> Çevresinden ısı alarak gerçekleşen değişimlerdir. Değişim
+      sırasında çevrenin sıcaklığı düşer, çünkü çevredeki enerjinin bir kısmı değişimi geçiren sisteme aktarılır.</p>
+  </div>
+  <div class="box kavram" style="background:var(--exo-soft);border-color:var(--exo)">
+    <span class="box-label" style="color:var(--exo)">Kavram</span>
+    <p style="margin:0"><b>Ekzotermik değişim:</b> Çevresine ısı vererek gerçekleşen değişimlerdir. Değişim
+      sırasında çevrenin sıcaklığı yükselir, çünkü sistemdeki enerjinin bir kısmı çevreye aktarılır.</p>
+  </div>
+
+  <h2>Fiziksel/Kimyasal Ayrımı ile Isı Yönü Bağımsızdır</h2>
+  <p>Bir değişimin fiziksel mi kimyasal mı olduğu, madde kimliğinin değişip değişmediğine bakılarak belirlenir.
+    Isı alışverişinin yönü (endotermik/ekzotermik) ise bundan bağımsız, ayrı bir sınıflandırma ölçütüdür.
+    Aşağıdaki tablo bu bağımsızlığı göstermektedir:</p>
+
+  <table class="dtable">
+    <thead><tr><th>Olay</th><th>Fiziksel / Kimyasal</th><th>Isı Yönü</th></tr></thead>
+    <tbody>
+      <tr><td>Buzun erimesi</td><td>Fiziksel</td><td>Endotermik</td></tr>
+      <tr><td>Su buharının yoğuşması</td><td>Fiziksel</td><td>Ekzotermik</td></tr>
+      <tr><td>Odunun yanması</td><td>Kimyasal</td><td>Ekzotermik</td></tr>
+      <tr><td>Amonyum klorürün suda çözünmesi</td><td>Fiziksel</td><td>Endotermik</td></tr>
+      <tr><td>Demirin paslanması</td><td>Kimyasal</td><td>Ekzotermik</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> Bir tıbbi soğutma paketi sıkıldığında içindeki katı madde suda çözünüyor ve paketin yüzeyi
+      hızla soğuyor. Bu olay hangi ısı alışverişi yönüne örnektir? Açıklayınız.</p>
+    <p><b>Çözüm:</b> Paketin yüzeyinin soğuması, çözünen katının çevresinden (sudan ve dış ortamdan) ısı aldığının
+      göstergesidir. Bir madde çözünürken çevresinden ısı alıyorsa bu süreç <b>endotermiktir</b>. Ayrıca çözünme,
+      madde kimliğini değiştirmediği için aynı zamanda <b>fiziksel</b> bir değişimdir.</p>
+  </div>
+
+  <div class="box notlarim">
+    <span class="box-label" style="color:var(--ink-soft)">Notlarım</span>
+  </div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 1</h2>
+  <div class="worksheet">
+    <ol>
+      <li>Aşağıdaki olayları fiziksel/kimyasal ve endotermik/ekzotermik olarak sınıflandırınız:
+        <br>a) Kuru buzun (katı CO₂) süblimleşmesi: <span class="answer-line">&nbsp;</span> / <span class="answer-line">&nbsp;</span>
+        <br>b) Sodyum hidroksidin suda çözünmesi (ısınma gözlenir): <span class="answer-line">&nbsp;</span> / <span class="answer-line">&nbsp;</span>
+        <br>c) Mumun erimesi: <span class="answer-line">&nbsp;</span> / <span class="answer-line">&nbsp;</span>
+      </li>
+      <li>Bir öğrencinin yaptığı deneyde, katı bir maddenin suda çözünmesiyle çözelti sıcaklığının 25°C'den
+        19°C'ye düştüğü ölçülüyor. Bu çözünme olayının ısı alışverişi yönünü belirleyip gerekçelendiriniz.
+        <br><br><span class="answer-line" style="min-width:100%"></span>
+      </li>
+      <li>"Her ekzotermik olay kimyasaldır." ifadesi doğru mudur? Bir örnekle açıklayınız.
+        <br><br><span class="answer-line" style="min-width:100%"></span>
+      </li>
+    </ol>
+  </div>
+
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1a) Fiziksel / Endotermik</div>
+    <div>1b) Fiziksel / Ekzotermik</div>
+    <div>1c) Fiziksel / Endotermik</div>
+    <div>2) Endotermik — sıcaklık düşmüştür, madde çevreden ısı almıştır.</div>
+    <div>3) Yanlıştır — yoğuşma gibi fiziksel değişimler de ekzotermik olabilir.</div>
+  </div>
+</div>
+
+<!-- MODÜL 2 -->
+<div class="page page-break">
+  <span class="tag endo" style="margin-bottom:8px">Modül 2</span>
+  <h1>Maddelerin Enerji Kaynağı Olma Potansiyeli</h1>
+  <p>Bir maddenin "iyi bir yakıt" sayılması için birim kütlesinin (1 gramının) yanmasıyla ne kadar ısı açığa
+    çıkardığına bakılır. Toplam ısıyı karşılaştırmak yanıltıcıdır; doğru karşılaştırma birim kütle başına
+    (kJ/g) yapılır.</p>
+
+  <div class="box kavram">
+    <span class="box-label">Kavram</span>
+    <p style="margin:0"><b>Yanma ısısı:</b> Belirli miktardaki (genellikle 1 g) bir maddenin tam yanması
+      sırasında açığa çıkan ısı miktarıdır; kJ/g birimiyle ifade edilir.</p>
+  </div>
+
+  <table class="dtable">
+    <thead><tr><th>Yakıt</th><th>Yanma Isısı (kJ/g)</th><th>Sınıf</th></tr></thead>
+    <tbody>
+      <tr><td>Selüloz</td><td>17,5</td><td>Biyolojik</td></tr>
+      <tr><td>Çam odunu</td><td>21,2</td><td>Biyolojik</td></tr>
+      <tr><td>Taş kömürü</td><td>28,3</td><td>Fosil</td></tr>
+      <tr><td>Doğal gaz</td><td>49,5</td><td>Fosil</td></tr>
+      <tr><td>Hidrojen gazı</td><td>142,9</td><td>Temiz enerji adayı</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> 5 g'lık bir yakıt tamamen yandığında 105 kJ ısı açığa çıkıyor. Bu yakıtın yanma ısısı kaç
+      kJ/g'dır? Bu değer, doğal gaz (49,5 kJ/g) ile karşılaştırıldığında ne söylenebilir?</p>
+    <p><b>Çözüm:</b> Yanma ısısı = toplam ısı ÷ kütle = 105 kJ ÷ 5 g = <b>21 kJ/g</b>. Bu değer doğal gazın
+      (49,5 kJ/g) yanma ısısından düşüktür; bu yakıt birim kütle başına doğal gazdan daha az ısı vermektedir.</p>
+  </div>
+
+  <div class="box notlarim"><span class="box-label" style="color:var(--ink-soft)">Notlarım</span></div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 2</h2>
+  <div class="worksheet">
+    <ol>
+      <li>Bir kamp sobasında 8 g yakıt yakıldığında 168 kJ ısı elde ediliyor. Bu yakıtın yanma ısısını
+        (kJ/g) hesaplayınız. <span class="answer-line"></span></li>
+      <li>Fosil yakıtların iki temel dezavantajını yazınız (yenilenebilirlik ve çevresel etki açısından).
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+      <li>Fizyolojik enerji değerleri Karbonhidrat: 17 kJ/g, Yağ: 38 kJ/g'dır. 20 g yağ ile 20 g karbonhidratın
+        sağladığı enerji arasındaki farkı hesaplayınız. <span class="answer-line"></span></li>
+    </ol>
+  </div>
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1) 168÷8 = 21 kJ/g</div>
+    <div>2) Yenilenemez olmaları; yanma sonucu sera gazı salınımı (küresel ısınma)</div>
+    <div>3) (20×38)−(20×17) = 760−340 = 420 kJ</div>
+  </div>
+</div>
+
+<!-- MODÜL 3 -->
+<div class="page page-break">
+  <span class="tag endo" style="margin-bottom:8px">Modül 3</span>
+  <h1>Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması</h1>
+  <p>Bir tepkime sırasında tepkenlerdeki bağlar kırılır, ürünlerde yeni bağlar oluşur. Bağ kırmak enerji
+    gerektirir (endotermik); bağ oluşumu enerji açığa çıkarır (ekzotermik).</p>
+
+  <div class="box kavram">
+    <span class="box-label">Kavram</span>
+    <p style="margin:0"><b>Matematiksel model:</b> ΔH<sub>tepkime</sub> = (Kırılan bağların enerjileri toplamı)
+      − (Oluşan bağların enerjileri toplamı)</p>
+  </div>
+
+  <table class="dtable">
+    <thead><tr><th>Bağ</th><th>Enerji (kJ/mol)</th><th>Bağ</th><th>Enerji (kJ/mol)</th></tr></thead>
+    <tbody>
+      <tr><td>H-H</td><td>436</td><td>Cl-Cl</td><td>243</td></tr>
+      <tr><td>H-Cl</td><td>431</td><td>O=O</td><td>498</td></tr>
+      <tr><td>C-H</td><td>414</td><td>O-H</td><td>464</td></tr>
+      <tr><td>C=O</td><td>736</td><td>N≡N</td><td>946</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> H2(g) + Cl2(g) → 2HCl(g) tepkimesinin ΔH<sub>tepkime</sub> değerini yukarıdaki tablodan
+      yararlanarak hesaplayınız.</p>
+    <p><b>Çözüm:</b> Kırılan: 1×H-H (436) + 1×Cl-Cl (243) = 679 kJ. Oluşan: 2×H-Cl (2×431) = 862 kJ.
+      ΔH = 679 − 862 = <b>-183 kJ</b> (ekzotermik).</p>
+  </div>
+
+  <div class="box notlarim"><span class="box-label" style="color:var(--ink-soft)">Notlarım</span></div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 3</h2>
+  <div class="worksheet">
+    <ol>
+      <li>H2(g) + F2(g) → 2HF(g) tepkimesinde H-H=436, F-F=159, H-F=565 kJ/mol'dür. ΔH<sub>tepkime</sub>
+        değerini hesaplayınız. <span class="answer-line"></span></li>
+      <li>Bir tepkimede kırılan bağ enerjileri toplamı 620 kJ, oluşan bağ enerjileri toplamı 450 kJ'dir.
+        ΔH kaç kJ'dir ve tepkime türü nedir? <span class="answer-line"></span></li>
+      <li>Bağ enerjisi yüksek olan bir bağın kararlılığı hakkında ne söylenebilir?
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+    </ol>
+  </div>
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1) Kırılan: 436+159=595. Oluşan: 2×565=1130. ΔH=595−1130=-535 kJ</div>
+    <div>2) ΔH=620−450=+170 kJ, endotermik</div>
+    <div>3) Bağ enerjisi yüksekse bağ daha kararlı ve sağlamdır</div>
+  </div>
+</div>
+
+<!-- MODÜL 4 -->
+<div class="page page-break">
+  <span class="tag endo" style="margin-bottom:8px">Modül 4</span>
+  <h1>Standart Oluşum Entalpisi</h1>
+  <p>Bir bileşiğin kendi elementlerinden 1 mol oluşurken meydana gelen entalpi değişimine standart oluşum
+    entalpisi (ΔH°f) denir. Standart hâldeki elementlerin ΔH°f değeri 0 kabul edilir.</p>
+
+  <div class="box kavram">
+    <span class="box-label">Kavram</span>
+    <p style="margin:0"><b>Matematiksel model:</b> ΔH°<sub>tepkime</sub> = Σn·ΔH°f (ürünler) − Σn·ΔH°f
+      (tepkenler). Dikkat: bu, bağ enerjisi formülünün (kırılan−oluşan) TERSİ bir sıralamadır.</p>
+  </div>
+
+  <table class="dtable">
+    <thead><tr><th>Madde</th><th>ΔH°f (kJ/mol)</th></tr></thead>
+    <tbody>
+      <tr><td>NH3(g)</td><td>-46,1</td></tr>
+      <tr><td>HCl(g)</td><td>-92,3</td></tr>
+      <tr><td>NH4Cl(k)</td><td>-314,4</td></tr>
+      <tr><td>H2O(g)</td><td>-241,8</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> NH3(g) + HCl(g) → NH4Cl(k) tepkimesinin ΔH°<sub>tepkime</sub> değerini yukarıdaki tablodan
+      yararlanarak hesaplayınız.</p>
+    <p><b>Çözüm:</b> ΔH° = ΔH°f(NH4Cl) − [ΔH°f(NH3) + ΔH°f(HCl)] = (-314,4) − [(-46,1)+(-92,3)]
+      = -314,4 − (-138,4) = <b>-176,0 kJ</b>.</p>
+  </div>
+
+  <div class="box notlarim"><span class="box-label" style="color:var(--ink-soft)">Notlarım</span></div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 4</h2>
+  <div class="worksheet">
+    <ol>
+      <li>H2(g) + 1/2O2(g) → H2O(g) tepkimesinin ΔH°f(H2O,g)=-241,8 kJ/mol olduğuna göre ΔH°<sub>tepkime</sub>
+        değeri kaçtır? (H2 ve O2 elementtir.) <span class="answer-line"></span></li>
+      <li>Bir bileşiğin ΔH°f değeri çok negatifse bu bileşiğin kararlılığı hakkında ne söylenebilir?
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+      <li>Standart hâldeki bir elementin (örneğin N2(g)) oluşum entalpisi kaçtır ve neden?
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+    </ol>
+  </div>
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1) ΔH°=(-241,8)−0=-241,8 kJ</div>
+    <div>2) Oluşurken çok enerji açığa çıkarmıştır, oldukça kararlıdır</div>
+    <div>3) 0 kJ/mol; referans noktası olarak tanım gereği sıfır kabul edilir</div>
+  </div>
+</div>
+
+<!-- MODÜL 5 -->
+<div class="page page-break">
+  <span class="tag rate" style="margin-bottom:8px">Modül 5</span>
+  <h1>Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli Şartlar</h1>
+  <p>Tanecikler çarpışsa bile her çarpışma ürün oluşturmaz. Ürün oluşturan çarpışmaya etkin çarpışma denir;
+    bunun için uygun geometri ve yeterli kinetik enerji birlikte gereklidir.</p>
+
+  <div class="box kavram">
+    <span class="box-label">Kavram</span>
+    <p style="margin:0"><b>Eşik değeri:</b> Etkin çarpışma için gereken minimum kinetik enerji.
+      <b>Aktivasyon enerjisi:</b> Tepkimenin gerçekleşmesi için gereken minimum potansiyel enerji.
+      ΔH<sub>tepkime</sub> = E<sub>ai</sub> − E<sub>ag</sub> (ileri − geri aktivasyon enerjisi).</p>
+  </div>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> Bir tepkimenin ileri aktivasyon enerjisi 150 kJ, geri aktivasyon enerjisi 90 kJ'dir. Bu
+      tepkimenin ΔH değeri kaçtır ve tepkime endotermik mi ekzotermik mi?</p>
+    <p><b>Çözüm:</b> ΔH = E<sub>ai</sub> − E<sub>ag</sub> = 150 − 90 = <b>+60 kJ</b>. Değer pozitif olduğu için
+      tepkime <b>endotermiktir</b> (E<sub>ai</sub> &gt; E<sub>ag</sub> ile tutarlıdır).</p>
+  </div>
+
+  <div class="box notlarim"><span class="box-label" style="color:var(--ink-soft)">Notlarım</span></div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 5</h2>
+  <div class="worksheet">
+    <ol>
+      <li>Bir tepkimede E<sub>ai</sub>=80 kJ, E<sub>ag</sub>=140 kJ'dir. ΔH değerini ve tepkime türünü
+        bulunuz. <span class="answer-line"></span></li>
+      <li>Etkin çarpışma için gereken iki koşulu yazınız.
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+      <li>Sıcaklık artışının aktivasyon enerjisi üzerindeki etkisini açıklayınız.
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+    </ol>
+  </div>
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1) ΔH=80−140=-60 kJ, ekzotermik</div>
+    <div>2) Uygun geometri + yeterli kinetik enerji</div>
+    <div>3) Sıcaklık Ea'yı değiştirmez; yalnızca Ea'yı aşan tanecik oranını artırır</div>
+  </div>
+</div>
+
+<!-- MODÜL 6 -->
+<div class="page page-break">
+  <span class="tag rate" style="margin-bottom:8px">Modül 6</span>
+  <h1>Tepken ve Ürün Derişimleriyle Ortalama Tepkime Hızlarının Hesaplanması</h1>
+  <p>Bir tepkimenin hızı, tepken ya da ürünlerin derişiminin zamanla nasıl değiştiği izlenerek hesaplanır.</p>
+
+  <div class="box kavram">
+    <span class="box-label">Kavram</span>
+    <p style="margin:0">Tepkenler için: r = −Δ[tepken]/Δt &nbsp;·&nbsp; Ürünler için: r = +Δ[ürün]/Δt.
+      Genel olarak aA+bB→cC+dD için: r<sub>tepkime</sub> = −(1/a)Δ[A]/Δt = (1/c)Δ[C]/Δt = ...</p>
+  </div>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> H2O2(suda) → H2O(s) + 1/2O2(g) tepkimesinde 200 s'de [H2O2]=2,00 M, 400 s'de [H2O2]=1,70 M
+      ölçülüyor. Bu aralıktaki ortalama harcanma hızını hesaplayınız.</p>
+    <p><b>Çözüm:</b> r = −Δ[H2O2]/Δt = −(1,70−2,00)/(400−200) = 0,30/200 = <b>0,0015 M/s</b>.</p>
+  </div>
+
+  <div class="box notlarim"><span class="box-label" style="color:var(--ink-soft)">Notlarım</span></div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 6</h2>
+  <div class="worksheet">
+    <ol>
+      <li>Aynı tepkimede 600 s'de [H2O2]=1,50 M, 1200 s'de [H2O2]=1,00 M'dır. Bu aralıktaki ortalama
+        harcanma hızını hesaplayınız. <span class="answer-line"></span></li>
+      <li>2N2O5(g)→4NO2(g)+O2(g) tepkimesinde r<sub>N2O5</sub>=0,0004 M/s ise r<sub>tepkime</sub> kaçtır?
+        <span class="answer-line"></span></li>
+      <li>Tepken derişimi azaldıkça tepkime hızı genellikle nasıl değişir? Neden?
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+    </ol>
+  </div>
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1) r=−(1,00−1,50)/600=0,50/600≈0,000833 M/s</div>
+    <div>2) r<sub>tepkime</sub>=0,0004÷2=0,0002 M/s</div>
+    <div>3) Azalır; çarpışma sıklığı derişimle birlikte düşer</div>
+  </div>
+</div>
+
+<!-- MODÜL 7 -->
+<div class="page page-break">
+  <span class="tag rate" style="margin-bottom:8px">Modül 7</span>
+  <h1>Tepkime Hızına Etki Eden Faktörler</h1>
+  <p>Aynı tepkime, koşullar değiştiğinde çok farklı hızlarda gerçekleşebilir. Altı temel etken tepkime hızını
+    belirler.</p>
+
+  <table class="dtable">
+    <thead><tr><th>Etken</th><th>Etki Mekanizması</th></tr></thead>
+    <tbody>
+      <tr><td>Madde cinsi</td><td>Kırılacak bağ sayısı/türü hızı belirler</td></tr>
+      <tr><td>Fiziksel hâl</td><td>Gaz &gt; sıvı &gt; katı hızda genel eğilim</td></tr>
+      <tr><td>Derişim</td><td>Çarpışma sayısını artırır</td></tr>
+      <tr><td>Sıcaklık</td><td>Eşik değerini aşan tanecik oranını artırır</td></tr>
+      <tr><td>Katalizör</td><td>Aktivasyon enerjisini düşürür</td></tr>
+      <tr><td>Temas yüzeyi</td><td>Çarpışabilecek bölgeyi artırır</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> Zn(k) + 2HCl(suda) → ZnCl2(suda) + H2(g) tepkimesinde parça çinko yerine aynı kütlede toz
+      çinko kullanılırsa tepkime hızı nasıl etkilenir? Nedenini açıklayınız.</p>
+    <p><b>Çözüm:</b> Toz çinkonun yüzey alanı parça çinkodan çok daha büyüktür. Bu, çinko-HCl çarpışma
+      sıklığını artırır; tepkime <b>çok daha hızlı ve şiddetli</b> gerçekleşir. Bu, temas yüzeyi etkenidir.</p>
+  </div>
+
+  <div class="box notlarim"><span class="box-label" style="color:var(--ink-soft)">Notlarım</span></div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 7</h2>
+  <div class="worksheet">
+    <ol>
+      <li>Ca(k)+H2O(s)→Ca(OH)2(suda)+H2(g) tepkimesi Ca(k)+H2O(g)→Ca(OH)2(k)+H2(g) tepkimesinden neden daha
+        yavaştır? <br><span class="answer-line" style="min-width:100%"></span></li>
+      <li>Katalizörün aktivasyon enerjisi üzerindeki etkisini açıklayınız.
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+      <li>"Katı yakıtlar sıvı yakıtlara göre neden daha yavaş yanar?" sorusu hangi etkenle ilgilidir?
+        <span class="answer-line"></span></li>
+    </ol>
+  </div>
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1) Sıvı su molekülleri gaz hâline göre daha az hareketli, çarpışma sıklığı düşük</div>
+    <div>2) Katalizör aktivasyon enerjisini düşürür, ΔH'yi değiştirmez</div>
+    <div>3) Fiziksel hâl (sıcaklık değil — sık yapılan kavram yanılgısı)</div>
+  </div>
+</div>
+
+<!-- MODÜL 8 -->
+<div class="page page-break">
+  <span class="tag rate" style="margin-bottom:8px">Modül 8</span>
+  <h1>Kimyasal Tepkimelerin Hız Denklemi</h1>
+  <p>Deneysel verilerden yola çıkarak bir tepkimenin hız denklemi, derecesi ve hız sabiti belirlenir.</p>
+
+  <div class="box kavram">
+    <span class="box-label">Kavram</span>
+    <p style="margin:0">r = k[A]<sup>a</sup>[B]<sup>b</sup>. Üslerin toplamı = tepkime derecesi. Tek basamaklı
+      gaz tepkimelerinde üsler katsayılara eşittir; <b>çok basamaklı</b> tepkimelerde üsler yalnızca deneysel
+      verilerden belirlenir. k birimi: 1/(s·M<sup>n-1</sup>).</p>
+  </div>
+
+  <table class="dtable">
+    <thead><tr><th>Deney</th><th>[CO] (M)</th><th>[Cl2] (M)</th><th>Hız (M/s)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>0,20</td><td>0,20</td><td>0,04</td></tr>
+      <tr><td>2</td><td>0,20</td><td>0,60</td><td>0,12</td></tr>
+      <tr><td>3</td><td>0,40</td><td>0,60</td><td>0,24</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> CO(g)+Cl2(g)→COCl2(g) tepkimesi için yukarıdaki tabloya göre hız denklemini ve k değerini
+      bulunuz.</p>
+    <p><b>Çözüm:</b> Deney 1→2: [CO] sabit, [Cl2] 3 katı → hız 3 katı ⟹ Cl2 derecesi 1. Deney 2→3: [Cl2] sabit,
+      [CO] 2 katı → hız 2 katı ⟹ CO derecesi 1. Hız denklemi: <b>r=k[CO][Cl2]</b> (derece 2).
+      k = 0,04/(0,20×0,20) = <b>1,0</b>.</p>
+  </div>
+
+  <div class="box notlarim"><span class="box-label" style="color:var(--ink-soft)">Notlarım</span></div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 8</h2>
+  <div class="worksheet">
+    <ol>
+      <li>Bir tepkimenin hız denklemi r=k[A]²[B] ise tepkime derecesi kaçtır ve k'nın birimi nedir?
+        <span class="answer-line"></span></li>
+      <li>r=k[A]³ hız denklemine göre [A] derişimi 2 katına çıkarsa hız kaç katına çıkar?
+        <span class="answer-line"></span></li>
+      <li>Çok basamaklı bir tepkimede hız denklemi neye göre yazılır, net tepkimeye göre mi?
+        <br><span class="answer-line" style="min-width:100%"></span></li>
+    </ol>
+  </div>
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1) Derece 3; k birimi 1/(s·M²)</div>
+    <div>2) 2³=8 katına çıkar</div>
+    <div>3) Net tepkimeye göre değil, yavaş (hız belirleyici) basamağa göre yazılır</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yanlışlarım · Kimya 11</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Tekrar Çalışma</span>
+    <h1>Yanlışlarım</h1>
+    <p class="lead">Modüllerdeki sorularda yanlış işaretlediğin tüm sorular burada birikir. Bu liste yalnızca bu
+      cihazda saklanır (localStorage) — başka bir cihazda görünmez.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <div id="wrong-host"></div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/quiz-engine.js"></script>
+<script>
+  function loadWrongList() {
+    try {
+      return JSON.parse(localStorage.getItem("khiz_wrong_list")) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  const host = document.getElementById("wrong-host");
+  const list = loadWrongList();
+
+  if (list.length === 0) {
+    host.appendChild(el2("div", { class: "card" }, "Henüz yanlış işaretlediğin bir soru yok. Modüllerdeki sorularla çalışmaya başladığında yanlışların burada listelenecek."));
+  } else {
+    const clearBtn = el2("button", { class: "btn", style: "margin-bottom:16px" }, "Listeyi Temizle");
+    clearBtn.addEventListener("click", () => {
+      localStorage.removeItem("khiz_wrong_list");
+      location.reload();
+    });
+    host.appendChild(clearBtn);
+
+    const moduleNames = Object.fromEntries(LINKS.map((l) => [l.key, l.title]));
+    list.slice().reverse().forEach((item) => {
+      const card = el2("div", { class: "card" });
+      card.appendChild(el2("span", { class: "tag orta" }, moduleNames[item.moduleKey] || item.moduleKey));
+      card.appendChild(el2("p", { style: "margin-top:10px;font-weight:600" }, item.text));
+      host.appendChild(card);
+    });
+  }
+
+  mountNav(null);
+  mountFooter();
+</script>
+</body>
+</html>
