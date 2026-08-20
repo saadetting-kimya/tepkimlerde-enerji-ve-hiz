@@ -7,6 +7,7 @@
    Modül 5: Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli Şartlar (KİM.11.1.5)
    Modül 6: Tepken ve Ürün Derişimleriyle Ortalama Tepkime Hızlarının Hesaplanması (KİM.11.1.6)
    Modül 7: Tepkime Hızına Etki Eden Faktörler (KİM.11.1.7)
+   Modül 8: Kimyasal Tepkimelerin Hız Denklemi (KİM.11.1.8)
    ============================================================ */
 
 const QUIZ = {
@@ -5668,6 +5669,821 @@ const QUIZ = {
       ],
       "correct": 2,
       "explain": "Yüksek sıcaklık ve basınç uygulamak enerji yoğun ve ekipman açısından maliyetli/riskli olabilir. Katalizör kullanmak, bu zorlu koşullara ihtiyaç duymadan aktivasyon enerjisini düşürerek tepkimeyi hızlandırabildiğinden, birçok endüstriyel süreçte (örneğin Haber-Bosch amonyak sentezi, katalitik konvertörler) tercih edilen, enerji ve maliyet açısından daha verimli bir yoldur."
+    }
+  ],
+  "m8": [
+    {
+      "difficulty": "kolay",
+      "text": "Tepkime hızı ile tepkimeye giren maddelerin derişimleri arasındaki bağıntıya ne ad verilir?",
+      "options": [
+        "Tepkime entalpisi",
+        "Eşik değeri",
+        "Hız denklemi",
+        "Bağ enerjisi",
+        "Aktivasyon enerjisi"
+      ],
+      "correct": 2,
+      "explain": "Tepkime hızı ile tepkimeye giren maddelerin derişimleri arasındaki bağıntıya hız denklemi denir; genel olarak r = k[A]^a[B]^b şeklinde ifade edilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Hız denklemindeki üslerin toplamına ne ad verilir?",
+      "options": [
+        "Tepkime derecesi",
+        "Eşik değeri",
+        "Aktivasyon enerjisi",
+        "Hız sabiti",
+        "Molarite"
+      ],
+      "correct": 0,
+      "explain": "Hız denklemindeki üslerin (derişim kuvvetlerinin) toplamına tepkime derecesi denir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Tepkime hızı ile derişimler arasındaki orantıyı eşitliğe dönüştüren orantı sabitine ne ad verilir?",
+      "options": [
+        "Gaz sabiti",
+        "Bağ sabiti",
+        "Avogadro sabiti",
+        "Hız sabiti (k)",
+        "Denge sabiti"
+      ],
+      "correct": 3,
+      "explain": "Tepkime hızı ile derişimler arasındaki orantıyı eşitliğe dönüştürmek için kullanılan orantı sabitine hız sabiti denir ve 'k' harfiyle gösterilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Hız sabiti (k) hangi etkenlere bağlıdır?",
+      "options": [
+        "Yalnızca kabın şekline",
+        "Hiçbir etkene bağlı değildir, evrensel bir sabittir",
+        "Yalnızca tepkimenin süresine",
+        "Tepkimenin niteliğine, sıcaklığa, temas yüzeyine ve katalizör kullanılıp kullanılmadığına",
+        "Yalnızca tepkimenin rengine"
+      ],
+      "correct": 3,
+      "explain": "Hız sabiti k'nın değeri; tepkimenin niteliğine, sıcaklığa, temas yüzeyine ve katalizör kullanılıp kullanılmadığına bağlıdır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Sıcaklık, temas yüzeyi ve katalizör arttığında/kullanıldığında hız sabiti (k) nasıl değişir?",
+      "options": [
+        "Sıfıra iner",
+        "Artar",
+        "Negatif olur",
+        "Değişmez",
+        "Azalır"
+      ],
+      "correct": 1,
+      "explain": "Hız sabiti k'nın değeri sıcaklık, temas yüzeyi ve katalizör ile artar."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Gaz fazında ve tek basamakta gerçekleşen aA + bB → cC + dD tepkimesinde hız denklemindeki üsler neye eşittir?",
+      "options": [
+        "Rastgele belirlenir",
+        "Tepkenlerin stokiyometrik katsayılarına (a ve b) eşittir",
+        "Her zaman 0'a eşittir",
+        "Her zaman 1'e eşittir",
+        "Ürünlerin katsayılarına eşittir"
+      ],
+      "correct": 1,
+      "explain": "Gaz fazında ve tek basamakta gerçekleşen bir tepkimede hız denklemindeki üsler, tepkenlerin denklemdeki stokiyometrik katsayılarına eşittir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Çok basamaklı bir tepkimede hız denklemindeki üsler nasıl belirlenir?",
+      "options": [
+        "Ürün miktarına göre belirlenir",
+        "Yalnızca sıcaklığa göre belirlenir",
+        "Her zaman tepkime denklemindeki katsayılarla aynıdır",
+        "Yalnızca deneysel verilerden belirlenir; katsayılarla aynı olmak zorunda değildir",
+        "Rastgele seçilir"
+      ],
+      "correct": 3,
+      "explain": "Çok basamaklı tepkimelerde hız denklemindeki üsler tepkime denklemindeki katsayılarla aynı olmak zorunda değildir; yalnızca deneysel verilerden belirlenebilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Hız denklemi neden tepkimenin başlangıç hızına göre oluşturulur?",
+      "options": [
+        "Başlangıç hızı ölçmek daha kolay olduğu için tercih edilir, başka nedeni yoktur",
+        "Başlangıçta tepkime henüz gerçekleşmemiştir",
+        "Derişimler zamanla azaldığından, ara zamanlardaki hız değişimleri doğru ölçülemez",
+        "Bu yalnızca bir gelenektir, bilimsel bir nedeni yoktur",
+        "Başlangıç hızı her zaman sıfırdır"
+      ],
+      "correct": 2,
+      "explain": "Tepken derişimleri zamanla azaldığı için tepkime hızındaki değişimler ara zamanlarda doğru ölçülemez; bu nedenle hız denklemi, tepkimenin henüz başladığı andaki (başlangıç) hıza göre oluşturulur."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkimenin hız sabitinin (k) birimi 1/(s·M^(n-1)) şeklinde ifade edildiğine göre, birimi yalnızca '1/s' olan bir tepkimenin derecesi (n) kaçtır?",
+      "options": [
+        "Belirlenemez",
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correct": 2,
+      "explain": "k biriminde M^(n-1) ifadesi görünmüyorsa (yani üs sıfırsa, n-1=0), tepkimenin derecesi n=1'dir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "CaCO3(k) → CaO(k) + CO2(g) tepkimesinin hız denklemi r = k (derişime bağlı değil) şeklindedir. Bu tepkimenin derecesi ve k'nın birimi nedir?",
+      "options": [
+        "Derece 0, birim M/s",
+        "Derece 0, birim 1/s",
+        "Derece 2, birim 1/(s·M)",
+        "Derece 1, birim 1/s",
+        "Derece 1, birim M/s"
+      ],
+      "correct": 0,
+      "explain": "Hız, derişimden bağımsız (r=k) olduğu için tepkime sıfırıncı derecedendir (derece 0). Sıfırıncı dereceden bir tepkimede k'nın birimi doğrudan M/s'dir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "C(k) + O2(g) → CO2(g) tepkimesinin hız denklemi r = k[O2] şeklindedir. Bu tepkimenin derecesi ve k'nın birimi nedir?",
+      "options": [
+        "Derece 1, birim 1/s",
+        "Derece 0, birim M/s",
+        "Derece 2, birim M²/s",
+        "Derece 2, birim 1/(s·M)",
+        "Derece 1, birim M/s"
+      ],
+      "correct": 0,
+      "explain": "Hız denklemindeki tek üs 1 olduğundan tepkime birinci derecedendir. Birinci dereceden bir tepkimede k'nın birimi 1/s'dir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Mg(k) + 2HCl(suda) → MgCl2(suda) + H2(g) tepkimesinin hız denklemi r = k[HCl]² şeklindedir. Bu tepkimenin derecesi kaçtır?",
+      "options": [
+        "0",
+        "2",
+        "4",
+        "3",
+        "1"
+      ],
+      "correct": 1,
+      "explain": "Hız denklemindeki üs 2 olduğundan tepkimenin derecesi 2'dir (ikinci dereceden)."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Tek basamakta gerçekleşen N2(g) + 3H2(g) → 2NH3(g) tepkimesinin hız denklemi r = k[N2][H2]³ şeklindedir. Bu tepkimenin toplam derecesi kaçtır?",
+      "options": [
+        "4",
+        "3",
+        "1",
+        "5",
+        "2"
+      ],
+      "correct": 0,
+      "explain": "Tepkime derecesi, hız denklemindeki üslerin toplamıdır: N2 için üs 1, H2 için üs 3, toplam 1+3=4."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "r = k[N2][H2]³ hız denklemine göre [N2] derişimi 2 katına çıkarılırsa (diğer koşullar sabitken) tepkime hızı nasıl değişir?",
+      "options": [
+        "Yarıya iner",
+        "2 katına çıkar",
+        "4 katına çıkar",
+        "8 katına çıkar",
+        "Değişmez"
+      ],
+      "correct": 1,
+      "explain": "N2'nin üssü 1 olduğundan, [N2] derişimi 2 katına çıkarıldığında hız da 2¹=2 katına çıkar."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "r = k[N2][H2]³ hız denklemine göre [H2] derişimi 2 katına çıkarılırsa (diğer koşullar sabitken) tepkime hızı nasıl değişir?",
+      "options": [
+        "Değişmez",
+        "8 katına çıkar",
+        "2 katına çıkar",
+        "4 katına çıkar",
+        "16 katına çıkar"
+      ],
+      "correct": 1,
+      "explain": "H2'nin üssü 3 olduğundan, [H2] derişimi 2 katına çıkarıldığında hız 2³=8 katına çıkar."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Çok basamaklı bir tepkimede toplam tepkime hızını hangi basamak belirler?",
+      "options": [
+        "İlk basamak her zaman",
+        "En hızlı basamak",
+        "Son basamak her zaman",
+        "En yavaş basamak",
+        "Tüm basamakların ortalaması"
+      ],
+      "correct": 3,
+      "explain": "Çok basamaklı tepkimelerde toplam hızı, en yavaş basamak (darboğaz basamağı) belirler; bu yüzden hız denklemi net tepkimeye göre değil, yavaş basamağa göre yazılır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "2H2O2(suda) → 2H2O(s) + O2(g) tepkimesinin I⁻ katalizörlüğündeki deneysel hız denklemi r = k[H2O2][I⁻] şeklindedir. I⁻ net tepkime denkleminde görünmediği hâlde hız denkleminde neden yer alır?",
+      "options": [
+        "I⁻, tepkimenin yavaş (hız belirleyici) basamağının bir tepkenidir; katalizör olarak tepkimeye katılıp tekrar açığa çıkar",
+        "I⁻ yalnızca sıcaklığı etkilediği için yer alır",
+        "Hız denklemi yalnızca net tepkimedeki maddeleri içerebilir, bu yüzden I⁻ orada olamaz",
+        "Bu bir yazım hatasıdır, I⁻ hız denkleminde olmamalıdır",
+        "I⁻ aslında bir ürün olduğu için yer alır"
+      ],
+      "correct": 0,
+      "explain": "Hız denklemi, net tepkimeye değil yavaş (hız belirleyici) basamağa göre yazılır. I⁻ bu yavaş basamağın bir tepkenidir; katalizör olarak tepkimeye girip ikinci basamakta tekrar açığa çıktığı için net tepkime denkleminde görünmez, ama hız denkleminde yer alır."
+    },
+    {
+      "difficulty": "orta",
+      "table": {
+        "headers": [
+          "Deney",
+          "[CO] (M)",
+          "[Cl2] (M)",
+          "Başlangıç Hızı (M/s)"
+        ],
+        "rows": [
+          [
+            "1",
+            "0,20",
+            "0,20",
+            "0,04"
+          ],
+          [
+            "2",
+            "0,20",
+            "0,60",
+            "0,12"
+          ],
+          [
+            "3",
+            "0,40",
+            "0,60",
+            "0,24"
+          ]
+        ]
+      },
+      "text": "CO(g) + Cl2(g) → COCl2(g) tepkimesine ait tabloya göre, Deney 1 ve 2 karşılaştırıldığında (CO sabit, Cl2 3 katına çıkıyor, hız 3 katına çıkıyor) Cl2'ye göre tepkime derecesi kaçtır?",
+      "options": [
+        "Belirlenemez",
+        "0",
+        "3",
+        "1",
+        "2"
+      ],
+      "correct": 3,
+      "explain": "[CO] sabitken [Cl2] 3 katına çıkarıldığında hız da 3 katına çıkıyor (0,04→0,12); bu, hızın [Cl2] ile doğru orantılı olduğunu, yani Cl2'ye göre derecenin 1 olduğunu gösterir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Aynı tabloda Deney 2 ve 3 karşılaştırıldığında (Cl2 sabit, CO 2 katına çıkıyor, hız 2 katına çıkıyor) CO'ya göre tepkime derecesi kaçtır ve tepkimenin hız denklemi nedir?",
+      "options": [
+        "Derece 1, r=k[CO][Cl2]",
+        "Derece 0, r=k[Cl2]",
+        "Derece 2, r=k[CO][Cl2]²",
+        "Derece 2, r=k[CO]²[Cl2]",
+        "Derece 1, r=k[Cl2][CO]²"
+      ],
+      "correct": 0,
+      "explain": "[Cl2] sabitken [CO] 2 katına çıkarıldığında hız da 2 katına çıkıyor (0,12→0,24); bu, CO'ya göre derecenin 1 olduğunu gösterir. Hız denklemi: r=k[CO][Cl2] (her ikisi de 1. dereceden, toplam derece 2)."
+    },
+    {
+      "difficulty": "orta",
+      "text": "CO(g) + Cl2(g) → COCl2(g) tepkimesi için r=k[CO][Cl2] hız denklemi ve Deney 1 verileri ([CO]=0,20 M, [Cl2]=0,20 M, r=0,04 M/s) kullanılarak hız sabiti k kaç bulunur?",
+      "options": [
+        "1,0",
+        "0,008",
+        "0,04",
+        "5,0",
+        "0,2"
+      ],
+      "correct": 0,
+      "explain": "k = r/([CO][Cl2]) = 0,04/(0,20×0,20) = 0,04/0,04 = 1,0."
+    },
+    {
+      "difficulty": "orta",
+      "table": {
+        "headers": [
+          "Deney",
+          "[NO] (M)",
+          "[H2] (M)",
+          "Başlangıç Hızı (M/s)"
+        ],
+        "rows": [
+          [
+            "1",
+            "0,10",
+            "0,10",
+            "1×10⁻³"
+          ],
+          [
+            "2",
+            "0,10",
+            "0,20",
+            "2×10⁻³"
+          ],
+          [
+            "3",
+            "0,20",
+            "0,20",
+            "8×10⁻³"
+          ]
+        ]
+      },
+      "text": "2NO(g) + 2H2(g) → N2(g) + 2H2O(g) çok basamaklı tepkimesine ait tabloya göre, Deney 2 ve 3 karşılaştırıldığında (H2 sabit, NO 2 katına çıkıyor, hız 4 katına çıkıyor) NO'ya göre tepkime derecesi kaçtır?",
+      "options": [
+        "4",
+        "1",
+        "3",
+        "2",
+        "0"
+      ],
+      "correct": 3,
+      "explain": "[H2] sabitken [NO] 2 katına çıkarıldığında hız 4 katına çıkıyor (2×10⁻³→8×10⁻³); 2ⁿ=4 eşitliğinden n=2 bulunur, yani NO'ya göre derece 2'dir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Aynı tepkimede Deney 1 ve 2 karşılaştırıldığında (NO sabit, H2 2 katına çıkıyor, hız 2 katına çıkıyor) H2'ye göre derece kaçtır? Bu tepkimenin hız denklemi ve toplam derecesi nedir?",
+      "options": [
+        "H2 derecesi 0; r=k[NO]²; toplam derece 2",
+        "H2 derecesi 2; r=k[NO][H2]²; toplam derece 3",
+        "H2 derecesi 1; r=k[NO][H2]; toplam derece 2",
+        "H2 derecesi 2; r=k[NO]²[H2]²; toplam derece 4",
+        "H2 derecesi 1; r=k[NO]²[H2]; toplam derece 3"
+      ],
+      "correct": 4,
+      "explain": "[NO] sabitken [H2] 2 katına çıkarıldığında hız da 2 katına çıkıyor (1×10⁻³→2×10⁻³), bu yüzden H2'ye göre derece 1'dir. Hız denklemi: r=k[NO]²[H2], toplam derece = 2+1 = 3. Not: bu tepkime çok basamaklı olduğu için üsler katsayılarla (2 ve 2) aynı çıkmamıştır — deneysel olarak belirlenmiştir."
+    },
+    {
+      "difficulty": "orta",
+      "statements": {
+        "items": [
+          "2NO(g)+2H2(g)→N2(g)+2H2O(g) tepkimesinde NO'ya göre derece, tepkime denklemindeki NO katsayısı olan 2 ile aynı çıkmıştır.",
+          "Bu tepkimenin çok basamaklı olması, hız denklemindeki üslerin katsayılarla uyuşmama olasılığını artırır.",
+          "CO(g)+Cl2(g)→COCl2(g) tek basamaklı tepkimesinde bulunan üsler, tepkime denklemindeki katsayılarla (1 ve 1) uyuşmaktadır."
+        ]
+      },
+      "text": "Verilen önermelerden hangileri doğrudur?",
+      "options": [
+        "I, II ve III",
+        "Yalnız III",
+        "II ve III",
+        "I ve II",
+        "Yalnız I"
+      ],
+      "correct": 2,
+      "explain": "I yanlıştır; NO'nun katsayısı 2 olsa da deneysel derece de 2 çıkmıştır aslında bu doğru — ancak asıl önemli olan bunun TESADÜFEN uyuşmasıdır, çok basamaklı tepkimelerde bu garanti değildir (H2 için katsayı 2 iken derece 1 çıkmıştır, uyuşmamıştır). II doğrudur; çok basamaklı tepkimelerde üsler yalnızca deneysel olarak belirlenir. III doğrudur; tek basamaklı CO+Cl2 tepkimesinde bulunan üsler (1,1) katsayılarla (1,1) uyuşmaktadır."
+    },
+    {
+      "difficulty": "orta",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "2NO+2H2→N2+2H2O tepkimesinde NO'nun katsayısı 2, deneysel derecesi de 2 çıktı; H2'nin katsayısı da 2, o zaman H2'nin derecesi de 2 olmalıydı."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Bu tepkime çok basamaklı, bu yüzden katsayı ile derecenin aynı olması garanti değil. Veriler H2 için derecenin 1 çıktığını gösteriyor; bu, tepkimenin gerçek mekanizmasının net denklemden farklı olduğunu gösterir."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrenci veriye dayalı olarak haklıdır?",
+      "options": [
+        "Yalnız Öğrenci A",
+        "İkisi de haksızdır",
+        "Yalnız Öğrenci B",
+        "İkisi de haklıdır",
+        "Verilen bilgiyle karar verilemez"
+      ],
+      "correct": 2,
+      "explain": "Öğrenci B haklıdır. Deney verileri H2'ye göre derecenin 1 olduğunu gösteriyor (katsayısı 2 olmasına rağmen); bu, çok basamaklı tepkimelerde üslerin katsayılarla aynı olmak zorunda olmadığının somut bir kanıtıdır."
+    },
+    {
+      "difficulty": "orta",
+      "matchPairs": {
+        "leftHeader": "Tepkime",
+        "rightHeader": "Hız Denklemi",
+        "pairs": [
+          [
+            "C(k) + O2(g) → CO2(g)",
+            "r = k[O2]"
+          ],
+          [
+            "CaCO3(k) → CaO(k) + CO2(g)",
+            "r = k"
+          ],
+          [
+            "Mg(k) + 2HCl(suda) → MgCl2(suda) + H2(g)",
+            "r = k[HCl]²"
+          ]
+        ]
+      },
+      "text": "Yukarıdaki eşleştirmeye göre hangi tepkimenin hız sabiti k'nın birimi doğrudan M/s'dir (derişime bağlı üs içermez)?",
+      "options": [
+        "C(k) + O2(g) → CO2(g)",
+        "Mg(k) + 2HCl(suda) → MgCl2(suda) + H2(g)",
+        "Hiçbirinde M/s değildir",
+        "CaCO3(k) → CaO(k) + CO2(g)",
+        "Üçünde de aynıdır"
+      ],
+      "correct": 3,
+      "explain": "CaCO3 tepkimesinin hız denklemi r=k (derişime bağlı değil) olduğundan bu tepkime sıfırıncı derecedendir; sıfırıncı dereceden tepkimelerde k'nın birimi doğrudan M/s'dir."
+    },
+    {
+      "difficulty": "orta",
+      "checklist": {
+        "items": [
+          "Bir tepkimenin hız denklemi, yalnızca dengelenmiş tepkime denklemine bakılarak (deney yapmadan) kesin olarak yazılabilir.",
+          "Tepkime derecesi negatif bir sayı olamaz.",
+          "Hız sabiti k, tepkimenin sıcaklığı değiştiğinde de aynı kalır."
+        ]
+      },
+      "text": "Yukarıdaki ifadelerden kaç tanesi doğrudur?",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "Verilenlerle belirlenemez",
+        "2"
+      ],
+      "correct": 0,
+      "explain": "Birinci ifade yanlıştır; hız denklemi genel olarak deneysel verilerle belirlenir (yalnızca tek basamaklı tepkimelerde katsayılardan tahmin edilebilir). İkinci ifade doğrudur; tepkime dereceleri fiziksel olarak negatif olmaz (0, 1, 2, 3... gibi değerler alır). Üçüncü ifade yanlıştır; k sıcaklıkla değişir (artar). Doğru ifade sayısı 1'dir."
+    },
+    {
+      "difficulty": "orta",
+      "table": {
+        "headers": [
+          "Deney",
+          "[NO] (M)",
+          "[O2] (M)",
+          "Başlangıç Hızı (M/s)"
+        ],
+        "rows": [
+          [
+            "1",
+            "0,10",
+            "0,10",
+            "0,10"
+          ],
+          [
+            "2",
+            "0,20",
+            "0,10",
+            "0,40"
+          ],
+          [
+            "3",
+            "0,20",
+            "0,20",
+            "0,80"
+          ]
+        ]
+      },
+      "text": "2NO(g) + O2(g) → 2NO2(g) tepkimesine ait tabloya göre, Deney 1 ve 2 karşılaştırıldığında ([O2] sabit, [NO] 2 katına çıkıyor, hız 4 katına çıkıyor) NO'ya göre tepkime derecesi kaçtır?",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": 2,
+      "explain": "[O2] sabitken [NO] 2 katına çıkarıldığında hız 4 katına çıkıyor (0,10→0,40); 2ⁿ=4 eşitliğinden n=2 bulunur."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Aynı tepkimede Deney 2 ve 3 karşılaştırıldığında ([NO] sabit, [O2] 2 katına çıkıyor, hız 2 katına çıkıyor) O2'ye göre derece kaçtır? Hız denklemi ve k değeri nedir? (Deney 1 verilerini kullanınız.)",
+      "options": [
+        "O2 derecesi 2; r=k[NO][O2]²; k=10",
+        "O2 derecesi 1; r=k[NO]²[O2]; k=100",
+        "O2 derecesi 0; r=k[NO]²; k=10",
+        "O2 derecesi 1; r=k[NO]²[O2]; k=10",
+        "O2 derecesi 1; r=k[NO][O2]; k=10"
+      ],
+      "correct": 1,
+      "explain": "[NO] sabitken [O2] 2 katına çıktığında hız 2 katına çıkıyor, O2 derecesi 1'dir. Hız denklemi r=k[NO]²[O2]. Deney 1 ile: k = 0,10/(0,10²×0,10) = 0,10/0,001 = 100."
+    },
+    {
+      "difficulty": "orta",
+      "table": {
+        "headers": [
+          "Deney",
+          "[ICl] (M)",
+          "[H2] (M)",
+          "Başlangıç Hızı (M/s)"
+        ],
+        "rows": [
+          [
+            "1",
+            "0,3",
+            "0,3",
+            "0,018"
+          ],
+          [
+            "2",
+            "0,6",
+            "0,3",
+            "0,036"
+          ],
+          [
+            "3",
+            "1,2",
+            "0,6",
+            "0,144"
+          ]
+        ]
+      },
+      "text": "2ICl(g) + H2(g) → I2(g) + 2HCl(g) tepkimesine ait tabloya göre, Deney 1 ve 2 karşılaştırıldığında ([H2] sabit, [ICl] 2 katına çıkıyor, hız 2 katına çıkıyor) ICl'ye göre derece kaçtır?",
+      "options": [
+        "2",
+        "3",
+        "Belirlenemez",
+        "0",
+        "1"
+      ],
+      "correct": 4,
+      "explain": "[H2] sabitken [ICl] 2 katına çıktığında hız da 2 katına çıkıyor (0,018→0,036); ICl'ye göre derece 1'dir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Aynı tepkimede Deney 2'den Deney 3'e geçişte hem [ICl] hem [H2] 2 katına çıkarken hız 4 katına çıkıyor. ICl'ye göre derece 1 olduğuna göre, bu bilgiyi kullanarak H2'ye göre dereceyi ve hız denklemini bulunuz.",
+      "options": [
+        "H2 derecesi 2; r=k[ICl][H2]²",
+        "H2 derecesi 1; r=k[ICl][H2]",
+        "H2 derecesi 0; r=k[ICl]",
+        "H2 derecesi 3; r=k[ICl][H2]³",
+        "H2 derecesi 1; r=k[ICl]²[H2]"
+      ],
+      "correct": 1,
+      "explain": "ICl 2 katına çıkarken kendi başına hızı 2¹=2 katına çıkarır; toplam hız artışı 4 kat olduğuna göre, H2'nin katkısı da 4/2=2 kat olmalıdır. [H2] de 2 katına çıktığından ve etkisi 2 kat olduğundan H2'ye göre derece 1'dir. Hız denklemi: r=k[ICl][H2]."
+    },
+    {
+      "difficulty": "orta",
+      "text": "2ICl(g) + H2(g) → I2(g) + 2HCl(g) tepkimesi için r=k[ICl][H2] hız denklemi ve Deney 1 verileri ([ICl]=0,3 M, [H2]=0,3 M, r=0,018 M/s) kullanılarak k kaç bulunur?",
+      "options": [
+        "0,2",
+        "0,002",
+        "0,06",
+        "0,018",
+        "1,8"
+      ],
+      "correct": 0,
+      "explain": "k = r/([ICl][H2]) = 0,018/(0,3×0,3) = 0,018/0,09 = 0,2."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin hız denklemi r=k[A]²[B]⁰ olarak bulunuyor (B'nin üssü sıfır). Bu, B maddesi hakkında ne söyler?",
+      "options": [
+        "B bir katalizördür ve tepkimede asla yer almaz",
+        "B'nin derişimindeki değişim, bu derişim aralığında tepkime hızını gözle görülür şekilde etkilememektedir",
+        "Hesaplama hatası yapılmıştır, üs asla sıfır olamaz",
+        "B tepkimeye hiç katılmamıştır",
+        "B ürünlerden biridir"
+      ],
+      "correct": 1,
+      "explain": "Bir maddenin hız denklemindeki üssünün sıfır olması, o maddenin derişimindeki değişimin (incelenen aralıkta) tepkime hızını belirgin şekilde etkilemediği anlamına gelir; bu, B'nin tepkimeye hiç katılmadığı anlamına gelmez, yalnızca hız denklemindeki payının sıfırıncı dereceden (etkisiz) olduğunu gösterir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir kimyager iki farklı deneyde yalnızca sıcaklığı değiştiriyor (derişimler sabit) ve tepkime hızının arttığını gözlemliyor. Hız denklemindeki hangi büyüklüğün değiştiği söylenebilir?",
+      "options": [
+        "Tepkime derecesi",
+        "Derişim üsleri",
+        "Denklem tamamen değişir",
+        "Tepken sayısı",
+        "Hız sabiti (k)"
+      ],
+      "correct": 4,
+      "explain": "Derişimler sabit tutulup yalnızca sıcaklık değiştirildiğinde hızdaki değişim, hız sabiti k'daki değişimden kaynaklanır; k sıcaklıkla artar. Tepkime derecesi ve üsler tepkimenin doğasına bağlıdır, sıcaklıkla değişmez."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin hız denklemi r=k[A]²'dir ([B] hiç yer almaz). Bu tepkimenin toplam derecesi kaçtır ve k'nın birimi nedir?",
+      "options": [
+        "Derece 2, birim M/s",
+        "Derece 1, birim 1/s",
+        "Derece 2, birim 1/(s·M)",
+        "Derece 0, birim M/s",
+        "Derece 2, birim M²/s"
+      ],
+      "correct": 2,
+      "explain": "Hız denkleminde yalnızca [A]² terimi olduğundan tepkime derecesi 2'dir. k'nın birimi 1/(s·M^(n-1)) = 1/(s·M^(2-1)) = 1/(s·M)'dir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "2NO(g) + 2H2(g) → N2(g) + 2H2O(g) tepkimesi için bulunan hız denklemi r=k[NO]²[H2]'dir. Deney 1 verileri ([NO]=0,10 M, [H2]=0,10 M, r=1×10⁻³ M/s) kullanılarak k kaç bulunur ve birimi nedir?",
+      "options": [
+        "k=10; birim 1/(s·M³)",
+        "k=100; birim M²/s",
+        "k=0,1; birim 1/(s·M)",
+        "k=1,0; birim 1/(s·M²)",
+        "k=1×10⁻³; birim M/s"
+      ],
+      "correct": 3,
+      "explain": "k = r/([NO]²[H2]) = (1×10⁻³)/(0,10²×0,10) = (1×10⁻³)/(0,001) = 1,0. Tepkime derecesi 3 (2+1) olduğundan k'nın birimi 1/(s·M^(3-1)) = 1/(s·M²)'dir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin hız sabiti k'nın birimi 1/(s·M³) olarak veriliyor. Bu tepkimenin toplam derecesi kaçtır ve hız denklemi hangi genel formda olabilir?",
+      "options": [
+        "Derece 1; r=k[A]",
+        "Derece 2; r=k[A][B]",
+        "Derece 3; r=k[A]³ ya da r=k[A]²[B] gibi üsleri toplamda 3 olan kombinasyonlar",
+        "Derece 0; r=k",
+        "Derece 4; r=k[A]³[B] gibi üsleri toplamda 4 olan kombinasyonlar"
+      ],
+      "correct": 4,
+      "explain": "k biriminin genel formu 1/(s·M^(n-1))'dir. Verilen birim 1/(s·M³) olduğuna göre n-1=3, yani n=4'tür. Hız denklemi, üsleri toplamda 4 eden herhangi bir kombinasyonda olabilir (örneğin r=k[A]³[B], r=k[A][B]³, r=k[A]²[B]² gibi)."
+    },
+    {
+      "difficulty": "zor",
+      "statements": {
+        "items": [
+          "2ICl(g)+H2(g)→I2(g)+2HCl(g) tepkimesinde bulunan hız denklemindeki ICl üssü (1), tepkime denklemindeki ICl katsayısından (2) farklıdır; bu, tepkimenin muhtemelen çok basamaklı bir mekanizma izlediğine işaret eder.",
+          "Bir tepkimenin toplam derecesi her zaman tam sayı olmak zorundadır, kesirli olamaz.",
+          "İki farklı deney setinden aynı tepkime için hesaplanan k değerlerinin (aynı sıcaklıkta) birbirine çok yakın çıkması, bulunan hız denkleminin doğruluğunu destekler."
+        ]
+      },
+      "text": "Bu önermelerden hangileri doğrudur?",
+      "options": [
+        "II ve III",
+        "Yalnız III",
+        "Yalnız I",
+        "I ve III",
+        "I, II ve III"
+      ],
+      "correct": 3,
+      "explain": "I doğrudur; katsayı-üs uyuşmazlığı çok basamaklı mekanizmaya işaret eder. II yanlıştır; bazı karmaşık tepkimelerde deneysel olarak kesirli dereceler de gözlenebilir (bu modülün kapsamındaki örneklerde tam sayı çıksa da genel kural bu değildir). III doğrudur; farklı deney verilerinden tutarlı k değerleri elde edilmesi, bulunan hız denkleminin geçerliliğini destekleyen bir kanıttır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "İki basamaklı bir mekanizmada I. basamak (yavaş) A + B → C, II. basamak (hızlı) C + D → E + B şeklindedir. Net tepkime A+D→E olarak yazılabilir (B ara basamakta tükenip tekrar oluştuğu için net denklemde görünmez, katalizör gibi davranır). Bu tepkimenin deneysel hız denklemi hangisi olması beklenir?",
+      "options": [
+        "r = k[E], çünkü E nihai üründür",
+        "r = k[C][D], çünkü II. basamak hızlıdır",
+        "r = k[A][B], çünkü hız yavaş (I.) basamağa göre yazılır ve bu basamağın tepkenleri A ve B'dir",
+        "r = k[A][D], çünkü net tepkime A+D→E'dir",
+        "r = k[A][B][C][D], tüm maddeler dâhil edilmelidir"
+      ],
+      "correct": 2,
+      "explain": "Çok basamaklı tepkimelerde hız denklemi, net tepkimeye değil yavaş (hız belirleyici) basamağa göre yazılır. I. basamak yavaş olduğundan ve bu basamağın tepkenleri A ve B olduğundan, hız denklemi r=k[A][B] olması beklenir; B net tepkimede görünmese de (katalizör gibi davransa da) hız denkleminde yer alır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir öğrenci, N2(g)+3H2(g)→2NH3(g) tepkimesinin tek basamaklı olduğunu varsayarak hız denklemini r=k[N2][H2]³ olarak yazıyor, ancak deneysel veriler H2'ye göre derecenin aslında 2 olduğunu gösteriyor. Bu durumda öğrencinin ilk varsayımı hakkında ne söylenebilir?",
+      "options": [
+        "H2'nin derecesi asla 2 olamaz, deney tekrarlanmalıdır",
+        "Bu sonuç N2'nin katsayısının yanlış yazıldığını gösterir",
+        "Bu durumda tepkime hiç gerçekleşmiyor demektir",
+        "Varsayım doğrudur, deneysel veriler yanlış olmalıdır",
+        "Varsayım (tepkimenin tek basamaklı olduğu) yanlış çıkmış olabilir; gerçek tepkime muhtemelen çok basamaklı bir mekanizma izlemektedir"
+      ],
+      "correct": 4,
+      "explain": "Yalnızca tek basamaklı, gaz fazındaki tepkimelerde üsler katsayılarla örtüşür. Deneysel veriler katsayıdan (3) farklı bir derece (2) gösteriyorsa, bu tutarsızlık öğrencinin 'tek basamaklı' varsayımının yanlış olabileceğine, tepkimenin gerçekte daha karmaşık bir çok basamaklı mekanizma izlediğine işaret eder."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin hız denklemi r=k[A][B]² olarak bulunmuştur. [A] sabit tutulup [B] üçte birine düşürülürse tepkime hızı başlangıç hızının kaçta kaçına iner?",
+      "options": [
+        "1/3",
+        "1/9",
+        "1/27",
+        "1/6",
+        "3 katına çıkar"
+      ],
+      "correct": 1,
+      "explain": "[B]'nin üssü 2 olduğundan, [B] 1/3'e düştüğünde hıza etkisi (1/3)²=1/9 olur. [A] sabit olduğundan toplam hız da başlangıcın 1/9'una iner."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin hız denklemi r=k[X]³ olarak bulunmuştur (tek tepkenli). [X] derişimi 3 katına çıkarılırsa hız kaç katına çıkar? Bu tepkimenin k biriminin doğru ifadesi nedir?",
+      "options": [
+        "9 kat; birim 1/(s·M³)",
+        "27 kat; birim M³/s",
+        "3 kat; birim 1/(s·M³)",
+        "9 kat; birim 1/(s·M²)",
+        "27 kat; birim 1/(s·M²)"
+      ],
+      "correct": 4,
+      "explain": "[X] 3 katına çıkarıldığında hıza etkisi 3³=27 kattır. Tepkime derecesi n=3 olduğundan k'nın birimi 1/(s·M^(3-1))=1/(s·M²)'dir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir laboratuvar, aynı tepkime için farklı sıcaklıklarda deney tekrarlıyor ve hesaplanan hız denklemindeki ÜSLERİN (derişim kuvvetlerinin) her sıcaklıkta aynı çıktığını, yalnızca k değerinin değiştiğini gözlemliyor. Bu gözlem, tepkime mekanizması hakkında ne düşündürür?",
+      "options": [
+        "Sıcaklık her seferinde farklı bir mekanizma başlatmıştır",
+        "Sıcaklık tepkimenin mekanizmasını (izlediği yolu ve hangi basamağın yavaş olduğunu) değiştirmemiştir; yalnızca hız sabitini etkilemiştir",
+        "Bu, deneyde sistematik bir hata olduğunu gösterir",
+        "Bu gözlem, tepkimenin derecesinin sıcaklıkla değiştiğini gösterir",
+        "Üslerin sabit kalması bir tesadüftür, hiçbir anlamı yoktur"
+      ],
+      "correct": 1,
+      "explain": "Hız denklemindeki üsler (dolayısıyla tepkime derecesi ve muhtemel mekanizma/yavaş basamak) sıcaklıktan bağımsız kalırken yalnızca k'nın değişmesi, sıcaklığın tepkimenin izlediği yolu (mekanizmayı) değiştirmediğini, yalnızca taneciklerin bu yolu ne hızda kat ettiğini etkilediğini gösterir — bu, sıcaklığın aktivasyon enerjisini/mekanizmayı değiştirmediği ilkesiyle tutarlıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "2H2O2(suda) → 2H2O(s) + O2(g) tepkimesinin farklı bir katalizörle (I⁻ yerine farklı bir madde ile) katalizlenmesi durumunda hız denkleminin r=k[H2O2][I⁻]'den farklı bir forma sahip olması beklenir mi?",
+      "options": [
+        "Evet, ama yalnızca ürünlerin miktarı değişir, hız denklemi aynı kalır",
+        "Bu durumda tepkime katalizörsüz hâle gelir",
+        "Hayır, çünkü net tepkime denklemi değişmez",
+        "Hayır, hız denklemi her koşulda aynı kalır",
+        "Evet; farklı bir katalizör kullanıldığında tepkime muhtemelen farklı bir mekanizma (farklı ara basamaklar) izleyeceğinden, hız denklemi de o katalizörün derişimine bağlı farklı bir formda olabilir"
+      ],
+      "correct": 4,
+      "explain": "Farklı bir katalizör, tepkimenin izlediği mekanizmayı (ara basamakları) değiştirebilir. Hız denklemi mekanizmanın yavaş basamağına bağlı olduğundan, farklı bir katalizörle farklı bir yavaş basamak oluşabilir ve bu da farklı bir hız denklemine (örneğin farklı bir katalizör derişimi teriminin yer aldığı bir forma) yol açabilir. Net tepkime denklemi aynı kalsa da (2H2O2→2H2O+O2), hız denklemi mekanizmaya özgüdür."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin hız denklemi r=k[A]²[B] olarak bulunmuştur ve k=25 M⁻²s⁻¹ ölçülmüştür. [A]=0,4 M ve [B]=0,5 M olduğunda tepkime hızı kaç M/s'dir?",
+      "options": [
+        "0,5 M/s",
+        "5,0 M/s",
+        "1,0 M/s",
+        "4,0 M/s",
+        "2,0 M/s"
+      ],
+      "correct": 4,
+      "explain": "r = k[A]²[B] = 25 × (0,4)² × 0,5 = 25 × 0,16 × 0,5 = 25 × 0,08 = 2,0 M/s."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin hız denklemi r=k[A][B]² olarak biliniyor. Bir deneyde [A]=0,2 M, [B]=0,3 M iken r=0,036 M/s ölçülüyor. Aynı tepkimede [A]=0,5 M, [B]=0,3 M olduğunda hız kaç M/s olur?",
+      "options": [
+        "0,225 M/s",
+        "0,036 M/s",
+        "0,018 M/s",
+        "0,090 M/s",
+        "0,072 M/s"
+      ],
+      "correct": 3,
+      "explain": "Önce k bulunur: k = r/([A][B]²) = 0,036/(0,2×0,3²) = 0,036/(0,2×0,09) = 0,036/0,018 = 2,0. Yeni hız: r = 2,0×0,5×0,3² = 2,0×0,5×0,09 = 0,090 M/s. (Alternatif olarak: [A] 2,5 katına çıktığı için, B sabit kaldığından hız da 2,5 katına çıkar: 0,036×2,5=0,090 M/s.)"
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir kimyager, iki tepkenli bir tepkimede yalnızca [A]'yı değiştirip [B]'yi sabit tuttuğu bir deney seti ile A'nın derecesini buluyor, ardından yalnızca [B]'yi değiştirip [A]'yı sabit tuttuğu ikinci bir deney seti ile B'nin derecesini buluyor. Bu yöntemin (her seferinde yalnızca bir değişkeni değiştirme) bilimsel değeri nedir?",
+      "options": [
+        "Bu yöntem, her tepkenin hıza olan bağımsız etkisini net şekilde izole ederek doğru bir hız denklemi kurulmasını sağlar; aksi hâlde birden fazla değişkenin aynı anda değişmesi hangi değişkenin etkiyi yarattığını belirsizleştirir",
+        "Hiçbir değeri yoktur, deneyler rastgele yapılabilir",
+        "Bu yöntem yalnızca gaz tepkimeleri için geçerlidir",
+        "Değişkenleri aynı anda değiştirmek her zaman daha güvenilir sonuç verir",
+        "Yalnızca A'nın derecesini bulmak yeterlidir, B için ayrı deney gereksizdir"
+      ],
+      "correct": 0,
+      "explain": "Bilimsel bir deneyde bir seferde yalnızca bir bağımsız değişkeni değiştirip diğerlerini sabit tutmak, gözlenen etkinin hangi değişkenden kaynaklandığını net şekilde belirlemeyi sağlar. Birden fazla derişim aynı anda değiştirilirse (üçüncü ICl+H2 örneğindeki Deney 2→3 geçişinde olduğu gibi), her bir tepkenin ayrı katkısını ayırt etmek matematiksel olarak daha karmaşık hâle gelir ve tek başına yorumlanamaz."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin hız denklemi r=k[A][B]⁰ olarak bulunmuştur (B'nin üssü sıfır). Buna karşın bir öğrenci [B]'nin derişimini büyük ölçüde artırdığında tepkime hızının da belirgin biçimde arttığını gözlemliyor. Bu şaşırtıcı gözlem için en dikkatli açıklama hangisidir?",
+      "options": [
+        "Hız denklemi kesinlikle yanlış hesaplanmıştır, B'nin üssü asla sıfır olamaz",
+        "Bu durumda tepkime derecesi otomatik olarak değişir",
+        "B tepkimeye hiçbir zaman katılmamıştır, bu gözlem imkânsızdır",
+        "Sıcaklık kesinlikle değişmiştir, bu yüzden hız artmıştır",
+        "B'nin başlangıçtaki küçük derişim aralığında etkisi ölçülemeyecek kadar küçük çıkmış olabilir, ancak çok büyük bir derişim artışında farklı bir mekanizma devreye girmiş ya da B'nin etkisi belirginleşmiş olabilir; hız denklemleri genellikle belirli bir derişim aralığı için geçerlidir"
+      ],
+      "correct": 4,
+      "explain": "Deneysel olarak belirlenen hız denklemleri, genellikle test edilen derişim aralığı için geçerlidir. B'nin üssünün küçük bir derişim aralığında sıfır (etkisiz) çıkması, çok daha geniş bir derişim aralığında da aynı kalacağı anlamına gelmez; büyük derişim değişimlerinde mekanizma değişebilir veya ihmal edilen küçük bir etki belirginleşebilir. Bu, deneysel sonuçların sınırlarını bilmenin önemini gösterir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin genel hız denklemi r=k[A]^a[B]^b şeklinde biliniyor ama a ve b değerleri bilinmiyor. Yalnızca [A]'nın 4 katına çıkarıldığı ve hızın da 4 katına çıktığı TEK bir deney sonucu verildiğinde, a'nın kesin değeri belirlenebilir mi?",
+      "options": [
+        "Evet, a=1 olduğu kesin olarak söylenebilir çünkü 4¹=4",
+        "Evet, çünkü tek deney her zaman yeterlidir",
+        "Hayır kesin olarak söylenemez; a=1 en basit açıklama olsa da, tek bir veri noktası a için matematiksel olarak tek bir çözüm garanti etmez (örneğin ölçüm belirsizlikleri hesaba katıldığında farklı yakın değerler de olası olabilir); güvenilir sonuç için birden fazla bağımsız deney karşılaştırması gerekir",
+        "Hayır, hiçbir zaman belirlenemez",
+        "a değeri yalnızca b bilinirse bulunabilir"
+      ],
+      "correct": 2,
+      "explain": "Matematiksel olarak x^a=4 denklemi x=4 için a=1 çözümünü verir ve pratikte bu modülün tüm örneklerinde tam sayı dereceler kullanılmıştır; ancak bilimsel güvenilirlik açısından tek bir ölçüme dayanmak risklidir (ölçüm hatası, tesadüf vb.). Bu yüzden gerçek deneylerde birden fazla bağımsız veri noktasıyla (farklı deney setleri) sonucun doğrulanması, bulunan derecenin güvenilirliğini artırır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir üretici, bir tepkimenin hızını 2 katına çıkarmak istiyor ve hız denkleminin r=k[A]³ olduğunu biliyor. [A]'yı hangi çarpanla artırması gerekir (yaklaşık)?",
+      "options": [
+        "1,5 kat",
+        "3 kat",
+        "2 kat",
+        "8 kat",
+        "2^(1/3) ≈ 1,26 kat"
+      ],
+      "correct": 4,
+      "explain": "r=k[A]³ olduğundan hızı 2 katına çıkarmak için [A]³'ün 2 katına çıkması gerekir, yani [A]'nın kendisi 2^(1/3) ≈ 1,26 katına çıkarılmalıdır (çünkü (1,26)³≈2)."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin iki farklı deney setinden hesaplanan k değerleri sırasıyla 4,98 ve 5,03 çıkıyor (aynı sıcaklıkta). Bu küçük fark (yaklaşık %1) hakkında en bilimsel değerlendirme hangisidir?",
+      "options": [
+        "Hız denklemi tamamen yanlıştır, çünkü k her zaman birebir aynı çıkmalıdır",
+        "Bu fark yalnızca sıcaklık farklılığıyla açıklanabilir",
+        "Bu küçük fark, deneysel ölçümlerdeki kaçınılmaz belirsizlik/hata payı içinde değerlendirilebilir ve bulunan hız denkleminin genel olarak geçerli olduğunu desteklemeye devam eder",
+        "Bu fark, tepkimenin derecesinin yanlış hesaplandığını kesin olarak gösterir",
+        "k değerleri her deneyde tamamen farklı olmalıdır, bu tutarlılık şüphelidir"
+      ],
+      "correct": 2,
+      "explain": "Gerçek deneysel ölçümlerde küçük farklılıklar (ölçüm hassasiyeti, yuvarlama, deneysel koşullardaki ufak sapmalar) beklenir. %1 civarındaki bir fark, bulunan hız denkleminin ve derecenin geçersiz olduğunu göstermez; aksine, k değerlerinin birbirine bu denli yakın çıkması, modelin (hız denkleminin) veriyle tutarlı olduğunu destekler."
     }
   ]
 };

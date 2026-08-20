@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kimyasal Tepkimelerin Hız Denklemi · Kimya 11</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Modül 8 · Hız</span>
+    <h1>Kimyasal Tepkimelerin Hız Denklemi</h1>
+    <p class="lead">Deneysel verilerden yola çıkarak bir tepkimenin hız denklemini, derecesini ve hız sabitini
+      nasıl belirleriz? Bu modülde gerçek deney tablolarını inceleyerek hız denklemi kurmayı öğreneceksin.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <h2><span class="num">1</span>Kavramlar</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Hız Denklemi ve Derece</h3>
+        <p>Tepkime hızı ile tepkime giren maddelerin derişimleri arasındaki bağıntıya <b>hız denklemi</b> denir:
+          r = k[A]<sup>a</sup>[B]<sup>b</sup>. Üslerin toplamına <b>tepkime derecesi</b> denir. Tek basamaklı gaz
+          tepkimelerinde üsler stokiyometrik katsayılara eşittir; <b>çok basamaklı</b> tepkimelerde üsler
+          <b>yalnızca deneysel verilerden</b> belirlenir.</p>
+      </div>
+      <div class="card">
+        <h3>Hız Sabiti (k)</h3>
+        <p>Derişimle hız arasındaki orantıyı eşitliğe dönüştüren orantı sabitidir. Tepkimenin niteliğine,
+          sıcaklığa, temas yüzeyine ve katalizöre bağlıdır — bunlar arttıkça k de artar. Birimi
+          1/(s·M<sup>n-1</sup>) şeklindedir (n = tepkime derecesi).</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>Neden başlangıç hızı kullanılır?</b> Derişimler zamanla azaldığı için tepkime
+        hızındaki değişimler ara zamanlarda doğru ölçülemez. Bu yüzden hız denklemi, tepkimenin henüz
+        başladığı andaki (başlangıç) hıza göre oluşturulur.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">2</span>Keşfet: Hız Denklemi Dedektifi</h2>
+    <p class="block-lead">Bir tepkime seç; deney verilerini karşılaştırarak her tepkenin derecesini, tepkimenin
+      hız denklemini ve hız sabitini adım adım bul.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="rxn8-select">Tepkime:</label>
+        <select id="rxn8-select"></select>
+      </div>
+      <div id="rxn8-detail"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">3</span>Keşfet: Çok Basamaklı Tepkime ve Yavaş Basamak</h2>
+    <p class="block-lead">2H2O2(suda) → 2H2O(s) + O2(g) tepkimesi iyodür iyonu (I⁻) katalizörlüğünde iki basamakta
+      gerçekleşir. Potansiyel enerji grafiğinde hangi basamağın daha yavaş olduğunu (daha yüksek aktivasyon
+      enerjisine sahip olduğunu) incele.</p>
+    <div class="lab">
+      <div class="lab-stage" style="min-height:300px"><svg id="mech-svg" viewBox="0 0 520 280" style="width:100%;max-width:520px"></svg></div>
+      <div class="lab-readout">
+        <div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻</div>
+        <div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻</div>
+      </div>
+      <p style="margin-top:10px;color:var(--ink-soft);font-size:.92rem">Deneysel hız denklemi net tepkimeye göre
+        değil, yavaş basamağa göre yazılır: <b>r = k[H2O2][I⁻]</b>. Dikkat: I⁻ net tepkime denkleminde
+        görünmese de (katalizör olduğu için), hız denkleminde yer alır — çünkü hız denklemi yavaş basamağın
+        tepkenlerinden kurulur.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">4</span>Değerlendir</h2>
+    <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
+    <div id="quiz-host"></div>
+  </div>
+</section>
+
+<div id="next-module-root"></div>
+<div id="footer-root"></div>
+
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/quiz-engine.js"></script>
+<script src="../assets/js/quiz-data.js"></script>
+<script>
+  const MODKEY = "m8";
+
+  const RXN8 = [
+    {
+      name: "CO(g) + Cl2(g) → COCl2(g)",
+      labelA: "[CO]", labelB: "[Cl2]",
+      rows: [
+        { a: 0.20, b: 0.20, r: 0.04 },
+        { a: 0.20, b: 0.60, r: 0.12 },
+        { a: 0.40, b: 0.60, r: 0.24 },
+      ],
+    },
+    {
+      name: "2NO(g) + 2H2(g) → N2(g) + 2H2O(g)",
+      labelA: "[NO]", labelB: "[H2]",
+      rows: [
+        { a: 0.10, b: 0.10, r: 0.001 },
+        { a: 0.10, b: 0.20, r: 0.002 },
+        { a: 0.20, b: 0.20, r: 0.008 },
+      ],
+    },
+    {
+      name: "2NO(g) + O2(g) → 2NO2(g)",
+      labelA: "[NO]", labelB: "[O2]",
+      rows: [
+        { a: 0.10, b: 0.10, r: 0.10 },
+        { a: 0.20, b: 0.10, r: 0.40 },
+        { a: 0.20, b: 0.20, r: 0.80 },
+      ],
+    },
+    {
+      name: "2ICl(g) + H2(g) → I2(g) + 2HCl(g)",
+      labelA: "[ICl]", labelB: "[H2]",
+      rows: [
+        { a: 0.3, b: 0.3, r: 0.018 },
+        { a: 0.6, b: 0.3, r: 0.036 },
+        { a: 1.2, b: 0.6, r: 0.144 },
+      ],
+    },
+  ];
+
+  // İki deney arasındaki geçişten n_A, n_B için doğrusal denklem katsayıları üretir:
+  // ln(r2/r1) = nA*ln(a2/a1) + nB*ln(b2/b1)
+  function eqFromPair(d1, d2) {
+    return {
+      lr: Math.log(d2.r / d1.r),
+      la: Math.log(d2.a / d1.a),
+      lb: Math.log(d2.b / d1.b),
+    };
+  }
+
+  // Genel 2x2 doğrusal sistemi çözerek nA ve nB'yi bulur (tek değişken sabit olmasa bile doğru sonuç verir).
+  function solveOrders(rows) {
+    const [d1, d2, d3] = rows;
+    const e1 = eqFromPair(d1, d2);
+    const e2 = eqFromPair(d2, d3);
+    const det = e1.la * e2.lb - e2.la * e1.lb;
+    const nA = (e1.lr * e2.lb - e2.lr * e1.lb) / det;
+    const nB = (e1.la * e2.lr - e2.la * e1.lr) / det;
+    return [Math.round(nA), Math.round(nB)];
+  }
+
+  function findCleanPair(rows, constKey, varKey) {
+    const [d1, d2, d3] = rows;
+    if (d1[constKey] === d2[constKey]) return [d1, d2];
+    if (d1[constKey] === d3[constKey]) return [d1, d3];
+    if (d2[constKey] === d3[constKey]) return [d2, d3];
+    return null;
+  }
+
+  function renderRxn8(idx) {
+    const rx = RXN8[idx];
+    const [nA, nB] = solveOrders(rx.rows);
+    const totalOrder = nA + nB;
+    const kVals = rx.rows.map((d) => d.r / (Math.pow(d.a, nA) * Math.pow(d.b, nB)));
+    const kAvg = kVals.reduce((a, b) => a + b, 0) / kVals.length;
+
+    const pairA = findCleanPair(rx.rows, "b", "a");
+    const pairB = findCleanPair(rx.rows, "a", "b");
+    const nameA = rx.labelA.slice(1, -1), nameB = rx.labelB.slice(1, -1);
+
+    function explainFor(pair, rows, labelSelf, labelOther, n) {
+      if (pair) {
+        const i1 = rows.indexOf(pair[0]) + 1, i2 = rows.indexOf(pair[1]) + 1;
+        const ratio = (pair[1].r / pair[0].r).toFixed(0);
+        return `Deney ${i1} → ${i2}'de ${labelOther} sabitken ${labelSelf} değişimi hızı ${ratio} katına çıkarıyor → derece = <b style="color:var(--energy)">${n}</b>`;
+      }
+      return `Hiçbir deney çiftinde ${labelOther} sabit tutulmadığından, üç deneyin tamamı bir arada matematiksel olarak çözülerek derece = <b style="color:var(--energy)">${n}</b> bulunur (diğer değişkenin bilinen etkisi denklemden çıkarılarak).`;
+    }
+
+    document.getElementById("rxn8-detail").innerHTML = `
+      <table class="viz-table">
+        <thead><tr><th>Deney</th><th>${rx.labelA} (M)</th><th>${rx.labelB} (M)</th><th>Başlangıç Hızı (M/s)</th></tr></thead>
+        <tbody>
+          ${rx.rows.map((d, i) => `<tr><td>${i + 1}</td><td>${d.a}</td><td>${d.b}</td><td>${d.r}</td></tr>`).join("")}
+        </tbody>
+      </table>
+      <div class="grid-2" style="margin-top:10px">
+        <div class="card">
+          <p style="margin:0"><b>${nameA} derecesi:</b> ${explainFor(pairA, rx.rows, rx.labelA, rx.labelB, nA)}</p>
+        </div>
+        <div class="card">
+          <p style="margin:0"><b>${nameB} derecesi:</b> ${explainFor(pairB, rx.rows, rx.labelB, rx.labelA, nB)}</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:10px;text-align:center">
+        <p style="margin:0;font-size:1.05rem">Hız denklemi: <b>r = k${rx.labelA}<sup>${nA}</sup>${rx.labelB}<sup>${nB}</sup></b>
+          &nbsp;·&nbsp; Tepkime derecesi = <b>${totalOrder}</b>
+          &nbsp;·&nbsp; k ≈ <b style="color:var(--rate)">${kAvg.toFixed(3)}</b></p>
+      </div>
+    `;
+  }
+
+  function buildRxn8Lab() {
+    const sel = document.getElementById("rxn8-select");
+    RXN8.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
+    sel.addEventListener("change", () => renderRxn8(sel.value));
+    renderRxn8(0);
+  }
+
+  function drawMechanism() {
+    const svgEl = document.getElementById("mech-svg");
+    svgEl.innerHTML = `
+      <line x1="50" y1="260" x2="50" y2="30" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <text x="10" y="25" font-size="12" fill="var(--ink-soft)">Potansiyel Enerji</text>
+      <text x="380" y="275" font-size="12" fill="var(--ink-soft)">Tepkime Koordinatı</text>
+      <line x1="60" y1="200" x2="130" y2="200" stroke="var(--ink)" stroke-width="3"/>
+      <text x="95" y="216" text-anchor="middle" font-size="11">H2O2+I⁻</text>
+      <line x1="230" y1="150" x2="300" y2="150" stroke="var(--ink)" stroke-width="3"/>
+      <text x="265" y="140" text-anchor="middle" font-size="11">H2O+IO⁻ (ara ürün)</text>
+      <line x1="400" y1="90" x2="470" y2="90" stroke="var(--ink)" stroke-width="3"/>
+      <text x="435" y="106" text-anchor="middle" font-size="11">H2O+O2+I⁻</text>
+      <path d="M130,200 Q 180,70 230,150" fill="none" stroke="var(--exo)" stroke-width="2.4"/>
+      <path d="M300,150 Q 340,120 400,90" fill="none" stroke="var(--endo)" stroke-width="2.4"/>
+      <text x="150" y="60" font-size="11" fill="var(--exo)" font-weight="700">Ea1 (büyük → yavaş)</text>
+      <text x="330" y="115" font-size="11" fill="var(--endo)" font-weight="700">Ea2 (küçük → hızlı)</text>
+    `;
+  }
+
+  buildRxn8Lab();
+  drawMechanism();
+  mountNav(MODKEY);
+  mountNextModule(MODKEY);
+  markVisited(MODKEY);
+  mountFooter();
+  renderQuiz(MODKEY, QUIZ.m8);
+</script>
+</body>
+</html>
