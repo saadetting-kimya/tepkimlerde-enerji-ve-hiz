@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kimya 11 · Enerji ve Tepkime Hızı</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">11. Sınıf Kimya</span>
+    <h1>Enerji ve Tepkime Hızı</h1>
+    <p class="lead">Kimyasal tepkimelerde açığa çıkan/soğurulan enerjiyi ve tepkimelerin ne kadar hızlı gerçekleştiğini,
+      sanal deneylerle ve bağlam temelli sorularla keşfet. 8 modül, kütüphanesiz ve internetsiz çalışır.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <h2>Modüller</h2>
+    <div id="module-grid" class="grid-3"></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container grid-2">
+    <div class="card">
+      <h3>📘 Basılabilir Ders Defteri</h3>
+      <p style="color:var(--ink-soft)">Aynı 8 modülü, konu anlatımı + kavram kutuları + çözümlü örnekler + çalışma
+        yaprakları hâlinde tek bir A4 defterde topla. Yazdırılabilir.</p>
+      <a href="defter/index.html" class="btn primary">Ders Defterini Aç</a>
+    </div>
+    <div class="card">
+      <h3>🔁 Yanlışlarım</h3>
+      <p style="color:var(--ink-soft)">Sorularda yanlış işaretlediğin tüm soruları tek bir yerde topla, tekrar
+        çalış.</p>
+      <a href="yanlislarim.html" class="btn">Yanlışlarımı Gör</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/quiz-engine.js"></script>
+<script>
+  const grid = document.getElementById("module-grid");
+  const visited = getVisited();
+  LINKS.forEach((l, i) => {
+    const done = visited.includes(l.key);
+    const card = document.createElement("a");
+    card.href = l.href;
+    card.className = "card";
+    card.style.textDecoration = "none";
+    card.style.color = "inherit";
+    card.style.display = "block";
+    card.innerHTML = `
+      <span class="tag ${done ? "rate" : "orta"}">${done ? "✓ Tamamlandı" : "Modül " + (i + 1)}</span>
+      <h3 style="margin-top:10px">${l.title}</h3>
+    `;
+    grid.appendChild(card);
+  });
+  mountNav(null);
+  mountFooter();
+</script>
+</body>
+</html>

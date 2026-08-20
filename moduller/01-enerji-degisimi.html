@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enerji Değişimi · Kimya 11</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="nav-root"></div>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Modül 1 · Enerji</span>
+    <h1>Tepkimelerde Meydana Gelen Enerji Değişimi</h1>
+    <p class="lead">Her fiziksel veya kimyasal olay, çevresiyle bir enerji alışverişi içindedir. Bu modülde
+      olayları fiziksel/kimyasal ve endotermik/ekzotermik eksenlerinde sınıflandırmayı öğreneceksin.</p>
+  </div>
+</header>
+
+<section class="block" style="border-top:none">
+  <div class="container">
+    <h2><span class="num">1</span>Kavramlar</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3><span class="tag endo">Endotermik</span></h3>
+        <p>Çevresinden ısı alarak gerçekleşen fiziksel veya kimyasal değişimlerdir. Değişim gerçekleşirken
+          çevrenin sıcaklığı düşer; çünkü çevredeki enerjinin bir kısmı sisteme aktarılır.</p>
+      </div>
+      <div class="card">
+        <h3><span class="tag exo">Ekzotermik</span></h3>
+        <p>Çevresine ısı vererek gerçekleşen fiziksel veya kimyasal değişimlerdir. Değişim gerçekleşirken
+          çevrenin sıcaklığı yükselir; çünkü sistemdeki enerjinin bir kısmı çevreye aktarılır.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>Önemli ayrım:</b> "Fiziksel mi, kimyasal mı?" sorusu ile "endotermik mi, ekzotermik mi?"
+        sorusu birbirinden bağımsızdır. Erime fiziksel bir olaydır ve endotermiktir; yanma kimyasal bir olaydır
+        ve ekzotermiktir — ama örneğin bir çözünme olayı fiziksel olduğu hâlde ekzotermik de endotermik de
+        olabilir; bunu belirleyen çözünen maddenin cinsidir.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">2</span>Keşfet: Olayı Sınıflandır</h2>
+    <p class="block-lead">Aşağıdaki günlük hayat olaylarından birine tıkla; olayın fiziksel/kimyasal türünü ve
+      ısı alışverişi yönünü birlikte belirlemeye çalış, sonra cevabı kontrol et.</p>
+    <div class="lab">
+      <div id="classify-grid" class="grid-3"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">3</span>Keşfet: Isı Alışverişinin Yönü</h2>
+    <p class="block-lead">Bir olay seç; sistemin (olayın gerçekleştiği maddenin) çevresiyle hangi yönde ısı
+      alışverişi yaptığını ve çevre sıcaklığındaki değişimi gözlemle.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="event-select">Olay:</label>
+        <select id="event-select"></select>
+      </div>
+      <div class="lab-stage"><svg id="heat-svg" viewBox="0 0 480 220" style="width:100%;max-width:480px"></svg></div>
+      <div class="lab-readout" id="heat-readout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">4</span>Değerlendir</h2>
+    <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
+    <div id="quiz-host"></div>
+  </div>
+</section>
+
+<div id="next-module-root"></div>
+<div id="footer-root"></div>
+
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/quiz-engine.js"></script>
+<script src="../assets/js/quiz-data.js"></script>
+<script>
+  const MODKEY = "m1";
+
+  const CLASSIFY_ITEMS = [
+    { label: "Buz küpünün elde erimesi", physical: "Fiziksel", thermic: "Endotermik", why: "Katı hâlden sıvı hâle geçiş bir hâl değişimidir (fiziksel); erime sırasında buz, elden ısı alır." },
+    { label: "Odunun yanması", physical: "Kimyasal", thermic: "Ekzotermik", why: "Yanma sonucunda yeni maddeler (kül, gazlar) oluşur (kimyasal); açığa çıkan ısı çevreye yayılır." },
+    { label: "Amonyum klorürün suda çözünmesi", physical: "Fiziksel", thermic: "Endotermik", why: "Çözünme bir hâl/dağılma olayıdır (fiziksel); bu tuzun çözünmesi ortamdan ısı çeker, çözelti soğur." },
+    { label: "Soğuk bir şişenin yüzeyinde su damlacıkları oluşması", physical: "Fiziksel", thermic: "Ekzotermik", why: "Havadaki su buharının yoğuşarak sıvı hâle geçmesi fizikseldir; yoğuşma sırasında çevreye ısı verilir." },
+    { label: "Demirin paslanması", physical: "Kimyasal", thermic: "Ekzotermik", why: "Demirin oksijenle tepkimeye girip demir oksit oluşturması kimyasaldır; bu tepkime ısı açığa çıkarır." },
+    { label: "Spor yaparken vücut sıcaklığının artması", physical: "Kimyasal", thermic: "Ekzotermik", why: "Vücuttaki besin moleküllerinin enerji üretmek üzere parçalanması kimyasal bir süreçtir ve ısı açığa çıkarır." },
+  ];
+
+  const HEAT_EVENTS = [
+    { name: "Buzun erimesi", dir: "in", note: "Sistem (buz) çevreden ısı alır; çevre soğur." },
+    { name: "Amonyum nitratın suda çözünmesi (soğutucu paket)", dir: "in", note: "Sistem çözeltiden ısı alır; çözelti ve çevresi soğur." },
+    { name: "Demirin havada yükseltgenmesi (ısıtıcı paket)", dir: "out", note: "Tepkime ısı üretir; sistem çevreye ısı verir, çevre ısınır." },
+    { name: "Mumun yanması", dir: "out", note: "Yanma tepkimesi ısı ve ışık açığa çıkarır; çevre ısınır." },
+    { name: "Suyun buharlaşması", dir: "in", note: "Sıvı molekülleri gaz hâle geçmek için ısı alır; çevre soğur." },
+    { name: "Sodyum asetatlı cep sobasının katılaşması", dir: "out", note: "Aşırı doymuş çözelti kristalleşirken biriktirdiği enerjiyi çevreye verir; çevre ısınır." },
+  ];
+
+  function buildClassifyGrid() {
+    const grid = document.getElementById("classify-grid");
+    CLASSIFY_ITEMS.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.cursor = "pointer";
+      card.innerHTML = `<p style="margin:0 0 10px;font-weight:600">${item.label}</p>
+        <div class="answer" style="display:none">
+          <p style="margin:0 0 8px"><span class="tag orta">${item.physical}</span> <span class="tag ${item.thermic === "Endotermik" ? "endo" : "exo"}">${item.thermic}</span></p>
+          <p style="margin:0;color:var(--ink-soft);font-size:.88rem">${item.why}</p>
+        </div>
+        <button class="btn" style="margin-top:8px;font-size:.8rem;padding:6px 12px">Cevabı göster</button>`;
+      const btn = card.querySelector("button");
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        card.querySelector(".answer").style.display = "block";
+        btn.style.display = "none";
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  function drawHeatDiagram(ev) {
+    const svgEl = document.getElementById("heat-svg");
+    const dirIn = ev.dir === "in";
+    const arrowColor = dirIn ? "var(--endo)" : "var(--exo)";
+    svgEl.innerHTML = `
+      <rect x="170" y="60" width="140" height="100" rx="14" fill="${dirIn ? "var(--endo-soft)" : "var(--exo-soft)"}" stroke="${arrowColor}" stroke-width="2"/>
+      <text x="240" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="${arrowColor}">SİSTEM</text>
+      <text x="70" y="30" font-size="12" fill="var(--ink-soft)">ÇEVRE</text>
+      ${dirIn
+        ? `<line x1="90" y1="110" x2="165" y2="110" stroke="${arrowColor}" stroke-width="4" marker-end="url(#arrow)"/>
+           <text x="60" y="180" font-size="12" fill="${arrowColor}">Isı sisteme giriyor →</text>`
+        : `<line x1="165" y1="110" x2="90" y2="110" stroke="${arrowColor}" stroke-width="4" marker-end="url(#arrow)"/>
+           <text x="30" y="180" font-size="12" fill="${arrowColor}">← Isı çevreye çıkıyor</text>`}
+      <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="${dirIn ? "auto" : "auto-start-reverse"}">
+        <path d="M0,0 L6,3 L0,6 Z" fill="${arrowColor}"/></marker></defs>
+      <circle cx="400" cy="110" r="26" fill="none" stroke="${arrowColor}" stroke-width="3"/>
+      <text x="400" y="116" text-anchor="middle" font-size="20" fill="${arrowColor}">${dirIn ? "↓T" : "↑T"}</text>
+    `;
+    document.getElementById("heat-readout").innerHTML = `
+      <div><b>${dirIn ? "Endotermik" : "Ekzotermik"}</b>Süreç türü</div>
+      <div><b>${dirIn ? "Azalır" : "Artar"}</b>Çevre sıcaklığı</div>
+      <div style="max-width:260px"><span style="color:var(--ink-soft)">${ev.note}</span></div>
+    `;
+  }
+
+  function buildHeatSim() {
+    const sel = document.getElementById("event-select");
+    HEAT_EVENTS.forEach((ev, i) => {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = ev.name;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener("change", () => drawHeatDiagram(HEAT_EVENTS[sel.value]));
+    drawHeatDiagram(HEAT_EVENTS[0]);
+  }
+
+  buildClassifyGrid();
+  buildHeatSim();
+  mountNav(MODKEY);
+  mountNextModule(MODKEY);
+  markVisited(MODKEY);
+  mountFooter();
+  renderQuiz(MODKEY, QUIZ.m1);
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ders Defteri · Kimya 11 Enerji ve Tepkime Hızı</title>
+<style>
+  :root {
+    --ink: #16202a; --ink-soft: #4b5b68; --line: #c9d2d9;
+    --energy: #d9622b; --energy-soft: #fbe6d8;
+    --endo: #2b6fd9; --endo-soft: #dbe8fb;
+    --exo: #d9422b; --exo-soft: #fbdcd8;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Noto Sans", sans-serif; color: var(--ink); margin: 0; background: #ececec; }
+  .toolbar { position: sticky; top: 0; background: #fff; border-bottom: 1px solid var(--line); padding: 10px 20px; display: flex; gap: 10px; align-items: center; z-index: 10; }
+  .toolbar a, .toolbar button { font-size: .88rem; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; cursor: pointer; text-decoration: none; color: var(--ink); }
+  .toolbar button.primary { background: var(--energy); color: #fff; border-color: var(--energy); }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 24px auto; background: #fff;
+    padding: 18mm 16mm; box-shadow: 0 4px 18px rgba(0,0,0,.15);
+  }
+  h1 { font-size: 1.7rem; margin: 0 0 6px; }
+  h2 { font-size: 1.25rem; margin: 26px 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--energy); }
+  h3 { font-size: 1.02rem; margin: 18px 0 8px; }
+  p { line-height: 1.6; }
+  .cover { text-align: center; padding-top: 30mm; }
+  .cover .eyebrow { display: inline-block; font-size: .8rem; font-weight: 700; color: var(--energy); background: var(--energy-soft); border-radius: 999px; padding: 4px 14px; margin-bottom: 18px; }
+  .box { border-radius: 10px; padding: 14px 16px; margin: 14px 0; border: 1px solid var(--line); }
+  .box.kavram { background: var(--endo-soft); border-color: var(--endo); }
+  .box.kavram .box-label { color: var(--endo); }
+  .box.ornek { background: #f4f6f8; border-left: 4px solid var(--energy); }
+  .box.notlarim { background: #fffceb; border: 1px dashed #d8c26a; min-height: 60px; }
+  .box-label { font-weight: 800; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; display: block; }
+  .worksheet { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin: 10px 0; }
+  .worksheet ol { padding-left: 20px; }
+  .worksheet li { margin-bottom: 10px; }
+  .answer-line { display: inline-block; border-bottom: 1px solid var(--ink-soft); min-width: 60px; }
+  table.dtable { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: .92rem; }
+  table.dtable th, table.dtable td { border: 1px solid var(--line); padding: 6px 9px; text-align: center; }
+  table.dtable th { background: #f0f2f4; }
+  .tag { display: inline-block; font-size: .74rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; }
+  .tag.endo { background: var(--endo-soft); color: var(--endo); }
+  .tag.exo { background: var(--exo-soft); color: var(--exo); }
+  .answer-key { columns: 2; column-gap: 30px; font-size: .92rem; }
+  .answer-key div { break-inside: avoid; margin-bottom: 4px; }
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none; }
+    .page { box-shadow: none; margin: 0; width: auto; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <a href="../index.html">← Ana Sayfa</a>
+  <button class="primary" onclick="window.print()">🖨️ Yazdır / PDF Kaydet</button>
+</div>
+
+<!-- KAPAK -->
+<div class="page cover">
+  <span class="eyebrow">11. Sınıf Kimya</span>
+  <h1 style="font-size:2.4rem">Enerji ve Tepkime Hızı</h1>
+  <p style="font-size:1.1rem;color:var(--ink-soft)">Ders Defteri</p>
+  <p style="margin-top:60px;color:var(--ink-soft);font-size:.9rem">Konu anlatımı · Kavram kutuları · Çözümlü örnekler<br>Çalışma yaprakları · Cevap anahtarı</p>
+</div>
+
+<!-- MODÜL 1 -->
+<div class="page">
+  <span class="tag endo" style="margin-bottom:8px">Modül 1</span>
+  <h1>Tepkimelerde Meydana Gelen Enerji Değişimi</h1>
+  <p>Her fiziksel veya kimyasal olay, çevresiyle bir enerji alışverişi içindedir. Bu ilişkinin yönünü tanımlamak
+    için iki temel kavram kullanılır: endotermik ve ekzotermik değişim.</p>
+
+  <div class="box kavram">
+    <span class="box-label">Kavram</span>
+    <p style="margin:0"><b>Endotermik değişim:</b> Çevresinden ısı alarak gerçekleşen değişimlerdir. Değişim
+      sırasında çevrenin sıcaklığı düşer, çünkü çevredeki enerjinin bir kısmı değişimi geçiren sisteme aktarılır.</p>
+  </div>
+  <div class="box kavram" style="background:var(--exo-soft);border-color:var(--exo)">
+    <span class="box-label" style="color:var(--exo)">Kavram</span>
+    <p style="margin:0"><b>Ekzotermik değişim:</b> Çevresine ısı vererek gerçekleşen değişimlerdir. Değişim
+      sırasında çevrenin sıcaklığı yükselir, çünkü sistemdeki enerjinin bir kısmı çevreye aktarılır.</p>
+  </div>
+
+  <h2>Fiziksel/Kimyasal Ayrımı ile Isı Yönü Bağımsızdır</h2>
+  <p>Bir değişimin fiziksel mi kimyasal mı olduğu, madde kimliğinin değişip değişmediğine bakılarak belirlenir.
+    Isı alışverişinin yönü (endotermik/ekzotermik) ise bundan bağımsız, ayrı bir sınıflandırma ölçütüdür.
+    Aşağıdaki tablo bu bağımsızlığı göstermektedir:</p>
+
+  <table class="dtable">
+    <thead><tr><th>Olay</th><th>Fiziksel / Kimyasal</th><th>Isı Yönü</th></tr></thead>
+    <tbody>
+      <tr><td>Buzun erimesi</td><td>Fiziksel</td><td>Endotermik</td></tr>
+      <tr><td>Su buharının yoğuşması</td><td>Fiziksel</td><td>Ekzotermik</td></tr>
+      <tr><td>Odunun yanması</td><td>Kimyasal</td><td>Ekzotermik</td></tr>
+      <tr><td>Amonyum klorürün suda çözünmesi</td><td>Fiziksel</td><td>Endotermik</td></tr>
+      <tr><td>Demirin paslanması</td><td>Kimyasal</td><td>Ekzotermik</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box ornek">
+    <span class="box-label" style="color:var(--energy)">Çözümlü Örnek</span>
+    <p><b>Soru:</b> Bir tıbbi soğutma paketi sıkıldığında içindeki katı madde suda çözünüyor ve paketin yüzeyi
+      hızla soğuyor. Bu olay hangi ısı alışverişi yönüne örnektir? Açıklayınız.</p>
+    <p><b>Çözüm:</b> Paketin yüzeyinin soğuması, çözünen katının çevresinden (sudan ve dış ortamdan) ısı aldığının
+      göstergesidir. Bir madde çözünürken çevresinden ısı alıyorsa bu süreç <b>endotermiktir</b>. Ayrıca çözünme,
+      madde kimliğini değiştirmediği için aynı zamanda <b>fiziksel</b> bir değişimdir.</p>
+  </div>
+
+  <div class="box notlarim">
+    <span class="box-label" style="color:var(--ink-soft)">Notlarım</span>
+  </div>
+</div>
+
+<div class="page page-break">
+  <h2 style="margin-top:0">Çalışma Yaprağı — Modül 1</h2>
+  <div class="worksheet">
+    <ol>
+      <li>Aşağıdaki olayları fiziksel/kimyasal ve endotermik/ekzotermik olarak sınıflandırınız:
+        <br>a) Kuru buzun (katı CO₂) süblimleşmesi: <span class="answer-line">&nbsp;</span> / <span class="answer-line">&nbsp;</span>
+        <br>b) Sodyum hidroksidin suda çözünmesi (ısınma gözlenir): <span class="answer-line">&nbsp;</span> / <span class="answer-line">&nbsp;</span>
+        <br>c) Mumun erimesi: <span class="answer-line">&nbsp;</span> / <span class="answer-line">&nbsp;</span>
+      </li>
+      <li>Bir öğrencinin yaptığı deneyde, katı bir maddenin suda çözünmesiyle çözelti sıcaklığının 25°C'den
+        19°C'ye düştüğü ölçülüyor. Bu çözünme olayının ısı alışverişi yönünü belirleyip gerekçelendiriniz.
+        <br><br><span class="answer-line" style="min-width:100%"></span>
+      </li>
+      <li>"Her ekzotermik olay kimyasaldır." ifadesi doğru mudur? Bir örnekle açıklayınız.
+        <br><br><span class="answer-line" style="min-width:100%"></span>
+      </li>
+    </ol>
+  </div>
+
+  <h2>Cevap Anahtarı</h2>
+  <div class="answer-key">
+    <div>1a) Fiziksel / Endotermik</div>
+    <div>1b) Fiziksel / Ekzotermik</div>
+    <div>1c) Fiziksel / Endotermik</div>
+    <div>2) Endotermik — sıcaklık düşmüştür, madde çevreden ısı almıştır.</div>
+    <div>3) Yanlıştır — yoğuşma gibi fiziksel değişimler de ekzotermik olabilir.</div>
+  </div>
+</div>
+
+<div class="page page-break" style="display:flex;align-items:center;justify-content:center;text-align:center">
+  <div>
+    <h2 style="border:none">Modül 2–8</h2>
+    <p style="color:var(--ink-soft)">Bu defter modül modül genişletilmeye devam edecek.</p>
+  </div>
+</div>
+
+</body>
+</html>
