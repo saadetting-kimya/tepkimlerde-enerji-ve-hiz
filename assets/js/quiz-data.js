@@ -2,6 +2,7 @@
    quiz-data.js — QUIZ = { modulAnahtari: [ {soru...}, ... ] }
    Modül 1: Tepkimelerde Meydana Gelen Enerji Değişimi (KİM.11.1.1)
    Modül 2: Maddelerin Enerji Kaynağı Olma Potansiyeli (KİM.11.1.2)
+   Modül 3: Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması (KİM.11.1.3)
    ============================================================ */
 
 const QUIZ = {
@@ -1802,6 +1803,858 @@ const QUIZ = {
       ],
       "correct": 2,
       "explain": "I yanlıştır; yanma ısısının yüksekliği ile maliyet arasında zorunlu bir ilişki yoktur (örneğin hidrojen yüksek yanma ısısına sahip olsa da maliyeti yüksektir). II doğrudur; madde 2'nin temel ilkesi budur. III doğrudur; hem yanma ısısı hem fizyolojik enerji değeri, birim kütlenin (1 g) sağladığı enerji miktarını ifade eder, ikisi de aynı temel mantığa (kJ/g) dayanır."
+    }
+  ],
+  "m3": [
+    {
+      "difficulty": "kolay",
+      "text": "Standart koşullarda gaz hâlindeki taneciklerde 1 mol kimyasal bağın kırılması için gereken enerjiye ne ad verilir?",
+      "options": [
+        "Tepkime entalpisi",
+        "Oluşum entalpisi",
+        "Bağ enerjisi",
+        "Yanma ısısı",
+        "Aktivasyon enerjisi"
+      ],
+      "correct": 2,
+      "explain": "Gaz hâlindeki 1 mol kimyasal bağın kırılması için gereken enerjiye bağ enerjisi denir; kJ/mol birimiyle ifade edilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir kimyasal bağın kırılması hangi türde bir olaydır?",
+      "options": [
+        "Endotermik, çevreden enerji alır",
+        "Yalnızca fiziksel bir değişimdir",
+        "Isı alışverişi içermez",
+        "Ekzotermik, çevreye ısı verir",
+        "Her zaman kendiliğinden gerçekleşir"
+      ],
+      "correct": 0,
+      "explain": "Bağ kırmak enerji gerektiren (endotermik) bir olaydır; bağı oluşturan atomları birbirinden ayırmak için dışarıdan enerji verilmesi gerekir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Yeni bir kimyasal bağın oluşması sırasında enerji açığa çıkar mı?",
+      "options": [
+        "Yalnızca iyonik bağlarda enerji açığa çıkar",
+        "Bu, bağın uzunluğuna bağlıdır",
+        "Hayır, bağ oluşumu da endotermiktir",
+        "Evet, bağ oluşumu ekzotermiktir",
+        "Hayır, bağ oluşumu ısı alışverişi yapmaz"
+      ],
+      "correct": 3,
+      "explain": "Atomlar bir araya gelip bağ oluştururken daha kararlı, daha düşük enerjili bir duruma geçerler ve bu sırada enerji açığa çıkar; bağ oluşumu ekzotermiktir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bağ enerjisi yüksek olan bir kimyasal bağ için ne söylenebilir?",
+      "options": [
+        "Yalnızca gaz fazında bulunur",
+        "Yalnızca metaller arasında oluşur",
+        "Renksizdir",
+        "Daha kararlı ve sağlamdır",
+        "Daha kolay kırılır"
+      ],
+      "correct": 3,
+      "explain": "Bağ enerjisi, bir bağın kırılması için gereken enerji miktarını gösterir; bu değer ne kadar yüksekse bağ o kadar sağlam ve kararlıdır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir sistemin toplam enerjisini (kinetik ve potansiyel enerjilerin toplamını) ifade eden büyüklüğe ne denir?",
+      "options": [
+        "Tepkime hızı",
+        "Entalpi",
+        "Derişim",
+        "Aktivasyon enerjisi",
+        "Bağ enerjisi"
+      ],
+      "correct": 1,
+      "explain": "Entalpi (H), bir sistemin kinetik ve potansiyel enerjilerinin toplamı olan toplam enerjisini ifade eder."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkimede ΔH_tepkime > 0 ise bu tepkime nasıl adlandırılır?",
+      "options": [
+        "Katalitik",
+        "Endotermik",
+        "Dengeli",
+        "Ekzotermik",
+        "Tersinmez"
+      ],
+      "correct": 1,
+      "explain": "ΔH_tepkime pozitifse tepkime çevresinden ısı alır; bu tür tepkimeler endotermik olarak adlandırılır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkimede ΔH_tepkime < 0 ise bu tepkime nasıl adlandırılır?",
+      "options": [
+        "Tersinir",
+        "Dengede",
+        "Endotermik",
+        "Ekzotermik",
+        "Nötr"
+      ],
+      "correct": 3,
+      "explain": "ΔH_tepkime negatifse tepkime çevresine ısı verir; bu tür tepkimeler ekzotermik olarak adlandırılır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bağ enerjileri kullanılarak bir tepkimenin entalpi değişimi hangi matematiksel bağıntıyla hesaplanır?",
+      "options": [
+        "ΔH, bağ enerjilerinden hesaplanamaz",
+        "ΔH = Oluşan bağ enerjileri toplamı + Kırılan bağ enerjileri toplamı",
+        "ΔH = Kırılan bağ enerjileri toplamı − Oluşan bağ enerjileri toplamı",
+        "ΔH = Kırılan bağ enerjileri toplamı × Oluşan bağ enerjileri toplamı",
+        "ΔH = Oluşan bağ enerjileri toplamı − Kırılan bağ enerjileri toplamı"
+      ],
+      "correct": 2,
+      "explain": "Tepkime entalpisi, tepkenlerdeki kırılan bağların toplam enerjisinden ürünlerdeki oluşan bağların toplam enerjisi çıkarılarak hesaplanır: ΔH = Σ(kırılan) − Σ(oluşan)."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "1 mol H-Cl bağının kırılması için 431 kJ enerji gereklidir. Bu enerji tepkime sırasında nereden karşılanır?",
+      "options": [
+        "Bağın kendisinden",
+        "Katalizörden",
+        "Çevreden alınır",
+        "Ürünlerden",
+        "Kendiliğinden oluşur"
+      ],
+      "correct": 2,
+      "explain": "Bağ kırmak endotermik bir olay olduğundan gereken enerji çevreden (ortamdan) alınır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkimede kırılan bağların toplam enerjisi 500 kJ, oluşan bağların toplam enerjisi 300 kJ ise ΔH_tepkime kaç kJ'dir ve tepkime türü nedir?",
+      "options": [
+        "+200 kJ, endotermik",
+        "-800 kJ, ekzotermik",
+        "+800 kJ, endotermik",
+        "-200 kJ, ekzotermik",
+        "0 kJ, nötr"
+      ],
+      "correct": 0,
+      "explain": "ΔH = Kırılan − Oluşan = 500 − 300 = +200 kJ. Değer pozitif olduğu için tepkime endotermiktir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bir tepkimede kırılan bağların toplam enerjisi 300 kJ, oluşan bağların toplam enerjisi 500 kJ ise ΔH_tepkime kaç kJ'dir ve tepkime türü nedir?",
+      "options": [
+        "-200 kJ, ekzotermik",
+        "+200 kJ, endotermik",
+        "0 kJ, nötr",
+        "+200 kJ, ekzotermik",
+        "-800 kJ, endotermik"
+      ],
+      "correct": 0,
+      "explain": "ΔH = Kırılan − Oluşan = 300 − 500 = -200 kJ. Değer negatif olduğu için tepkime ekzotermiktir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bağ enerjisi hangi birimle ifade edilir?",
+      "options": [
+        "g/mol",
+        "kJ/mol",
+        "°C",
+        "kJ/s",
+        "mol/L"
+      ],
+      "correct": 1,
+      "explain": "Bağ enerjisi, 1 mol bağın kırılması için gereken enerji olduğundan kJ/mol (bazen kkal/mol) birimiyle ifade edilir."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Bağ enerjisi ölçümlerinin gaz fazında yapılmasının nedeni nedir?",
+      "options": [
+        "Gaz fazında tanecikler arasındaki etkileşimler çok düşük olduğundan ölçülen enerji değişimi yalnızca bağ enerjisini yansıtır",
+        "Gaz fazında ölçüm yapmak daha ucuzdur",
+        "Gaz fazında bağlar daha güçlüdür",
+        "Katı ve sıvı fazlarda bağ enerjisi ölçülemez",
+        "Gaz fazında tepkimeler daha yavaş gerçekleşir"
+      ],
+      "correct": 0,
+      "explain": "Gaz fazında tanecikler birbirinden uzak olduğu için aralarındaki etkileşimler ihmal edilebilir düzeydedir; bu sayede ölçülen enerji değişimi yalnızca kimyasal bağın kırılmasından kaynaklanır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "N≡N (azot-azot üçlü bağı) bağ enerjisinin (946 kJ/mol) diğer birçok bağa göre çok yüksek olması, azot gazının kimyasal davranışı hakkında ne gösterir?",
+      "options": [
+        "Azot gazı bağ enerjisiyle ilgisizdir",
+        "Azot gazı oldukça kararlıdır ve tepkimeye girmesi zordur",
+        "Azot gazı yalnızca sıvı hâlde bulunur",
+        "Azot gazı renklidir",
+        "Azot gazı çok kolay tepkimeye girer"
+      ],
+      "correct": 1,
+      "explain": "N≡N bağının çok yüksek enerjisi, bu bağı kırmanın çok fazla enerji gerektirdiği anlamına gelir; bu yüzden azot gazı atmosferde bol miktarda bulunmasına rağmen oksijen gibi maddelerle kolay tepkimeye girmez, oldukça kararlıdır."
+    },
+    {
+      "difficulty": "kolay",
+      "table": {
+        "headers": [
+          "Bağ",
+          "Bağ Enerjisi (kJ/mol)"
+        ],
+        "rows": [
+          [
+            "H-F",
+            "565"
+          ],
+          [
+            "H-Cl",
+            "431"
+          ],
+          [
+            "H-Br",
+            "364"
+          ],
+          [
+            "H-I",
+            "297"
+          ]
+        ]
+      },
+      "text": "Tabloya göre verilen bağlardan hangisi en kararlıdır (kırılması en fazla enerji gerektirir)?",
+      "options": [
+        "H-I",
+        "H-F",
+        "H-Cl",
+        "H-Br",
+        "Hepsi eşittir"
+      ],
+      "correct": 1,
+      "explain": "En yüksek bağ enerjisi değerine (565 kJ/mol) sahip olan H-F bağı, verilenler arasında en kararlı ve en sağlam olandır."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Potansiyel enerji-tepkime koordinatı grafiğinde ürünün enerji düzeyi tepkenlerin enerji düzeyinden daha düşükse bu tepkime nasıl sınıflandırılır?",
+      "options": [
+        "Yavaş",
+        "Endotermik",
+        "Hızlı",
+        "Ekzotermik",
+        "Dengesiz"
+      ],
+      "correct": 3,
+      "explain": "Ürünlerin potansiyel enerjisi tepkenlerden düşükse, sistem tepkime sırasında enerji kaybetmiş, bu enerjiyi çevreye vermiştir; bu durum ekzotermik bir tepkimeye işaret eder."
+    },
+    {
+      "difficulty": "kolay",
+      "text": "Potansiyel enerji-tepkime koordinatı grafiğinde ürünün enerji düzeyi tepkenlerin enerji düzeyinden daha yüksekse bu tepkime nasıl sınıflandırılır?",
+      "options": [
+        "Endotermik",
+        "Nötr",
+        "Tersinmez",
+        "Ekzotermik",
+        "Katalitik"
+      ],
+      "correct": 0,
+      "explain": "Ürünlerin potansiyel enerjisi tepkenlerden yüksekse, sistem tepkime sırasında enerji kazanmış, bu enerjiyi çevreden almıştır; bu durum endotermik bir tepkimeye işaret eder."
+    },
+    {
+      "difficulty": "orta",
+      "table": {
+        "headers": [
+          "Bağ",
+          "Bağ Enerjisi (kJ/mol)"
+        ],
+        "rows": [
+          [
+            "H-H",
+            "436"
+          ],
+          [
+            "F-F",
+            "159"
+          ],
+          [
+            "H-F",
+            "565"
+          ]
+        ]
+      },
+      "text": "H2(g) + F2(g) → 2HF(g) tepkimesinde tepkenlerdeki bağların kırılması için gereken toplam enerji ve ürünlerde oluşan bağların toplam enerjisi sırasıyla kaç kJ'dir?",
+      "options": [
+        "595 kJ, 565 kJ",
+        "436 kJ, 565 kJ",
+        "159 kJ, 565 kJ",
+        "595 kJ, 1130 kJ",
+        "1130 kJ, 595 kJ"
+      ],
+      "correct": 3,
+      "explain": "Kırılan: 1 mol H-H (436) + 1 mol F-F (159) = 595 kJ. Oluşan: 2 mol H-F (2 × 565) = 1130 kJ."
+    },
+    {
+      "difficulty": "orta",
+      "statements": {
+        "items": [
+          "Bağ enerjisi büyük olan bir bağı kırmak için daha fazla enerji gerekir.",
+          "Bir tepkimede kırılan bağ enerjileri toplamı, oluşan bağ enerjileri toplamından büyükse tepkime endotermiktir.",
+          "Entalpi değişimi yalnızca kimyasal tepkimelerde hesaplanabilir, fiziksel değişimlerde hesaplanamaz."
+        ]
+      },
+      "text": "Bu önermelerden hangileri doğrudur?",
+      "options": [
+        "I ve II",
+        "II ve III",
+        "I, II ve III",
+        "Yalnız I",
+        "Yalnız III"
+      ],
+      "correct": 0,
+      "explain": "I doğrudur; bağ enerjisi büyük bağlar daha sağlamdır ve kırılmaları daha fazla enerji gerektirir. II doğrudur; ΔH = kırılan − oluşan olduğundan kırılan taraf büyükse ΔH pozitif, yani endotermik olur. III yanlıştır; entalpi değişimi sabit basınç altında gerçekleşen hem fiziksel hem kimyasal değişimler için hesaplanabilir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "H2(g) + Cl2(g) → 2HCl(g) tepkimesi için ΔH_tepkime değeri, H-H = 436 kJ/mol, Cl-Cl = 243 kJ/mol, H-Cl = 431 kJ/mol bağ enerjileri kullanılarak hesaplandığında kaç kJ bulunur?",
+      "options": [
+        "-183 kJ",
+        "+862 kJ",
+        "-862 kJ",
+        "+183 kJ",
+        "+679 kJ"
+      ],
+      "correct": 0,
+      "explain": "Kırılan: 436 + 243 = 679 kJ. Oluşan: 2 × 431 = 862 kJ. ΔH = 679 − 862 = -183 kJ (ekzotermik)."
+    },
+    {
+      "difficulty": "orta",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "Bir tepkimede ΔH negatif çıktı, demek ki tepkenlerdeki bağlar ürünlerdeki bağlardan daha güçlüymüş."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Tam tersi olmalı; ΔH negatifse oluşan bağların toplam enerjisi, kırılan bağların toplam enerjisinden daha büyüktür. Yani ürünlerdeki bağlar toplamda daha güçlüdür."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrenci doğru söylemektedir?",
+      "options": [
+        "İkisi de yanlış söylemektedir",
+        "Yalnız Öğrenci A",
+        "İkisi de doğru söylemektedir",
+        "Yalnız Öğrenci B",
+        "Verilen bilgiyle karar verilemez"
+      ],
+      "correct": 3,
+      "explain": "Öğrenci B haklıdır. ΔH = Kırılan − Oluşan olduğuna göre, ΔH negatifse Oluşan > Kırılan'dır; yani ürünlerdeki bağların toplam enerjisi, tepkenlerdeki bağların toplam enerjisinden daha büyüktür, ürünler daha kararlıdır."
+    },
+    {
+      "difficulty": "orta",
+      "matchPairs": {
+        "leftHeader": "Bağ",
+        "rightHeader": "Bağ Enerjisi (kJ/mol)",
+        "pairs": [
+          [
+            "C≡C",
+            "837"
+          ],
+          [
+            "C=C",
+            "611"
+          ],
+          [
+            "C-C",
+            "347"
+          ]
+        ]
+      },
+      "text": "Yukarıdaki eşleştirmeye göre karbon-karbon bağlarında bağ sayısı (tekli → ikili → üçlü) arttıkça bağ enerjisi nasıl değişmektedir?",
+      "options": [
+        "Önce artar sonra azalır",
+        "Azalır",
+        "Değişmez",
+        "Belirlenemez",
+        "Artar"
+      ],
+      "correct": 4,
+      "explain": "Tablodaki değerlere göre C-C (347) < C=C (611) < C≡C (837); bağ sayısı arttıkça (tekliden üçlüye) bağ enerjisi de artmaktadır, çünkü atomlar arasında daha fazla ortak elektron çifti paylaşılır."
+    },
+    {
+      "difficulty": "orta",
+      "checklist": {
+        "items": [
+          "Bağ enerjisi kullanılarak hesaplanan ΔH pozitifse tepkime ekzotermiktir.",
+          "İki atom arasındaki bağ sayısı arttıkça bağ genellikle daha kararlı hâle gelir.",
+          "Bağ enerjisi tablosundaki değerler yalnızca belirli bir sıcaklıkta değil, genel ortalama değerlerdir."
+        ]
+      },
+      "text": "Yukarıdaki ifadelerden kaç tanesi doğrudur?",
+      "options": [
+        "Verilenlerle belirlenemez",
+        "3",
+        "2",
+        "1",
+        "0"
+      ],
+      "correct": 2,
+      "explain": "Birinci ifade yanlıştır; ΔH pozitifse tepkime endotermiktir, ekzotermik değil. İkinci ve üçüncü ifadeler doğrudur: bağ sayısı arttıkça bağ enerjisi (ve kararlılık) artar, ve tablo değerleri farklı moleküllerden elde edilen ortalama değerlerdir. Doğru ifade sayısı 2'dir."
+    },
+    {
+      "difficulty": "orta",
+      "context": "CH4(g) + 2O2(g) → CO2(g) + 2H2O(g) tepkimesinde 4 mol C-H (414 kJ/mol), 2 mol O=O (498 kJ/mol) bağı kırılırken; 2 mol C=O (736 kJ/mol) ve 4 mol O-H (464 kJ/mol) bağı oluşur.",
+      "text": "Verilen bilgilere göre bu tepkimenin ΔH_tepkime değeri kaç kJ'dir?",
+      "options": [
+        "+676 kJ",
+        "+3328 kJ",
+        "-676 kJ",
+        "-2652 kJ",
+        "-121 kJ"
+      ],
+      "correct": 2,
+      "explain": "Kırılan: (4 × 414) + (2 × 498) = 1656 + 996 = 2652 kJ. Oluşan: (2 × 736) + (4 × 464) = 1472 + 1856 = 3328 kJ. ΔH = 2652 − 3328 = -676 kJ (ekzotermik) — metanın yanması güçlü bir ekzotermik tepkimedir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "N2(g) + O2(g) → 2NO(g) tepkimesinde N≡N = 946 kJ/mol, O=O = 498 kJ/mol, N=O = 590 kJ/mol bağ enerjileri kullanıldığında ΔH_tepkime kaç kJ bulunur ve tepkime türü nedir?",
+      "options": [
+        "-264 kJ, ekzotermik",
+        "+1444 kJ, endotermik",
+        "0 kJ, nötr",
+        "+264 kJ, endotermik",
+        "-1180 kJ, ekzotermik"
+      ],
+      "correct": 3,
+      "explain": "Kırılan: 946 + 498 = 1444 kJ. Oluşan: 2 × 590 = 1180 kJ. ΔH = 1444 − 1180 = +264 kJ (endotermik). Bu, N2 ve O2'nin normal koşullarda kolayca tepkimeye girmemesinin bir nedenidir; örneğin yıldırım gibi çok yüksek enerjili ortamlarda gerçekleşebilir."
+    },
+    {
+      "difficulty": "orta",
+      "compareChart": {
+        "xLabels": [
+          "H-F",
+          "H-Cl",
+          "H-Br",
+          "H-I"
+        ],
+        "series": [
+          {
+            "name": "Bağ enerjisi (kJ/mol)",
+            "values": [
+              565,
+              431,
+              364,
+              297
+            ],
+            "color": "var(--energy)"
+          }
+        ]
+      },
+      "text": "Grafikte H-F, H-Cl, H-Br ve H-I bağlarının enerjileri sıralanmıştır. Grafiğe göre halojen atomunun boyutu büyüdükçe (F'den I'ya doğru) hidrojen-halojen bağının enerjisi nasıl değişmektedir?",
+      "options": [
+        "Sürekli azalmaktadır",
+        "Sürekli artmaktadır",
+        "Değişmemektedir",
+        "Grafikten bu ilişki çıkarılamaz",
+        "Önce artıp sonra azalmaktadır"
+      ],
+      "correct": 0,
+      "explain": "Grafikteki doğru F'den I'ya doğru sürekli azalmaktadır (565 → 431 → 364 → 297 kJ/mol); halojen atomunun boyutu büyüdükçe bağ uzunluğu artar ve bağ enerjisi azalır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "H2(g) + Br2(g) → 2HBr(g) tepkimesi için H-H = 436 kJ/mol, Br-Br = 193 kJ/mol, H-Br = 364 kJ/mol bağ enerjileri kullanılarak hesaplanan ΔH_tepkime kaç kJ'dir?",
+      "options": [
+        "-728 kJ",
+        "+99 kJ",
+        "-99 kJ",
+        "-629 kJ",
+        "+629 kJ"
+      ],
+      "correct": 2,
+      "explain": "Kırılan: 436 + 193 = 629 kJ. Oluşan: 2 × 364 = 728 kJ. ΔH = 629 − 728 = -99 kJ (ekzotermik)."
+    },
+    {
+      "difficulty": "orta",
+      "text": "İki farklı tepkimenin ΔH_tepkime değerleri sırasıyla -535 kJ (H2+F2→2HF) ve -99 kJ (H2+Br2→2HBr)'dir. Bu iki değer karşılaştırıldığında hangi tepkimenin daha fazla ısı açığa çıkardığı söylenebilir?",
+      "options": [
+        "H2 + Br2 → 2HBr tepkimesi, çünkü ΔH değeri daha büyüktür",
+        "H2 + F2 → 2HF tepkimesi, çünkü ΔH değeri daha küçük (daha negatif) ve mutlak değeri daha büyüktür",
+        "ΔH değerleri karşılaştırılamaz",
+        "Isı miktarı yalnızca kütleyle ilgilidir, ΔH ile ilgisizdir",
+        "İkisi eşit miktarda ısı açığa çıkarır"
+      ],
+      "correct": 1,
+      "explain": "ΔH ne kadar negatifse (mutlak değeri ne kadar büyükse) tepkime o kadar fazla ısı açığa çıkarır. -535 kJ, -99 kJ'den daha negatif (mutlak değeri daha büyük) olduğu için H2 + F2 → 2HF tepkimesi daha fazla ısı açığa çıkarır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimenin potansiyel enerji-tepkime koordinatı grafiğinde tepken ve ürün enerji düzeyleri neredeyse aynı yükseklikte çiziliyor. Bu, ΔH_tepkime değeri hakkında ne düşündürür?",
+      "options": [
+        "ΔH büyük ve negatiftir",
+        "Tepkime gerçekleşmemiştir",
+        "Grafik hatalı çizilmiştir",
+        "ΔH büyük ve pozitiftir",
+        "ΔH sıfıra yakın küçük bir değerdir"
+      ],
+      "correct": 4,
+      "explain": "Tepken ve ürün enerji düzeyleri birbirine yakınsa, aralarındaki enerji farkı (ΔH) küçük olur; bu, kırılan ve oluşan bağ enerjileri toplamlarının birbirine yakın olduğu anlamına gelir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Aynı iki atom arasında (örneğin karbon-karbon) bağ sayısı arttıkça (tekliden üçlüye doğru) bağ uzunluğu ve bağ enerjisi nasıl değişir?",
+      "options": [
+        "Bağ uzunluğu artar, bağ enerjisi azalır",
+        "Bağ uzunluğu azalır, bağ enerjisi artar",
+        "Hem bağ uzunluğu hem bağ enerjisi artar",
+        "Hem bağ uzunluğu hem bağ enerjisi azalır",
+        "İkisi de değişmez"
+      ],
+      "correct": 1,
+      "explain": "Bağ sayısı arttıkça (C-C'den C≡C'ye) atomlar arasında daha fazla elektron çifti paylaşılır; bu atomları birbirine daha yakın ve daha güçlü şekilde bağlar. Bu yüzden bağ uzunluğu azalırken bağ enerjisi artar."
+    },
+    {
+      "difficulty": "orta",
+      "statements": {
+        "items": [
+          "Bağ enerjisi yöntemiyle hesaplanan ΔH değerleri, gerçek deneysel değerlere çok yakın ama tam olarak birebir aynı olmayabilir çünkü tablo değerleri ortalamadır.",
+          "Bir tepkimede birden fazla farklı türde bağ kırılıyor ve oluşuyorsa, her bağ türünün katkısı ayrı ayrı hesaba katılmalıdır.",
+          "ΔH hesaplanırken yalnızca kırılan bağlar dikkate alınır, oluşan bağlar hesaba katılmaz."
+        ]
+      },
+      "text": "Yukarıdaki önermelerden hangileri doğrudur?",
+      "options": [
+        "I ve II",
+        "I, II ve III",
+        "Yalnız I",
+        "II ve III",
+        "Yalnız III"
+      ],
+      "correct": 0,
+      "explain": "I doğrudur; bağ enerjisi tablosundaki değerler farklı moleküllerden elde edilmiş ortalamalardır, bu yüzden hesaplanan ΔH gerçek değere yakın ama birebir aynı olmayabilir. II doğrudur; her bağ türü ve sayısı ayrı ayrı çarpılıp toplanmalıdır. III yanlıştır; ΔH hem kırılan hem oluşan bağların dikkate alınmasıyla hesaplanır."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir laboratuvar raporunda bir tepkime için 'kırılan bağların toplam enerjisi 820 kJ, oluşan bağların toplam enerjisi 950 kJ' olarak veriliyor. Bu tepkimenin ΔH değeri ve türü nedir?",
+      "options": [
+        "+1770 kJ, endotermik",
+        "-130 kJ, ekzotermik",
+        "-1770 kJ, ekzotermik",
+        "+130 kJ, endotermik",
+        "0 kJ, nötr"
+      ],
+      "correct": 1,
+      "explain": "ΔH = Kırılan − Oluşan = 820 − 950 = -130 kJ. Değer negatif olduğu için tepkime ekzotermiktir."
+    },
+    {
+      "difficulty": "orta",
+      "text": "Bir tepkimede tepkenler arasında yalnızca zayıf bağlar (düşük bağ enerjili), ürünlerde ise çok güçlü bağlar (yüksek bağ enerjili) oluşuyorsa bu tepkimenin ΔH işareti hakkında ne söylenebilir?",
+      "options": [
+        "ΔH kesinlikle pozitiftir (endotermik)",
+        "ΔH sıfırdır",
+        "Bu bilgi ΔH ile ilgisizdir",
+        "ΔH işareti belirlenemez",
+        "ΔH kesinlikle negatiftir (ekzotermik)"
+      ],
+      "correct": 4,
+      "explain": "Zayıf (düşük enerjili) bağların kırılması az enerji gerektirirken, güçlü (yüksek enerjili) bağların oluşması çok enerji açığa çıkarır. Oluşan bağ enerjisi toplamı kırılan bağ enerjisi toplamından büyük olacağından ΔH negatif, yani tepkime ekzotermik olur."
+    },
+    {
+      "difficulty": "orta",
+      "chart": {
+        "labels": [
+          "H2O ayrışması",
+          "N2H4 oluşumu",
+          "H2+F2→2HF",
+          "CH4 yanması"
+        ],
+        "values": [
+          243,
+          99,
+          -535,
+          -676
+        ],
+        "unit": "ΔH_tepkime (kJ)",
+        "tone": [
+          "endo",
+          "endo",
+          "exo",
+          "exo"
+        ]
+      },
+      "text": "Grafikte dört farklı tepkimenin ΔH_tepkime değerleri verilmiştir. Grafiğe göre bu tepkimelerden hangisi en fazla ısıyı çevreye vermektedir?",
+      "options": [
+        "N2H4 oluşumu",
+        "H2O ayrışması",
+        "CH4 yanması",
+        "H2 + F2 → 2HF",
+        "Hepsi eşit ısı verir"
+      ],
+      "correct": 2,
+      "explain": "En fazla ısıyı çevreye veren tepkime, ΔH değeri en negatif olan tepkimedir. Grafikte CH4 yanması -676 kJ ile en negatif değere sahiptir; bu yüzden en fazla ısıyı açığa çıkaran (çevreye veren) tepkime budur."
+    },
+    {
+      "difficulty": "zor",
+      "text": "H2(g) + I2(g) → 2HI(g) tepkimesi için H-H = 436 kJ/mol, I-I = 151 kJ/mol, H-I = 297 kJ/mol bağ enerjileri kullanıldığında ΔH_tepkime kaç kJ bulunur? Bu değer, H2+F2, H2+Cl2 ve H2+Br2 tepkimeleriyle karşılaştırıldığında ne gösterir?",
+      "options": [
+        "+7 kJ; tepkime endotermiktir ve trend bozulmuştur",
+        "0 kJ; hiç ısı alışverişi olmaz",
+        "-587 kJ; I2 ile tepkime en ekzotermik olandır",
+        "-7 kJ; halojen atomu büyüdükçe (F→Cl→Br→I) tepkimenin ekzotermikliği azalmakta, I2 ile neredeyse enerji değişimi sıfıra yaklaşmaktadır",
+        "-297 kJ; tüm halojenlerle aynı sonuç elde edilir"
+      ],
+      "correct": 3,
+      "explain": "Kırılan: 436 + 151 = 587 kJ. Oluşan: 2 × 297 = 594 kJ. ΔH = 587 − 594 = -7 kJ. Bu değer, F2(-535), Cl2(-183), Br2(-99) ile karşılaştırıldığında bir trend ortaya koyar: halojen atomu büyüdükçe H-X bağı zayıflar, bu da tepkimenin ekzotermikliğinin azalmasına, I2 ile neredeyse termonötr (ısı değişimi ~0) bir tepkimeye dönüşmesine neden olur."
+    },
+    {
+      "difficulty": "zor",
+      "text": "N2(g) + 2H2(g) → N2H4(g) tepkimesinde N≡N = 946 kJ/mol, H-H = 436 kJ/mol, N-N = 163 kJ/mol, N-H = 389 kJ/mol bağ enerjileri kullanılıyor (N2H4 molekülünde 1 N-N ve 4 N-H bağı vardır). Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir?",
+      "options": [
+        "+1818 kJ",
+        "+1719 kJ",
+        "-99 kJ",
+        "-1818 kJ",
+        "+99 kJ"
+      ],
+      "correct": 4,
+      "explain": "Kırılan: 946 + (2 × 436) = 946 + 872 = 1818 kJ. Oluşan: 163 + (4 × 389) = 163 + 1556 = 1719 kJ. ΔH = 1818 − 1719 = +99 kJ (endotermik) — çok güçlü N≡N bağının kırılması, oluşan bağların toplamından fazla enerji gerektirir."
+    },
+    {
+      "difficulty": "zor",
+      "statements": {
+        "items": [
+          "N≡N bağının çok yüksek enerjiye sahip olması, azot içeren bazı tepkimelerin (örneğin N2H4 oluşumu) endotermik çıkmasının nedenlerinden biri olabilir.",
+          "Bir tepkimenin ΔH değeri negatifse bu tepkime mutlaka çok hızlı gerçekleşir.",
+          "Aynı tepkenlerden farklı ürünler oluşabiliyorsa (örneğin N2+H2 hem NH3 hem N2H4 verebilir), her ürün için ayrı bir ΔH hesaplanmalıdır."
+        ]
+      },
+      "text": "Verilen önermelerden hangileri doğrudur?",
+      "options": [
+        "II ve III",
+        "Yalnız II",
+        "Yalnız I",
+        "I ve III",
+        "I, II ve III"
+      ],
+      "correct": 3,
+      "explain": "I doğrudur; N≡N bağının kırılması çok fazla enerji gerektirdiğinden bazı azot tepkimeleri endotermik çıkabilir. II yanlıştır; ΔH işareti tepkimenin hızıyla ilgili bilgi vermez, bu ayrı bir kavramdır (tepkime hızı ileriki modüllerde işlenecektir). III doğrudur; farklı ürünler farklı bağ yapılarına sahip olacağından her biri için ayrı ΔH hesaplanmalıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "CH4(g) + Cl2(g) → CH3Cl(g) + HCl(g) tepkimesinde yalnızca 1 mol C-H (414 kJ/mol) ve 1 mol Cl-Cl (243 kJ/mol) bağı kırılırken, 1 mol C-Cl (339 kJ/mol) ve 1 mol H-Cl (431 kJ/mol) bağı oluşmaktadır (değişmeyen bağlar hesaba katılmamıştır). Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir?",
+      "options": [
+        "+770 kJ",
+        "-657 kJ",
+        "-113 kJ",
+        "+113 kJ",
+        "-1440 kJ"
+      ],
+      "correct": 2,
+      "explain": "Kırılan: 414 + 243 = 657 kJ. Oluşan: 339 + 431 = 770 kJ. ΔH = 657 − 770 = -113 kJ (ekzotermik). Yalnızca değişen bağları hesaba katmak, aynı kalan bağların (örneğin diğer 3 C-H bağının) her iki tarafta da eşit olup birbirini götürmesinden dolayı geçerli bir kısayoldur."
+    },
+    {
+      "difficulty": "zor",
+      "dialogue": {
+        "turns": [
+          {
+            "who": "Öğrenci A",
+            "text": "N2 + 3H2 → 2NH3 tepkimesi ekzotermik (-80 kJ) ama N2 + 2H2 → N2H4 tepkimesi endotermik (+99 kJ). Aynı tepkenlerle başlayıp farklı sonuç çıkması bana mantıksız geliyor."
+          },
+          {
+            "who": "Öğrenci B",
+            "text": "Aslında mantıklı; ürünler farklı (NH3 ve N2H4 farklı moleküller, farklı bağ sayı ve türlerine sahip), bu yüzden oluşan bağların toplam enerjisi de farklı çıkıyor. ΔH, hangi ürünün oluştuğuna bağlıdır."
+          }
+        ]
+      },
+      "text": "Bu tartışmaya göre hangi öğrencinin açıklaması bilimsel olarak doğrudur?",
+      "options": [
+        "İkisi de haksızdır",
+        "Verilen bilgiyle karar verilemez",
+        "İkisi de haklıdır",
+        "Yalnız Öğrenci A",
+        "Yalnız Öğrenci B"
+      ],
+      "correct": 4,
+      "explain": "Öğrenci B haklıdır. ΔH yalnızca tepkenlere değil, hangi ürünlerin oluştuğuna da bağlıdır. NH3'te 6 N-H bağı (2 molekülde), N2H4'te ise 1 N-N ve 4 N-H bağı bulunur; bu farklı bağ yapıları farklı toplam bağ enerjilerine ve dolayısıyla farklı ΔH değerlerine yol açar."
+    },
+    {
+      "difficulty": "zor",
+      "text": "2H2(g) + O2(g) → 2H2O(g) tepkimesi için H-H = 436 kJ/mol, O=O = 498 kJ/mol, O-H = 464 kJ/mol bağ enerjileri kullanılarak ΔH_tepkime hesaplanıyor. Bu değer, H2O(g) → H2(g) + 1/2O2(g) tepkimesinin ΔH değeri olan +243 kJ ile nasıl bir ilişki içindedir?",
+      "options": [
+        "İki tepkimenin ΔH değerleri arasında hiçbir matematiksel ilişki yoktur",
+        "2H2+O2→2H2O tepkimesinin ΔH'si tam olarak -486 kJ'dir; bu, +243 kJ'nin işareti değiştirilip 2 ile çarpılmasıyla elde edilen değere eşittir çünkü ikinci tepkime, birincinin tersinin iki katıdır",
+        "Bu iki tepkime birbirinden tamamen bağımsız bağlar içerir",
+        "2H2+O2→2H2O tepkimesinin ΔH'si +243 kJ ile aynıdır",
+        "2H2+O2→2H2O tepkimesinin ΔH'si +486 kJ'dir"
+      ],
+      "correct": 1,
+      "explain": "Kırılan: (2×436)+498 = 1370 kJ. Oluşan: 4×464 = 1856 kJ. ΔH = 1370 − 1856 = -486 kJ. H2O(g)→H2(g)+1/2O2(g) tepkimesi 2H2(g)+O2(g)→2H2O(g) tepkimesinin tam tersi ve yarısı olduğundan, bir tepkimenin yönü tersine çevrildiğinde ve/veya katsayıları belirli bir sayıyla çarpıldığında ΔH işareti değişir ve aynı oranda çarpılır: +243 × (-2) = -486 kJ; bu tutarlılık bağ enerjisi yönteminin doğruluğunu destekler."
+    },
+    {
+      "difficulty": "zor",
+      "compareChart": {
+        "xLabels": [
+          "F-F",
+          "Cl-Cl",
+          "Br-Br",
+          "I-I"
+        ],
+        "series": [
+          {
+            "name": "Halojen-halojen bağ enerjisi (kJ/mol)",
+            "values": [
+              159,
+              243,
+              193,
+              151
+            ],
+            "color": "var(--exo)"
+          }
+        ]
+      },
+      "text": "Grafikte halojen-halojen (X-X) bağ enerjileri verilmiştir. F-F bağının (159 kJ/mol), Cl-Cl bağından (243 kJ/mol) daha düşük bir enerjiye sahip olması, H-X serisindeki düzenli azalan trendin (H-F>H-Cl>H-Br>H-I) aksine bir durumdur. Bu gözlem neyi gösterir?",
+      "options": [
+        "Bu veriler yalnızca H-X bağları için geçerlidir, X-X bağları için hesaba katılmamalıdır",
+        "Halojen-halojen bağları hiçbir düzen izlemez",
+        "F-F bağı aslında var olamaz",
+        "Grafikteki veriler hatalıdır, çünkü tüm bağ enerjileri atom boyutuyla ters orantılı azalmalıdır",
+        "Bağ enerjisi trendleri, karşılaştırılan bağın türüne (X-X mi, H-X mi) göre farklı düzenler izleyebilir; genellemeler her bağ türü için ayrı ayrı test edilmelidir"
+      ],
+      "correct": 4,
+      "explain": "F-F bağının beklenenden düşük enerjili olması (küçük flor atomlarındaki elektron çiftleri arasındaki itme nedeniyle), bağ enerjisi trendlerinin her bağ türü için ayrı ayrı incelenmesi gerektiğini gösterir; H-X serisindeki düzenli azalma, X-X serisine otomatik olarak genellenemez."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin bağ enerjisi yöntemiyle hesaplanan ΔH değeri -450 kJ çıkarken, aynı tepkimenin gerçek (deneysel) ΔH değerinin -463 kJ olduğu ölçülüyor. Aradaki küçük farkın en olası nedeni nedir?",
+      "options": [
+        "Hesaplama yöntemi tamamen yanlıştır ve hiçbir zaman kullanılmamalıdır",
+        "Bağ enerjisi tablosundaki değerler, birçok farklı molekülden elde edilen ortalama değerlerdir; belirli bir moleküldeki gerçek bağ enerjisi bu ortalamadan hafifçe farklı olabilir",
+        "Bu fark, tepkimenin gerçekleşmediğini gösterir",
+        "ΔH değerleri asla birebir karşılaştırılamaz",
+        "Deneysel ölçüm yöntemi güvenilmezdir"
+      ],
+      "correct": 1,
+      "explain": "Bağ enerjisi tablosundaki değerler, o bağ türünün farklı moleküllerdeki ölçümlerinden elde edilen ortalama değerlerdir. Belirli bir moleküldeki gerçek bağ enerjisi, moleküldeki diğer atomların etkisiyle bu ortalamadan hafifçe sapabilir; bu yüzden bağ enerjisi yöntemiyle hesaplanan ΔH, deneysel değere yakın ama birebir aynı olmayabilir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir öğrenci, 'bağ enerjisi yüksek olan tepkenlerden oluşan bir tepkime her zaman endotermiktir' şeklinde bir genelleme yapıyor. Bu genellemenin geçerliliği hakkında en doğru değerlendirme hangisidir?",
+      "options": [
+        "Genelleme yalnızca organik tepkimeler için geçerlidir",
+        "Bağ enerjisi ile ΔH işareti arasında hiçbir ilişki yoktur",
+        "Genelleme yalnızca gaz tepkimeleri için doğrudur",
+        "Genelleme her zaman doğrudur",
+        "Genelleme yanlıştır; tepkimenin ΔH işareti yalnızca tepkenlerin değil, hem kırılan hem oluşan bağların toplam enerjilerinin karşılaştırılmasıyla belirlenir"
+      ],
+      "correct": 4,
+      "explain": "Tepkenlerin bağ enerjisinin yüksek olması tek başına ΔH işaretini belirlemez. Örneğin N2+O2→2NO tepkiminde tepkenlerin bağları (N≡N, O=O) çok güçlü olsa da, oluşan N=O bağları da güçlüdür; ΔH işaretini belirleyen, kırılan ve oluşan bağ enerjileri toplamlarının birbirine göre büyüklüğüdür."
+    },
+    {
+      "difficulty": "zor",
+      "text": "İki basamaklı bir tepkimede önce A maddesindeki bağlar kırılıp B ara ürünü oluşuyor (ΔH1 = +150 kJ), sonra B'deki bağlar yeniden düzenlenerek C ürünü oluşuyor (ΔH2 = -400 kJ). A'dan C'ye doğrudan gerçekleşen toplam tepkimenin ΔH değeri kaç kJ'dir?",
+      "options": [
+        "-400 kJ",
+        "+550 kJ",
+        "+250 kJ",
+        "-550 kJ",
+        "-250 kJ"
+      ],
+      "correct": 4,
+      "explain": "Birbirini izleyen basamaklardan oluşan bir tepkimede toplam entalpi değişimi, basamakların ΔH değerlerinin toplamına eşittir: ΔH_toplam = ΔH1 + ΔH2 = (+150) + (-400) = -250 kJ."
+    },
+    {
+      "difficulty": "zor",
+      "table": {
+        "headers": [
+          "Tepkime",
+          "Kırılan Bağ Enerjisi Toplamı (kJ)",
+          "Oluşan Bağ Enerjisi Toplamı (kJ)"
+        ],
+        "rows": [
+          [
+            "X",
+            "1200",
+            "1450"
+          ],
+          [
+            "Y",
+            "980",
+            "820"
+          ],
+          [
+            "Z",
+            "1500",
+            "1500"
+          ]
+        ]
+      },
+      "text": "Tabloya göre X, Y ve Z tepkimelerinden hangisi ya da hangileri ekzotermiktir?",
+      "options": [
+        "X ve Y",
+        "Yalnız Y",
+        "Yalnız Z",
+        "Yalnız X",
+        "X, Y ve Z"
+      ],
+      "correct": 3,
+      "explain": "X: ΔH = 1200-1450 = -250 kJ (ekzotermik). Y: ΔH = 980-820 = +160 kJ (endotermik). Z: ΔH = 1500-1500 = 0 kJ (ısı alışverişi yaklaşık yok, ne endotermik ne ekzotermik sayılır). Bu durumda yalnızca X tepkimesi ekzotermiktir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede kullanılan bağ enerjisi tablosunun yalnızca ortalama değerler içerdiği bilinmesine rağmen bir öğrenci hesapladığı ΔH değerini 'kesin ve değişmez bir gerçek' olarak sunuyor. Bu yaklaşımın bilimsel açıdan eksikliği nedir?",
+      "options": [
+        "Bağ enerjisi yöntemiyle elde edilen ΔH bir yaklaşık değerdir; kesinlik iddiası, ortalama tablo değerlerinin doğasını göz ardı eder",
+        "Hesaplama yöntemi yanlış olduğu için sonuç zaten geçersizdir",
+        "Bu yaklaşımda herhangi bir bilimsel eksiklik yoktur",
+        "Ortalama değerler kullanmak sonucu otomatik olarak yanlış yapar",
+        "ΔH değerleri zaten hiçbir zaman hesaplanamaz"
+      ],
+      "correct": 0,
+      "explain": "Bağ enerjisi tablosundaki değerler farklı moleküllerden elde edilen ortalamalar olduğundan, bu yöntemle hesaplanan ΔH gerçek değere yakın bir tahmindir, mutlak kesinlik taşımaz. Bir sonucu 'kesin' olarak sunmak, yöntemin doğasındaki bu yaklaşıklığı göz ardı etmek anlamına gelir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "C2H4(g) + H2(g) → C2H6(g) tepkimesinde C2H4'teki 1 C=C (611 kJ/mol) ve 4 C-H (414 kJ/mol) bağı ile H2'deki 1 H-H (436 kJ/mol) bağı kırılırken; C2H6'da 1 C-C (347 kJ/mol) ve 6 C-H (414 kJ/mol) bağı oluşmaktadır. Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir?",
+      "options": [
+        "+128 kJ",
+        "-483 kJ",
+        "-2703 kJ",
+        "+2831 kJ",
+        "-128 kJ"
+      ],
+      "correct": 4,
+      "explain": "Kırılan: 611 + (4×414) + 436 = 611 + 1656 + 436 = 2703 kJ. Oluşan: 347 + (6×414) = 347 + 2484 = 2831 kJ. ΔH = 2703 − 2831 = -128 kJ (ekzotermik) — etilenin hidrojenlenerek etana dönüşmesi ekzotermik bir tepkimedir."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimenin ΔH değeri bağ enerjisi yöntemiyle -320 kJ olarak hesaplanmıştır. Aynı tepkimenin tersinin (ürünlerden tepkenlere dönüşün) ΔH değeri için en doğru çıkarım hangisidir?",
+      "options": [
+        "Ters tepkimenin ΔH'si de -320 kJ'dir",
+        "Ters tepkimenin ΔH'si 0 kJ'dir",
+        "Ters tepkimenin ΔH'si +320 kJ'dir; çünkü kırılan ve oluşan bağların rolleri yer değiştirir",
+        "Ters tepkimenin ΔH'si hesaplanamaz",
+        "Ters tepkimenin ΔH'si -640 kJ'dir"
+      ],
+      "correct": 2,
+      "explain": "Bir tepkime tersine çevrildiğinde, ileri tepkimede oluşan bağlar artık kırılan, kırılan bağlar ise artık oluşan bağlar olur. Bu, ΔH = Kırılan − Oluşan ifadesindeki iki terimin yer değiştirmesi anlamına gelir; bu da ΔH'nin işaretinin tersine dönmesine (mutlak değeri aynı kalarak) yol açar: -320 kJ → +320 kJ."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede tepkenlerdeki toplam bağ sayısı, ürünlerdeki toplam bağ sayısından fazladır (örneğin bir büyük molekül birden fazla küçük parçaya ayrışıyor). Yalnızca bu bilgiye (bağ sayılarının farkına) dayanarak tepkimenin ΔH işareti kesin olarak belirlenebilir mi?",
+      "options": [
+        "Hayır, çünkü ayrışma tepkimeleri her zaman ısı alışverişi yapmaz",
+        "Evet, bağ sayısı ile ΔH işareti her zaman birebir örtüşür",
+        "Evet, bağ sayısı azaldığı için tepkime kesinlikle endotermiktir",
+        "Evet, bağ sayısı azaldığı için tepkime kesinlikle ekzotermiktir",
+        "Hayır; ΔH işareti bağ SAYISINA değil, kırılan ve oluşan bağların toplam ENERJİSİNE bağlıdır — az sayıda ama çok güçlü bağ, çok sayıda zayıf bağdan daha fazla enerji içerebilir"
+      ],
+      "correct": 4,
+      "explain": "ΔH işaretini belirleyen, bağların sayısı değil toplam enerjileridir. Örneğin tek bir çok güçlü bağ (örneğin N≡N, 946 kJ/mol), birkaç zayıf bağın toplamından daha fazla enerji taşıyabilir. Bu yüzden yalnızca bağ sayısındaki değişime bakarak ΔH işareti hakkında kesin bir sonuca varılamaz; enerjiler hesaplanmalıdır."
+    },
+    {
+      "difficulty": "zor",
+      "text": "Bir tepkimede A maddesi B'ye dönüşürken ΔH1 = +180 kJ, B maddesi C'ye dönüşürken ΔH2 = +40 kJ değerleri ölçülüyor. A'dan doğrudan C'ye giden tek basamaklı bir yol bulunabilirse bu yolun ΔH değeri için en tutarlı beklenti nedir?",
+      "options": [
+        "Yaklaşık +140 kJ olması beklenir",
+        "Bu iki değerden A'dan C'ye giden yolun ΔH'si hakkında hiçbir çıkarım yapılamaz",
+        "Yaklaşık +220 kJ olması beklenir, çünkü entalpi değişimi izlenen yoldan bağımsız olarak yalnızca başlangıç ve bitiş durumuna bağlıdır",
+        "Yaklaşık -220 kJ olması beklenir",
+        "Tek basamaklı yolun ΔH'si her zaman 0 olur"
+      ],
+      "correct": 2,
+      "explain": "Entalpi bir hâl fonksiyonudur; yani toplam ΔH, izlenen ara basamaklardan bağımsız olarak yalnızca başlangıç (A) ve bitiş (C) durumlarının enerjisine bağlıdır. A→B→C basamaklarının toplamı (180+40=220 kJ) ile A→C yolunun ΔH'si eşit olmalıdır: yaklaşık +220 kJ."
     }
   ]
 };
