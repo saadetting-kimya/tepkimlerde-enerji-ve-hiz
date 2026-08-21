@@ -313,7 +313,7 @@ section.block > .container > h2 .num {
 .viz-table th { background: var(--bg-panel); font-weight: 700; }
 .viz-table td:first-child, .viz-table th:first-child { text-align: left; }
 
-.viz-chart { width: 100%; height: auto; }
+.viz-chart { width: 100%; max-width: 480px; height: auto; display: block; margin: 6px auto 14px; }
 .viz-chart .axis { stroke: var(--ink-soft); stroke-width: 1.4; }
 .viz-chart .gridline { stroke: var(--line); stroke-width: 1; }
 .viz-chart .bar { fill: var(--energy); }
@@ -371,7 +371,7 @@ section.block > .container > h2 .num {
 .exp-scene-wrap svg { width: 100%; height: auto; border-radius: var(--radius-sm); background: var(--bg-panel); }
 .exp-readout { margin-top: 10px; min-height: 40px; font-size: .85rem; color: var(--ink-soft); }
 .exp-readout b { display: block; font-size: 1.3rem; color: var(--ink); }
-.exp-chart-wrap { flex: 1; min-width: 260px; }
+.exp-chart-wrap { flex: 1; min-width: 260px; max-width: 460px; }
 .exp-chart-wrap svg { width: 100%; height: auto; }
 
 .exp-classify { margin-top: 20px; }
