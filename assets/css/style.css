@@ -425,6 +425,25 @@ section.block > .container > h2 .num {
 .race-bar-fill.fast { background: var(--rate); }
 .predict-label { font-weight: 700; color: var(--ink-soft); align-self: center; margin-right: 4px; }
 
+/* ---------- Oluşum entalpisi: sayacı sen oluştur (kart+ekle/çıkar) ---------- */
+.chip-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.chip-card { background: #fff; border: 2px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; min-width: 170px; text-align: center; }
+.chip-card.chip-correct { border-color: var(--rate); background: var(--rate-soft); }
+.chip-card.chip-wrong { border-color: var(--bad); background: #fbe1e1; }
+.chip-term { font-weight: 700; font-size: .92rem; }
+.chip-value { color: var(--ink-soft); font-size: .84rem; margin: 2px 0 8px; }
+.chip-btns { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.chip-btns button { font-size: .78rem; padding: 6px 10px; }
+.chip-feedback { font-size: .8rem; margin-top: 8px; min-height: 1.2em; }
+.chip-correct .chip-feedback { color: var(--rate); }
+.chip-wrong .chip-feedback { color: var(--bad); }
+
+/* ---------- Derişim-zaman grafiğinde iki noktayı sen seç ---------- */
+.rate-picker { background: var(--bg-panel); border-radius: var(--radius-sm); padding: 14px 16px; }
+.rate-picker label { display: block; font-size: .86rem; font-weight: 700; color: var(--ink-soft); margin-bottom: 6px; }
+.rate-picker label:not(:first-child) { margin-top: 12px; }
+.rate-picker input[type=range] { width: 100%; accent-color: var(--energy); }
+
 /* =========================================================
    ÖĞRENCİ PDF ANALİZ RAPORU
    ========================================================= */

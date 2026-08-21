@@ -25,9 +25,9 @@
     <div class="grid-2">
       <div class="card">
         <h3>Standart Oluşum Entalpisi (ΔH°f)</h3>
-        <p>Bir bileşiğin, kendi standart hâlindeki elementlerinden 1 molünün oluşması sırasındaki entalpi
-          değişimidir. Standart hâldeki elementlerin (H2(g), O2(g), N2(g) gibi) oluşum entalpisi <b>0</b> kabul
-          edilir.</p>
+        <p>1 atm ve 25°C standart koşullarında, bir bileşiğin kendi elementlerinin en kararlı hâllerinden 1
+          molünün oluşması sırasındaki entalpi değişimidir. Standart hâldeki elementlerin (H2(g), O2(g),
+          N2(g) gibi) oluşum entalpisi <b>0</b> kabul edilir.</p>
       </div>
       <div class="card">
         <h3>Kararlılıkla İlişkisi</h3>
@@ -42,22 +42,28 @@
       <p style="margin:8px 0 0;color:var(--ink-soft);font-size:.9rem">Dikkat: Bu, bağ enerjisi formülünün
         (kırılan − oluşan) tam tersi bir sıralamadır — burada <b>ürünlerden tepkenler çıkarılır</b>.</p>
     </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>Tepkime entalpisini neler değiştirir?</b> Maddenin fiziksel hâli (katı, sıvı ve
+        gaz hâllerinin potansiyel enerjisi farklıdır — örneğin CO2(g) oluşumu ile kuru buz (CO2(k)) oluşumunun
+        ΔH değeri farklıdır), tepkimenin gerçekleştiği sıcaklık ve basınç, ve tepkimeye giren madde miktarı
+        (mol sayısı) tepkime entalpisinin büyüklüğünü etkiler.</p>
+    </div>
   </div>
 </section>
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Deney İstasyonu: Oluşum Entalpisi Sayacı</h2>
-    <p class="block-lead">Bir tepkime seç ve simülasyonu başlat; her tepken ve ürünün standart oluşum entalpisi
-      sırayla sayaca eklenirken ΔH°<sub>tepkime</sub> değerinin nasıl oluştuğunu izle.</p>
+    <h2><span class="num">2</span>Deney İstasyonu: Sayacı Sen Oluştur</h2>
+    <p class="block-lead">Bir tepkime seç. Karışık sırada gelen her terimin <b>ürün mü tepken mi</b> olduğuna
+      ve sayaca <b>eklenip eklenmeyeceğine (+) ya da çıkarılıp çıkarılmayacağına (−)</b> SEN karar ver — ΔH°f
+      işaretini karıştırmamayı böyle öğrenirsin.</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="rxn-select">Tepkime:</label>
         <select id="rxn-select"></select>
-        <button id="rxn4-start" class="btn primary" type="button">▶ Simülasyonu Başlat</button>
       </div>
       <div class="bond-stage">
-        <svg id="formation-scene" viewBox="0 0 460 110"></svg>
+        <div id="formation-chips" class="chip-row"></div>
         <div class="bond-counter" id="formation-counter">Sayaç: 0 kJ</div>
       </div>
       <div id="rxn-detail"></div>
@@ -162,55 +168,61 @@
     `;
   }
 
-  function formationCard(name, n, value, sign) {
-    const color = sign < 0 ? "var(--endo)" : "var(--rate)";
-    return `
-      <rect x="130" y="20" width="200" height="70" rx="10" fill="#fff" stroke="${color}" stroke-width="2.5"/>
-      <text x="230" y="45" text-anchor="middle" font-size="15" font-weight="700">${n}× ${name}</text>
-      <text x="230" y="70" text-anchor="middle" font-size="15" fill="${color}" font-weight="700">${sign < 0 ? "−" : "+"}${Math.abs(value).toFixed(1)} kJ</text>
-    `;
-  }
-
-  function runFormationSim(idx) {
+  function renderFormationChips(idx) {
     const rxn = RXN4[idx];
-    const btn = document.getElementById("rxn4-start");
-    btn.disabled = true;
+    document.getElementById("formation-counter").textContent = "Sayaç: 0 kJ";
     document.getElementById("rxn-detail").innerHTML = "";
-    const steps = [
-      ...rxn.reactants.map(([name, n]) => ({ name, n, sign: -1 })),
-      ...rxn.products.map(([name, n]) => ({ name, n, sign: 1 })),
+    const chipsHost = document.getElementById("formation-chips");
+    chipsHost.innerHTML = "";
+
+    const terms = [
+      ...rxn.reactants.map(([name, n]) => ({ name, n, isProduct: false })),
+      ...rxn.products.map(([name, n]) => ({ name, n, isProduct: true })),
     ];
-    let total = 0;
-    let stepIdx = 0;
-    function runStep() {
-      if (stepIdx >= steps.length) {
-        renderRxn4Table(idx);
-        btn.disabled = false;
-        return;
-      }
-      const s = steps[stepIdx];
-      const term = FORMATION[s.name] * s.n;
-      document.getElementById("formation-scene").innerHTML = formationCard(s.name, s.n, term, s.sign);
-      setTimeout(() => {
-        total += s.sign * term;
-        document.getElementById("formation-counter").textContent = `${s.name} ${s.n}× ΔH°f = ${term.toFixed(1)} kJ ${s.sign < 0 ? "(tepken, çıkar)" : "(ürün, ekle)"} → Sayaç: ${total.toFixed(1)} kJ`;
-        stepIdx++;
-        setTimeout(runStep, 500);
-      }, 550);
+    for (let i = terms.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [terms[i], terms[j]] = [terms[j], terms[i]];
     }
-    runStep();
+
+    let total = 0;
+    let done = 0;
+    terms.forEach((t) => {
+      const value = FORMATION[t.name] * t.n;
+      const card = document.createElement("div");
+      card.className = "chip-card";
+      card.innerHTML = `
+        <div class="chip-term">${t.n}× ${t.name}</div>
+        <div class="chip-value">ΔH°f = ${value.toFixed(1)} kJ</div>
+        <div class="chip-btns">
+          <button class="btn" data-op="add" type="button">+ Ürün (ekle)</button>
+          <button class="btn" data-op="sub" type="button">− Tepken (çıkar)</button>
+        </div>
+        <div class="chip-feedback"></div>
+      `;
+      card.querySelectorAll(".chip-btns button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          card.querySelectorAll(".chip-btns button").forEach((b) => (b.disabled = true));
+          const chosenAdd = btn.dataset.op === "add";
+          const correct = chosenAdd === t.isProduct;
+          total += t.isProduct ? value : -value;
+          done++;
+          card.classList.add(correct ? "chip-correct" : "chip-wrong");
+          card.querySelector(".chip-feedback").innerHTML = correct
+            ? `✓ Doğru — bu bir ${t.isProduct ? "ürün, sayaca eklendi." : "tepken, sayaçtan çıkarıldı."}`
+            : `✗ Yanlış — bu bir ${t.isProduct ? "ürün, sayaca EKLENMELİYDİ." : "tepken, sayaçtan ÇIKARILMALIYDI."}`;
+          document.getElementById("formation-counter").textContent = `Sayaç: ${total.toFixed(1)} kJ`;
+          if (done >= terms.length) renderRxn4Table(idx);
+        });
+      });
+      chipsHost.appendChild(card);
+    });
   }
 
   function buildRxnLab4() {
     const sel = document.getElementById("rxn-select");
     RXN4.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
-    sel.addEventListener("change", () => {
-      document.getElementById("formation-counter").textContent = "Sayaç: 0 kJ";
-      document.getElementById("formation-scene").innerHTML = "";
-      document.getElementById("rxn-detail").innerHTML = "";
-    });
-    document.getElementById("rxn4-start").addEventListener("click", () => runFormationSim(Number(sel.value)));
-    renderRxn4Table(0);
+    sel.addEventListener("change", () => renderFormationChips(Number(sel.value)));
+    renderFormationChips(0);
   }
 
   function drawStabilityChart() {

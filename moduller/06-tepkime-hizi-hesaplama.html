@@ -45,6 +45,13 @@
       <p style="margin:0"><b>Genel bağıntı:</b> aA(g) + bB(g) → cC(g) + dD(g) tepkimesi için
         r<sub>tepkime</sub> = −(1/a)·Δ[A]/Δt = −(1/b)·Δ[B]/Δt = (1/c)·Δ[C]/Δt = (1/d)·Δ[D]/Δt</p>
     </div>
+    <div class="card" style="margin-top:16px">
+      <p style="margin:0"><b>Hız neden zamanla değişir?</b> Tepkenler gaz ya da çözelti fazındaysa, tepkime
+        ilerledikçe derişimleri azalır; derişim azaldıkça taneciklerin çarpışma sıklığı da azalır, bu yüzden
+        ortalama tepkime hızı zamanla düşer (hız en yüksek değerine başlangıç anında ulaşır). Tepkenler katı
+        ya da saf sıvı hâldeyse derişimleri sabit kalır; bu durumda tepkime, temas yüzeyi değişmediği sürece
+        aynı hızla devam eder.</p>
+    </div>
   </div>
 </section>
 
@@ -52,8 +59,8 @@
   <div class="container">
     <h2><span class="num">2</span>Deney İstasyonu: H2O2 Bozunma Deneyi</h2>
     <p class="block-lead">H2O2(suda) → H2O(s) + 1/2O2(g) tepkimesini başlat; derişim ölçerdeki azalışı ve kabın
-      içinde yükselen O2 kabarcıklarının zamanla nasıl seyreldiğini izle. Deney bitince bir zaman aralığı seçip
-      o aralıktaki ortalama harcanma hızını hesapla.</p>
+      içinde yükselen O2 kabarcıklarının zamanla nasıl seyreldiğini izle. Deney bitince grafikteki iki noktayı
+      <b>SEN</b> seç (kaydırıcılarla) ve o iki nokta arasındaki ortalama hızın nasıl değiştiğini gözlemle.</p>
     <div class="lab">
       <div class="lab-controls">
         <button id="h2o2-start" class="btn primary" type="button">▶ Deneyi Başlat</button>
@@ -68,9 +75,11 @@
           <svg id="h2o2-chart" viewBox="0 0 440 240" class="viz-chart"></svg>
         </div>
       </div>
-      <div class="lab-controls" id="h2o2-interval-wrap" style="margin-top:16px;display:none">
-        <label for="interval-select">Zaman aralığı seç ve hızı hesapla:</label>
-        <select id="interval-select"></select>
+      <div class="rate-picker" id="h2o2-interval-wrap" style="display:none">
+        <label for="h2o2-point-a">Nokta A: t = <span id="h2o2-a-label"></span> s</label>
+        <input type="range" id="h2o2-point-a" min="0" max="0" value="0" step="1">
+        <label for="h2o2-point-b">Nokta B: t = <span id="h2o2-b-label"></span> s</label>
+        <input type="range" id="h2o2-point-b" min="0" max="0" value="0" step="1">
       </div>
       <div class="lab-readout" id="h2o2-readout"></div>
     </div>
@@ -81,8 +90,8 @@
   <div class="container">
     <h2><span class="num">3</span>Deney İstasyonu: N2O5 Bozunma Deneyi</h2>
     <p class="block-lead">2N2O5(g) → 4NO2(g) + O2(g) tepkimesini başlat; renksiz N2O5 gazının kahverengi NO2 gazına
-      dönüşünü ve toplanan O2 hacmini birlikte izle. Deney bitince bir zaman aralığı seçip üç maddenin de hızını
-      ve tepkime hızıyla ilişkisini incele.</p>
+      dönüşünü ve toplanan O2 hacmini birlikte izle. Deney bitince grafikteki iki noktayı <b>SEN</b> seç ve üç
+      maddenin de hızının, seçtiğin aralığa göre nasıl değiştiğini incele.</p>
     <div class="lab">
       <div class="lab-controls">
         <button id="n2o5-start" class="btn primary" type="button">▶ Deneyi Başlat</button>
@@ -96,9 +105,11 @@
           <svg id="n2o5-chart" viewBox="0 0 440 240" class="viz-chart"></svg>
         </div>
       </div>
-      <div class="lab-controls" id="n2o5-interval-wrap" style="margin-top:16px;display:none">
-        <label for="n2o5-interval">Zaman aralığı seç ve hızları hesapla:</label>
-        <select id="n2o5-interval"></select>
+      <div class="rate-picker" id="n2o5-interval-wrap" style="display:none">
+        <label for="n2o5-point-a">Nokta A: t = <span id="n2o5-a-label"></span> s</label>
+        <input type="range" id="n2o5-point-a" min="0" max="0" value="0" step="1">
+        <label for="n2o5-point-b">Nokta B: t = <span id="n2o5-b-label"></span> s</label>
+        <input type="range" id="n2o5-point-b" min="0" max="0" value="0" step="1">
       </div>
       <div id="n2o5-detail"></div>
     </div>
@@ -154,7 +165,7 @@
     ensureH2O2Beaker3D().then((api) => api.setBubbles(frac));
   }
 
-  function drawH2O2Chart(points) {
+  function drawH2O2Chart(points, markers) {
     const svgEl = document.getElementById("h2o2-chart");
     const W = 440, H = 240, padL = 44, padB = 30, padT = 14, padR = 14;
     const plotW = W - padL - padR, plotH = H - padT - padB;
@@ -169,12 +180,22 @@
       grid += `<text x="${padL - 6}" y="${y + 3}" text-anchor="end" font-size="9">${(yMax - (yMax * i) / 4).toFixed(1)}</text>`;
     }
     const pts = points.map((d) => `${xAt(d.t)},${yAt(d.c)}`).join(" ");
+    let markerSvg = "";
+    if (markers) {
+      const [ma, mb] = markers;
+      markerSvg = `
+        <line x1="${xAt(ma.t)}" y1="${yAt(ma.c)}" x2="${xAt(mb.t)}" y2="${yAt(mb.c)}" stroke="var(--rate)" stroke-width="2.4" stroke-dasharray="5 3"/>
+        <circle cx="${xAt(ma.t)}" cy="${yAt(ma.c)}" r="6" style="fill:var(--rate)" stroke="#fff" stroke-width="1.6"/>
+        <circle cx="${xAt(mb.t)}" cy="${yAt(mb.c)}" r="6" style="fill:var(--rate)" stroke="#fff" stroke-width="1.6"/>
+      `;
+    }
     svgEl.innerHTML = `
       ${grid}
       <line x1="${padL}" x2="${padL}" y1="${padT}" y2="${H - padB}" class="axis"/>
       <line x1="${padL}" x2="${W - padR}" y1="${H - padB}" y2="${H - padB}" class="axis"/>
       ${points.length > 1 ? `<polyline points="${pts}" class="line" style="stroke:var(--energy)"/>` : ""}
       ${points.map((d) => `<circle cx="${xAt(d.t)}" cy="${yAt(d.c)}" r="3" style="fill:var(--energy)"/>`).join("")}
+      ${markerSvg}
       <text x="${padL}" y="${H - 6}" font-size="9">zaman (s) →</text>
       <text x="6" y="12" font-size="9">M</text>
     `;
@@ -196,14 +217,19 @@
       if (i >= H2O2_DATA.length) {
         clearInterval(timer);
         btn.disabled = false;
-        document.getElementById("h2o2-interval-wrap").style.display = "flex";
-        drawH2O2(0);
+        setupH2O2Picker();
       }
     }, 450);
   }
 
-  function drawH2O2(idx) {
-    const a = H2O2_DATA[idx], b = H2O2_DATA[idx + 1];
+  function updateH2O2Rate() {
+    let ia = Number(document.getElementById("h2o2-point-a").value);
+    let ib = Number(document.getElementById("h2o2-point-b").value);
+    if (ia === ib) ib = ia === H2O2_DATA.length - 1 ? ia - 1 : ia + 1;
+    if (ia > ib) [ia, ib] = [ib, ia];
+    const a = H2O2_DATA[ia], b = H2O2_DATA[ib];
+    document.getElementById("h2o2-a-label").textContent = a.t;
+    document.getElementById("h2o2-b-label").textContent = b.t;
     const dC = b.c - a.c;
     const dt = b.t - a.t;
     const rate = (-dC / dt).toFixed(5);
@@ -211,14 +237,22 @@
       <div><b>Δ[H2O2] = ${b.c.toFixed(2)} − ${a.c.toFixed(2)} = ${dC.toFixed(2)} M</b>${a.t}-${b.t} s aralığı</div>
       <div><b>r = −Δ[H2O2]/Δt = ${rate} M/s</b>Ortalama harcanma hızı</div>
     `;
+    drawH2O2Chart(H2O2_DATA, [a, b]);
+  }
+
+  function setupH2O2Picker() {
+    const sliderA = document.getElementById("h2o2-point-a");
+    const sliderB = document.getElementById("h2o2-point-b");
+    sliderA.max = sliderB.max = H2O2_DATA.length - 1;
+    sliderA.value = 0;
+    sliderB.value = H2O2_DATA.length - 1;
+    document.getElementById("h2o2-interval-wrap").style.display = "";
+    updateH2O2Rate();
   }
 
   function buildH2O2Lab() {
-    const sel = document.getElementById("interval-select");
-    for (let i = 0; i < H2O2_DATA.length - 1; i++) {
-      sel.appendChild(new Option(`${H2O2_DATA[i].t}-${H2O2_DATA[i + 1].t} s`, i));
-    }
-    sel.addEventListener("change", () => drawH2O2(Number(sel.value)));
+    document.getElementById("h2o2-point-a").addEventListener("input", updateH2O2Rate);
+    document.getElementById("h2o2-point-b").addEventListener("input", updateH2O2Rate);
     document.getElementById("h2o2-start").addEventListener("click", runH2O2Experiment);
     sceneH2O2(0);
     drawH2O2Chart([H2O2_DATA[0]]);
@@ -255,7 +289,7 @@
     `;
   }
 
-  function drawN2O5Chart(points) {
+  function drawN2O5Chart(points, markers) {
     const svgEl = document.getElementById("n2o5-chart");
     const W = 440, H = 240, padL = 44, padB = 30, padT = 14, padR = 14;
     const plotW = W - padL - padR, plotH = H - padT - padB;
@@ -286,11 +320,16 @@
       legend += `<circle cx="${lx}" cy="${padT}" r="4" style="fill:${s.color}"/><text x="${lx + 8}" y="${padT + 4}" font-size="9">${s.name}</text>`;
       lx += s.name.length * 6 + 22;
     });
+    let markerSvg = "";
+    if (markers) {
+      markerSvg = markers.map((m) => `<line x1="${xAt(m.t)}" x2="${xAt(m.t)}" y1="${padT}" y2="${H - padB}" stroke="var(--ink)" stroke-width="1.6" stroke-dasharray="5 3"/>`).join("");
+    }
     svgEl.innerHTML = `
       ${grid}
       <line x1="${padL}" x2="${padL}" y1="${padT}" y2="${H - padB}" class="axis"/>
       <line x1="${padL}" x2="${W - padR}" y1="${H - padB}" y2="${H - padB}" class="axis"/>
       ${body}
+      ${markerSvg}
       ${legend}
       <text x="${padL}" y="${H - 6}" font-size="9">zaman (s) →</text>
     `;
@@ -312,14 +351,19 @@
       if (i >= N2O5_DATA.length) {
         clearInterval(timer);
         btn.disabled = false;
-        document.getElementById("n2o5-interval-wrap").style.display = "flex";
-        drawN2O5(0);
+        setupN2O5Picker();
       }
     }, 450);
   }
 
-  function drawN2O5(idx) {
-    const a = N2O5_DATA[idx], b = N2O5_DATA[idx + 1];
+  function updateN2O5Rate() {
+    let ia = Number(document.getElementById("n2o5-point-a").value);
+    let ib = Number(document.getElementById("n2o5-point-b").value);
+    if (ia === ib) ib = ia === N2O5_DATA.length - 1 ? ia - 1 : ia + 1;
+    if (ia > ib) [ia, ib] = [ib, ia];
+    const a = N2O5_DATA[ia], b = N2O5_DATA[ib];
+    document.getElementById("n2o5-a-label").textContent = a.t;
+    document.getElementById("n2o5-b-label").textContent = b.t;
     const dt = b.t - a.t;
     const rN2O5 = -(b.n2o5 - a.n2o5) / dt;
     const rNO2 = (b.no2 - a.no2) / dt;
@@ -339,14 +383,22 @@
           (${a.t}-${b.t} s aralığında)</p>
       </div>
     `;
+    drawN2O5Chart(N2O5_DATA, [a, b]);
+  }
+
+  function setupN2O5Picker() {
+    const sliderA = document.getElementById("n2o5-point-a");
+    const sliderB = document.getElementById("n2o5-point-b");
+    sliderA.max = sliderB.max = N2O5_DATA.length - 1;
+    sliderA.value = 0;
+    sliderB.value = N2O5_DATA.length - 1;
+    document.getElementById("n2o5-interval-wrap").style.display = "";
+    updateN2O5Rate();
   }
 
   function buildN2O5Lab() {
-    const sel = document.getElementById("n2o5-interval");
-    for (let i = 0; i < N2O5_DATA.length - 1; i++) {
-      sel.appendChild(new Option(`${N2O5_DATA[i].t}-${N2O5_DATA[i + 1].t} s`, i));
-    }
-    sel.addEventListener("change", () => drawN2O5(Number(sel.value)));
+    document.getElementById("n2o5-point-a").addEventListener("input", updateN2O5Rate);
+    document.getElementById("n2o5-point-b").addEventListener("input", updateN2O5Rate);
     document.getElementById("n2o5-start").addEventListener("click", runN2O5Experiment);
     document.getElementById("n2o5-scene").innerHTML = sceneN2O5(0);
     drawN2O5Chart([N2O5_DATA[0]]);
