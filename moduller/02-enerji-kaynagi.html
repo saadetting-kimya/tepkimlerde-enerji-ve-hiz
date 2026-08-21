@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enerji Kaynağı Olma Potansiyeli · Kimya 11</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three/three.module.js",
+  "three/addons/": "../assets/vendor/three/examples/jsm/"
+} }
+</script>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -55,7 +61,11 @@
       </div>
       <div class="exp-stage">
         <div class="exp-scene-wrap">
-          <svg id="fuel-scene" viewBox="0 0 300 220"></svg>
+          <div class="exp-3d-frame">
+            <div id="fuel-scene-3d" class="exp-3d-host"></div>
+            <span id="fuel-flame" class="exp-3d-flame">🔥</span>
+          </div>
+          <p class="exp-3d-hint">🖱️ Fareyle sürükleyerek kalorimetre kabını döndürebilir, tekerlekle yakınlaştırabilirsin.</p>
           <div class="exp-readout" id="fuel-readout">Bir yakıt seçip yakmak için düğmeye bas</div>
         </div>
         <div class="exp-chart-wrap">
@@ -137,15 +147,24 @@
     `;
   }
 
-  function sceneCombustion(kj, frac) {
-    return `
-      <path d="M90 60 L90 165 Q90 190 115 190 L185 190 Q210 190 210 165 L210 60" fill="none" stroke="var(--ink-soft)" stroke-width="3"/>
-      <path d="M94 96 L206 96 L206 163 Q206 184 185 184 L115 184 Q94 184 94 163 Z" fill="#cfe4fb" opacity="0.55"/>
-      <rect x="130" y="172" width="40" height="12" rx="3" fill="#8a8f99"/>
-      ${flame(150, 172, frac)}
-      <text x="150" y="205" text-anchor="middle" font-size="12" fill="var(--ink-soft)">Kalorimetre (1 g örnek)</text>
-      ${digitalReadout(228, 55, 60, 62, kj.toFixed(1), "kJ açığa çıktı")}
-    `;
+  /* ---------- 3B kalorimetre kabı ---------- */
+  let calorimeter3D = null;
+  let calorimeter3DLoading = null;
+  function ensureCalorimeter3D() {
+    if (calorimeter3D) return Promise.resolve(calorimeter3D);
+    if (calorimeter3DLoading) return calorimeter3DLoading;
+    calorimeter3DLoading = import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
+      calorimeter3D = createBeakerScene(document.getElementById("fuel-scene-3d"), { liquidColor: 0xbcdcf6 });
+      calorimeter3D.setLiquid(0.55, 0xbcdcf6);
+      return calorimeter3D;
+    });
+    return calorimeter3DLoading;
+  }
+  function sceneCombustion(frac) {
+    ensureCalorimeter3D();
+    const flameEl = document.getElementById("fuel-flame");
+    flameEl.style.opacity = frac <= 0.02 ? "0" : Math.min(1, 0.5 + frac * 0.5).toFixed(2);
+    flameEl.style.transform = `translateX(-50%) scale(${(0.7 + frac * 0.5).toFixed(2)})`;
   }
 
   const testedFuels = {};
@@ -171,7 +190,7 @@
       i++;
       const frac = i / steps;
       const kj = fuel.value * frac;
-      document.getElementById("fuel-scene").innerHTML = sceneCombustion(kj, frac < 1 ? frac : 0.15);
+      sceneCombustion(frac < 1 ? frac : 0.15);
       document.getElementById("fuel-readout").innerHTML = `<b>${kj.toFixed(1)} kJ/g</b><span>${fuel.name} yanıyor…</span>`;
       if (i >= steps) {
         clearInterval(timer);
@@ -188,7 +207,7 @@
     FUELS.forEach((f, i) => sel.appendChild(new Option(f.name, i)));
     sel.value = 1;
     document.getElementById("fuel-burn").addEventListener("click", () => runFuelBurn(FUELS[sel.value]));
-    document.getElementById("fuel-scene").innerHTML = sceneCombustion(0, 0);
+    sceneCombustion(0);
     drawFuelBarChart();
   }
 

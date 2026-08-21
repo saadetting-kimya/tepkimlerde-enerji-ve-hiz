@@ -372,6 +372,8 @@ section.block > .container > h2 .num {
 .exp-3d-host { width: 100%; aspect-ratio: 300 / 220; border-radius: var(--radius-sm); background: var(--bg-panel); overflow: hidden; touch-action: none; }
 .exp-3d-host canvas { display: block; }
 .exp-3d-hint { margin: 6px 0 0; font-size: .78rem; color: var(--ink-soft); text-align: center; }
+.exp-3d-frame { position: relative; }
+.exp-3d-flame { position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); font-size: 2rem; opacity: 0; transition: opacity .15s linear; pointer-events: none; filter: drop-shadow(0 0 8px rgba(255,138,61,.7)); z-index: 2; }
 .exp-readout { margin-top: 10px; min-height: 40px; font-size: .85rem; color: var(--ink-soft); }
 .exp-readout b { display: block; font-size: 1.3rem; color: var(--ink); }
 .exp-chart-wrap { flex: 1; min-width: 260px; max-width: 460px; }
@@ -404,6 +406,7 @@ section.block > .container > h2 .num {
 .race-stage { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 18px; }
 .race-vessel { flex: 1; min-width: 220px; text-align: center; background: var(--bg-panel); border-radius: var(--radius-sm); padding: 14px; }
 .race-vessel svg { width: 100%; max-width: 220px; height: auto; margin-top: 6px; }
+.race-3d-host { max-width: 220px; margin: 6px auto 0; aspect-ratio: 160 / 140; }
 .race-bar { margin-top: 10px; height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; }
 .race-bar-fill { height: 100%; width: 0%; background: var(--ink-soft); transition: width .1s linear; }
 .race-bar-fill.fast { background: var(--rate); }

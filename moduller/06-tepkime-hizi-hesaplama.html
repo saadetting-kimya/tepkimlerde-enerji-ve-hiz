@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ortalama Tepkime Hızının Hesaplanması · Kimya 11</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three/three.module.js",
+  "three/addons/": "../assets/vendor/three/examples/jsm/"
+} }
+</script>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -54,7 +60,8 @@
       </div>
       <div class="exp-stage">
         <div class="exp-scene-wrap">
-          <svg id="h2o2-scene" viewBox="0 0 300 220"></svg>
+          <div id="h2o2-scene-3d" class="exp-3d-host"></div>
+          <p class="exp-3d-hint">🖱️ Fareyle sürükleyerek kabı döndürebilir, tekerlekle yakınlaştırabilirsin.</p>
           <div class="exp-readout" id="h2o2-gauge-readout">Deneyi başlatmak için düğmeye bas</div>
         </div>
         <div class="exp-chart-wrap">
@@ -128,30 +135,23 @@
       <text x="${x + w / 2}" y="${y + h - 8}" text-anchor="middle" font-size="10" fill="#8fa3b3">${unitText}</text>
     `;
   }
-  function bubbles(cx, baseY, count, intensity) {
-    if (intensity <= 0.02) return "";
-    let out = "";
-    for (let i = 0; i < count; i++) {
-      const dx = (i - (count - 1) / 2) * 14 + (i % 2 === 0 ? -3 : 3);
-      const r = 3 + (i % 3);
-      const rise = 20 + i * 16;
-      out += `<circle cx="${cx + dx}" cy="${baseY - rise * intensity}" r="${r}" fill="#dff3ff" opacity="${(0.5 * intensity).toFixed(2)}" stroke="#bcd7f2" stroke-width="1"/>`;
-    }
-    return out;
+  /* ---------- 3B beher (H2O2 çözeltisi, O2 kabarcıkları) ---------- */
+  let h2o2Beaker3D = null;
+  let h2o2Beaker3DLoading = null;
+  function ensureH2O2Beaker3D() {
+    if (h2o2Beaker3D) return Promise.resolve(h2o2Beaker3D);
+    if (h2o2Beaker3DLoading) return h2o2Beaker3DLoading;
+    h2o2Beaker3DLoading = import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
+      h2o2Beaker3D = createBeakerScene(document.getElementById("h2o2-scene-3d"), { liquidColor: 0xcfe4fb });
+      h2o2Beaker3D.setLiquid(0.58, 0xcfe4fb);
+      return h2o2Beaker3D;
+    });
+    return h2o2Beaker3DLoading;
   }
-
   function sceneH2O2(step) {
     const d = H2O2_DATA[step];
     const frac = d.c / H2O2_DATA[0].c;
-    const bubbleCount = Math.round(1 + frac * 5);
-    return `
-      <path d="M65 42 L65 172 Q65 196 89 196 L191 196 Q215 196 215 172 L215 42" fill="none" stroke="var(--ink-soft)" stroke-width="3"/>
-      <path d="M69 88 L211 88 L211 170 Q211 190 191 190 L89 190 Q69 190 69 170 Z" fill="#cfe4fb" opacity="0.75"/>
-      ${bubbles(140, 175, bubbleCount, frac)}
-      <text x="140" y="212" text-anchor="middle" font-size="12" fill="var(--ink-soft)">H₂O₂(suda)</text>
-      ${digitalReadout(228, 40, 56, 60, d.c.toFixed(2), "M  [H₂O₂]")}
-      <text x="256" y="118" text-anchor="middle" font-size="11" fill="var(--ink-soft)">t = ${d.t} s</text>
-    `;
+    ensureH2O2Beaker3D().then((api) => api.setBubbles(frac));
   }
 
   function drawH2O2Chart(points) {
@@ -189,7 +189,7 @@
     let i = 0;
     const timer = setInterval(() => {
       shown.push(H2O2_DATA[i]);
-      document.getElementById("h2o2-scene").innerHTML = sceneH2O2(i);
+      sceneH2O2(i);
       document.getElementById("h2o2-gauge-readout").innerHTML = `<b>${H2O2_DATA[i].c.toFixed(2)} M</b><span>t = ${H2O2_DATA[i].t} s</span>`;
       drawH2O2Chart(shown);
       i++;
@@ -220,7 +220,7 @@
     }
     sel.addEventListener("change", () => drawH2O2(Number(sel.value)));
     document.getElementById("h2o2-start").addEventListener("click", runH2O2Experiment);
-    document.getElementById("h2o2-scene").innerHTML = sceneH2O2(0);
+    sceneH2O2(0);
     drawH2O2Chart([H2O2_DATA[0]]);
   }
 

@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tepkime Hızına Etki Eden Faktörler · Kimya 11</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three/three.module.js",
+  "three/addons/": "../assets/vendor/three/examples/jsm/"
+} }
+</script>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -46,12 +52,12 @@
       <div class="race-stage">
         <div class="race-vessel">
           <span class="tag orta">Yavaş</span>
-          <svg id="race-slow-svg" viewBox="0 0 160 140"></svg>
+          <div id="race-slow-3d" class="exp-3d-host race-3d-host"></div>
           <div class="race-bar"><div class="race-bar-fill" id="race-slow-fill"></div></div>
         </div>
         <div class="race-vessel">
           <span class="tag rate">Hızlı</span>
-          <svg id="race-fast-svg" viewBox="0 0 160 140"></svg>
+          <div id="race-fast-3d" class="exp-3d-host race-3d-host"></div>
           <div class="race-bar"><div class="race-bar-fill fast" id="race-fast-fill"></div></div>
         </div>
       </div>
@@ -85,7 +91,17 @@
       </div>
       <div class="exp-stage">
         <div class="exp-scene-wrap">
-          <svg id="surface-scene" viewBox="0 0 300 220"></svg>
+          <div class="race-stage" style="margin-bottom:0">
+            <div class="race-vessel">
+              <span class="tag rate">Toz Zn</span>
+              <div id="surface-toz-3d" class="exp-3d-host race-3d-host"></div>
+            </div>
+            <div class="race-vessel">
+              <span class="tag orta">Parça Zn</span>
+              <div id="surface-parca-3d" class="exp-3d-host race-3d-host"></div>
+            </div>
+          </div>
+          <p class="exp-3d-hint">🖱️ Fareyle sürükleyerek kapları döndürebilir, tekerlekle yakınlaştırabilirsin.</p>
           <div class="exp-readout" id="surface-readout">Deneyi başlatmak için düğmeye bas</div>
         </div>
         <div class="exp-chart-wrap">
@@ -163,24 +179,20 @@
     `;
   }
 
-  function bubbles(cx, baseY, count, intensity) {
-    if (intensity <= 0.02) return "";
-    let out = "";
-    for (let i = 0; i < count; i++) {
-      const dx = (i - (count - 1) / 2) * 12 + (i % 2 === 0 ? -2 : 2);
-      const r = 2.5 + (i % 3);
-      const rise = 16 + i * 13;
-      out += `<circle cx="${cx + dx}" cy="${baseY - rise * intensity}" r="${r}" fill="#dff3ff" opacity="${(0.5 * intensity).toFixed(2)}" stroke="#bcd7f2" stroke-width="1"/>`;
-    }
-    return out;
+  /* ---------- 3B yarış kapları (paylaşılan beher bileşeni, iki kopya) ---------- */
+  const raceBeakers = { slow: null, fast: null };
+  function ensureRaceBeaker(key, hostId) {
+    if (raceBeakers[key]) return Promise.resolve(raceBeakers[key]);
+    return import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
+      raceBeakers[key] = createBeakerScene(document.getElementById(hostId), { liquidColor: 0xcfe4fb });
+      raceBeakers[key].setLiquid(0.55, 0xcfe4fb);
+      return raceBeakers[key];
+    });
   }
-  function sceneVessel(progress) {
-    const bubbleCount = Math.round(2 + progress * 5);
-    return `
-      <path d="M35 20 L35 105 Q35 122 52 122 L108 122 Q125 122 125 105 L125 20" fill="none" stroke="var(--ink-soft)" stroke-width="2.5"/>
-      <path d="M38 55 L122 55 L122 103 Q122 116 108 116 L52 116 Q38 116 38 103 Z" fill="#cfe4fb" opacity="0.65"/>
-      ${bubbles(80, 108, bubbleCount, Math.min(1, progress * 1.3) * (progress < 1 ? 1 : 0.15))}
-    `;
+  function sceneVessel(key, hostId, progress) {
+    ensureRaceBeaker(key, hostId).then((api) => {
+      api.setBubbles(Math.min(1, progress * 1.3) * (progress < 1 ? 1 : 0.15));
+    });
   }
 
   let raceTimer = null;
@@ -190,8 +202,8 @@
     btn.disabled = true;
     const slowDur = 3600, fastDur = 1400;
     const start = performance.now();
-    document.getElementById("race-slow-svg").innerHTML = sceneVessel(0);
-    document.getElementById("race-fast-svg").innerHTML = sceneVessel(0);
+    sceneVessel("slow", "race-slow-3d", 0);
+    sceneVessel("fast", "race-fast-3d", 0);
     let fastDone = false;
     raceTimer = setInterval(() => {
       const elapsed = performance.now() - start;
@@ -199,8 +211,8 @@
       const pFast = Math.min(1, elapsed / fastDur);
       document.getElementById("race-slow-fill").style.width = `${pSlow * 100}%`;
       document.getElementById("race-fast-fill").style.width = `${pFast * 100}%`;
-      document.getElementById("race-slow-svg").innerHTML = sceneVessel(pSlow);
-      document.getElementById("race-fast-svg").innerHTML = sceneVessel(pFast);
+      sceneVessel("slow", "race-slow-3d", pSlow);
+      sceneVessel("fast", "race-fast-3d", pFast);
       if (pFast >= 1 && !fastDone) {
         fastDone = true;
       }
@@ -219,13 +231,13 @@
       renderFactor(sel.value);
       document.getElementById("race-slow-fill").style.width = "0%";
       document.getElementById("race-fast-fill").style.width = "0%";
-      document.getElementById("race-slow-svg").innerHTML = sceneVessel(0);
-      document.getElementById("race-fast-svg").innerHTML = sceneVessel(0);
+      sceneVessel("slow", "race-slow-3d", 0);
+      sceneVessel("fast", "race-fast-3d", 0);
     });
     document.getElementById("factor-start").addEventListener("click", runRace);
     renderFactor(0);
-    document.getElementById("race-slow-svg").innerHTML = sceneVessel(0);
-    document.getElementById("race-fast-svg").innerHTML = sceneVessel(0);
+    sceneVessel("slow", "race-slow-3d", 0);
+    sceneVessel("fast", "race-fast-3d", 0);
   }
 
   function drawTempDist() {
@@ -266,23 +278,19 @@
     return SURFACE_MAX_MOL * (1 - Math.exp(-rate * x * 6));
   }
 
+  /* ---------- 3B temas-yüzeyi kapları (paylaşılan beher bileşeni, iki kopya) ---------- */
+  const surfaceBeakers = { toz: null, parca: null };
+  function ensureSurfaceBeaker(key, hostId) {
+    if (surfaceBeakers[key]) return Promise.resolve(surfaceBeakers[key]);
+    return import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
+      surfaceBeakers[key] = createBeakerScene(document.getElementById(hostId), { liquidColor: 0xcfe4fb });
+      surfaceBeakers[key].setLiquid(0.5, 0xcfe4fb);
+      return surfaceBeakers[key];
+    });
+  }
   function sceneSurface(tozFrac, parcaFrac) {
-    function vessel(cx, label, isPowder, frac, mol) {
-      const collectFrac = mol / SURFACE_MAX_MOL;
-      return `
-        <path d="M${cx - 24} 70 L${cx - 24} 145 Q${cx - 24} 158 ${cx - 12} 158 L${cx + 12} 158 Q${cx + 24} 158 ${cx + 24} 145 L${cx + 24} 70" fill="none" stroke="var(--ink-soft)" stroke-width="2.5"/>
-        <path d="M${cx - 21} 95 L${cx + 21} 95 L${cx + 21} 143 Q${cx + 21} 154 ${cx + 12} 154 L${cx - 12} 154 Q${cx - 21} 154 ${cx - 21} 143 Z" fill="#cfe4fb" opacity="0.7"/>
-        ${isPowder
-          ? `<circle cx="${cx - 6}" cy="145" r="2.5" fill="#8a8f99"/><circle cx="${cx + 2}" cy="148" r="2" fill="#8a8f99"/><circle cx="${cx + 8}" cy="144" r="2.5" fill="#8a8f99"/><circle cx="${cx - 2}" cy="140" r="2" fill="#8a8f99"/>`
-          : `<rect x="${cx - 9}" y="139" width="18" height="14" rx="3" fill="#8a8f99"/>`}
-        ${bubbles(cx, 150, Math.round(2 + frac * 5), frac < 1 ? frac : 0.1)}
-        <path d="M${cx + 18} 78 Q${cx + 40} 78 ${cx + 40} 60 L${cx + 40} 35" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"/>
-        <rect x="${cx + 32}" y="15" width="16" height="24" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"/>
-        <rect x="${cx + 33.5}" y="${39 - 23 * collectFrac}" width="13" height="${23 * collectFrac}" fill="#dff3ff" opacity="0.7"/>
-        <text x="${cx}" y="172" text-anchor="middle" font-size="10" fill="var(--ink-soft)">${label}</text>
-      `;
-    }
-    return vessel(72, "Toz Zn", true, tozFrac, molH2(1.4, tozFrac < 1 ? tozFrac : 1)) + vessel(220, "Parça Zn", false, parcaFrac, molH2(0.35, parcaFrac < 1 ? parcaFrac : 1));
+    ensureSurfaceBeaker("toz", "surface-toz-3d").then((api) => api.setBubbles(tozFrac < 1 ? tozFrac : 0.1));
+    ensureSurfaceBeaker("parca", "surface-parca-3d").then((api) => api.setBubbles(parcaFrac < 1 ? parcaFrac : 0.1));
   }
 
   function drawSurfaceChart(points) {
@@ -327,7 +335,7 @@
     const points = [];
     const timer = setInterval(() => {
       const x = Math.min(1, (performance.now() - start) / duration);
-      document.getElementById("surface-scene").innerHTML = sceneSurface(x, x);
+      sceneSurface(x, x);
       const tozMol = molH2(1.4, x), parcaMol = molH2(0.35, x);
       points.push({ t: x, toz: tozMol, parca: parcaMol });
       drawSurfaceChart(points);
@@ -342,7 +350,7 @@
 
   function buildSurfaceLab() {
     document.getElementById("surface-start").addEventListener("click", runSurfaceExperiment);
-    document.getElementById("surface-scene").innerHTML = sceneSurface(0, 0);
+    sceneSurface(0, 0);
     drawSurfaceChart([{ t: 0, toz: 0, parca: 0 }]);
   }
 
