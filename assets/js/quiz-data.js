@@ -2032,6 +2032,7 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
+      "peDiagram": { "reactant": 180, "peak": 220, "product": 90, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Potansiyel enerji-tepkime koordinatı grafiğinde ürünün enerji düzeyi tepkenlerin enerji düzeyinden daha düşükse bu tepkime nasıl sınıflandırılır?",
       "options": [
         "Yavaş",
@@ -2045,6 +2046,7 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
+      "peDiagram": { "reactant": 90, "peak": 200, "product": 170, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Potansiyel enerji-tepkime koordinatı grafiğinde ürünün enerji düzeyi tepkenlerin enerji düzeyinden daha yüksekse bu tepkime nasıl sınıflandırılır?",
       "options": [
         "Endotermik",
@@ -2286,6 +2288,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "peDiagram": { "reactant": 150, "peak": 210, "product": 155, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Bir tepkimenin potansiyel enerji-tepkime koordinatı grafiğinde tepken ve ürün enerji düzeyleri neredeyse aynı yükseklikte çiziliyor. Bu, ΔH_tepkime değeri hakkında ne düşündürür?",
       "options": [
         "ΔH büyük ve negatiftir",
@@ -3800,6 +3803,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "peDiagram": { "reactant": 0, "peak": 120, "product": 40, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Bir tepkimenin ileri aktivasyon enerjisi 120 kJ, geri aktivasyon enerjisi 80 kJ olarak ölçülüyor. Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir ve tepkime türü nedir?",
       "options": [
         "-40 kJ, ekzotermik",
@@ -3813,6 +3817,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "peDiagram": { "reactant": 100, "peak": 160, "product": 10, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Bir tepkimenin ileri aktivasyon enerjisi 60 kJ, geri aktivasyon enerjisi 150 kJ olarak ölçülüyor. Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir ve tepkime türü nedir?",
       "options": [
         "-90 kJ, ekzotermik",
@@ -4001,6 +4006,7 @@ const QUIZ = {
     },
     {
       "difficulty": "zor",
+      "peDiagram": { "reactant": 60, "peak": 220, "product": 30, "unit": "Potansiyel Enerji (kJ)", "firstLabel": "1. yol (katalizörsüz)", "second": { "peak": 110, "label": "2. yol (katalizörlü)" } },
       "text": "Bir araştırmacı aynı iki tepken kullanılan iki farklı tepkime yolunu karşılaştırıyor: 1. yolda aktivasyon enerjisi çok yüksek, 2. yolda (bir katalizör kullanılarak) aktivasyon enerjisi daha düşük. Her iki yolun da aynı ürünlere ve aynı ΔH değerine sahip olduğu biliniyor. Bu bilgiye dayanarak en doğru çıkarım hangisidir?",
       "options": [
         "Katalizör kullanımı tepkimenin türünü (endo/ekzotermik) değiştirir",
@@ -4118,6 +4124,7 @@ const QUIZ = {
     },
     {
       "difficulty": "zor",
+      "peDiagram": { "reactant": 20, "peak": 70, "product": 20, "unit": "Potansiyel Enerji (kJ)", "firstLabel": "1. tepkime (Ea=50 kJ)", "second": { "peak": 170, "label": "2. tepkime (Ea=150 kJ)" } },
       "text": "İki farklı katalizörsüz tepkime karşılaştırılıyor: 1. tepkimenin aktivasyon enerjisi 50 kJ, 2. tepkimenin aktivasyon enerjisi 150 kJ'dir. Aynı sıcaklıkta, hangi tepkimede etkin çarpışma yapabilecek tanecik oranının daha yüksek olması ve dolayısıyla tepkimenin daha hızlı ilerlemesi beklenir?",
       "options": [
         "2. tepkime, çünkü aktivasyon enerjisi daha yüksektir",
@@ -5328,6 +5335,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "peDiagram": { "reactant": 80, "peak": 220, "product": 40, "unit": "Potansiyel Enerji (kJ)", "firstLabel": "Katalizörsüz", "second": { "peak": 120, "label": "Katalizörlü" } },
       "text": "Bir kimyager, katalizörlü ve katalizörsüz aynı tepkimenin potansiyel enerji-tepkime koordinatı grafiklerini üst üste çiziyor. İki eğri arasında beklenen fark nedir?",
       "options": [
         "Katalizörlü eğrinin tepe noktası (aktivasyon enerjisi zirvesi) daha düşük olur, ama tepken ve ürün enerji düzeyleri aynı kalır",

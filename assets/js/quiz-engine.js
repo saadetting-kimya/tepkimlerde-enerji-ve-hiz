@@ -172,6 +172,66 @@ function renderChecklist(spec) {
   return ul;
 }
 
+/* ---------------- renderPEDiagram (potansiyel enerji-tepkime koordinatı) ---------------- */
+function renderPEDiagram(spec) {
+  // spec: { reactant, peak, product, unit, reactantLabel, productLabel, second: { peak, label } }
+  const W = 480, H = 260, padL = 50, padR = 18, padT = 20, padB = 40;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const allV = [spec.reactant, spec.peak, spec.product, spec.second ? spec.second.peak : spec.peak];
+  const maxV = Math.max(...allV) * 1.12;
+  const minV = Math.min(0, ...allV) * (Math.min(...allV) < 0 ? 1.12 : 1);
+  const yAt = (v) => padT + plotH - ((v - minV) / (maxV - minV)) * plotH;
+  const x0 = padL, x1 = padL + plotW * 0.24, x2 = padL + plotW * 0.62, x3 = padL + plotW;
+
+  const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, class: "viz-chart", role: "img" });
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (plotH * i) / 4;
+    s.appendChild(svg("line", { class: "gridline", x1: padL, x2: W - padR, y1: y, y2: y }));
+    const val = maxV - ((maxV - minV) * i) / 4;
+    const t = svg("text", { x: padL - 6, y: y + 3, "text-anchor": "end" });
+    t.textContent = Math.round(val);
+    s.appendChild(t);
+  }
+  s.appendChild(svg("line", { class: "axis", x1: padL, x2: padL, y1: padT, y2: H - padB }));
+  s.appendChild(svg("line", { class: "axis", x1: padL, x2: W - padR, y1: H - padB, y2: H - padB }));
+
+  function curve(peakV, color) {
+    const p0 = [x1, yAt(spec.reactant)], p1 = [(x1 + x2) / 2, yAt(peakV)], p2 = [x2, yAt(spec.product)];
+    const d = `M ${p0[0]},${p0[1]} Q ${p1[0]},${p1[1]} ${p2[0]},${p2[1]}`;
+    return svg("path", { d, fill: "none", class: "line", style: `stroke:${color}` });
+  }
+  if (spec.second) s.appendChild(curve(spec.second.peak, "var(--rate)"));
+  s.appendChild(curve(spec.peak, "var(--energy)"));
+
+  s.appendChild(svg("line", { x1: x0, x2: x1, y1: yAt(spec.reactant), y2: yAt(spec.reactant), stroke: "var(--ink)", "stroke-width": 2.4 }));
+  s.appendChild(svg("line", { x1: x2, x2: x3, y1: yAt(spec.product), y2: yAt(spec.product), stroke: "var(--ink)", "stroke-width": 2.4 }));
+  const rl = svg("text", { x: (x0 + x1) / 2, y: yAt(spec.reactant) + 16, "text-anchor": "middle", class: "label" });
+  rl.textContent = spec.reactantLabel || "Tepkenler";
+  s.appendChild(rl);
+  const pl = svg("text", { x: (x2 + x3) / 2, y: yAt(spec.product) + (spec.product >= spec.reactant ? -8 : 16), "text-anchor": "middle", class: "label" });
+  pl.textContent = spec.productLabel || "Ürünler";
+  s.appendChild(pl);
+
+  if (spec.second) {
+    const legend = svg("text", { x: padL + 4, y: padT + 10, class: "label", style: "fill:var(--rate)" });
+    legend.textContent = spec.second.label || "Katalizörlü";
+    s.appendChild(legend);
+    const legend2 = svg("text", { x: padL + 4, y: padT + 24, class: "label", style: "fill:var(--energy)" });
+    legend2.textContent = spec.firstLabel || "Katalizörsüz";
+    s.appendChild(legend2);
+  }
+
+  const axisLbl = svg("text", { x: padL + plotW - 90, y: H - 8 });
+  axisLbl.textContent = "Tepkime Koordinatı →";
+  s.appendChild(axisLbl);
+  if (spec.unit) {
+    const u = svg("text", { x: 6, y: 12 });
+    u.textContent = spec.unit;
+    s.appendChild(u);
+  }
+  return s;
+}
+
 const RENDERERS = {
   table: renderDataTable,
   chart: renderChart,
@@ -180,6 +240,7 @@ const RENDERERS = {
   dialogue: renderDialogue,
   matchPairs: renderMatchTable,
   checklist: renderChecklist,
+  peDiagram: renderPEDiagram,
 };
 
 /* ============================================================
