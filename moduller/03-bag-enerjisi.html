@@ -49,14 +49,18 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Deney İstasyonu: Bağ Kırma/Oluşturma Simülatörü</h2>
-    <p class="block-lead">Bir tepkime seç ve simülasyonu başlat; bağların gerçekten tek tek kırılıp yeniden
-      oluşmasını ve enerji sayacının buna göre değişmesini izle.</p>
+    <h2><span class="num">2</span>Deney İstasyonu: Bağı Sen Oluştur, Sen Kopar</h2>
+    <p class="block-lead">Bir bağ seç. Önce iki taneciği <b>SEN</b> yaklaştırarak bağı oluştur ve enerjinin nasıl
+      açığa çıktığını izle. Sonra aynı bağa <b>SEN</b> enerji vererek kopar — bağ enerjisinin ne demek olduğunu
+      böylece elinle hissedersin.</p>
     <div class="lab">
       <div class="lab-controls">
-        <label for="rxn-select">Tepkime:</label>
-        <select id="rxn-select"></select>
-        <button id="rxn-start" class="btn primary" type="button">▶ Simülasyonu Başlat</button>
+        <label for="bond-select">Bağ:</label>
+        <select id="bond-select"></select>
+      </div>
+      <div class="bond-tabs">
+        <button class="btn bond-tab active" data-tab="form" type="button">🧲 Bağ Oluştur</button>
+        <button class="btn bond-tab" data-tab="break" type="button">⚡ Bağ Kopar</button>
       </div>
       <div class="bond-stage">
         <div class="exp-3d-frame" style="max-width:420px;margin:0 auto">
@@ -64,7 +68,35 @@
           <span id="bond-label-badge" class="exp-3d-badge"></span>
         </div>
         <p class="exp-3d-hint">🖱️ Fareyle sürükleyerek bağı farklı açılardan inceleyebilirsin.</p>
-        <div class="bond-counter" id="bond-counter">Enerji sayacı: 0 kJ</div>
+      </div>
+
+      <div id="form-panel" class="bond-panel">
+        <label for="dist-slider">Tanecikleri birbirine yaklaştır (kaydırıcıyı sağa sürükle)</label>
+        <input type="range" id="dist-slider" min="0" max="100" value="0" step="1">
+        <div class="bond-readout" id="form-readout">Tanecikler uzakta — henüz enerji açığa çıkmadı.</div>
+      </div>
+
+      <div id="break-panel" class="bond-panel" style="display:none">
+        <div class="btn-row">
+          <button class="btn primary" id="pump-btn" type="button">⚡ Enerji Ver</button>
+          <button class="btn" id="break-reset" type="button">↺ Bağı Yeniden Oluştur</button>
+        </div>
+        <div class="bond-energy-bar"><div class="bond-energy-fill" id="pump-fill"></div></div>
+        <div class="bond-readout" id="break-readout">Depolanan enerji: 0 kJ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2><span class="num">3</span>Değerlendir: Bir Tepkimenin Tüm Bağları</h2>
+    <p class="block-lead">Gerçek bir tepkimede birden çok bağ aynı anda kırılır ve oluşur. Bir tepkime seç;
+      kırılan ve oluşan bağların toplam enerjisinden ΔH'yi hesapla.</p>
+    <div class="lab">
+      <div class="lab-controls">
+        <label for="rxn-select">Tepkime:</label>
+        <select id="rxn-select"></select>
       </div>
       <div id="rxn-detail"></div>
     </div>
@@ -73,7 +105,7 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">3</span>Keşfet: Potansiyel Enerji – Tepkime Koordinatı</h2>
+    <h2><span class="num">4</span>Keşfet: Potansiyel Enerji – Tepkime Koordinatı</h2>
     <p class="block-lead">Aynı tepkimenin tepken ve ürün potansiyel enerji düzeylerini karşılaştıran grafiği
       incele. Ürün, tepkenden daha mı yüksek yoksa daha mı düşük enerjili?</p>
     <div class="lab">
@@ -85,7 +117,7 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">4</span>Değerlendir</h2>
+    <h2><span class="num">5</span>Değerlendir</h2>
     <p class="block-lead">50 bağlam temelli soru — kolay, orta ve zor karışık sırada.</p>
     <div id="quiz-host"></div>
   </div>
@@ -164,52 +196,108 @@
     const m = bond.match(/^([A-Z][a-z]?)[-=≡]([A-Z][a-z]?)$/);
     return m ? [m[1], m[2]] : ["C", "C"];
   }
-  function bondIcon(label, gap) {
-    const [elA, elB] = parseBond(label.replace(/^[\d.]+×\s*/, ""));
-    ensureBondScene3D().then((api) => api.setBond(elA, elB, gap / 30));
-    const badge = document.getElementById("bond-label-badge");
-    badge.textContent = label;
-    badge.style.color = "var(--ink)";
+
+  /* ---------- Bağı Sen Oluştur, Sen Kopar (öğrenci doğrudan sürükler/tıklar) ---------- */
+  const BOND_LIST = Object.keys(BOND_ENERGIES).sort();
+  let bondTab = "form";
+  let pumpEnergy = 0;
+  let pumpBroken = false;
+
+  function selectedBondKey() {
+    return document.getElementById("bond-select").value;
+  }
+  function setSceneBond(gap) {
+    const [elA, elB] = parseBond(selectedBondKey());
+    ensureBondScene3D().then((api) => api.setBond(elA, elB, gap));
   }
 
-  function runBondSim(idx) {
-    const rxn = REACTIONS[idx];
-    const btn = document.getElementById("rxn-start");
-    btn.disabled = true;
-    document.getElementById("rxn-detail").innerHTML = "";
-    const steps = [
-      ...rxn.broken.map(([b, n]) => ({ bond: b, n, mode: "break" })),
-      ...rxn.formed.map(([b, n]) => ({ bond: b, n, mode: "form" })),
-    ];
-    let total = 0;
-    let stepIdx = 0;
+  function resetFormPanel() {
+    document.getElementById("dist-slider").value = 0;
+    setSceneBond(1.7);
+    document.getElementById("bond-label-badge").textContent = "";
+    const readout = document.getElementById("form-readout");
+    readout.className = "bond-readout";
+    readout.textContent = "Tanecikler uzakta — henüz enerji açığa çıkmadı.";
+  }
 
-    function runStep() {
-      if (stepIdx >= steps.length) {
-        renderReactionTable(idx);
-        btn.disabled = false;
-        return;
-      }
-      const s = steps[stepIdx];
-      const energy = BOND_ENERGIES[s.bond] * s.n;
-      const breaking = s.mode === "break";
-      const frames = 16;
+  function onDistInput(e) {
+    const pct = Number(e.target.value);
+    const gap = 1.7 * (1 - pct / 100);
+    setSceneBond(gap);
+    const energy = BOND_ENERGIES[selectedBondKey()];
+    const readout = document.getElementById("form-readout");
+    const badge = document.getElementById("bond-label-badge");
+    if (pct >= 92) {
+      readout.className = "bond-readout flash";
+      readout.innerHTML = `🔆 <b>Bağ oluştu! ${energy} kJ enerji açığa çıktı.</b>`;
+      badge.textContent = `${selectedBondKey()} bağı`;
+    } else {
+      readout.className = "bond-readout";
+      readout.textContent = pct > 5
+        ? `Yaklaştıkça enerji açığa çıkıyor: ≈ ${Math.round(energy * (pct / 100))} kJ`
+        : "Tanecikler uzakta — henüz enerji açığa çıkmadı.";
+      badge.textContent = "";
+    }
+  }
+
+  function resetBreakPanel() {
+    pumpEnergy = 0;
+    pumpBroken = false;
+    setSceneBond(0);
+    document.getElementById("bond-label-badge").textContent = `${selectedBondKey()} bağı (oluşmuş)`;
+    document.getElementById("pump-fill").style.width = "0%";
+    document.getElementById("pump-fill").classList.remove("done");
+    document.getElementById("pump-btn").disabled = false;
+    const readout = document.getElementById("break-readout");
+    readout.className = "bond-readout";
+    readout.textContent = "Depolanan enerji: 0 kJ";
+  }
+
+  function onPump() {
+    if (pumpBroken) return;
+    const required = BOND_ENERGIES[selectedBondKey()];
+    const step = Math.max(20, Math.round(required / 8));
+    pumpEnergy = Math.min(required, pumpEnergy + step);
+    document.getElementById("pump-fill").style.width = Math.round((pumpEnergy / required) * 100) + "%";
+    const readout = document.getElementById("break-readout");
+    if (pumpEnergy >= required) {
+      pumpBroken = true;
+      document.getElementById("pump-btn").disabled = true;
+      document.getElementById("pump-fill").classList.add("done");
+      readout.className = "bond-readout flash";
+      readout.innerHTML = `💥 <b>Bağ kırıldı! ${required} kJ enerji alındı.</b>`;
+      document.getElementById("bond-label-badge").textContent = `${selectedBondKey()} bağı kırıldı`;
       let f = 0;
+      const frames = 10;
       const timer = setInterval(() => {
         f++;
-        const t = f / frames;
-        const gap = breaking ? t * 34 : (1 - t) * 34;
-        bondIcon(`${s.n}× ${s.bond}`, gap);
-        if (f >= frames) {
-          clearInterval(timer);
-          total += breaking ? energy : -energy;
-          document.getElementById("bond-counter").innerHTML = `${s.bond} ${s.n}× ${breaking ? "kırıldı: +" : "oluştu: −"}${Math.round(energy)} kJ &nbsp;→&nbsp; Sayaç: ${Math.round(total)} kJ`;
-          stepIdx++;
-          setTimeout(runStep, 350);
-        }
+        setSceneBond(1.7 * (f / frames));
+        if (f >= frames) clearInterval(timer);
       }, 30);
+    } else {
+      readout.textContent = `Depolanan enerji: ${pumpEnergy} / ${required} kJ`;
     }
-    runStep();
+  }
+
+  function switchBondTab(tab) {
+    bondTab = tab;
+    document.querySelectorAll(".bond-tab").forEach((b) => b.classList.toggle("active", b.dataset.tab === tab));
+    document.getElementById("form-panel").style.display = tab === "form" ? "" : "none";
+    document.getElementById("break-panel").style.display = tab === "break" ? "" : "none";
+    if (tab === "form") resetFormPanel();
+    else resetBreakPanel();
+  }
+
+  function setupBondSim() {
+    const sel = document.getElementById("bond-select");
+    BOND_LIST.forEach((b) => sel.appendChild(new Option(`${b}  (${BOND_ENERGIES[b]} kJ/mol)`, b)));
+    sel.value = "O-H";
+    sel.addEventListener("change", () => switchBondTab(bondTab));
+    document.querySelectorAll(".bond-tab").forEach((btn) => btn.addEventListener("click", () => switchBondTab(btn.dataset.tab)));
+    document.getElementById("dist-slider").addEventListener("input", onDistInput);
+    document.getElementById("pump-btn").addEventListener("click", onPump);
+    document.getElementById("break-reset").addEventListener("click", resetBreakPanel);
+    switchBondTab("form");
   }
 
   function drawPEDiagram(dH, name) {
@@ -240,15 +328,11 @@
   function buildRxnLab() {
     const sel = document.getElementById("rxn-select");
     REACTIONS.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
-    sel.addEventListener("change", () => {
-      document.getElementById("bond-counter").textContent = "Enerji sayacı: 0 kJ";
-      document.getElementById("bond-label-badge").textContent = "";
-      document.getElementById("rxn-detail").innerHTML = "";
-    });
-    document.getElementById("rxn-start").addEventListener("click", () => runBondSim(Number(sel.value)));
+    sel.addEventListener("change", () => renderReactionTable(Number(sel.value)));
     renderReactionTable(0);
   }
 
+  setupBondSim();
   buildRxnLab();
   mountNav(MODKEY);
   mountNextModule(MODKEY);
