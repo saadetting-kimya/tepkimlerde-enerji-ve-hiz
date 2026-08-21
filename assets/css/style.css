@@ -374,6 +374,8 @@ section.block > .container > h2 .num {
 .exp-3d-hint { margin: 6px 0 0; font-size: .78rem; color: var(--ink-soft); text-align: center; }
 .exp-3d-frame { position: relative; }
 .exp-3d-flame { position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); font-size: 2rem; opacity: 0; transition: opacity .15s linear; pointer-events: none; filter: drop-shadow(0 0 8px rgba(255,138,61,.7)); z-index: 2; }
+.exp-3d-badge { position: absolute; left: 50%; top: 8%; transform: translateX(-50%); font-size: 1.15rem; font-weight: 800; color: var(--rate); background: #fff; padding: 4px 12px; border-radius: 999px; box-shadow: var(--shadow); pointer-events: none; z-index: 2; }
+.exp-3d-badge:empty { display: none; }
 .exp-readout { margin-top: 10px; min-height: 40px; font-size: .85rem; color: var(--ink-soft); }
 .exp-readout b { display: block; font-size: 1.3rem; color: var(--ink); }
 .exp-chart-wrap { flex: 1; min-width: 260px; max-width: 460px; }

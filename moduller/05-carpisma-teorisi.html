@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tepkimenin Gerçekleşme Şartları · Kimya 11</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three/three.module.js",
+  "three/addons/": "../assets/vendor/three/examples/jsm/"
+} }
+</script>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -60,7 +66,11 @@
         </select>
         <button id="geo-start" class="btn primary" type="button">▶ Çarpıştır</button>
       </div>
-      <div class="lab-stage" style="min-height:180px"><svg id="geo-svg" viewBox="0 0 420 160" style="width:100%;max-width:420px"></svg></div>
+      <div class="exp-3d-frame" style="max-width:420px;margin:0 auto">
+        <div id="geo-3d" class="exp-3d-host" style="aspect-ratio:420/180"></div>
+        <span id="geo-result-badge" class="exp-3d-badge"></span>
+      </div>
+      <p class="exp-3d-hint">🖱️ Fareyle sürükleyerek molekülleri farklı açılardan inceleyebilir, tekerlekle yakınlaştırabilirsin.</p>
       <div class="lab-readout" id="geo-readout"></div>
     </div>
   </div>
@@ -124,25 +134,30 @@
 <script>
   const MODKEY = "m5";
 
-  function sceneCollision(kind, noX, o3X, phase) {
-    /* phase: "approach" | "impact" | "success" | "bounce" */
-    const good = kind === "good";
-    let noGroup = `<circle cx="${noX}" cy="70" r="12" fill="var(--endo)"/><circle cx="${noX + 15}" cy="70" r="8" fill="var(--ink-soft)"/><text x="${noX - 12}" y="46" font-size="12" font-weight="700">NO</text>`;
-    let o3Group;
-    if (good) {
-      o3Group = `<circle cx="${o3X}" cy="65" r="9" fill="var(--exo)"/><circle cx="${o3X + 20}" cy="65" r="9" fill="var(--exo)"/><circle cx="${o3X + 40}" cy="65" r="9" fill="var(--exo)"/><text x="${o3X}" y="46" font-size="12" font-weight="700">O3</text>`;
-    } else {
-      o3Group = `<circle cx="${o3X}" cy="50" r="9" fill="var(--exo)"/><circle cx="${o3X}" cy="70" r="9" fill="var(--exo)"/><circle cx="${o3X}" cy="90" r="9" fill="var(--exo)"/><text x="${o3X - 4}" y="34" font-size="12" font-weight="700">O3</text>`;
-    }
-    let resultMark = "";
+  /* ---------- 3B çarpışma sahnesi (NO + O3, ball-and-stick) ---------- */
+  let collision3D = null;
+  let collision3DLoading = null;
+  function ensureCollision3D() {
+    if (collision3D) return Promise.resolve(collision3D);
+    if (collision3DLoading) return collision3DLoading;
+    collision3DLoading = import("../assets/js/scene3d-molecule.js").then(({ createCollisionScene }) => {
+      collision3D = createCollisionScene(document.getElementById("geo-3d"));
+      return collision3D;
+    });
+    return collision3DLoading;
+  }
+  function sceneCollision(kind, u, phase) {
+    ensureCollision3D().then((api) => api.setState(kind, u, phase));
+    const badge = document.getElementById("geo-result-badge");
     if (phase === "success") {
-      noGroup = "";
-      o3Group = "";
-      resultMark = `<text x="150" y="70" font-size="14" fill="var(--rate)" font-weight="700">NO2 + O2</text><text x="310" y="78" font-size="24">✔️</text>`;
+      badge.textContent = "✔️ NO2 + O2";
+      badge.style.color = "var(--rate)";
     } else if (phase === "bounce") {
-      resultMark = `<text x="310" y="78" font-size="24">❌</text>`;
+      badge.textContent = "❌ Ürün oluşmadı";
+      badge.style.color = "var(--bad)";
+    } else {
+      badge.textContent = "";
     }
-    return `${noGroup}${o3Group}${resultMark}`;
   }
 
   let geoTimer = null;
@@ -150,32 +165,30 @@
     if (geoTimer) { clearInterval(geoTimer); geoTimer = null; }
     const btn = document.getElementById("geo-start");
     btn.disabled = true;
-    const svgEl = document.getElementById("geo-svg");
-    const startNo = 45, startO3 = 260, meetNo = 130, meetO3 = 150;
-    const steps = 22;
-    let i = 0;
+    sceneCollision(kind, 0, "approach");
+    const duration = 1500;
+    const start = performance.now();
+    let settled = false;
     geoTimer = setInterval(() => {
-      i++;
-      if (i <= steps) {
-        const t = i / steps;
-        const noX = startNo + (meetNo - startNo) * t;
-        const o3X = startO3 + (meetO3 - startO3) * t;
-        svgEl.innerHTML = sceneCollision(kind, noX, o3X, "approach");
-      } else if (i === steps + 6) {
-        svgEl.innerHTML = sceneCollision(kind, meetNo, meetO3, kind === "good" ? "success" : "bounce");
-        document.getElementById("geo-readout").innerHTML = kind === "good"
-          ? `<div><b>Ürün oluşur</b>Etkin çarpışma — NO'nun azot ucu O3'ün uygun oksijenine yönelmiş.</div>`
-          : `<div><b>Ürün oluşmaz</b>Etkin olmayan çarpışma — moleküller doğru yönelimde temas etmemiş, birbirinden sekiyor.</div>`;
-        clearInterval(geoTimer);
-        geoTimer = null;
-        btn.disabled = false;
+      const t = Math.min(1, (performance.now() - start) / duration);
+      sceneCollision(kind, t, "approach");
+      if (t >= 1 && !settled) {
+        settled = true;
+        setTimeout(() => {
+          sceneCollision(kind, 1, kind === "good" ? "success" : "bounce");
+          document.getElementById("geo-readout").innerHTML = kind === "good"
+            ? `<div><b>Ürün oluşur</b>Etkin çarpışma — NO'nun azot ucu O3'ün uygun oksijenine yönelmiş.</div>`
+            : `<div><b>Ürün oluşmaz</b>Etkin olmayan çarpışma — moleküller doğru yönelimde temas etmemiş, birbirinden sekiyor.</div>`;
+          clearInterval(geoTimer);
+          geoTimer = null;
+          btn.disabled = false;
+        }, 300);
       }
-    }, 35);
+    }, 40);
   }
 
   function drawGeo(kind) {
-    const svgEl = document.getElementById("geo-svg");
-    svgEl.innerHTML = sceneCollision(kind, 45, 260, "idle");
+    sceneCollision(kind, 0, "idle");
     document.getElementById("geo-readout").innerHTML = `<div>Çarpıştırmak için düğmeye bas.</div>`;
   }
 
