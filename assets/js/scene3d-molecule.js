@@ -8,10 +8,19 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
+/* Gerçek/evrensel CPK (Corey-Pauling-Koltun) atom renk kuralı — uydurma değil. */
 const CPK = {
-  O: 0xd93b2b,
+  H: 0xe8e8e8,
+  C: 0x3a3a3a,
   N: 0x2b5fd9,
+  O: 0xd93b2b,
+  F: 0x8fdb5c,
+  S: 0xe6c229,
+  Cl: 0x2fbf4f,
+  Br: 0xa62929,
+  I: 0x8f2fa6,
 };
+const RADIUS = { H: 0.22, C: 0.32, N: 0.32, O: 0.3, F: 0.29, S: 0.36, Cl: 0.35, Br: 0.37, I: 0.4 };
 const BOND_COLOR = 0xc7ccd2;
 
 function buildAtom(radius, color) {
@@ -157,4 +166,104 @@ export function createCollisionScene(container) {
   }
 
   return { setState, dispose, THREE };
+}
+
+/** İki atom + tek bağ — bağ kırılma/oluşma simülatörü için jenerik 3B sahne.
+ * "O-H", "N≡N", "H-S" gibi bağ etiketlerinden atom elementlerini ayrıştırıp
+ * gerçek CPK renkleriyle küre çifti + aralarında bir bağ çubuğu kurar. */
+export function createBondScene(container) {
+  const width = container.clientWidth || 460;
+  const height = container.clientHeight || 130;
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  } catch (e) {
+    container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--ink-soft);font-size:.85rem;text-align:center;padding:14px">3B görüntüleme bu tarayıcıda desteklenmiyor.</div>';
+    return { setBond() {}, dispose() {}, THREE: null };
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(width, height);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  container.innerHTML = "";
+  container.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(32, width / height, 0.1, 100);
+  camera.position.set(0, 0.9, 5.6);
+  camera.lookAt(0, 0, 0);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 0, 0);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.minDistance = 3;
+  controls.maxDistance = 8;
+  controls.enablePan = false;
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const key = new THREE.DirectionalLight(0xffffff, 1.3);
+  key.position.set(3, 5, 4);
+  scene.add(key);
+  const fill = new THREE.DirectionalLight(0xcfe0ff, 0.5);
+  fill.position.set(-4, 1, -2);
+  scene.add(fill);
+
+  let atomA = null, atomB = null, bondMesh = null, currentPair = null;
+
+  function ensureAtoms(elA, elB) {
+    const pairKey = `${elA}:${elB}`;
+    if (currentPair === pairKey) return;
+    currentPair = pairKey;
+    if (atomA) scene.remove(atomA);
+    if (atomB) scene.remove(atomB);
+    atomA = buildAtom(RADIUS[elA] || 0.32, CPK[elA] || 0x9aa0a8);
+    atomB = buildAtom(RADIUS[elB] || 0.32, CPK[elB] || 0x9aa0a8);
+    scene.add(atomA, atomB);
+  }
+
+  /** elA, elB: element sembolleri · gap: 0 (bağ oluşmuş) → ~1.7 (tamamen ayrılmış) */
+  function setBond(elA, elB, gap) {
+    ensureAtoms(elA, elB);
+    const half = 0.45 + gap;
+    atomA.position.set(-half, 0, 0);
+    atomB.position.set(half, 0, 0);
+    if (bondMesh) {
+      scene.remove(bondMesh);
+      bondMesh = null;
+    }
+    if (gap < 0.85) {
+      bondMesh = buildBond(atomA.position, atomB.position, 0.09);
+      scene.add(bondMesh);
+    }
+  }
+
+  let running = true;
+  function animate() {
+    if (!running) return;
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  function resize() {
+    const w = container.clientWidth || width;
+    const h = container.clientHeight || height;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  const ro = new ResizeObserver(resize);
+  ro.observe(container);
+
+  function dispose() {
+    running = false;
+    ro.disconnect();
+    controls.dispose();
+    renderer.dispose();
+  }
+
+  return { setBond, dispose, THREE };
 }
