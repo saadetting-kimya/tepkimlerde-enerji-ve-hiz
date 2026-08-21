@@ -369,6 +369,9 @@ section.block > .container > h2 .num {
 .exp-stage { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
 .exp-scene-wrap { flex: 1.3; min-width: 280px; text-align: center; }
 .exp-scene-wrap svg { width: 100%; height: auto; border-radius: var(--radius-sm); background: var(--bg-panel); }
+.exp-3d-host { width: 100%; aspect-ratio: 300 / 220; border-radius: var(--radius-sm); background: var(--bg-panel); overflow: hidden; touch-action: none; }
+.exp-3d-host canvas { display: block; }
+.exp-3d-hint { margin: 6px 0 0; font-size: .78rem; color: var(--ink-soft); text-align: center; }
 .exp-readout { margin-top: 10px; min-height: 40px; font-size: .85rem; color: var(--ink-soft); }
 .exp-readout b { display: block; font-size: 1.3rem; color: var(--ink); }
 .exp-chart-wrap { flex: 1; min-width: 260px; max-width: 460px; }

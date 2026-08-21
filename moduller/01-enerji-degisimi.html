@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enerji Değişimi · Kimya 11</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three/three.module.js",
+  "three/addons/": "../assets/vendor/three/examples/jsm/"
+} }
+</script>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -57,6 +63,8 @@
       <div class="exp-stage">
         <div class="exp-scene-wrap">
           <svg id="exp-scene" viewBox="0 0 300 220"></svg>
+          <div id="exp-scene-3d" class="exp-3d-host" style="display:none"></div>
+          <p class="exp-3d-hint" id="exp-3d-hint" style="display:none">🖱️ Fareyle sürükleyerek 3B kabı döndürebilir, tekerlekle yakınlaştırabilirsin.</p>
           <div class="exp-readout" id="exp-readout">Deneyi başlatmak için düğmeye bas</div>
         </div>
         <div class="exp-chart-wrap">
@@ -142,16 +150,6 @@
   let currentExp = EXPERIMENTS[0];
   let chartPoints = [];
   let animTimer = null;
-
-  function easeSteps(start, end, n) {
-    const out = [];
-    for (let i = 0; i <= n; i++) {
-      const t = i / n;
-      const eased = 1 - Math.pow(1 - t, 2.2);
-      out.push(start + (end - start) * eased);
-    }
-    return out;
-  }
 
   /* ---------- ortak sahne motifleri ---------- */
   function miniThermometer(x, y, h, frac, color, overflow) {
@@ -293,17 +291,49 @@
     `;
   }
 
+  /* ---------- 3B beher (yalnızca "soğutma paketi" deneyi) ---------- */
+  let beaker3D = null;
+  let beaker3DLoading = null;
+  function ensureBeaker3D() {
+    if (beaker3D) return Promise.resolve(beaker3D);
+    if (beaker3DLoading) return beaker3DLoading;
+    beaker3DLoading = import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
+      beaker3D = createBeakerScene(document.getElementById("exp-scene-3d"), { liquidColor: 0xcfe4fb });
+      return beaker3D;
+    });
+    return beaker3DLoading;
+  }
+  function updateBeaker3D(exp, value) {
+    ensureBeaker3D().then((api) => {
+      const coldFrac = Math.max(0, Math.min(1, (exp.start - value) / (exp.start - exp.end)));
+      const c1 = new (beaker3D.THREE.Color)(0xcfe4fb), c2 = new (beaker3D.THREE.Color)(0x6fa8dc);
+      const mixed = c1.clone().lerp(c2, coldFrac);
+      api.setLiquid(0.6, mixed.getHex());
+    });
+  }
+
   function drawScene(exp, value, progress) {
     const svgEl = document.getElementById("exp-scene");
+    const host3D = document.getElementById("exp-scene-3d");
+    const hint3D = document.getElementById("exp-3d-hint");
     const overflow = exp.capped && value >= exp.gaugeMax;
     const tempColor = value >= exp.start ? "var(--exo)" : "var(--endo)";
 
-    if (exp.scene === "beaker") svgEl.innerHTML = sceneBeaker(exp, progress, value, tempColor);
-    else if (exp.scene === "pouch") svgEl.innerHTML = scenePouch(exp, progress, value, tempColor);
-    else if (exp.scene === "crucible") svgEl.innerHTML = sceneCrucible(exp, progress, value, overflow);
-    else if (exp.scene === "firefly") svgEl.innerHTML = sceneFirefly(exp, progress, value);
-    else if (exp.scene === "photocell") svgEl.innerHTML = scenePhotocell(exp, progress);
-    else if (exp.scene === "ice") svgEl.innerHTML = sceneIce(exp, progress, value, tempColor);
+    if (exp.scene === "beaker") {
+      svgEl.style.display = "none";
+      host3D.style.display = "block";
+      hint3D.style.display = "block";
+      updateBeaker3D(exp, value);
+    } else {
+      svgEl.style.display = "";
+      host3D.style.display = "none";
+      hint3D.style.display = "none";
+      if (exp.scene === "pouch") svgEl.innerHTML = scenePouch(exp, progress, value, tempColor);
+      else if (exp.scene === "crucible") svgEl.innerHTML = sceneCrucible(exp, progress, value, overflow);
+      else if (exp.scene === "firefly") svgEl.innerHTML = sceneFirefly(exp, progress, value);
+      else if (exp.scene === "photocell") svgEl.innerHTML = scenePhotocell(exp, progress);
+      else if (exp.scene === "ice") svgEl.innerHTML = sceneIce(exp, progress, value, tempColor);
+    }
 
     const readoutEl = document.getElementById("exp-readout");
     if (overflow) {
@@ -358,23 +388,33 @@
   }
 
   function runExperiment(exp) {
+    // Gerçek geçen zamana (performance.now()) dayalı ilerleme kullanılır —
+    // 3B sahnenin render yükü ara sıra bir kareyi geciktirse bile deney
+    // doğru sürede/duyguda tamamlanır (sabit "tık sayısı" varsayımına
+    // dayanmaz, bu yüzden yavaş cihazlarda takılıp kalmaz).
     const btn = document.getElementById("exp-start");
     btn.disabled = true;
-    const steps = easeSteps(exp.start, exp.end, EXPERIMENTS_STEPS - 1);
     chartPoints = [];
-    let i = 0;
+    const duration = 2400;
+    const start = performance.now();
+    let lastSampleT = -1;
     animTimer = setInterval(() => {
-      const v = steps[i];
-      chartPoints.push(v);
-      drawScene(exp, v, i / (steps.length - 1));
+      const elapsed = performance.now() - start;
+      const t = Math.min(1, elapsed / duration);
+      const eased = 1 - Math.pow(1 - t, 2.2);
+      const v = exp.start + (exp.end - exp.start) * eased;
+      if (t - lastSampleT >= 1 / (EXPERIMENTS_STEPS - 1) || t >= 1) {
+        chartPoints.push(v);
+        lastSampleT = t;
+      }
+      drawScene(exp, v, t < 1 ? t : 0.15);
       drawChart(exp, chartPoints);
-      i++;
-      if (i >= steps.length) {
+      if (t >= 1) {
         clearInterval(animTimer);
         btn.disabled = false;
         showClassifyPrompt(exp);
       }
-    }, 220);
+    }, 120);
   }
 
   function showClassifyPrompt(exp) {
