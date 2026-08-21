@@ -298,6 +298,14 @@ section.block > .container > h2 .num {
 }
 .explain.show { display: block; }
 .explain b { color: var(--ok); }
+.explain .similar-btn { display: block; margin-top: 12px; font-size: .85rem; padding: 8px 14px; }
+.explain .similar-none { margin-top: 10px; font-size: .85rem; color: var(--ink-soft); }
+
+/* ---------- Soru Bankası ---------- */
+.bank-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; position: sticky; top: 0; background: var(--bg); padding: 12px 0; z-index: 5; }
+.bank-tab { font-size: .85rem; padding: 8px 14px; }
+.bank-tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.bank-card .opt { cursor: default; }
 
 /* ---------- görsel bileşenler (render*) ---------- */
 .viz-table { width: 100%; border-collapse: collapse; font-size: .92rem; margin: 6px 0 14px; }

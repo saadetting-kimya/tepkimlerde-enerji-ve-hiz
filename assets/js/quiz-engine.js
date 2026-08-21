@@ -185,19 +185,34 @@ const RENDERERS = {
 /* ============================================================
    Quiz mantığı
    ============================================================ */
-function progressKey(moduleKey) {
-  return `khiz_progress_${moduleKey}`;
+function shuffle(arr) {
+  const out = arr.slice();
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
 }
 
-function loadProgress(moduleKey) {
-  try {
-    return JSON.parse(localStorage.getItem(progressKey(moduleKey))) || {};
-  } catch {
-    return {};
+/* Her ziyarette havuzdan QUESTION_COUNT kadar soru gösterilir (bkz.
+   "Benzerini Çöz" mantığı aşağıda); geri kalanı yalnızca bir soru
+   yanlış yapılıp pekiştirme istendiğinde sırayla devreye girer.
+   Zorluk (kolay/orta/zor) mümkün olduğunca dengeli seçilir. */
+function selectInitialIndices(questions, count) {
+  const byDifficulty = { kolay: [], orta: [], zor: [] };
+  questions.forEach((q, i) => {
+    (byDifficulty[q.difficulty] || byDifficulty.kolay).push(i);
+  });
+  const buckets = shuffle(Object.values(byDifficulty).filter((b) => b.length));
+  buckets.forEach((b, i) => (buckets[i] = shuffle(b)));
+  const picked = [];
+  let round = 0;
+  while (picked.length < count && buckets.some((b) => b.length)) {
+    const bucket = buckets[round % buckets.length];
+    if (bucket.length) picked.push(bucket.pop());
+    round++;
   }
-}
-function saveProgress(moduleKey, data) {
-  localStorage.setItem(progressKey(moduleKey), JSON.stringify(data));
+  return picked;
 }
 
 /* ---------------- kazanım / öğrenme analizi verisi ---------------- */
@@ -294,10 +309,10 @@ function registerAnswer(question, isCorrect, moduleKey) {
   saveHistory(history);
 }
 
-function buildQuestionCard(q, idx, moduleKey, onAnswered) {
+function buildQuestionCard(q, idx, moduleKey, position, onAnswered, onWantSimilar) {
   const card = el("div", { class: "qcard", id: `q-${idx}` });
   const diffTag = el("span", { class: `tag ${q.difficulty}` }, q.difficulty === "kolay" ? "Kolay" : q.difficulty === "orta" ? "Orta" : "Zor");
-  card.appendChild(el("div", { class: "qcard-head" }, [el("span", { class: "qno" }, `Soru ${idx + 1}`), diffTag]));
+  card.appendChild(el("div", { class: "qcard-head" }, [el("span", { class: "qno" }, `Soru ${position + 1}`), diffTag]));
 
   if (q.context) card.appendChild(el("div", { class: "context" }, q.context));
 
@@ -321,8 +336,13 @@ function buildQuestionCard(q, idx, moduleKey, onAnswered) {
       exp.classList.add("show");
       const wasCorrect = i === correctIdx;
       registerAnswer(q, wasCorrect, moduleKey);
-      if (!wasCorrect) saveWrongQuestion(moduleKey, q, idx);
-      onAnswered(idx, wasCorrect);
+      if (!wasCorrect) {
+        saveWrongQuestion(moduleKey, q, idx);
+        const similarBtn = el("button", { class: "btn similar-btn" }, "🔄 Benzerini Çöz");
+        similarBtn.addEventListener("click", () => onWantSimilar(position));
+        exp.appendChild(similarBtn);
+      }
+      onAnswered(position, wasCorrect);
     });
     opts.appendChild(row);
   });
@@ -335,36 +355,66 @@ function renderQuiz(moduleKey, questions, hostId = "quiz-host") {
   const host = document.getElementById(hostId);
   if (!host) return;
   host.innerHTML = "";
-  const progress = loadProgress(moduleKey);
-  let answered = Object.keys(progress).length;
+
+  const QUESTION_COUNT = Math.min(5, questions.length);
+  const usedIndices = new Set();
+  const activeIndices = selectInitialIndices(questions, QUESTION_COUNT);
+  activeIndices.forEach((i) => usedIndices.add(i));
+
+  let answered = 0;
 
   const bar = el("div", { class: "progress-mini" });
-  questions.forEach((_, i) => bar.appendChild(el("i", { class: progress[i] != null ? "done" : "" })));
+  for (let i = 0; i < QUESTION_COUNT; i++) bar.appendChild(el("i"));
   host.appendChild(bar);
-  const status = el("p", { style: "color:var(--ink-soft);font-size:.9rem" }, `${answered}/${questions.length} soru tamamlandı`);
+  const status = el("p", { style: "color:var(--ink-soft);font-size:.9rem" }, `0/${QUESTION_COUNT} soru tamamlandı`);
   host.appendChild(status);
 
-  questions.forEach((q, idx) => {
-    const card = buildQuestionCard(q, idx, moduleKey, (i, wasCorrect) => {
-      progress[i] = wasCorrect ? "correct" : "wrong";
-      saveProgress(moduleKey, progress);
-      const bars = bar.children;
-      bars[i].className = "done";
-      answered = Object.keys(progress).length;
-      status.textContent = `${answered}/${questions.length} soru tamamlandı`;
-    });
-    if (progress[idx] != null) {
-      // önceden cevaplanmışsa kilitli göster
-      const optsDiv = card.querySelector(".options");
-      [...optsDiv.children].forEach((c, i) => {
-        c.dataset.locked = "1";
-        c.classList.add("disabled");
-        if (i === q.correct) c.classList.add("correct");
-      });
-      card.querySelector(".explain").classList.add("show");
-    }
-    host.appendChild(card);
-  });
+  const cardsWrap = el("div");
+  host.appendChild(cardsWrap);
+
+  function pickUnusedIndex() {
+    const pool = questions.map((_, i) => i).filter((i) => !usedIndices.has(i));
+    if (pool.length === 0) return -1;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  function mount(position, replaceEl) {
+    const idx = activeIndices[position];
+    const card = buildQuestionCard(
+      questions[idx],
+      idx,
+      moduleKey,
+      position,
+      (pos, wasCorrect) => {
+        const bars = bar.children;
+        if (bars[pos].className !== "done") {
+          bars[pos].className = "done";
+          answered++;
+        }
+        status.textContent = `${answered}/${QUESTION_COUNT} soru tamamlandı`;
+      },
+      (pos) => {
+        const newIdx = pickUnusedIndex();
+        if (newIdx === -1) {
+          const note = el("div", { class: "similar-none" }, "Bu modül için havuzda başka soru kalmadı.");
+          card.querySelector(".explain").appendChild(note);
+          return;
+        }
+        usedIndices.add(newIdx);
+        activeIndices[pos] = newIdx;
+        if (bar.children[pos].className === "done") {
+          bar.children[pos].className = "";
+          answered--;
+          status.textContent = `${answered}/${QUESTION_COUNT} soru tamamlandı`;
+        }
+        mount(pos, card);
+      }
+    );
+    if (replaceEl) replaceEl.replaceWith(card);
+    else cardsWrap.appendChild(card);
+  }
+
+  for (let position = 0; position < QUESTION_COUNT; position++) mount(position);
 }
 
 function markVisited(moduleKey) {
