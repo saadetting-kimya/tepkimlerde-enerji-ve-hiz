@@ -47,13 +47,18 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Keşfet: Oluşum Entalpisi Hesap Makinesi</h2>
-    <p class="block-lead">Bir tepkime seç; standart oluşum entalpisi tablosundan yararlanarak ΔH°<sub>tepkime</sub>
-      değerini adım adım hesapla.</p>
+    <h2><span class="num">2</span>Deney İstasyonu: Oluşum Entalpisi Sayacı</h2>
+    <p class="block-lead">Bir tepkime seç ve simülasyonu başlat; her tepken ve ürünün standart oluşum entalpisi
+      sırayla sayaca eklenirken ΔH°<sub>tepkime</sub> değerinin nasıl oluştuğunu izle.</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="rxn-select">Tepkime:</label>
         <select id="rxn-select"></select>
+        <button id="rxn4-start" class="btn primary" type="button">▶ Simülasyonu Başlat</button>
+      </div>
+      <div class="bond-stage">
+        <svg id="formation-scene" viewBox="0 0 460 110"></svg>
+        <div class="bond-counter" id="formation-counter">Sayaç: 0 kJ</div>
       </div>
       <div id="rxn-detail"></div>
     </div>
@@ -132,7 +137,7 @@
     return list.reduce((acc, [name, n]) => acc + FORMATION[name] * n, 0);
   }
 
-  function renderRxn4(idx) {
+  function renderRxn4Table(idx) {
     const rxn = RXN4[idx];
     const reactSum = sumF(rxn.reactants);
     const prodSum = sumF(rxn.products);
@@ -157,11 +162,55 @@
     `;
   }
 
+  function formationCard(name, n, value, sign) {
+    const color = sign < 0 ? "var(--endo)" : "var(--rate)";
+    return `
+      <rect x="130" y="20" width="200" height="70" rx="10" fill="#fff" stroke="${color}" stroke-width="2.5"/>
+      <text x="230" y="45" text-anchor="middle" font-size="15" font-weight="700">${n}× ${name}</text>
+      <text x="230" y="70" text-anchor="middle" font-size="15" fill="${color}" font-weight="700">${sign < 0 ? "−" : "+"}${Math.abs(value).toFixed(1)} kJ</text>
+    `;
+  }
+
+  function runFormationSim(idx) {
+    const rxn = RXN4[idx];
+    const btn = document.getElementById("rxn4-start");
+    btn.disabled = true;
+    document.getElementById("rxn-detail").innerHTML = "";
+    const steps = [
+      ...rxn.reactants.map(([name, n]) => ({ name, n, sign: -1 })),
+      ...rxn.products.map(([name, n]) => ({ name, n, sign: 1 })),
+    ];
+    let total = 0;
+    let stepIdx = 0;
+    function runStep() {
+      if (stepIdx >= steps.length) {
+        renderRxn4Table(idx);
+        btn.disabled = false;
+        return;
+      }
+      const s = steps[stepIdx];
+      const term = FORMATION[s.name] * s.n;
+      document.getElementById("formation-scene").innerHTML = formationCard(s.name, s.n, term, s.sign);
+      setTimeout(() => {
+        total += s.sign * term;
+        document.getElementById("formation-counter").textContent = `${s.name} ${s.n}× ΔH°f = ${term.toFixed(1)} kJ ${s.sign < 0 ? "(tepken, çıkar)" : "(ürün, ekle)"} → Sayaç: ${total.toFixed(1)} kJ`;
+        stepIdx++;
+        setTimeout(runStep, 500);
+      }, 550);
+    }
+    runStep();
+  }
+
   function buildRxnLab4() {
     const sel = document.getElementById("rxn-select");
     RXN4.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
-    sel.addEventListener("change", () => renderRxn4(sel.value));
-    renderRxn4(0);
+    sel.addEventListener("change", () => {
+      document.getElementById("formation-counter").textContent = "Sayaç: 0 kJ";
+      document.getElementById("formation-scene").innerHTML = "";
+      document.getElementById("rxn-detail").innerHTML = "";
+    });
+    document.getElementById("rxn4-start").addEventListener("click", () => runFormationSim(Number(sel.value)));
+    renderRxn4Table(0);
   }
 
   function drawStabilityChart() {
