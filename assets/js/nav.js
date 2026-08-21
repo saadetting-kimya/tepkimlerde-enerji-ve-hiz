@@ -38,7 +38,7 @@ function mountNav(activeKey) {
 
   const bar = el2("div", { class: "topbar" });
   const inner = el2("div", { class: "topbar-inner" });
-  inner.appendChild(el2("a", { href: prefix + "index.html", class: "topbar-brand" }, ["Kimya 10 · ", el2("span", {}, "Enerji ve Hız")]));
+  inner.appendChild(el2("a", { href: prefix + "index.html", class: "topbar-brand" }, ["Kimya 11 · ", el2("span", {}, "Enerji ve Hız")]));
 
   const linksWrap = el2("div", { class: "topbar-links" });
   LINKS.forEach((l) => {
