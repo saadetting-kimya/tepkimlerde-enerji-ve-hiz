@@ -43,13 +43,18 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Keşfet: Bağ Enerjisi Hesap Makinesi</h2>
-    <p class="block-lead">Bir tepkime seç; tepkenlerde kırılan ve ürünlerde oluşan bağların enerjilerini bağ
-      enerjisi tablosundan okuyup ΔH değerini adım adım hesapla.</p>
+    <h2><span class="num">2</span>Deney İstasyonu: Bağ Kırma/Oluşturma Simülatörü</h2>
+    <p class="block-lead">Bir tepkime seç ve simülasyonu başlat; bağların gerçekten tek tek kırılıp yeniden
+      oluşmasını ve enerji sayacının buna göre değişmesini izle.</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="rxn-select">Tepkime:</label>
         <select id="rxn-select"></select>
+        <button id="rxn-start" class="btn primary" type="button">▶ Simülasyonu Başlat</button>
+      </div>
+      <div class="bond-stage">
+        <svg id="bond-scene" viewBox="0 0 460 130"></svg>
+        <div class="bond-counter" id="bond-counter">Enerji sayacı: 0 kJ</div>
       </div>
       <div id="rxn-detail"></div>
     </div>
@@ -107,7 +112,7 @@
     return list.reduce((acc, [bond, n]) => acc + BOND_ENERGIES[bond] * n, 0);
   }
 
-  function renderReaction(idx) {
+  function renderReactionTable(idx) {
     const rxn = REACTIONS[idx];
     const brokenSum = sumEnergy(rxn.broken);
     const formedSum = sumEnergy(rxn.formed);
@@ -131,6 +136,58 @@
       </div>
     `;
     drawPEDiagram(dH, rxn.name);
+  }
+
+  function bondIcon(label, gap, forming) {
+    const cx = 230, cy = 65, half = 30 + gap;
+    const spark = gap > 5 && gap < 35 ? `<circle cx="${cx}" cy="${cy}" r="4" fill="#ffb020"/>` : "";
+    return `
+      <circle cx="${cx - half}" cy="${cy}" r="16" fill="${forming ? "var(--rate)" : "var(--endo)"}"/>
+      <circle cx="${cx + half}" cy="${cy}" r="16" fill="${forming ? "var(--energy)" : "var(--exo)"}"/>
+      ${gap < 30 ? `<line x1="${cx - half + 16}" y1="${cy}" x2="${cx + half - 16}" y2="${cy}" stroke="var(--ink)" stroke-width="${4 - gap / 12}"/>` : ""}
+      ${spark}
+      <text x="${cx}" y="${cy - 32}" text-anchor="middle" font-size="14" font-weight="700">${label}</text>
+    `;
+  }
+
+  function runBondSim(idx) {
+    const rxn = REACTIONS[idx];
+    const btn = document.getElementById("rxn-start");
+    btn.disabled = true;
+    document.getElementById("rxn-detail").innerHTML = "";
+    const steps = [
+      ...rxn.broken.map(([b, n]) => ({ bond: b, n, mode: "break" })),
+      ...rxn.formed.map(([b, n]) => ({ bond: b, n, mode: "form" })),
+    ];
+    let total = 0;
+    let stepIdx = 0;
+
+    function runStep() {
+      if (stepIdx >= steps.length) {
+        renderReactionTable(idx);
+        btn.disabled = false;
+        return;
+      }
+      const s = steps[stepIdx];
+      const energy = BOND_ENERGIES[s.bond] * s.n;
+      const breaking = s.mode === "break";
+      const frames = 16;
+      let f = 0;
+      const timer = setInterval(() => {
+        f++;
+        const t = f / frames;
+        const gap = breaking ? t * 34 : (1 - t) * 34;
+        document.getElementById("bond-scene").innerHTML = bondIcon(`${s.n}× ${s.bond}`, gap, !breaking);
+        if (f >= frames) {
+          clearInterval(timer);
+          total += breaking ? energy : -energy;
+          document.getElementById("bond-counter").innerHTML = `${s.bond} ${s.n}× ${breaking ? "kırıldı: +" : "oluştu: −"}${Math.round(energy)} kJ &nbsp;→&nbsp; Sayaç: ${Math.round(total)} kJ`;
+          stepIdx++;
+          setTimeout(runStep, 350);
+        }
+      }, 30);
+    }
+    runStep();
   }
 
   function drawPEDiagram(dH, name) {
@@ -161,8 +218,13 @@
   function buildRxnLab() {
     const sel = document.getElementById("rxn-select");
     REACTIONS.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
-    sel.addEventListener("change", () => renderReaction(sel.value));
-    renderReaction(0);
+    sel.addEventListener("change", () => {
+      document.getElementById("bond-counter").textContent = "Enerji sayacı: 0 kJ";
+      document.getElementById("bond-scene").innerHTML = "";
+      document.getElementById("rxn-detail").innerHTML = "";
+    });
+    document.getElementById("rxn-start").addEventListener("click", () => runBondSim(Number(sel.value)));
+    renderReactionTable(0);
   }
 
   buildRxnLab();
