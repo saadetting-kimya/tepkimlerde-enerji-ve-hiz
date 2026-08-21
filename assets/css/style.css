@@ -390,6 +390,8 @@ section.block > .container > h2 .num {
   .exp-scene-wrap { min-width: 0; }
 }
 
+.row-highlight { background: var(--exo-soft) !important; }
+
 /* ---------- Bağ Kırma/Oluşturma Simülatörü ---------- */
 .bond-stage { background: var(--bg-panel); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 16px; }
 .bond-stage svg { width: 100%; max-width: 460px; height: auto; display: block; margin: 0 auto; }
