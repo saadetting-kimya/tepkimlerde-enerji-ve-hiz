@@ -4990,6 +4990,13 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
+      "particleBox": {
+        "vessels": [
+          { "label": "Seyreltik", "particles": [{ "color": "var(--rate)", "count": 4 }] },
+          { "label": "Derişik", "particles": [{ "color": "var(--rate)", "count": 12 }] }
+        ],
+        "note": "Aynı hacimli 2 özdeş kap, aynı sıcaklık"
+      },
       "text": "Derişimin tepkime hızına etkisiyle ilgili aşağıdakilerden hangisi doğrudur?",
       "options": [
         "Derişim yalnızca katı maddelerde etkilidir",
@@ -5068,6 +5075,10 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
+      "illustration": {
+        "viewBox": "0 0 285 120",
+        "svg": "<rect x='18' y='72' width='120' height='30' rx='10' fill='var(--ink-soft)'/><rect x='42' y='50' width='62' height='26' rx='10' fill='var(--ink-soft)'/><rect x='50' y='55' width='20' height='14' rx='2' fill='#eef1f4'/><rect x='74' y='55' width='20' height='14' rx='2' fill='#eef1f4'/><circle cx='50' cy='104' r='13' fill='#2c2c33'/><circle cx='50' cy='104' r='5' fill='#8a8f99'/><circle cx='112' cy='104' r='13' fill='#2c2c33'/><circle cx='112' cy='104' r='5' fill='#8a8f99'/><rect x='6' y='90' width='14' height='8' rx='2' fill='#6b6f78'/><circle cx='30' cy='94' r='4' fill='var(--exo)' opacity='.55'/><circle cx='42' cy='88' r='5' fill='var(--exo)' opacity='.6'/><circle cx='56' cy='93' r='4' fill='var(--exo)' opacity='.55'/><text x='43' y='16' text-anchor='middle' font-size='10' style='fill:var(--exo)' font-weight='700'>CO, NOx, HC</text><rect x='148' y='86' width='56' height='26' rx='5' fill='var(--bg-panel)' stroke='var(--ink-soft)' stroke-width='2'/><text x='176' y='99' text-anchor='middle' font-size='8.5' style='fill:var(--ink)'>Katalitik</text><text x='176' y='109' text-anchor='middle' font-size='8.5' style='fill:var(--ink)'>Konvertör</text><line x1='70' y1='94' x2='146' y2='97' stroke='var(--ink-soft)' stroke-width='2' stroke-dasharray='3 3'/><circle cx='222' cy='90' r='4' fill='var(--rate)' opacity='.6'/><circle cx='236' cy='84' r='5' fill='var(--rate)' opacity='.65'/><circle cx='250' cy='90' r='4' fill='var(--rate)' opacity='.6'/><circle cx='264' cy='83' r='4.5' fill='var(--rate)' opacity='.6'/><line x1='206' y1='94' x2='270' y2='86' stroke='var(--ink-soft)' stroke-width='2' stroke-dasharray='3 3' marker-end='url(#exharrow)'/><text x='243' y='16' text-anchor='middle' font-size='10' style='fill:var(--rate)' font-weight='700'>CO2, H2O, N2</text><defs><marker id='exharrow' markerWidth='8' markerHeight='8' refX='4' refY='4' orient='auto'><path d='M0,0 L4,4 L0,8 Z' fill='var(--ink-soft)'/></marker></defs>"
+      },
       "text": "Araç egzoz sistemlerinde kullanılan katalitik konvertörler hangi metalleri katalizör olarak içerir?",
       "options": [
         "Platin, paladyum, rodyum",
@@ -5362,6 +5373,15 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "particleBox": {
+        "vessels": [
+          { "label": "1", "particles": [{ "color": "var(--endo)", "count": 3 }, { "color": "var(--exo)", "count": 3 }] },
+          { "label": "2", "particles": [{ "color": "var(--endo)", "count": 6 }, { "color": "var(--exo)", "count": 6 }] },
+          { "label": "3", "particles": [{ "color": "var(--endo)", "count": 10 }, { "color": "var(--exo)", "count": 10 }] }
+        ],
+        "legend": [{ "color": "var(--endo)", "name": "H2" }, { "color": "var(--exo)", "name": "Cl2" }],
+        "note": "Aynı hacimli 3 özdeş kap, aynı sıcaklık"
+      },
       "text": "Direkt sentez yöntemiyle H2(g) + Cl2(g) → 2HCl(g) tepkimesinde üç özdeş kapta aynı koşullarda farklı derişimlerde H2 ve Cl2 gazları bulunuyor. En yüksek derişime sahip kapta beklenen sonuç nedir?",
       "options": [
         "En yavaş tepkime ve en az HCl üretimi",

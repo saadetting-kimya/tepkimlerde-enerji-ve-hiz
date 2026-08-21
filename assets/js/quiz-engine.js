@@ -232,6 +232,60 @@ function renderPEDiagram(spec) {
   return s;
 }
 
+/* ---------------- renderParticleBox (kapalı kaplarda tanecik yoğunluğu) ---------------- */
+function renderParticleBox(spec) {
+  // spec: { vessels: [{ label, particles: [{color,count}, ...] }, ...], legend: [{color,name}], note }
+  const n = spec.vessels.length;
+  const W = Math.max(320, n * 150), H = 190;
+  const cx0 = W / n / 2, spacing = W / n, r = Math.min(58, spacing * 0.36);
+  const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, class: "viz-chart", role: "img" });
+
+  spec.vessels.forEach((v, vi) => {
+    const cx = cx0 + vi * spacing, cy = 78;
+    s.appendChild(svg("circle", { cx, cy, r, fill: "var(--bg-panel)", stroke: "var(--ink-soft)", "stroke-width": 2 }));
+    let seed = vi * 97 + 13;
+    const rand = () => {
+      seed = (seed * 9301 + 49297) % 233280;
+      return seed / 233280;
+    };
+    v.particles.forEach((sp) => {
+      for (let i = 0; i < sp.count; i++) {
+        const ang = rand() * Math.PI * 2, dist = rand() * (r - 10);
+        const px = cx + Math.cos(ang) * dist, py = cy + Math.sin(ang) * dist;
+        s.appendChild(svg("circle", { cx: px, cy: py, r: 4.4, fill: sp.color }));
+      }
+    });
+    const lbl = svg("text", { x: cx, y: cy + r + 18, "text-anchor": "middle", class: "label" });
+    lbl.textContent = v.label;
+    s.appendChild(lbl);
+  });
+
+  if (spec.legend) {
+    let lx = 6;
+    spec.legend.forEach((lg) => {
+      s.appendChild(svg("circle", { cx: lx, cy: 14, r: 4.4, fill: lg.color }));
+      const t = svg("text", { x: lx + 9, y: 18 });
+      t.textContent = lg.name;
+      s.appendChild(t);
+      lx += lg.name.length * 6.4 + 26;
+    });
+  }
+  if (spec.note) {
+    const nt = svg("text", { x: W / 2, y: H - 6, "text-anchor": "middle" });
+    nt.textContent = spec.note;
+    s.appendChild(nt);
+  }
+  return s;
+}
+
+/* ---------------- renderIllustration (elle çizilmiş, bağlamı somutlaştıran sahne) ---------------- */
+function renderIllustration(spec) {
+  // spec: { svg: "<...>", viewBox: "0 0 W H" } — sabit, geliştirici tarafından yazılmış SVG içeriği
+  const s = svg("svg", { viewBox: spec.viewBox || "0 0 300 140", class: "viz-chart viz-illustration", role: "img" });
+  s.innerHTML = spec.svg;
+  return s;
+}
+
 const RENDERERS = {
   table: renderDataTable,
   chart: renderChart,
@@ -241,6 +295,8 @@ const RENDERERS = {
   matchPairs: renderMatchTable,
   checklist: renderChecklist,
   peDiagram: renderPEDiagram,
+  particleBox: renderParticleBox,
+  illustration: renderIllustration,
 };
 
 /* ============================================================
