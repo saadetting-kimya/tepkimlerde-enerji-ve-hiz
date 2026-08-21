@@ -337,14 +337,14 @@ function selectInitialIndices(questions, count) {
    (bkz. CLAUDE.md madde 14); bu yüzden kazanım kodu, modül anahtarına
    bakılarak sabit bir tablodan okunur. */
 const MODULE_KAZANIM = {
-  m1: "KİM.10.1.1",
-  m2: "KİM.10.1.2",
-  m3: "KİM.10.1.3",
-  m4: "KİM.10.1.4",
-  m5: "KİM.10.1.5",
-  m6: "KİM.10.1.6",
-  m7: "KİM.10.1.7",
-  m8: "KİM.10.1.8",
+  m1: "KİM.11.1.1",
+  m2: "KİM.11.1.2",
+  m3: "KİM.11.1.3",
+  m4: "KİM.11.1.4",
+  m5: "KİM.11.1.5",
+  m6: "KİM.11.1.6",
+  m7: "KİM.11.1.7",
+  m8: "KİM.11.1.8",
 };
 
 const ERROR_KEY = "khiz_errors";
@@ -558,7 +558,7 @@ function mountFooter() {
   const f = document.getElementById("footer-root");
   if (!f) return;
   f.innerHTML = "";
-  f.appendChild(el("p", {}, "Kimya 10 · Enerji ve Tepkime Hızı — bağımlılıksız, çevrimdışı çalışan öğrenme uygulaması."));
+  f.appendChild(el("p", {}, "Kimya 11 · Enerji ve Tepkime Hızı — bağımlılıksız, çevrimdışı çalışan öğrenme uygulaması."));
 }
 
 function bindJournal() {

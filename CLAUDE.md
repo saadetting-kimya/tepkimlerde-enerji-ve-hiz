@@ -8,13 +8,13 @@ alışkanlıklarımdan **önceliklidir**. Madde 1-11, AtomLab 9 projesinde
 geçer davranış kurallarıdır — buradaki somut vakalar (piktogram,
 kuantum sayısı) o projeye ait örnekler olsa da, çıkardıkları GENEL
 KURAL bu projede de aynı şekilde bağlayıcıdır. Madde 14+ bu projeye
-(10. sınıf Enerji ve Kimyasal Tepkimelerde Hız) özeldir. Yeni bir
+(11. sınıf Enerji ve Kimyasal Tepkimelerde Hız) özeldir. Yeni bir
 standing-rule (tek seferlik görev değil, kalıcı tercih) verildiğinde,
 aynı oturumda bu dosyaya eklenir (bkz. madde 13).
 
 **Bu projenin resmî müfredat kaynağı** (madde 5'teki "MEB kitabı"
 kuralının bu projedeki karşılığı): `enerji ve hız meb.pdf` — Türkiye
-Yüzyılı Maarif Modeli 10. sınıf Kimya ders kitabının "Enerji" (1.1.x)
+Yüzyılı Maarif Modeli 11. sınıf Kimya ders kitabının "Enerji" (1.1.x)
 ve "Kimyasal Tepkimelerde Hız" (1.2.x) bölümü. Bkz. madde 14.
 
 ## 1. PİKTOGRAM OLAYI — somut ders çıkarılan vaka (telif + doğruluk)
@@ -266,17 +266,6 @@ hemen** bu dosyaya yeni bir madde olarak eklenir. Kural eklenirken:
 
 ## 14. Konu kapsamı ve kazanım kodu — bu projeye özel
 
-**SINIF DÜZEYİ DÜZELTMESİ (2026-08-21):** Proje başlangıçta yanlışlıkla
-"11. sınıf" olarak etiketlenmişti (README, tüm sayfa başlıkları/nav
-markası, kazanım kodları `KİM.11.1.X`, ders defteri kapağı dahil).
-Kullanıcı bunun aslında **10. sınıf** içeriği olduğunu belirtti;
-site genelinde ve bu dosyada "11. sınıf"/"Kimya 11"/`KİM.11.1.X` →
-"10. sınıf"/"Kimya 10"/`KİM.10.1.X` olacak şekilde düzeltildi. Tek
-istisna: `kimya dersi 11. sınıf müfredat içeriği.pdf` — bu, kullanıcının
-yüklediği gerçek dosyanın adı olduğu için değiştirilmedi (dosya adının
-içindeki "11" kendi grade etiketiyle ilgisiz, sadece dosya adının aynen
-alıntısıdır).
-
 **Kaynak tarama sonucu (2026-08-20):** Yüklenen 9 PDF'ten yalnızca 3
 tanesi (`enerji ve hız meb.pdf` = asıl MEB ders kitabı bölümü, Aydın
 Yayınları'nın Enerji-1/2 ve Hız-1/2 öğrenci kitapları) gerçek/çıkarılabilir
@@ -289,10 +278,10 @@ npm/apt-get'i 403 ile engelliyor) ve dosya bu yüzden okunamadı.
 büyük ölçüde taranmış görsel sayfalar, metin katmanı yok.
 
 **Sonuç:** Hiçbir kaynakta (ne MEB kitabında ne 3 yayınevi kitabında)
-yazılı "KİM.10.X.Y" formatında bir kazanım kodu bulunamadı — yeni
+yazılı "KİM.11.X.Y" formatında bir kazanım kodu bulunamadı — yeni
 Maarif Modeli öğrenci kitapları bu kodları öğrenci metnine basmıyor.
 
-**Kullanıcı kararı:** `KİM.10.1.1`–`KİM.10.1.8` içi referans kodu
+**Kullanıcı kararı:** `KİM.11.1.1`–`KİM.11.1.8` içi referans kodu
 olarak kullanılır (modülün MEB kitabındaki gerçek alt-başlık sırasına
 birebir karşılık gelir — bkz. aşağıki liste). Bu kod **resmî öğretim
 programı belgesinden doğrulanmış bir kod DEĞİLDİR**, yalnızca modül
@@ -303,23 +292,23 @@ ve `nav.js`/`quiz-data.js`'teki kodlar buna göre güncellenir.
 **MEB kitabından doğrulanan 8 alt-konu (madde 3.1 gereği bağlayıcı
 kapsam sınırı):**
 
-1. KİM.10.1.1 — Tepkimelerde Meydana Gelen Enerji Değişimi (fiziksel/
+1. KİM.11.1.1 — Tepkimelerde Meydana Gelen Enerji Değişimi (fiziksel/
    kimyasal olay, endotermik/ekzotermik)
-2. KİM.10.1.2 — Maddelerin Enerji Kaynağı Olma Potansiyeli (yakıt
+2. KİM.11.1.2 — Maddelerin Enerji Kaynağı Olma Potansiyeli (yakıt
    karşılaştırma, kJ/g)
-3. KİM.10.1.3 — Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması
-4. KİM.10.1.4 — Standart Oluşum Entalpisi (**dikkat:** kitap "Hess
+3. KİM.11.1.3 — Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması
+4. KİM.11.1.4 — Standart Oluşum Entalpisi (**dikkat:** kitap "Hess
    Yasası" terimini HİÇ kullanmıyor, yalnızca "standart oluşum
    entalpilerine göre tepkime entalpisi hesaplama" diyor — bu isim
    uygulamada/deftede/sorularda kullanılmaz, madde 5 ihlali olur)
-5. KİM.10.1.5 — Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli
+5. KİM.11.1.5 — Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli
    Şartlar (çarpışma teorisi, ileri/geri aktivasyon enerjisi)
-6. KİM.10.1.6 — Tepken ve Ürün Derişimleriyle Ortalama Tepkime
+6. KİM.11.1.6 — Tepken ve Ürün Derişimleriyle Ortalama Tepkime
    Hızlarının Hesaplanması
-7. KİM.10.1.7 — Tepkime Hızına Etki Eden Faktörler (kitapta tam
+7. KİM.11.1.7 — Tepkime Hızına Etki Eden Faktörler (kitapta tam
    olarak 6 ayrı deney/etken: madde cinsi, fiziksel hâl, derişim,
    sıcaklık, katalizör, temas yüzeyi — 7. değil, gerçekten 6)
-8. KİM.10.1.8 — Kimyasal Tepkimelerin Hız Denklemi (hız denklemi,
+8. KİM.11.1.8 — Kimyasal Tepkimelerin Hız Denklemi (hız denklemi,
    tepkime derecesi/mertebesi, hız sabiti "k" — "Arrhenius" veya
    "yarı ömür" gibi kitapta GEÇMEYEN üniversite terimleri YASAK)
 
@@ -335,7 +324,7 @@ kapsam sınırı):**
 gerçek hayat bağlamlı (araç egzozu) bir illüstrasyonla yeni bir soru
 eklerken, soru "katalitik konvertörler HANGİ METALLERİ (platin,
 paladyum, rodyum) katalizör olarak içerir?" diye sordu. Görsel/bağlam
-güzeldi ama soru, MEB'in katalizör kazanımının (KİM.10.1.7 — katalizör
+güzeldi ama soru, MEB'in katalizör kazanımının (KİM.11.1.7 — katalizör
 aktivasyon enerjisini düşürür, kendisi değişmeden kalır) ölçtüğü
 kavramın DIŞINDA, öğrencinin bilmek zorunda olmadığı bir ezber/trivia
 bilgisi soruyordu (madde 5 ihlali, farklı bir kılıkta). Kullanıcı:
