@@ -13,9 +13,10 @@
   <div class="container">
     <span class="eyebrow">Tam Liste</span>
     <h1>Soru Bankası</h1>
-    <p class="lead">Her modülün soru havuzundaki 50 sorunun TAMAMI, doğru cevabı ve açıklamasıyla birlikte
-      burada listelenir. Modül sayfalarındaki "Değerlendir" bölümü her ziyarette havuzdan yalnızca 5 soru
-      gösterir; burası konuyu tarama, deneme sınavı gibi çalışma veya tüm soruları gözden geçirme içindir.</p>
+    <p class="lead">Her modülün soru havuzundaki 50 sorunun TAMAMI burada listelenir. Bir seçeneğe tıklayarak
+      cevapla — doğru cevap ve açıklama, sen işaretledikten sonra görünür. Modül sayfalarındaki "Değerlendir"
+      bölümü her ziyarette havuzdan yalnızca 5 soru gösterir; burası konuyu tarama, deneme sınavı gibi çalışma
+      veya tüm soruları gözden geçirme içindir.</p>
   </div>
 </header>
 
@@ -45,13 +46,22 @@
 
     card.appendChild(el("div", { class: "qtext" }, q.text));
 
+    const exp = el("div", { class: "explain" }, [el("b", {}, "Açıklama: "), el("span", {}, q.explain)]);
     const opts = el("div", { class: "options" });
     q.options.forEach((optText, i) => {
-      const row = el("div", { class: "opt disabled" + (i === q.correct ? " correct" : "") }, [el("span", { class: "letter" }, LETTERS[i]), el("span", {}, optText)]);
+      const row = el("div", { class: "opt" }, [el("span", { class: "letter" }, LETTERS[i]), el("span", {}, optText)]);
+      row.addEventListener("click", () => {
+        if (row.dataset.locked) return;
+        [...opts.children].forEach((c) => (c.dataset.locked = "1"));
+        [...opts.children][q.correct].classList.add("correct");
+        if (i !== q.correct) row.classList.add("wrong");
+        [...opts.children].forEach((c) => c.classList.add("disabled"));
+        exp.classList.add("show");
+      });
       opts.appendChild(row);
     });
     card.appendChild(opts);
-    card.appendChild(el("div", { class: "explain show" }, [el("b", {}, "Açıklama: "), el("span", {}, q.explain)]));
+    card.appendChild(exp);
     return card;
   }
 

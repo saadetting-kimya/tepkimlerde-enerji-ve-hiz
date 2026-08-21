@@ -120,9 +120,9 @@ export function createCollisionScene(container) {
   }
   animate();
 
-  /** kind: "good"|"bad" · u: 0(başlangıç)-1(buluşma noktası) yaklaşma ilerlemesi
-   * phase: "idle"|"approach"|"success"|"bounce" */
-  function setState(kind, u, phase) {
+  /** angleDeg: 0° (O3'ün ucu NO'ya tam dönük, en uygun geometri) .. 180° (tam ters dönük)
+   * u: 0(başlangıç)-1(buluşma noktası) yaklaşma ilerlemesi · phase: "idle"|"approach"|"success"|"bounce" */
+  function setState(angleDeg, u, phase) {
     const startNo = -3.2, startO3 = 3.2, meet = 0.55;
     const t = Math.max(0, Math.min(1, u));
     const noX = startNo + (-meet - startNo) * t;
@@ -130,8 +130,7 @@ export function createCollisionScene(container) {
     noGroup.position.set(noX, 0, 0);
     noGroup.rotation.set(0, 0, 0);
     o3Group.position.set(o3X, 0, 0);
-    // "uygun geometri": O3'ün ucu (+x) NO'ya dönük (0 rad) · "uygun olmayan": 90° yan dönük
-    o3Group.rotation.y = kind === "good" ? 0 : Math.PI / 2;
+    o3Group.rotation.y = (angleDeg * Math.PI) / 180;
 
     if (phase === "success") {
       noGroup.visible = false;

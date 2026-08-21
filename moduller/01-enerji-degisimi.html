@@ -125,11 +125,11 @@
       why: "Fe2O3 ve alüminyumdan alüminyum oksit ile demir gibi kimliği farklı yeni maddeler oluşur; bu kimyasaldır. Açığa çıkan ısı, tren raylarını eritecek kadar yüksektir — ölçer bu deneyde üst sınırını aşar; tepkime güçlü bir ekzotermik tepkimedir.",
     },
     {
-      id: "ateşböceği", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, tiny: true, scene: "firefly",
+      id: "ateşböceği", kind: "light", unit: "%", gaugeMin: 0, gaugeMax: 100, scene: "firefly",
       label: "Ateş böceğinin karnında ışık üretmesi (biyolüminesans)",
-      start: 24, end: 24.3,
+      start: 0, end: 92,
       physical: "Kimyasal", thermic: "Ekzotermik",
-      why: "Karın bölgesindeki maddenin enzim yardımıyla oksijenle tepkimeye girip kimliği farklı ürünler oluşturması kimyasaldır. Işıkla birlikte az da olsa ısı açığa çıkması (ölçer neredeyse hiç kımıldamaz) tepkimenin yine de ekzotermik olduğunu gösterir; bu yüzden 'soğuk ışık' denir.",
+      why: "Karın bölgesindeki maddenin enzim yardımıyla oksijenle tepkimeye girip kimliği farklı ürünler oluşturması kimyasaldır. Karından yayılan ışık gözle görülür şekilde artar; bununla birlikte çevreye az da olsa ısı da açığa çıkar (bir termometreyle ölçülemeyecek kadar küçük olsa da). Bu ısı açığa çıkışı, tepkimenin ekzotermik olduğunu gösterir — bu yüzden ateş böceğinin ışığına 'soğuk ışık' denir.",
     },
     {
       id: "fotosel", kind: "energy", unit: "birim", gaugeMin: 0, gaugeMax: 100, pop: true, scene: "photocell",
@@ -243,17 +243,34 @@
   }
 
   function sceneFirefly(exp, progress, value) {
-    /* ateş böceği: karanlıkta parlayan biyolüminesans */
-    const glow = 0.35 + 0.55 * Math.sin(progress * Math.PI);
+    /* ateş böceği: karanlıkta artan biyolüminesans + ışık şiddeti göstergesi */
+    const glow = Math.max(0, Math.min(1, (value - exp.gaugeMin) / (exp.gaugeMax - exp.gaugeMin)));
+    const barH = 130 * glow;
     return `
-      <rect x="30" y="30" width="240" height="160" rx="10" fill="#181c33"/>
-      <ellipse cx="150" cy="105" rx="26" ry="12" fill="#2b2f4a"/>
-      <ellipse cx="122" cy="98" rx="16" ry="7" fill="#33375a" opacity="0.8"/>
-      <ellipse cx="122" cy="112" rx="16" ry="7" fill="#33375a" opacity="0.8"/>
-      <circle cx="176" cy="105" r="9" fill="#ffe27a" opacity="${glow.toFixed(2)}"/>
-      <circle cx="176" cy="105" r="16" fill="#ffe27a" opacity="${(glow * 0.35).toFixed(2)}"/>
-      <text x="150" y="205" text-anchor="middle" font-size="11" fill="#c9cdE6">Luciferin + O₂ (enzimle)</text>
-      ${miniThermometer(250, 60, 80, (value - exp.gaugeMin) / (exp.gaugeMax - exp.gaugeMin), "var(--exo)", false)}
+      <rect x="18" y="18" width="196" height="184" rx="10" fill="#12162c"/>
+      <circle cx="42" cy="40" r="1.6" fill="#fff" opacity="0.5"/>
+      <circle cx="184" cy="34" r="1.4" fill="#fff" opacity="0.4"/>
+      <circle cx="168" cy="176" r="1.4" fill="#fff" opacity="0.35"/>
+      <circle cx="36" cy="168" r="1.3" fill="#fff" opacity="0.4"/>
+      <g transform="translate(30,84)">
+        <line x1="12" y1="9" x2="1" y2="-6" stroke="#4b5182" stroke-width="2.6" stroke-linecap="round"/>
+        <line x1="20" y1="5" x2="16" y2="-11" stroke="#4b5182" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="17" cy="17" r="11" fill="#3d4270"/>
+        <ellipse cx="45" cy="19" rx="21" ry="15" fill="#4b5182"/>
+        <path d="M36 6 Q82 -8 106 12 Q82 21 36 21 Z" fill="#5c62a0" opacity="0.92"/>
+        <path d="M36 32 Q82 45 106 23 Q82 17 36 17 Z" fill="#4f5590" opacity="0.92"/>
+        <ellipse cx="93" cy="19" rx="23" ry="14" fill="#4b5182"/>
+        <circle cx="112" cy="19" r="${(19 + glow * 15).toFixed(1)}" fill="#ffe27a" opacity="${(glow * 0.14).toFixed(2)}"/>
+        <circle cx="112" cy="19" r="${(13 + glow * 9).toFixed(1)}" fill="#ffe27a" opacity="${(glow * 0.32).toFixed(2)}"/>
+        <ellipse cx="112" cy="19" rx="11" ry="10" fill="#ffe27a" opacity="${(0.4 + glow * 0.6).toFixed(2)}"/>
+        <line x1="32" y1="30" x2="24" y2="50" stroke="#3d4270" stroke-width="3" stroke-linecap="round"/>
+        <line x1="47" y1="33" x2="43" y2="52" stroke="#3d4270" stroke-width="3" stroke-linecap="round"/>
+        <line x1="62" y1="31" x2="67" y2="50" stroke="#3d4270" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <text x="116" y="212" text-anchor="middle" font-size="11" fill="#c9cdE6">Luciferin + O₂ (enzimle)</text>
+      <text x="257" y="38" text-anchor="middle" font-size="10" fill="var(--ink-soft)">Işık şiddeti</text>
+      <rect x="248" y="45" width="18" height="132" rx="6" fill="#fff" stroke="var(--line)" stroke-width="1.6"/>
+      <rect x="250.5" y="${(177 - barH).toFixed(1)}" width="13" height="${barH.toFixed(1)}" rx="4.5" style="fill:var(--exo)"/>
     `;
   }
 
@@ -261,17 +278,27 @@
     /* fotoselli batarya: fotonlar metal levhaya çarpıyor, elektron kopuyor */
     const rays = [0, 1, 2].map((i) => {
       const t = (progress * 3 + i * 0.33) % 1;
-      const x = 40 + t * 130;
-      return `<line x1="${x}" y1="${70 + i * 30}" x2="${x + 22}" y2="${85 + i * 30}" stroke="#ffb020" stroke-width="3" stroke-linecap="round"/>`;
+      const x = 44 + t * 120;
+      const y = 65 + i * 32;
+      return `<line x1="${x}" y1="${y}" x2="${x + 24}" y2="${y + 16}" stroke="#ffb020" stroke-width="3.4" stroke-linecap="round"/>`;
     }).join("");
+    const ejected = progress >= 0.9;
     return `
+      <circle cx="45" cy="42" r="11" fill="#ffce54"/>
+      ${[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
+        const rad = (deg * Math.PI) / 180;
+        const x1 = 45 + Math.cos(rad) * 15, y1 = 42 + Math.sin(rad) * 15;
+        const x2 = 45 + Math.cos(rad) * 20, y2 = 42 + Math.sin(rad) * 20;
+        return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#ffce54" stroke-width="2" stroke-linecap="round"/>`;
+      }).join("")}
+      <text x="45" y="70" text-anchor="middle" font-size="10" fill="var(--ink-soft)">ışık (foton)</text>
+      ${rays}
       <rect x="205" y="45" width="26" height="140" fill="#8b93a6" stroke="#5b6274" stroke-width="2"/>
       <text x="218" y="200" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Metal levha</text>
-      ${rays}
-      <text x="70" y="55" font-size="11" fill="var(--ink-soft)">ışık (foton)</text>
-      ${progress >= 0.92 ? `<circle cx="220" cy="60" r="6" fill="var(--endo)"><animate attributeName="cy" from="60" to="20" dur="0.5s" fill="freeze"/><animate attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"/></circle><text x="220" y="14" text-anchor="middle" font-size="11" fill="var(--endo)">e⁻</text>` : ""}
-      <rect x="255" y="45" width="16" height="140" rx="6" fill="#fff" stroke="var(--line)" stroke-width="1.6"/>
-      <rect x="257.5" y="${185 - 140 * progress}" width="11" height="${140 * progress}" rx="4.5" fill="var(--energy)"/>
+      ${ejected ? `<circle cx="220" cy="60" r="6" fill="var(--endo)"><animate attributeName="cy" from="60" to="20" dur="0.5s" fill="freeze"/><animate attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"/></circle><text x="220" y="14" text-anchor="middle" font-size="11" style="fill:var(--endo)">e⁻ koptu!</text>` : ""}
+      <text x="264" y="38" text-anchor="middle" font-size="9" fill="var(--ink-soft)">Kopan e⁻</text>
+      <rect x="255" y="45" width="18" height="140" rx="6" fill="#fff" stroke="var(--line)" stroke-width="1.6"/>
+      <rect x="257.5" y="${(185 - 140 * progress).toFixed(1)}" width="13" height="${(140 * progress).toFixed(1)}" rx="4.5" style="fill:var(--energy)"/>
     `;
   }
 
@@ -338,10 +365,10 @@
     const readoutEl = document.getElementById("exp-readout");
     if (overflow) {
       readoutEl.innerHTML = `<b style="color:var(--bad)">ÖLÇÜM SINIRINI AŞTI ⚠</b>`;
-    } else if (exp.tiny) {
-      readoutEl.innerHTML = `<b>≈ ${exp.start}${exp.unit}</b><span>Ölçülebilir değişim çok küçük</span>`;
     } else if (exp.kind === "energy") {
       readoutEl.innerHTML = `<b>%${Math.round(value)}</b><span>${value >= 100 ? "Elektron koptu!" : "Foton enerjisi aktarılıyor"}</span>`;
+    } else if (exp.kind === "light") {
+      readoutEl.innerHTML = `<b>%${Math.round(value)}</b><span>${value >= exp.end ? "Karnı parlıyor! (az miktarda ısı da açığa çıkıyor)" : "Işık şiddeti artıyor"}</span>`;
     } else {
       readoutEl.innerHTML = `<b>${value.toFixed(1)}${exp.unit}</b><span>Anlık ölçüm</span>`;
     }

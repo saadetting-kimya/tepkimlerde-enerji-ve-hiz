@@ -59,10 +59,11 @@ function mountNextModule(activeKey) {
   if (!root) return;
   const idx = LINKS.findIndex((l) => l.key === activeKey);
   const next = LINKS[idx + 1];
+  const prefix = rootPrefix();
   const wrap = el2("div", { class: "container", style: "padding:30px 20px;text-align:center" });
   if (next) {
     wrap.appendChild(
-      el2("a", { href: next.href, class: "btn primary", style: "font-size:1rem;padding:14px 26px" }, `Sonraki Modül: ${next.title} →`)
+      el2("a", { href: prefix + next.href, class: "btn primary", style: "font-size:1rem;padding:14px 26px" }, `Sonraki Modül: ${next.title} →`)
     );
   } else {
     wrap.appendChild(el2("a", { href: rootPrefix() + "index.html", class: "btn primary", style: "font-size:1rem;padding:14px 26px" }, "🎉 Tüm modülleri tamamladın — Ana sayfaya dön"));
