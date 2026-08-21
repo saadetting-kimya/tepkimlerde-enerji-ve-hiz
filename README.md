@@ -1,12 +1,12 @@
-# Kimya 11 · Enerji ve Tepkime Hızı Simülasyonu
+# Kimya 10 · Enerji ve Tepkime Hızı Simülasyonu
 
-Türkiye Yüzyılı Maarif Modeli 11. Sınıf Kimya Dersi Öğretim Programı'ndaki **Enerji** ve
+Türkiye Yüzyılı Maarif Modeli 10. Sınıf Kimya Dersi Öğretim Programı'ndaki **Enerji** ve
 **Kimyasal Tepkimelerde Hız** temalarını kapsayan, 8 modüllük, bağımlılıksız (kütüphanesiz)
 etkileşimli bir öğrenme simülasyonu.
 
 ## Özellikler
 
-- 8 modül (KİM.11.1.1 – KİM.11.1.8), her biri: **Konu Özeti → Uygulama (sanal deney/hesap makinesi) → Bağlam Temelli Sorular**
+- 8 modül (KİM.10.1.1 – KİM.10.1.8), her biri: **Konu Özeti → Uygulama (sanal deney/hesap makinesi) → Bağlam Temelli Sorular**
 - Sanal laboratuvarlar: ekzo/endotermik deneyler, yakıt kıyaslama, bağ enerjisi hesap makinesi,
   Hess Yasası hesap makinesi, çarpışma teorisi parçacık simülasyonu, derişim-zaman grafiği,
   6 istasyonlu "hıza etki eden etkenler" laboratuvarı, hız denklemi dedektifi

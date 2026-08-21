@@ -275,7 +275,7 @@ function buildStudentPrintReport() {
       </section>
 
       <footer class="report-footer">
-        <span>Kimya 11 · Enerji ve Hız</span>
+        <span>Kimya 10 · Enerji ve Hız</span>
         <span>Öğrenme verilerinden otomatik oluşturulmuştur.</span>
       </footer>
     </article>

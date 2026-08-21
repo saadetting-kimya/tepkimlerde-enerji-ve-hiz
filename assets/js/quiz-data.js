@@ -1,13 +1,13 @@
 /* ============================================================
    quiz-data.js — QUIZ = { modulAnahtari: [ {soru...}, ... ] }
-   Modül 1: Tepkimelerde Meydana Gelen Enerji Değişimi (KİM.11.1.1)
-   Modül 2: Maddelerin Enerji Kaynağı Olma Potansiyeli (KİM.11.1.2)
-   Modül 3: Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması (KİM.11.1.3)
-   Modül 4: Standart Oluşum Entalpisi (KİM.11.1.4)
-   Modül 5: Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli Şartlar (KİM.11.1.5)
-   Modül 6: Tepken ve Ürün Derişimleriyle Ortalama Tepkime Hızlarının Hesaplanması (KİM.11.1.6)
-   Modül 7: Tepkime Hızına Etki Eden Faktörler (KİM.11.1.7)
-   Modül 8: Kimyasal Tepkimelerin Hız Denklemi (KİM.11.1.8)
+   Modül 1: Tepkimelerde Meydana Gelen Enerji Değişimi (KİM.10.1.1)
+   Modül 2: Maddelerin Enerji Kaynağı Olma Potansiyeli (KİM.10.1.2)
+   Modül 3: Bağ Enerjileriyle Tepkime Entalpisinin Hesaplanması (KİM.10.1.3)
+   Modül 4: Standart Oluşum Entalpisi (KİM.10.1.4)
+   Modül 5: Kimyasal Tepkimelerin Gerçekleşmesi İçin Gerekli Şartlar (KİM.10.1.5)
+   Modül 6: Tepken ve Ürün Derişimleriyle Ortalama Tepkime Hızlarının Hesaplanması (KİM.10.1.6)
+   Modül 7: Tepkime Hızına Etki Eden Faktörler (KİM.10.1.7)
+   Modül 8: Kimyasal Tepkimelerin Hız Denklemi (KİM.10.1.8)
    ============================================================ */
 
 const QUIZ = {
