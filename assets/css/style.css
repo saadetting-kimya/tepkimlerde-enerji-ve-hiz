@@ -438,6 +438,12 @@ section.block > .container > h2 .num {
 .chip-correct .chip-feedback { color: var(--rate); }
 .chip-wrong .chip-feedback { color: var(--bad); }
 
+/* ---------- Derişim-zaman grafiğinde iki noktayı sen seç ---------- */
+.rate-picker { background: var(--bg-panel); border-radius: var(--radius-sm); padding: 14px 16px; }
+.rate-picker label { display: block; font-size: .86rem; font-weight: 700; color: var(--ink-soft); margin-bottom: 6px; }
+.rate-picker label:not(:first-child) { margin-top: 12px; }
+.rate-picker input[type=range] { width: 100%; accent-color: var(--energy); }
+
 /* =========================================================
    ÖĞRENCİ PDF ANALİZ RAPORU
    ========================================================= */
