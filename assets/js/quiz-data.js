@@ -5079,16 +5079,16 @@ const QUIZ = {
         "viewBox": "0 0 285 120",
         "svg": "<rect x='18' y='72' width='120' height='30' rx='10' fill='var(--ink-soft)'/><rect x='42' y='50' width='62' height='26' rx='10' fill='var(--ink-soft)'/><rect x='50' y='55' width='20' height='14' rx='2' fill='#eef1f4'/><rect x='74' y='55' width='20' height='14' rx='2' fill='#eef1f4'/><circle cx='50' cy='104' r='13' fill='#2c2c33'/><circle cx='50' cy='104' r='5' fill='#8a8f99'/><circle cx='112' cy='104' r='13' fill='#2c2c33'/><circle cx='112' cy='104' r='5' fill='#8a8f99'/><rect x='6' y='90' width='14' height='8' rx='2' fill='#6b6f78'/><circle cx='30' cy='94' r='4' fill='var(--exo)' opacity='.55'/><circle cx='42' cy='88' r='5' fill='var(--exo)' opacity='.6'/><circle cx='56' cy='93' r='4' fill='var(--exo)' opacity='.55'/><text x='43' y='16' text-anchor='middle' font-size='10' style='fill:var(--exo)' font-weight='700'>CO, NOx, HC</text><rect x='148' y='86' width='56' height='26' rx='5' fill='var(--bg-panel)' stroke='var(--ink-soft)' stroke-width='2'/><text x='176' y='99' text-anchor='middle' font-size='8.5' style='fill:var(--ink)'>Katalitik</text><text x='176' y='109' text-anchor='middle' font-size='8.5' style='fill:var(--ink)'>Konvertör</text><line x1='70' y1='94' x2='146' y2='97' stroke='var(--ink-soft)' stroke-width='2' stroke-dasharray='3 3'/><circle cx='222' cy='90' r='4' fill='var(--rate)' opacity='.6'/><circle cx='236' cy='84' r='5' fill='var(--rate)' opacity='.65'/><circle cx='250' cy='90' r='4' fill='var(--rate)' opacity='.6'/><circle cx='264' cy='83' r='4.5' fill='var(--rate)' opacity='.6'/><line x1='206' y1='94' x2='270' y2='86' stroke='var(--ink-soft)' stroke-width='2' stroke-dasharray='3 3' marker-end='url(#exharrow)'/><text x='243' y='16' text-anchor='middle' font-size='10' style='fill:var(--rate)' font-weight='700'>CO2, H2O, N2</text><defs><marker id='exharrow' markerWidth='8' markerHeight='8' refX='4' refY='4' orient='auto'><path d='M0,0 L4,4 L0,8 Z' fill='var(--ink-soft)'/></marker></defs>"
       },
-      "text": "Araç egzoz sistemlerinde kullanılan katalitik konvertörler hangi metalleri katalizör olarak içerir?",
+      "text": "Araç egzoz sistemindeki katalitik konvertör, zararlı egzoz gazlarının daha az zararlı gazlara dönüşme tepkimesini hızlandırır. Bu hızlanmanın nedeni nedir?",
       "options": [
-        "Platin, paladyum, rodyum",
-        "Demir, bakır, çinko",
-        "Karbon, azot, oksijen",
-        "Altın, gümüş, kurşun",
-        "Sodyum, potasyum, kalsiyum"
+        "Konvertör, tepkimenin aktivasyon enerjisini düşürerek eşik değerini aşabilen tanecik oranını artırır",
+        "Konvertör, tepkimenin ΔH değerini sıfıra indirir",
+        "Konvertör, egzoz gazlarının derişimini seyrelterek hızı artırır",
+        "Konvertör, egzoz sıcaklığını düşürerek tepkimeyi hızlandırır",
+        "Konvertör kendisi tepkimeye girip tükenir, bu yüzden hız artar"
       ],
       "correct": 0,
-      "explain": "Katalitik konvertörler; platin, paladyum ve rodyum gibi metaller aracılığıyla egzoz gazlarındaki zararlı bileşikleri (CO, hidrokarbonlar, NOx) daha az zararlı bileşiklere (CO2, H2O, N2, O2) dönüştürür."
+      "explain": "Katalitik konvertör içindeki katalizör, tepkimenin izlediği yolu değiştirerek aktivasyon enerjisini düşürür; bu da eşik değerini aşabilen tanecik oranını artırarak tepkimeyi hızlandırır. Katalizör tepkime sonunda değişmeden kalır — tükenmez, bu yüzden E yanlıştır."
     },
     {
       "difficulty": "kolay",
@@ -5696,7 +5696,7 @@ const QUIZ = {
         "Katalizör yalnızca laboratuvar ölçeğinde kullanılabilir, endüstride kullanılamaz"
       ],
       "correct": 2,
-      "explain": "Yüksek sıcaklık ve basınç uygulamak enerji yoğun ve ekipman açısından maliyetli/riskli olabilir. Katalizör kullanmak, bu zorlu koşullara ihtiyaç duymadan aktivasyon enerjisini düşürerek tepkimeyi hızlandırabildiğinden, birçok endüstriyel süreçte (örneğin Haber-Bosch amonyak sentezi, katalitik konvertörler) tercih edilen, enerji ve maliyet açısından daha verimli bir yoldur."
+      "explain": "Yüksek sıcaklık ve basınç uygulamak enerji yoğun ve ekipman açısından maliyetli/riskli olabilir. Katalizör kullanmak, bu zorlu koşullara ihtiyaç duymadan aktivasyon enerjisini düşürerek tepkimeyi hızlandırabildiğinden, birçok endüstriyel süreçte tercih edilen, enerji ve maliyet açısından daha verimli bir yoldur."
     }
   ],
   "m8": [
