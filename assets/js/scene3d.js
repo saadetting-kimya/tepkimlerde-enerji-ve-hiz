@@ -35,10 +35,10 @@ function buildStudioEnvironment(renderer) {
   grad.height = 256;
   const ctx = grad.getContext("2d");
   const g = ctx.createLinearGradient(0, 0, 0, 256);
-  g.addColorStop(0, "#ffffff");
-  g.addColorStop(0.35, "#dfe8f2");
-  g.addColorStop(0.7, "#aab4c0");
-  g.addColorStop(1, "#7c8794");
+  g.addColorStop(0, "#eef3f8");
+  g.addColorStop(0.35, "#cfd9e3");
+  g.addColorStop(0.7, "#8e99a6");
+  g.addColorStop(1, "#5f6772");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, 16, 256);
   const tex = new THREE.CanvasTexture(grad);
@@ -46,7 +46,7 @@ function buildStudioEnvironment(renderer) {
   const skyGeo = new THREE.SphereGeometry(20, 24, 24);
   const skyMat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide });
   envScene.add(new THREE.Mesh(skyGeo, skyMat));
-  const bright = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+  const bright = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), new THREE.MeshBasicMaterial({ color: 0xdfe4e8 }));
   bright.position.set(3, 5, 4);
   bright.lookAt(0, 0, 0);
   envScene.add(bright);
@@ -90,7 +90,7 @@ export function createBeakerScene(container, opts = {}) {
 
   const scene = new THREE.Scene();
   scene.environment = buildStudioEnvironment(renderer);
-  scene.environmentIntensity = 1.1;
+  scene.environmentIntensity = 0.8;
 
   const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
   camera.position.set(4.2, 2.6, 5.4);
@@ -127,17 +127,21 @@ export function createBeakerScene(container, opts = {}) {
 
   // beher (cam)
   const beakerGeo = buildBeakerGeometry();
+  // transmission KULLANILMIYOR: yazılım/düşük seviye WebGL'de (örn. GPU'suz
+  // Chromebook'lar) transmission geçişi doğru render edilmeyip camı opak/
+  // buzlu beyaza çeviriyor, içindeki sıvıyı tamamen görünmez kılıyordu —
+  // opacity tabanlı klasik saydamlık her cihazda güvenilir çalışıyor.
   const beakerMat = new THREE.MeshPhysicalMaterial({
     color: 0xffffff,
     transparent: true,
-    opacity: 0.35,
-    roughness: 0.02,
+    opacity: 0.16,
+    roughness: 0.04,
     metalness: 0,
-    transmission: 1,
+    transmission: 0,
     thickness: 0.4,
     ior: 1.45,
     specularIntensity: 1,
-    envMapIntensity: 1.2,
+    envMapIntensity: 0.9,
     side: THREE.DoubleSide,
   });
   const beaker = new THREE.Mesh(beakerGeo, beakerMat);
@@ -149,9 +153,9 @@ export function createBeakerScene(container, opts = {}) {
   const liquidMat = new THREE.MeshStandardMaterial({
     color: opts.liquidColor || 0xbdd8f5,
     transparent: true,
-    opacity: 0.82,
-    roughness: 0.25,
-    envMapIntensity: 1,
+    opacity: 0.9,
+    roughness: 0.35,
+    envMapIntensity: 0.35,
   });
   const liquid = new THREE.Mesh(liquidGeo, liquidMat);
   liquid.scale.y = 0.001;

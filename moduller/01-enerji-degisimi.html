@@ -298,7 +298,7 @@
     if (beaker3D) return Promise.resolve(beaker3D);
     if (beaker3DLoading) return beaker3DLoading;
     beaker3DLoading = import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
-      beaker3D = createBeakerScene(document.getElementById("exp-scene-3d"), { liquidColor: 0xcfe4fb });
+      beaker3D = createBeakerScene(document.getElementById("exp-scene-3d"), { liquidColor: 0xbcdcf6 });
       return beaker3D;
     });
     return beaker3DLoading;
@@ -306,7 +306,7 @@
   function updateBeaker3D(exp, value) {
     ensureBeaker3D().then((api) => {
       const coldFrac = Math.max(0, Math.min(1, (exp.start - value) / (exp.start - exp.end)));
-      const c1 = new (beaker3D.THREE.Color)(0xcfe4fb), c2 = new (beaker3D.THREE.Color)(0x6fa8dc);
+      const c1 = new (beaker3D.THREE.Color)(0xbcdcf6), c2 = new (beaker3D.THREE.Color)(0x2f6fb0);
       const mixed = c1.clone().lerp(c2, coldFrac);
       api.setLiquid(0.6, mixed.getHex());
     });
