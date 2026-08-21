@@ -47,15 +47,17 @@
 <section class="block">
   <div class="container">
     <h2><span class="num">2</span>Deney İstasyonu: Hız Denklemi Dedektifi</h2>
-    <p class="block-lead">Bir tepkime seç; deney verilerini karşılaştırarak her tepkenin derecesini, tepkimenin
-      hız denklemini ve hız sabitini adım adım bul.</p>
+    <p class="block-lead">Bir tepkime seç. Tablodan <b>SEN</b> iki deney seç — bir tepkenin derişimini SABİT
+      tutan bir çift bulursan diğer tepkenin derecesini izole edebilirsin. Yanlış çift seçersen neden işe
+      yaramadığını okuyup başka bir çift dene.</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="rxn8-select">Tepkime:</label>
         <select id="rxn8-select"></select>
-        <button id="rxn8-analyze" class="btn primary" type="button">🔍 Analiz Et</button>
       </div>
       <div id="rxn8-table"></div>
+      <div id="rxn8-pair-feedback"></div>
+      <div id="rxn8-status"></div>
       <div id="rxn8-steps"></div>
     </div>
   </div>
@@ -65,13 +67,12 @@
   <div class="container">
     <h2><span class="num">3</span>Deney İstasyonu: Çok Basamaklı Tepkime ve Yavaş Basamak</h2>
     <p class="block-lead">2H2O2(suda) → 2H2O(s) + O2(g) tepkimesi iyodür iyonu (I⁻) katalizörlüğünde iki basamakta
-      gerçekleşir. Potansiyel enerji grafiğinde hangi basamağın daha yavaş olduğunu (daha yüksek aktivasyon
-      enerjisine sahip olduğunu) incele.</p>
+      gerçekleşir. Kaydırıcıyı <b>SEN</b> sürükleyerek tepkimeyi ilerlet; hangi basamağın daha yüksek enerji
+      tepesini aştığını (dolayısıyla daha yavaş olduğunu) izle.</p>
     <div class="lab">
-      <div class="lab-controls">
-        <button id="mech-play" class="btn primary" type="button">▶ Reaksiyonu Oynat</button>
-      </div>
       <div class="lab-stage" style="min-height:300px"><svg id="mech-svg" viewBox="0 0 520 280" style="width:100%;max-width:520px"></svg></div>
+      <label for="mech-progress" style="display:block;text-align:center;font-size:.86rem;font-weight:700;color:var(--ink-soft);margin-top:10px">Tepkimeyi SEN ilerlet</label>
+      <input type="range" id="mech-progress" min="0" max="100" value="0" step="1" style="width:100%;max-width:480px;display:block;margin:6px auto 0;accent-color:var(--energy)">
       <div class="lab-readout" id="mech-readout">
         <div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻</div>
         <div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻</div>
@@ -161,83 +162,114 @@
     return [Math.round(nA), Math.round(nB)];
   }
 
-  function findCleanPair(rows, constKey, varKey) {
-    const [d1, d2, d3] = rows;
-    if (d1[constKey] === d2[constKey]) return [d1, d2];
-    if (d1[constKey] === d3[constKey]) return [d1, d3];
-    if (d2[constKey] === d3[constKey]) return [d2, d3];
-    return null;
-  }
-
-  function explainFor(pair, rows, labelSelf, labelOther, n) {
-    if (pair) {
-      const i1 = rows.indexOf(pair[0]) + 1, i2 = rows.indexOf(pair[1]) + 1;
-      const ratio = (pair[1].r / pair[0].r).toFixed(0);
-      return `Deney ${i1} → ${i2}'de ${labelOther} sabitken ${labelSelf} değişimi hızı ${ratio} katına çıkarıyor → derece = <b style="color:var(--energy)">${n}</b>`;
-    }
-    return `Hiçbir deney çiftinde ${labelOther} sabit tutulmadığından, üç deneyin tamamı bir arada matematiksel olarak çözülerek derece = <b style="color:var(--energy)">${n}</b> bulunur (diğer değişkenin bilinen etkisi denklemden çıkarılarak).`;
-  }
+  let rxn8State = { idx: 0, selected: [], tried: new Set(), foundA: null, foundB: null };
 
   function renderRxn8Table(idx) {
+    rxn8State = { idx, selected: [], tried: new Set(), foundA: null, foundB: null };
     const rx = RXN8[idx];
     document.getElementById("rxn8-table").innerHTML = `
       <table class="viz-table" id="rxn8-table-el">
         <thead><tr><th>Deney</th><th>${rx.labelA} (M)</th><th>${rx.labelB} (M)</th><th>Başlangıç Hızı (M/s)</th></tr></thead>
         <tbody>
-          ${rx.rows.map((d, i) => `<tr data-row="${i}"><td>${i + 1}</td><td>${d.a}</td><td>${d.b}</td><td>${d.r}</td></tr>`).join("")}
+          ${rx.rows.map((d, i) => `<tr data-row="${i}" style="cursor:pointer"><td>${i + 1}</td><td>${d.a}</td><td>${d.b}</td><td>${d.r}</td></tr>`).join("")}
         </tbody>
       </table>
+      <p style="margin:8px 0 0;color:var(--ink-soft);font-size:.85rem">🖱️ İki deney satırına tıklayarak seç.</p>
     `;
+    document.querySelectorAll("#rxn8-table-el tbody tr").forEach((tr) => {
+      tr.addEventListener("click", () => onRowClick(Number(tr.dataset.row)));
+    });
+    document.getElementById("rxn8-pair-feedback").innerHTML = "";
+    document.getElementById("rxn8-status").innerHTML = "";
     document.getElementById("rxn8-steps").innerHTML = "";
   }
 
-  function highlightRows(pair, rows) {
+  function highlightSelection() {
     document.querySelectorAll("#rxn8-table-el tbody tr").forEach((tr) => tr.classList.remove("row-highlight"));
-    if (!pair) return;
-    const i1 = rows.indexOf(pair[0]), i2 = rows.indexOf(pair[1]);
-    document.querySelector(`#rxn8-table-el tr[data-row="${i1}"]`)?.classList.add("row-highlight");
-    document.querySelector(`#rxn8-table-el tr[data-row="${i2}"]`)?.classList.add("row-highlight");
+    rxn8State.selected.forEach((i) => {
+      document.querySelector(`#rxn8-table-el tr[data-row="${i}"]`)?.classList.add("row-highlight");
+    });
   }
 
-  function runRxn8Analysis(idx) {
-    const rx = RXN8[idx];
-    const btn = document.getElementById("rxn8-analyze");
-    btn.disabled = true;
-    const [nA, nB] = solveOrders(rx.rows);
-    const totalOrder = nA + nB;
-    const kVals = rx.rows.map((d) => d.r / (Math.pow(d.a, nA) * Math.pow(d.b, nB)));
-    const kAvg = kVals.reduce((a, b) => a + b, 0) / kVals.length;
-    const pairA = findCleanPair(rx.rows, "b", "a");
-    const pairB = findCleanPair(rx.rows, "a", "b");
-    const nameA = rx.labelA.slice(1, -1), nameB = rx.labelB.slice(1, -1);
-    const steps = document.getElementById("rxn8-steps");
-    steps.innerHTML = "";
+  function onRowClick(i) {
+    const sel = rxn8State.selected;
+    if (sel.includes(i)) {
+      rxn8State.selected = sel.filter((x) => x !== i);
+    } else {
+      if (sel.length >= 2) sel.shift();
+      sel.push(i);
+    }
+    highlightSelection();
+    if (rxn8State.selected.length === 2) evaluateRxn8Pair();
+  }
 
-    highlightRows(pairA, rx.rows);
-    setTimeout(() => {
-      steps.innerHTML += `<div class="card"><p style="margin:0"><b>${nameA} derecesi:</b> ${explainFor(pairA, rx.rows, rx.labelA, rx.labelB, nA)}</p></div>`;
-      highlightRows(pairB, rx.rows);
-      setTimeout(() => {
-        steps.innerHTML += `<div class="card" style="margin-top:10px"><p style="margin:0"><b>${nameB} derecesi:</b> ${explainFor(pairB, rx.rows, rx.labelB, rx.labelA, nB)}</p></div>`;
-        highlightRows(null, rx.rows);
-        setTimeout(() => {
-          steps.innerHTML += `
-            <div class="card" style="margin-top:10px;text-align:center">
-              <p style="margin:0;font-size:1.05rem">Hız denklemi: <b>r = k${rx.labelA}<sup>${nA}</sup>${rx.labelB}<sup>${nB}</sup></b>
-                &nbsp;·&nbsp; Tepkime derecesi = <b>${totalOrder}</b>
-                &nbsp;·&nbsp; k ≈ <b style="color:var(--rate)">${kAvg.toFixed(3)}</b></p>
-            </div>`;
-          btn.disabled = false;
-        }, 900);
-      }, 900);
-    }, 900);
+  function evaluateRxn8Pair() {
+    const rx = RXN8[rxn8State.idx];
+    const [i1, i2] = rxn8State.selected;
+    const d1 = rx.rows[i1], d2 = rx.rows[i2];
+    const pairKey = [i1, i2].sort().join("-");
+    rxn8State.tried.add(pairKey);
+    const aChanged = d1.a !== d2.a;
+    const bChanged = d1.b !== d2.b;
+    const feedback = document.getElementById("rxn8-pair-feedback");
+
+    if (aChanged && bChanged) {
+      feedback.innerHTML = `<div class="card"><p style="margin:0">Deney ${i1 + 1} → ${i2 + 1}'de hem
+        ${rx.labelA} hem ${rx.labelB} değişmiş — bu çift <b>tek başına</b> hiçbir tepkenin derecesini izole
+        edemez. Bir derişimi <b>sabit</b> tutan başka bir çift dene.</p></div>`;
+    } else {
+      const varyKey = aChanged ? "a" : "b";
+      const varyLabel = aChanged ? rx.labelA : rx.labelB;
+      const constLabel = aChanged ? rx.labelB : rx.labelA;
+      const [lo, hi] = d1[varyKey] < d2[varyKey] ? [d1, d2] : [d2, d1];
+      const ratioX = hi[varyKey] / lo[varyKey];
+      const ratioR = hi.r / lo.r;
+      const n = Math.round(Math.log(ratioR) / Math.log(ratioX));
+      if (aChanged) rxn8State.foundA = n; else rxn8State.foundB = n;
+      feedback.innerHTML = `<div class="card"><p style="margin:0">Deney ${i1 + 1} → ${i2 + 1}'de
+        ${constLabel} <b>sabit</b>; ${varyLabel} ${ratioX.toFixed(0)} katına çıkınca hız ${ratioR.toFixed(0)}
+        katına çıktı → <b style="color:var(--energy)">${varyLabel} derecesi = ${n}</b></p></div>`;
+    }
+    updateRxn8Status();
+  }
+
+  function updateRxn8Status() {
+    const rx = RXN8[rxn8State.idx];
+    const allPairsTried = rxn8State.tried.size >= 3;
+    if (allPairsTried && (rxn8State.foundA === null || rxn8State.foundB === null)) {
+      const [nA, nB] = solveOrders(rx.rows);
+      if (rxn8State.foundA === null) rxn8State.foundA = nA;
+      if (rxn8State.foundB === null) rxn8State.foundB = nB;
+      document.getElementById("rxn8-status").innerHTML = `<div class="card" style="margin-top:8px">
+        <p style="margin:0;color:var(--ink-soft)">Üç deney çiftinin hiçbiri her iki tepkeni de tek başına
+        izole edemiyor. Bu durumda üç deneyin tamamı bir arada matematiksel olarak çözülür (diğer değişkenin
+        bilinen etkisi denklemden çıkarılarak).</p></div>`;
+    }
+    const nameA = rx.labelA.slice(1, -1), nameB = rx.labelB.slice(1, -1);
+    document.getElementById("rxn8-steps").innerHTML = `
+      <div class="card" style="margin-top:10px">
+        <p style="margin:0">${nameA} derecesi: ${rxn8State.foundA === null ? "henüz bulunmadı" : `<b style="color:var(--energy)">${rxn8State.foundA}</b>`}
+          &nbsp;·&nbsp; ${nameB} derecesi: ${rxn8State.foundB === null ? "henüz bulunmadı" : `<b style="color:var(--energy)">${rxn8State.foundB}</b>`}</p>
+      </div>
+    `;
+    if (rxn8State.foundA !== null && rxn8State.foundB !== null) {
+      const nA = rxn8State.foundA, nB = rxn8State.foundB;
+      const totalOrder = nA + nB;
+      const kVals = rx.rows.map((d) => d.r / (Math.pow(d.a, nA) * Math.pow(d.b, nB)));
+      const kAvg = kVals.reduce((a, b) => a + b, 0) / kVals.length;
+      document.getElementById("rxn8-steps").innerHTML += `
+        <div class="card" style="margin-top:10px;text-align:center">
+          <p style="margin:0;font-size:1.05rem">Hız denklemi: <b>r = k${rx.labelA}<sup>${nA}</sup>${rx.labelB}<sup>${nB}</sup></b>
+            &nbsp;·&nbsp; Tepkime derecesi = <b>${totalOrder}</b>
+            &nbsp;·&nbsp; k ≈ <b style="color:var(--rate)">${kAvg.toFixed(3)}</b></p>
+        </div>`;
+    }
   }
 
   function buildRxn8Lab() {
     const sel = document.getElementById("rxn8-select");
     RXN8.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
     sel.addEventListener("change", () => renderRxn8Table(Number(sel.value)));
-    document.getElementById("rxn8-analyze").addEventListener("click", () => runRxn8Analysis(Number(sel.value)));
     renderRxn8Table(0);
   }
 
@@ -274,41 +306,24 @@
     `;
   }
 
-  function drawMechanism() {
-    document.getElementById("mech-svg").innerHTML = mechanismSVG(null);
-  }
-
-  let mechTimer = null;
-  function playMechanism() {
-    if (mechTimer) { clearInterval(mechTimer); mechTimer = null; }
-    const btn = document.getElementById("mech-play");
-    btn.disabled = true;
-    const steps = 50;
-    let i = 0;
-    mechTimer = setInterval(() => {
-      i++;
-      const t = i / steps;
-      document.getElementById("mech-svg").innerHTML = mechanismSVG(t);
-      const readout = document.getElementById("mech-readout");
-      if (t < 0.5) {
-        readout.innerHTML = `<div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻ — yüksek Ea1'i aşıyor</div>`;
-      } else {
-        readout.innerHTML = `<div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻ — daha alçak Ea2'yi aşıyor</div>`;
-      }
-      if (i >= steps) {
-        clearInterval(mechTimer);
-        mechTimer = null;
-        btn.disabled = false;
-        readout.innerHTML = `
-          <div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻</div>
-          <div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻</div>`;
-      }
-    }, 40);
+  function updateMechanism() {
+    const t = Number(document.getElementById("mech-progress").value) / 100;
+    document.getElementById("mech-svg").innerHTML = mechanismSVG(t);
+    const readout = document.getElementById("mech-readout");
+    if (t < 0.03) {
+      readout.innerHTML = `
+        <div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻</div>
+        <div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻</div>`;
+    } else if (t < 0.5) {
+      readout.innerHTML = `<div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻ — yüksek Ea1'i aşıyor</div>`;
+    } else {
+      readout.innerHTML = `<div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻ — daha alçak Ea2'yi aşıyor</div>`;
+    }
   }
 
   buildRxn8Lab();
-  drawMechanism();
-  document.getElementById("mech-play").addEventListener("click", playMechanism);
+  updateMechanism();
+  document.getElementById("mech-progress").addEventListener("input", updateMechanism);
   mountNav(MODKEY);
   mountNextModule(MODKEY);
   markVisited(MODKEY);
