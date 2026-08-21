@@ -266,6 +266,16 @@ hemen** bu dosyaya yeni bir madde olarak eklenir. Kural eklenirken:
 
 ## 14. Konu kapsamı ve kazanım kodu — bu projeye özel
 
+**SINIF DÜZEYİ — DOĞRULANDI, DEĞİŞTİRME (2026-08-21):** Proje
+**11. sınıf** içeriğidir — "Kimya 11", "11. Sınıf", `KİM.11.1.X`
+doğru etiketlerdir, DEĞİŞTİRİLMEZ. Bir ara kullanıcı bunun 10. sınıf
+olması gerektiğini söyledi; site genelinde "10. Sınıf"/"Kimya 10"/
+`KİM.10.1.X` olacak şekilde değiştirildi (PR #3) — ama bu YANLIŞ bir
+düzeltmeydi, kullanıcı hemen ardından "yanlış yaptık, 11. sınıftı"
+diyerek geri aldırdı (revert edildi). Sonuç: proje 11. sınıftır, bu
+konuda tekrar bir "düzeltme" talebi gelmedikçe (ve kullanıcı açıkça
+kesin/emin olduğunu belirtmedikçe) sınıf düzeyi metni DEĞİŞTİRİLMEZ.
+
 **Kaynak tarama sonucu (2026-08-20):** Yüklenen 9 PDF'ten yalnızca 3
 tanesi (`enerji ve hız meb.pdf` = asıl MEB ders kitabı bölümü, Aydın
 Yayınları'nın Enerji-1/2 ve Hız-1/2 öğrenci kitapları) gerçek/çıkarılabilir
