@@ -317,3 +317,41 @@ kapsam sınırı):**
 - Branch: `claude/reaction-energy-speed-course-etubf6`.
 - Küçük, odaklı commit'ler, açıklayıcı Türkçe commit mesajlarıyla.
 - Her modül bitince: QA script → görsel test → commit → push.
+
+## 16. Yeni soru yazarken USÛL — SORUYAZIMYONERGESI.md süreci ZORUNLU
+
+**KATALİTİK KONVERTÖR OLAYI — somut ders çıkarılan vaka:** M7'ye
+gerçek hayat bağlamlı (araç egzozu) bir illüstrasyonla yeni bir soru
+eklerken, soru "katalitik konvertörler HANGİ METALLERİ (platin,
+paladyum, rodyum) katalizör olarak içerir?" diye sordu. Görsel/bağlam
+güzeldi ama soru, MEB'in katalizör kazanımının (KİM.11.1.7 — katalizör
+aktivasyon enerjisini düşürür, kendisi değişmeden kalır) ölçtüğü
+kavramın DIŞINDA, öğrencinin bilmek zorunda olmadığı bir ezber/trivia
+bilgisi soruyordu (madde 5 ihlali, farklı bir kılıkta). Kullanıcı:
+"Soru şekli güzel olmuş ama başka bir şey sor... kazanımlara ve
+terimlere dikkat et" dedi ve bunun HER YENİ SORU için kalıcı bir usûl
+olmasını istedi.
+
+**GENEL KURAL:** quiz-data.js'e yeni bir soru eklenirken veya mevcut
+bir soru düzenlenirken, `SORUYAZIMYONERGESI.md`'deki süreç HER
+SEFERİNDE uygulanır (bu repoda ayrı bir "İçerik Üretim Rehberi"
+olmadığından, o belge quiz-data.js soruları için de bağlayıcıdır):
+1. **Kazanımı çıkar** (madde 5 ile birlikte): bu soru MEB'in HANGİ
+   kazanımını, GERÇEKTE ne derinlikte ölçüyor? Kazanımın genel başlığı
+   değil, kitapta geçen somut terim/derinlik esas alınır.
+2. **Bağlam ≠ kapsam:** Gerçek hayat bağlamı/görseli kullanmak İYİDİR
+   (madde 6), ama bağlamın ilginç/renkli olması, SORUNUN kendisinin
+   kazanım dışına taşmasını haklı çıkarmaz. Bağlamın somutlaştırdığı
+   ile sorunun ÖLÇTÜĞÜ ayrı ayrı değerlendirilir.
+3. **Yazmadan önce kontrol listesi** (`SORUYAZIMYONERGESI.md` Bölüm 3):
+   bağlam geçerliliği, açılış cümlesi, görsel gerekliliği, çeldirici
+   kalitesi (makul, gerçek bir hata türünü temsil eden).
+4. **Teslimden önce öz-denetim** (Bölüm 4).
+
+**Somut önlem:** Bir soru "X nedir / hangi metaldir / hangi maddedir /
+hangi isimdir" tarzı SPESİFİK, isim/marka/ürün bazlı bir bilgi
+soruyorsa, önce bu bilginin MEB kazanım metninde veya kitapta GEÇİP
+GEÇMEDİĞİ doğrulanır; geçmiyorsa soru o bilgiyi SORMAZ — bunun yerine
+kazanımın gerçekte ölçtüğü İLİŞKİYİ/MEKANİZMAYI sorar (örnek: "hangi
+metaller" yerine "neden hızlanır" — aktivasyon enerjisi ilişkisi).
+Aynı bağlam/görsel korunarak yalnızca SORULAN ŞEY değiştirilebilir.

@@ -47,6 +47,7 @@ function mountNav(activeKey) {
   });
   inner.appendChild(linksWrap);
   inner.appendChild(el2("a", { href: prefix + "defter/index.html", class: "btn" }, "📘 Ders Defteri"));
+  inner.appendChild(el2("a", { href: prefix + "soru-bankasi.html", class: "btn" }, "📚 Soru Bankası"));
   inner.appendChild(el2("a", { href: prefix + "yanlislarim.html", class: "btn" }, "🔁 Yanlışlarım"));
 
   bar.appendChild(inner);

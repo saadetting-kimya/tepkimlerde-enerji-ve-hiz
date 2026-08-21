@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tepkime Hızına Etki Eden Faktörler · Kimya 11</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three/three.module.js",
+  "three/addons/": "../assets/vendor/three/examples/jsm/"
+} }
+</script>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -34,13 +40,26 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Keşfet: Etkeni Seç, Örneği İncele</h2>
-    <p class="block-lead">Altı etkenden birini seç; gerçek bir örnek üzerinden "yavaş" ve "hızlı" durumu
-      karşılaştır.</p>
+    <h2><span class="num">2</span>Deney İstasyonu: Etken Yarışı</h2>
+    <p class="block-lead">Altı etkenden birini seç ve yarışı başlat; aynı tepkimenin "yavaş" ve "hızlı" koşuldaki
+      iki kabını yan yana izle — hangisi önce tamamlanıyor?</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="factor-select">Etken:</label>
         <select id="factor-select"></select>
+        <button id="factor-start" class="btn primary" type="button">▶ Yarışı Başlat</button>
+      </div>
+      <div class="race-stage">
+        <div class="race-vessel">
+          <span class="tag orta">Yavaş</span>
+          <div id="race-slow-3d" class="exp-3d-host race-3d-host"></div>
+          <div class="race-bar"><div class="race-bar-fill" id="race-slow-fill"></div></div>
+        </div>
+        <div class="race-vessel">
+          <span class="tag rate">Hızlı</span>
+          <div id="race-fast-3d" class="exp-3d-host race-3d-host"></div>
+          <div class="race-bar"><div class="race-bar-fill fast" id="race-fast-fill"></div></div>
+        </div>
       </div>
       <div id="factor-detail"></div>
     </div>
@@ -62,12 +81,33 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">4</span>Keşfet: Temas Yüzeyi ve Mol-Zaman Grafiği</h2>
-    <p class="block-lead">Zn(k) + 2HCl(suda) → ZnCl2(suda) + H2(g) tepkimesinde eşit kütlede parça hâlindeki ve
-      toz hâlindeki çinko kullanıldığında açığa çıkan H2 gazı miktarının zamanla değişimini karşılaştır. İkisi de
-      sonunda aynı miktar ürün verir, ama farklı sürede.</p>
+    <h2><span class="num">4</span>Deney İstasyonu: Temas Yüzeyi Deneyi</h2>
+    <p class="block-lead">Zn(k) + 2HCl(suda) → ZnCl2(suda) + H2(g) tepkimesini başlat; eşit kütlede parça hâlindeki
+      ve toz hâlindeki çinkodan açığa çıkan H2 gazının toplanma hızını karşılaştır. İkisi de sonunda aynı miktar
+      gaz verir, ama farklı sürede.</p>
     <div class="lab">
-      <div class="lab-stage" style="min-height:280px"><svg id="surface-svg" viewBox="0 0 480 260" style="width:100%;max-width:480px"></svg></div>
+      <div class="lab-controls">
+        <button id="surface-start" class="btn primary" type="button">▶ Deneyi Başlat</button>
+      </div>
+      <div class="exp-stage">
+        <div class="exp-scene-wrap">
+          <div class="race-stage" style="margin-bottom:0">
+            <div class="race-vessel">
+              <span class="tag rate">Toz Zn</span>
+              <div id="surface-toz-3d" class="exp-3d-host race-3d-host"></div>
+            </div>
+            <div class="race-vessel">
+              <span class="tag orta">Parça Zn</span>
+              <div id="surface-parca-3d" class="exp-3d-host race-3d-host"></div>
+            </div>
+          </div>
+          <p class="exp-3d-hint">🖱️ Fareyle sürükleyerek kapları döndürebilir, tekerlekle yakınlaştırabilirsin.</p>
+          <div class="exp-readout" id="surface-readout">Deneyi başlatmak için düğmeye bas</div>
+        </div>
+        <div class="exp-chart-wrap">
+          <svg id="surface-chart" viewBox="0 0 440 240" class="viz-chart"></svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -139,11 +179,65 @@
     `;
   }
 
+  /* ---------- 3B yarış kapları (paylaşılan beher bileşeni, iki kopya) ---------- */
+  const raceBeakers = { slow: null, fast: null };
+  function ensureRaceBeaker(key, hostId) {
+    if (raceBeakers[key]) return Promise.resolve(raceBeakers[key]);
+    return import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
+      raceBeakers[key] = createBeakerScene(document.getElementById(hostId), { liquidColor: 0xcfe4fb });
+      raceBeakers[key].setLiquid(0.55, 0xcfe4fb);
+      return raceBeakers[key];
+    });
+  }
+  function sceneVessel(key, hostId, progress) {
+    ensureRaceBeaker(key, hostId).then((api) => {
+      api.setBubbles(Math.min(1, progress * 1.3) * (progress < 1 ? 1 : 0.15));
+    });
+  }
+
+  let raceTimer = null;
+  function runRace() {
+    if (raceTimer) { clearInterval(raceTimer); raceTimer = null; }
+    const btn = document.getElementById("factor-start");
+    btn.disabled = true;
+    const slowDur = 3600, fastDur = 1400;
+    const start = performance.now();
+    sceneVessel("slow", "race-slow-3d", 0);
+    sceneVessel("fast", "race-fast-3d", 0);
+    let fastDone = false;
+    raceTimer = setInterval(() => {
+      const elapsed = performance.now() - start;
+      const pSlow = Math.min(1, elapsed / slowDur);
+      const pFast = Math.min(1, elapsed / fastDur);
+      document.getElementById("race-slow-fill").style.width = `${pSlow * 100}%`;
+      document.getElementById("race-fast-fill").style.width = `${pFast * 100}%`;
+      sceneVessel("slow", "race-slow-3d", pSlow);
+      sceneVessel("fast", "race-fast-3d", pFast);
+      if (pFast >= 1 && !fastDone) {
+        fastDone = true;
+      }
+      if (pSlow >= 1) {
+        clearInterval(raceTimer);
+        raceTimer = null;
+        btn.disabled = false;
+      }
+    }, 60);
+  }
+
   function buildFactorLab() {
     const sel = document.getElementById("factor-select");
     FACTORS.forEach((f, i) => sel.appendChild(new Option(f.name, i)));
-    sel.addEventListener("change", () => renderFactor(sel.value));
+    sel.addEventListener("change", () => {
+      renderFactor(sel.value);
+      document.getElementById("race-slow-fill").style.width = "0%";
+      document.getElementById("race-fast-fill").style.width = "0%";
+      sceneVessel("slow", "race-slow-3d", 0);
+      sceneVessel("fast", "race-fast-3d", 0);
+    });
+    document.getElementById("factor-start").addEventListener("click", runRace);
     renderFactor(0);
+    sceneVessel("slow", "race-slow-3d", 0);
+    sceneVessel("fast", "race-fast-3d", 0);
   }
 
   function drawTempDist() {
@@ -179,36 +273,90 @@
     `;
   }
 
-  function drawSurfaceGraph() {
-    const svgEl = document.getElementById("surface-svg");
-    const W = 480, H = 260, padL = 46, padB = 40, padT = 20;
-    const plotW = W - padL - 20, plotH = H - padT - padB;
-    function curve(rate) {
-      const pts = [];
-      for (let i = 0; i <= 60; i++) {
-        const x = i / 60;
-        const y = 1 - Math.exp(-rate * x * 6);
-        pts.push([padL + x * plotW, padT + plotH - y * plotH * 0.85]);
-      }
-      return pts;
+  const SURFACE_MAX_MOL = 0.050;
+  function molH2(rate, x) {
+    return SURFACE_MAX_MOL * (1 - Math.exp(-rate * x * 6));
+  }
+
+  /* ---------- 3B temas-yüzeyi kapları (paylaşılan beher bileşeni, iki kopya) ---------- */
+  const surfaceBeakers = { toz: null, parca: null };
+  function ensureSurfaceBeaker(key, hostId) {
+    if (surfaceBeakers[key]) return Promise.resolve(surfaceBeakers[key]);
+    return import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
+      surfaceBeakers[key] = createBeakerScene(document.getElementById(hostId), { liquidColor: 0xcfe4fb });
+      surfaceBeakers[key].setLiquid(0.5, 0xcfe4fb);
+      return surfaceBeakers[key];
+    });
+  }
+  function sceneSurface(tozFrac, parcaFrac) {
+    ensureSurfaceBeaker("toz", "surface-toz-3d").then((api) => api.setBubbles(tozFrac < 1 ? tozFrac : 0.1));
+    ensureSurfaceBeaker("parca", "surface-parca-3d").then((api) => api.setBubbles(parcaFrac < 1 ? parcaFrac : 0.1));
+  }
+
+  function drawSurfaceChart(points) {
+    const svgEl = document.getElementById("surface-chart");
+    const W = 440, H = 240, padL = 44, padB = 30, padT = 14, padR = 14;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+    const yMax = SURFACE_MAX_MOL * 1.1;
+    let grid = "";
+    for (let i = 0; i <= 4; i++) {
+      const y = padT + (plotH * i) / 4;
+      grid += `<line x1="${padL}" x2="${W - padR}" y1="${y}" y2="${y}" class="gridline"/>`;
+      grid += `<text x="${padL - 6}" y="${y + 3}" text-anchor="end" font-size="9">${(yMax - (yMax * i) / 4).toFixed(3)}</text>`;
     }
-    const toz = curve(1.4), parca = curve(0.35);
-    const path = (pts) => "M " + pts.map((p) => p.join(",")).join(" L ");
+    const xAt = (t) => padL + plotW * t;
+    const yAt = (v) => padT + plotH - (v / yMax) * plotH;
+    const series = [
+      { key: "toz", color: "var(--rate)", name: "Toz Zn" },
+      { key: "parca", color: "var(--energy)", name: "Parça Zn" },
+    ];
+    let body = "", legend = "", lx = padL + 4;
+    series.forEach((s) => {
+      const pts = points.map((p) => `${xAt(p.t)},${yAt(p[s.key])}`).join(" ");
+      if (points.length > 1) body += `<polyline points="${pts}" class="line" style="stroke:${s.color}"/>`;
+      legend += `<circle cx="${lx}" cy="${padT}" r="4" style="fill:${s.color}"/><text x="${lx + 8}" y="${padT + 4}" font-size="9">${s.name}</text>`;
+      lx += s.name.length * 6 + 22;
+    });
     svgEl.innerHTML = `
-      <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="var(--ink-soft)" stroke-width="1.5"/>
-      <line x1="${padL}" y1="${padT + plotH}" x2="${padL + plotW}" y2="${padT + plotH}" stroke="var(--ink-soft)" stroke-width="1.5"/>
-      <text x="8" y="16" font-size="12" fill="var(--ink-soft)">n(H2)</text>
-      <text x="${padL + plotW - 40}" y="${H - 8}" font-size="12" fill="var(--ink-soft)">Zaman →</text>
-      <path d="${path(toz)}" fill="none" stroke="var(--rate)" stroke-width="2.4"/>
-      <path d="${path(parca)}" fill="none" stroke="var(--energy)" stroke-width="2.4"/>
-      <circle cx="60" cy="34" r="5" fill="var(--rate)"/><text x="70" y="38" font-size="12">Toz çinko</text>
-      <circle cx="60" cy="52" r="5" fill="var(--energy)"/><text x="70" y="56" font-size="12">Parça çinko</text>
+      ${grid}
+      <line x1="${padL}" x2="${padL}" y1="${padT}" y2="${H - padB}" class="axis"/>
+      <line x1="${padL}" x2="${W - padR}" y1="${H - padB}" y2="${H - padB}" class="axis"/>
+      ${body}${legend}
+      <text x="${padL}" y="${H - 6}" font-size="9">zaman →</text>
+      <text x="6" y="12" font-size="9">mol H2</text>
     `;
+  }
+
+  function runSurfaceExperiment() {
+    const btn = document.getElementById("surface-start");
+    btn.disabled = true;
+    const duration = 4200;
+    const start = performance.now();
+    const points = [];
+    const timer = setInterval(() => {
+      const x = Math.min(1, (performance.now() - start) / duration);
+      sceneSurface(x, x);
+      const tozMol = molH2(1.4, x), parcaMol = molH2(0.35, x);
+      points.push({ t: x, toz: tozMol, parca: parcaMol });
+      drawSurfaceChart(points);
+      document.getElementById("surface-readout").innerHTML = `<b>Toz: ${tozMol.toFixed(3)} mol · Parça: ${parcaMol.toFixed(3)} mol</b><span>Toplanan H2</span>`;
+      if (x >= 1) {
+        clearInterval(timer);
+        btn.disabled = false;
+        document.getElementById("surface-readout").innerHTML = `<b>İkisi de ${SURFACE_MAX_MOL.toFixed(3)} mol H2 verdi</b><span>Toz çinko çok daha kısa sürede tamamladı</span>`;
+      }
+    }, 60);
+  }
+
+  function buildSurfaceLab() {
+    document.getElementById("surface-start").addEventListener("click", runSurfaceExperiment);
+    sceneSurface(0, 0);
+    drawSurfaceChart([{ t: 0, toz: 0, parca: 0 }]);
   }
 
   buildFactorLab();
   drawTempDist();
-  drawSurfaceGraph();
+  buildSurfaceLab();
   mountNav(MODKEY);
   mountNextModule(MODKEY);
   markVisited(MODKEY);

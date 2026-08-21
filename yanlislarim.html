@@ -13,8 +13,8 @@
   <div class="container">
     <span class="eyebrow">Tekrar Çalışma</span>
     <h1>Yanlışlarım</h1>
-    <p class="lead">Modüllerdeki sorularda yanlış işaretlediğin tüm sorular burada birikir. Bu liste yalnızca bu
-      cihazda saklanır (localStorage) — başka bir cihazda görünmez.</p>
+    <p class="lead">Modüllerdeki sorularda yanlış işaretlediğin tüm sorular burada modül modül birikir. Bu liste
+      yalnızca bu cihazda saklanır (localStorage) — başka bir cihazda görünmez.</p>
   </div>
 </header>
 
@@ -24,41 +24,106 @@
   </div>
 </section>
 
+<section class="block">
+  <div class="container">
+    <section class="student-report-panel">
+      <div class="student-report-head">
+        <h2>📊 Öğrenci Analiz Raporu</h2>
+        <p>Çözdüğün sorular, kazanım başarıların ve yanlışların öğretmen için yazdırılabilir bir rapora dönüştürülür.</p>
+      </div>
+
+      <div class="student-report-form">
+        <div class="report-field">
+          <label for="reportStudentName">Öğrenci Adı Soyadı</label>
+          <input id="reportStudentName" type="text" placeholder="Ad Soyad">
+        </div>
+        <div class="report-field">
+          <label for="reportStudentClass">Sınıf / Şube</label>
+          <input id="reportStudentClass" type="text" placeholder="11/A">
+        </div>
+        <div class="report-field">
+          <label for="reportStudentNo">Öğrenci No</label>
+          <input id="reportStudentNo" type="text" placeholder="123">
+        </div>
+      </div>
+
+      <button id="createPdfReportBtn" class="btn pdf-report-btn" type="button">🖨️ PDF Raporu Oluştur</button>
+    </section>
+  </div>
+</section>
+
+<!-- Yazdırılırken kullanılacak gizli alan -->
+<div id="studentPrintReport" class="student-print-report"></div>
+
 <div id="footer-root"></div>
 
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/quiz-engine.js"></script>
+<script src="assets/js/report.js"></script>
 <script>
-  function loadWrongList() {
-    try {
-      return JSON.parse(localStorage.getItem("khiz_wrong_list")) || [];
-    } catch {
-      return [];
+  function renderWrongQuestions() {
+    const host = document.getElementById("wrong-host");
+    const errors = readErrors();
+    const moduleKeys = Object.keys(errors).filter((k) => Object.keys(errors[k] || {}).length > 0);
+
+    if (moduleKeys.length === 0) {
+      host.appendChild(
+        el2("div", { class: "wrong-empty" }, [
+          el2("div", { class: "wrong-empty-icon" }, "🎯"),
+          el2("h3", {}, "Henüz yanlış yaptığın bir soru yok."),
+          el2("p", {}, "Modüllerdeki sorularla çalışmaya başladığında yanlışların burada, modül modül ve kaç kez yanlış yaptığın gösterilerek listelenecek."),
+        ])
+      );
+      return;
     }
-  }
 
-  const host = document.getElementById("wrong-host");
-  const list = loadWrongList();
+    const moduleNames = Object.fromEntries(LINKS.map((l) => [l.key, l.title]));
+    let totalWrong = 0;
 
-  if (list.length === 0) {
-    host.appendChild(el2("div", { class: "card" }, "Henüz yanlış işaretlediğin bir soru yok. Modüllerdeki sorularla çalışmaya başladığında yanlışların burada listelenecek."));
-  } else {
     const clearBtn = el2("button", { class: "btn", style: "margin-bottom:16px" }, "Listeyi Temizle");
     clearBtn.addEventListener("click", () => {
-      localStorage.removeItem("khiz_wrong_list");
+      localStorage.removeItem("khiz_errors");
       location.reload();
     });
     host.appendChild(clearBtn);
 
-    const moduleNames = Object.fromEntries(LINKS.map((l) => [l.key, l.title]));
-    list.slice().reverse().forEach((item) => {
-      const card = el2("div", { class: "card" });
-      card.appendChild(el2("span", { class: "tag orta" }, moduleNames[item.moduleKey] || item.moduleKey));
-      card.appendChild(el2("p", { style: "margin-top:10px;font-weight:600" }, item.text));
-      host.appendChild(card);
+    LINKS.forEach((link) => {
+      const moduleErrors = errors[link.key];
+      if (!moduleErrors) return;
+      const items = Object.values(moduleErrors).sort((a, b) => a.questionIndex - b.questionIndex);
+      if (items.length === 0) return;
+      totalWrong += items.length;
+
+      const box = el2("section", { class: "wrong-module" });
+      box.appendChild(
+        el2("div", { class: "wrong-module-title" }, [
+          el2("span", {}, moduleNames[link.key] || link.key),
+          el2("span", { class: "wrong-count" }, `${items.length} soru`),
+        ])
+      );
+
+      items.forEach((item) => {
+        const card = el2("article", { class: "wrong-question-card" });
+        card.appendChild(el2("div", { class: "wrong-question-number" }, `SORU ${item.questionIndex + 1}`));
+        if (item.context) card.appendChild(el2("div", { class: "wrong-question-context" }, item.context));
+        card.appendChild(el2("div", { class: "wrong-question-text" }, item.text));
+        card.appendChild(el2("div", { class: "wrong-question-answer" }, [el2("strong", {}, `Doğru cevap: ${String.fromCharCode(65 + item.correct)}) ${item.options[item.correct] || ""}`)]));
+        card.appendChild(el2("div", { class: "wrong-question-explain" }, item.explain));
+        card.appendChild(el2("div", { class: "wrong-question-meta" }, [el2("span", {}, "Bu soruyu "), el2("strong", {}, String(item.wrongCount)), el2("span", {}, " kez yanlış yaptın.")]));
+        box.appendChild(card);
+      });
+
+      host.appendChild(box);
     });
+
+    const info = el2("div", { class: "wrong-summary" }, [
+      el2("div", { class: "wrong-summary-title" }, "🧠 Yanlışlarımdan Öğreniyorum"),
+      el2("div", {}, [el2("span", {}, "Şu anda "), el2("strong", {}, String(totalWrong)), el2("span", {}, " soruyu tekrar çalışman gerekiyor.")]),
+    ]);
+    host.insertBefore(info, host.firstChild);
   }
 
+  renderWrongQuestions();
   mountNav(null);
   mountFooter();
 </script>

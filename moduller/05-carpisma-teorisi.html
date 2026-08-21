@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tepkimenin Gerçekleşme Şartları · Kimya 11</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three/three.module.js",
+  "three/addons/": "../assets/vendor/three/examples/jsm/"
+} }
+</script>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -47,9 +53,10 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Keşfet: Çarpışma Geometrisi</h2>
+    <h2><span class="num">2</span>Deney İstasyonu: Çarpışma Simülatörü</h2>
     <p class="block-lead">NO(g) + O3(g) → NO2(g) + O2(g) tepkimesinde çarpışmanın yönelimi ürün oluşup
-      oluşmayacağını belirler. Aşağıdaki iki durumu karşılaştır.</p>
+      oluşmayacağını belirler. Bir yönelim seç, çarpışmayı başlat ve moleküllerin gerçekten birbirine
+      yaklaşıp çarpışmasını izle.</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="geo-select">Çarpışma yönelimi:</label>
@@ -57,8 +64,13 @@
           <option value="good">Uygun geometri</option>
           <option value="bad">Uygun olmayan geometri</option>
         </select>
+        <button id="geo-start" class="btn primary" type="button">▶ Çarpıştır</button>
       </div>
-      <div class="lab-stage" style="min-height:180px"><svg id="geo-svg" viewBox="0 0 420 160" style="width:100%;max-width:420px"></svg></div>
+      <div class="exp-3d-frame" style="max-width:420px;margin:0 auto">
+        <div id="geo-3d" class="exp-3d-host" style="aspect-ratio:420/180"></div>
+        <span id="geo-result-badge" class="exp-3d-badge"></span>
+      </div>
+      <p class="exp-3d-hint">🖱️ Fareyle sürükleyerek molekülleri farklı açılardan inceleyebilir, tekerlekle yakınlaştırabilirsin.</p>
       <div class="lab-readout" id="geo-readout"></div>
     </div>
   </div>
@@ -86,9 +98,10 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">4</span>Keşfet: Aktivasyon Enerjisi Diyagramı</h2>
+    <h2><span class="num">4</span>Deney İstasyonu: Aktivasyon Enerjisi Diyagramı</h2>
     <p class="block-lead">Endotermik ve ekzotermik bir tepkimenin potansiyel enerji-tepkime koordinatı
-      grafiklerini karşılaştır; ileri ve geri aktivasyon enerjilerinin büyüklük ilişkisine dikkat et.</p>
+      grafiklerini karşılaştır. "Reaksiyonu Oynat" ile sistemin tepkenlerden ürünlere giderken enerji tepesini
+      nasıl aştığını izle; ileri ve geri aktivasyon enerjilerinin büyüklük ilişkisine dikkat et.</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="ea-select">Tepkime türü:</label>
@@ -96,6 +109,7 @@
           <option value="endo">Endotermik</option>
           <option value="exo">Ekzotermik</option>
         </select>
+        <button id="ea-play" class="btn primary" type="button">▶ Reaksiyonu Oynat</button>
       </div>
       <div class="lab-stage" style="min-height:300px"><svg id="ea-svg" viewBox="0 0 480 300" style="width:100%;max-width:480px"></svg></div>
       <div class="lab-readout" id="ea-readout"></div>
@@ -120,27 +134,62 @@
 <script>
   const MODKEY = "m5";
 
+  /* ---------- 3B çarpışma sahnesi (NO + O3, ball-and-stick) ---------- */
+  let collision3D = null;
+  let collision3DLoading = null;
+  function ensureCollision3D() {
+    if (collision3D) return Promise.resolve(collision3D);
+    if (collision3DLoading) return collision3DLoading;
+    collision3DLoading = import("../assets/js/scene3d-molecule.js").then(({ createCollisionScene }) => {
+      collision3D = createCollisionScene(document.getElementById("geo-3d"));
+      return collision3D;
+    });
+    return collision3DLoading;
+  }
+  function sceneCollision(kind, u, phase) {
+    ensureCollision3D().then((api) => api.setState(kind, u, phase));
+    const badge = document.getElementById("geo-result-badge");
+    if (phase === "success") {
+      badge.textContent = "✔️ NO2 + O2";
+      badge.style.color = "var(--rate)";
+    } else if (phase === "bounce") {
+      badge.textContent = "❌ Ürün oluşmadı";
+      badge.style.color = "var(--bad)";
+    } else {
+      badge.textContent = "";
+    }
+  }
+
+  let geoTimer = null;
+  function runCollision(kind) {
+    if (geoTimer) { clearInterval(geoTimer); geoTimer = null; }
+    const btn = document.getElementById("geo-start");
+    btn.disabled = true;
+    sceneCollision(kind, 0, "approach");
+    const duration = 1500;
+    const start = performance.now();
+    let settled = false;
+    geoTimer = setInterval(() => {
+      const t = Math.min(1, (performance.now() - start) / duration);
+      sceneCollision(kind, t, "approach");
+      if (t >= 1 && !settled) {
+        settled = true;
+        setTimeout(() => {
+          sceneCollision(kind, 1, kind === "good" ? "success" : "bounce");
+          document.getElementById("geo-readout").innerHTML = kind === "good"
+            ? `<div><b>Ürün oluşur</b>Etkin çarpışma — NO'nun azot ucu O3'ün uygun oksijenine yönelmiş.</div>`
+            : `<div><b>Ürün oluşmaz</b>Etkin olmayan çarpışma — moleküller doğru yönelimde temas etmemiş, birbirinden sekiyor.</div>`;
+          clearInterval(geoTimer);
+          geoTimer = null;
+          btn.disabled = false;
+        }, 300);
+      }
+    }, 40);
+  }
+
   function drawGeo(kind) {
-    const good = kind === "good";
-    const svgEl = document.getElementById("geo-svg");
-    svgEl.innerHTML = `
-      <text x="30" y="30" font-size="13" font-weight="700">NO</text>
-      <circle cx="45" cy="60" r="12" fill="var(--endo)"/>
-      <circle cx="70" cy="60" r="8" fill="var(--ink-soft)"/>
-      <text x="150" y="30" font-size="13" font-weight="700">O3</text>
-      ${good
-        ? `<circle cx="180" cy="55" r="9" fill="var(--exo)"/><circle cx="200" cy="55" r="9" fill="var(--exo)"/><circle cx="220" cy="55" r="9" fill="var(--exo)"/>
-           <text x="300" y="60" font-size="30">→</text>
-           <text x="350" y="55" font-size="13" fill="var(--rate)" font-weight="700">NO2 + O2</text>
-           <text x="340" y="75" font-size="20">✔️</text>`
-        : `<circle cx="220" cy="40" r="9" fill="var(--exo)"/><circle cx="220" cy="60" r="9" fill="var(--exo)"/><circle cx="220" cy="80" r="9" fill="var(--exo)"/>
-           <text x="300" y="60" font-size="30">→</text>
-           <text x="345" y="55" font-size="13" fill="var(--ink-soft)" font-weight="700">Ürün yok</text>
-           <text x="350" y="80" font-size="20">❌</text>`}
-    `;
-    document.getElementById("geo-readout").innerHTML = good
-      ? `<div><b>Ürün oluşur</b>Etkin çarpışma — NO'nun azot ucu O3'ün uygun oksijenine yönelmiş.</div>`
-      : `<div><b>Ürün oluşmaz</b>Etkin olmayan çarpışma — moleküller doğru yönelimde temas etmemiş.</div>`;
+    sceneCollision(kind, 0, "idle");
+    document.getElementById("geo-readout").innerHTML = `<div>Çarpıştırmak için düğmeye bas.</div>`;
   }
 
   function drawDistribution(kind) {
@@ -178,12 +227,19 @@
     `;
   }
 
-  function drawEaDiagram(kind) {
+  function bezierPoint(p0, p1, p2, t) {
+    const x = (1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * p1[0] + t ** 2 * p2[0];
+    const y = (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * p1[1] + t ** 2 * p2[1];
+    return [x, y];
+  }
+
+  function eaDiagramSVG(kind, ballT) {
     const endo = kind === "endo";
-    const svgEl = document.getElementById("ea-svg");
     const reactY = 220, prodY = endo ? 130 : 260, peakY = endo ? 70 : 110;
     const color = endo ? "var(--endo)" : "var(--exo)";
-    svgEl.innerHTML = `
+    const p0 = [150, reactY], p1 = [240, peakY], p2 = [330, prodY];
+    const ball = ballT != null ? bezierPoint(p0, p1, p2, ballT) : null;
+    return `
       <line x1="50" y1="270" x2="50" y2="30" stroke="var(--ink-soft)" stroke-width="1.5"/>
       <text x="15" y="25" font-size="12" fill="var(--ink-soft)">Potansiyel Enerji</text>
       <text x="360" y="290" font-size="12" fill="var(--ink-soft)">Tepkime Koordinatı</text>
@@ -200,16 +256,45 @@
       <text x="446" y="${(reactY + prodY) / 2}" font-size="11" fill="${color}" font-weight="700">ΔH</text>
       <defs><marker id="eaarrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
         <path d="M0,0 L4,4 L0,8 Z" fill="${color}"/></marker></defs>
+      ${ball ? `<circle cx="${ball[0].toFixed(1)}" cy="${ball[1].toFixed(1)}" r="7" fill="var(--rate)" stroke="#fff" stroke-width="1.6"/>` : ""}
     `;
+  }
+
+  function drawEaDiagram(kind) {
+    document.getElementById("ea-svg").innerHTML = eaDiagramSVG(kind, 0);
+    const endo = kind === "endo";
     document.getElementById("ea-readout").innerHTML = `
       <div><b>${endo ? "Eai > Eag" : "Eai < Eag"}</b>Aktivasyon enerjileri ilişkisi</div>
       <div><b>${endo ? "Tepkenler daha kararlı" : "Ürünler daha kararlı"}</b></div>
     `;
   }
 
+  let eaTimer = null;
+  function playReaction(kind) {
+    if (eaTimer) { clearInterval(eaTimer); eaTimer = null; }
+    const btn = document.getElementById("ea-play");
+    btn.disabled = true;
+    const steps = 40;
+    let i = 0;
+    eaTimer = setInterval(() => {
+      i++;
+      const t = i / steps;
+      document.getElementById("ea-svg").innerHTML = eaDiagramSVG(kind, t);
+      const label = t < 0.5 ? "Eşik enerjisine tırmanıyor…" : t < 1 ? "Enerji tepesini aştı, ürünlere iniyor…" : "Ürünlere ulaştı";
+      document.getElementById("ea-readout").innerHTML = `<div><b>${label}</b></div>`;
+      if (i >= steps) {
+        clearInterval(eaTimer);
+        eaTimer = null;
+        btn.disabled = false;
+      }
+    }, 40);
+  }
+
   document.getElementById("geo-select").addEventListener("change", (e) => drawGeo(e.target.value));
+  document.getElementById("geo-start").addEventListener("click", () => runCollision(document.getElementById("geo-select").value));
   document.getElementById("threshold-select").addEventListener("change", (e) => drawDistribution(e.target.value));
   document.getElementById("ea-select").addEventListener("change", (e) => drawEaDiagram(e.target.value));
+  document.getElementById("ea-play").addEventListener("click", () => playReaction(document.getElementById("ea-select").value));
   drawGeo("good");
   drawDistribution("low");
   drawEaDiagram("endo");

@@ -158,16 +158,16 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
-      "text": "Bir demir-kükürt karışımı ısıtıldığında parlak kızıl bir ışıma ile birlikte demir sülfür oluşur ve tepkime başladıktan sonra dışarıdan ısı verilmese de kendiliğinden devam eder. Bu gözlem tepkimenin türü hakkında ne söyler?",
+      "text": "Demir(III) oksit ile alüminyum tozu karıştırılıp tutuşturulduğunda Fe2O3 + 2Al → Al2O3 + 2Fe + ısı tepkimesi gerçekleşir ve açığa çıkan ısı, tren raylarının kaynak işlemlerinde eritme için kullanılacak kadar yüksek olur (termit tepkimesi). Bu tepkime için aşağıdakilerden hangisi doğrudur?",
       "options": [
-        "Tepkime fizikseldir çünkü ışık açığa çıkmıştır",
-        "Tepkime ekzotermiktir çünkü kendi ürettiği ısıyla devam etmektedir",
-        "Tepkime yalnızca fiziksel bir karışım oluşturur",
-        "Tepkime ısı alışverişi yapmamaktadır",
-        "Tepkime endotermiktir çünkü başlangıçta ısıtma gerekmiştir"
+        "Fiziksel bir değişimdir çünkü yalnızca iki katı karışmıştır",
+        "Kimyasal ve ekzotermik bir değişimdir; alüminyum oksit ve demir gibi yeni maddeler oluşurken çok fazla ısı açığa çıkar",
+        "Kimyasal ve endotermik bir değişimdir çünkü tutuşturmak için ısı verilmiştir",
+        "Isı alışverişi yapmayan bir değişimdir",
+        "Fiziksel ve ekzotermik bir değişimdir"
       ],
       "correct": 1,
-      "explain": "Tepkimenin, başlatıldıktan sonra dışarıdan ısı almadan kendi ürettiği ısıyla ilerlemesi, açığa çıkardığı enerjinin tepkimeyi sürdürmeye yettiğini gösterir; bu ekzotermik tepkimelerin tipik bir özelliğidir. Demir ve kükürtten farklı bir bileşiğin (demir sülfür) oluşması da değişimin kimyasal olduğunu gösterir."
+      "explain": "Demir(III) oksit ve alüminyumdan alüminyum oksit ile demir gibi kimlikleri farklı yeni maddelerin oluşması bu değişimin kimyasal olduğunu gösterir. Açığa çıkan ısının rayları eritecek kadar yüksek olması ise tepkimenin güçlü bir ekzotermik tepkime olduğunu gösterir; başlangıçtaki tutuşturma yalnızca tepkimeyi başlatır, tepkimenin kendisinin ısı alışverişi yönünü belirlemez."
     },
     {
       "difficulty": "kolay",
@@ -210,16 +210,16 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
-      "text": "Aşağıdaki olaylardan hangisinde madde, ortamdan ısı alarak hâl değiştirir?",
+      "text": "Ateş böceği, karnındaki bir maddenin enzim yardımıyla oksijenle tepkimeye girmesi sonucu ışık üretir (biyolüminesans); bu ışık üretimi sırasında çevreye çok az ısı yayılır. Bu olay için aşağıdakilerden hangisi doğrudur?",
       "options": [
-        "Erimiş mumun katılaşması",
-        "Sıvı yağın donması",
-        "Su buharının yoğuşması",
-        "Suyun kaynayarak buharlaşması",
-        "Sıvı azotun donması"
+        "Fiziksel bir değişimdir çünkü yalnızca ışık üretilmiştir",
+        "Kimyasal ve endotermik bir değişimdir çünkü enzim harcanır",
+        "Kimyasal ve ekzotermik bir değişimdir; enzimle oksijenin tepkimesi sonucu yeni maddeler oluşur ve az miktarda da olsa ısı açığa çıkar",
+        "Isı alışverişi yapmayan bir değişimdir",
+        "Fiziksel ve endotermik bir değişimdir"
       ],
-      "correct": 3,
-      "explain": "Kaynama sırasında sıvı tanecikleri gaz hâline geçmek için ortamdan enerji alır; bu yüzden kaynama endotermik bir hâl değişimidir. Diğer seçeneklerin tümü ısı vererek gerçekleşen (ekzotermik) hâl değişimleridir."
+      "correct": 2,
+      "explain": "Karın bölgesindeki maddenin enzim yardımıyla oksijenle tepkimeye girip kimliği farklı ürünler oluşturması bu değişimin kimyasal olduğunu gösterir. Işıkla birlikte az da olsa ısının açığa çıkması, tepkimenin ekzotermik olduğunu gösterir; bu yüzden ateş böceğinin ışığına 'soğuk ışık' denir."
     },
     {
       "difficulty": "kolay",
@@ -398,7 +398,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
-      "text": "Bir sodyum asetat cep sobası kristalleştirilerek harekete geçirildiğinde elle hissedilir biçimde ısınır; soba tekrar kullanılabilmesi için kaynar suda ısıtılarak katı hâlden aşırı doymuş sıvı hâle geri döndürülür. Buna göre sobanın kristalleşme ve yeniden sıvılaştırma adımları için aşağıdakilerden hangisi doğrudur?",
+      "text": "Jel bazlı bir cep sobası içindeki metal diskin tıklatılmasıyla sodyum asetat hızla kristalleşir ve sobanın sıcaklığı 50-55°C'ye kadar yükselir; soba tekrar kullanılabilmesi için kaynar suda ısıtılarak katı hâlden aşırı doymuş sıvı hâle geri döndürülür. Buna göre sobanın kristalleşme ve yeniden sıvılaştırma adımları için aşağıdakilerden hangisi doğrudur?",
       "options": [
         "Kristalleşme endotermik, sıvılaştırma ekzotermiktir",
         "Her iki adım da endotermiktir",
@@ -407,7 +407,7 @@ const QUIZ = {
         "Adımların ısı yönü belirlenemez"
       ],
       "correct": 2,
-      "explain": "Kristalleşme sırasında elle hissedilecek kadar ısı açığa çıkması, bu adımın ekzotermik olduğunu gösterir. Sobayı tekrar sıvı hâle döndürmek için dışarıdan (kaynar sudan) ısı verilmesi gerekmesi, bu adımın endotermik olduğunu gösterir; iki adım birbirinin tersidir."
+      "explain": "Kristalleşme sırasında sıcaklığın 50-55°C'ye kadar yükselecek kadar ısı açığa çıkması, bu adımın ekzotermik olduğunu gösterir. Sobayı tekrar sıvı hâle döndürmek için dışarıdan (kaynar sudan) ısı verilmesi gerekmesi, bu adımın endotermik olduğunu gösterir; iki adım birbirinin tersidir."
     },
     {
       "difficulty": "orta",
@@ -431,16 +431,16 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
-      "text": "Bir kimyager, aynı miktarda iki farklı tuzu ayrı beherlerdeki eşit miktarda suda çözüyor ve her iki beherin sıcaklığını da çözünmeden önce ve sonra ölçüyor. 1. beherin sıcaklığı 3°C düşerken 2. beherin sıcaklığı 5°C artıyor. Bu ölçümlere dayanarak hangi sonuca varılabilir?",
+      "text": "Bir tıbbi soğutma paketi deneyinde 100 mL, 25°C'deki suya 20 g amonyum klorür eklenip karıştırılıyor; katı tamamen çözününce çözeltinin sıcaklığı 12°C'ye düşüyor. Bu ölçümlere dayanarak amonyum klorürün suda çözünmesi hakkında hangi sonuca varılabilir?",
       "options": [
-        "1. tuzun çözünmesi endotermik, 2. tuzun çözünmesi ekzotermiktir",
-        "1. tuzun çözünmesi ekzotermik, 2. tuzun çözünmesi endotermiktir",
-        "Her iki çözünme de ekzotermiktir",
-        "Sıcaklık verileri ısı yönünü belirlemek için yeterli değildir",
-        "Her iki çözünme de endotermiktir"
+        "Çözünme endotermiktir; katı, sudan yaklaşık 13°C'lik bir sıcaklık düşüşüne yol açacak kadar ısı almıştır",
+        "Çözünme ekzotermiktir; katı suya ısı vermiştir",
+        "Çözünme ısı alışverişi yapmamıştır, sıcaklık değişimi ölçüm hatasıdır",
+        "Sıcaklık verisi tek başına ısı yönünü belirlemek için yeterli değildir",
+        "Çözünme kimyasal bir değişimdir çünkü sıcaklık değişmiştir"
       ],
       "correct": 0,
-      "explain": "Sıcaklığın düşmesi (1. beher), çözünen maddenin ortamdan ısı aldığını, yani endotermik bir süreci gösterir. Sıcaklığın artması (2. beher) ise madde çözünürken ortama ısı verdiğini, yani ekzotermik bir süreci gösterir."
+      "explain": "Sıcaklığın 25°C'den 12°C'ye, yani 13°C düşmesi, amonyum klorürün suda çözünürken ortamdan (sudan) ısı aldığını gösterir; bu da çözünmenin endotermik olduğunun somut kanıtıdır. Çözünme, madde kimliğini değiştirmediği için fiziksel bir olaydır."
     },
     {
       "difficulty": "orta",
@@ -470,16 +470,16 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
-      "text": "Bir öğretmen sınıfta iki farklı deney düzeneği kuruyor: 1. düzenekte katı bir madde ısıtılınca renk değiştirip gaz çıkışı gözleniyor; 2. düzenekte aynı madde ısıtılınca sadece sıvı hâle geçiyor. Isıtmanın kesilmesi hâlinde her iki düzenekte beklenen davranış nedir?",
+      "text": "Fotoselli bir bataryada, üzerine düşen ışığın enerjisi metal yüzeydeki bir elektronu atomdan koparmaya yetecek kadar yüksek olduğunda elektron serbest kalır ve akım oluşur. Elektronun atomdan koparılması olayı için aşağıdakilerden hangisi doğrudur?",
       "options": [
-        "Her iki düzenekte de değişim tamamen tersine döner",
-        "Her iki düzenekte de değişim geri döndürülemez",
-        "Isıtmanın kesilmesi değişim türünü etkilemez, bu yüzden ikisi de aynı davranışı gösterir",
-        "1. düzenekte tepkime tersine döner, 2. düzenekte madde katı hâle döner",
-        "1. düzenekte oluşan yeni ürünler kendiliğinden eski maddeye dönüşmez, 2. düzenekte madde soğuyunca tekrar katılaşabilir"
+        "Kimyasal bir değişimdir çünkü elektron sayısı değişmektedir",
+        "Fiziksel ve endotermik bir değişimdir; elektron, atomdan ayrılabilmek için fotondan enerji almaktadır",
+        "Fiziksel ve ekzotermik bir değişimdir çünkü ışık kullanılmaktadır",
+        "Isı alışverişi yapmayan bir değişimdir",
+        "Kimyasal ve endotermik bir değişimdir çünkü yeni bir madde oluşmaktadır"
       ],
-      "correct": 4,
-      "explain": "1. düzenekte renk değişimi ve gaz çıkışı, yeni madde oluşan bir kimyasal değişime işaret eder; bu tür değişimler kendiliğinden eski hâline dönmez. 2. düzenekteki erime ise fizikseldir ve soğutulduğunda madde tekrar katı hâle (donarak) geri dönebilir."
+      "correct": 1,
+      "explain": "Elektronun kopması metalin atom/iyon kimliğini değiştirmediği için fizikseldir. Elektronun atoma bağlayan çekim kuvvetini yenip ayrılabilmesi için fotondan enerji alması gerekir; bu yüzden olay endotermiktir."
     },
     {
       "difficulty": "orta",
@@ -779,16 +779,16 @@ const QUIZ = {
     },
     {
       "difficulty": "zor",
-      "text": "Bir tarihçi kaynağa göre eski dönemlerde bazı el ısıtıcıları, demir tozunun nemli ortamda yavaşça oksitlenmesi ilkesiyle çalışırdı; ısıtıcı paket açıldığında havayla temas eden demir tozu saatlerce düşük şiddette ısı üretirdi. Bu bilgiye dayanarak aşağıdaki yorumlardan hangisi en doğrudur?",
+      "text": "Termit tepkimesinde (Fe2O3 + 2Al → Al2O3 + 2Fe + ısı) açığa çıkan ısı tren raylarını eritecek kadar yüksekken, tıbbi soğutma paketinde amonyum klorürün suda çözünmesi çevreyi belirgin biçimde soğutur. İki olay da 'sistemde bir değişim gerçekleşirken çevreyle ısı alışverişi olur' ortak ilkesine örnektir. Bu iki olayın karşılaştırılmasıyla ilgili en doğru değerlendirme hangisidir?",
       "options": [
-        "Tepkimenin yavaş ilerlemesi, ekzotermik olup olmadığını değil yalnızca ısının ne kadar sürede açığa çıktığını etkiler",
-        "Tepkime yavaş ilerlediği için ekzotermik olamaz",
-        "Isının saatlerce sürmesi, tepkimenin endotermik olduğunu gösterir",
-        "Bu tepkimede madde kimliği değişmez",
-        "Tepkime fizikseldir çünkü sadece demir tozu kullanılmaktadır"
+        "Her iki olayda da madde kimliği değişmediği için ikisi de fizikseldir",
+        "İki olay da ekzotermiktir çünkü ikisinde de gözlenebilir bir sıcaklık değişimi vardır",
+        "Termit tepkimesi kimyasal ve ekzotermik, soğutma paketindeki çözünme fiziksel ve endotermiktir; ikisi de ısı alışverişi yönü bakımından birbirinin zıttıdır ama değişim türü bakımından farklı kategorilere aittir",
+        "Soğutma paketindeki olay da kimyasaldır çünkü sıcaklık değişmiştir",
+        "İki olayın karşılaştırılması mümkün değildir çünkü biri katı-katı, diğeri katı-sıvı sistemdir"
       ],
-      "correct": 0,
-      "explain": "Bir tepkimenin ekzotermik olup olmadığı, açığa çıkan ısının toplam miktarı ve yönüyle ilgilidir; tepkimenin hızı (ısının hızlı mı yoksa saatlere yayılarak mı açığa çıktığı) bu sınıflandırmayı değiştirmez. Demir tozunun oksijenle tepkimeye girip demir oksit oluşturması kimyasal bir değişimdir ve açığa çıkan ısı, sürece yayılsa da tepkimenin ekzotermik olduğunu gösterir."
+      "correct": 2,
+      "explain": "Termit tepkimesinde Fe2O3 ve Al'den kimliği farklı yeni maddeler (Al2O3, Fe) oluşur; bu kimyasaldır ve açığa çıkan yüksek ısı onu ekzotermik yapar. Soğutma paketindeki amonyum klorürün çözünmesinde madde kimliği değişmez (fizikseldir) ve çözelti ortamdan ısı aldığı için endotermiktir. İki olay hem değişim türü hem ısı yönü bakımından birbirinden bağımsız iki farklı eksende karşıt uçlardadır; 'ısı alışverişi var' ortak gözlemi tek başına ikisinin aynı kategoriye ait olduğu anlamına gelmez."
     },
     {
       "difficulty": "zor",
@@ -818,16 +818,16 @@ const QUIZ = {
     },
     {
       "difficulty": "zor",
-      "text": "Bir mağara içinde binlerce yıl boyunca çok yavaş damlayan sudaki çözünmüş kalsiyum bileşiklerinin çökelerek sarkıt oluşturması sırasında ortama az miktarda ısı yayıldığı belirleniyor. Bu sürecin, laboratuvarda saniyeler içinde gerçekleşen bir çökelme tepkimesiyle temel ısı-alışverişi sınıflandırması açısından karşılaştırılması için en doğru yaklaşım hangisidir?",
+      "text": "Karlı bir yola serpilen kalsiyum klorür hem suda çözünürken ortama ısı vererek çevresindeki buzu doğrudan eritmeye yardımcı olur hem de oluşan derişik tuzlu çözeltinin donma noktasını saf suyunkinden daha düşük bir değere çeker; bu yüzden ortam sıcaklığı 0°C'nin biraz altında olsa bile çözelti sıvı kalmaya devam edebilir. Bu iki etkinin birlikte değerlendirilmesiyle ilgili en doğru yorum hangisidir?",
       "options": [
-        "Yalnızca laboratuvar koşullarında gerçekleşen tepkimeler sınıflandırılabilir",
-        "Mağaradaki süreç kimyasal değil fizikseldir, bu yüzden karşılaştırma geçersizdir",
-        "Süre farkı, iki sürecin ısı alışverişi yönünü karşılaştırılamaz kılar",
-        "Yavaş süreç endotermik, hızlı süreç ekzotermik kabul edilmelidir",
-        "Isının yayılma süresi ne olursa olsun, ortama ısı verilmesi her iki süreci de ekzotermik olarak sınıflandırmak için yeterlidir"
+        "İki etki de aynı fiziksel olaydan (çözünmeden) kaynaklanır; çözünme ısı açığa çıkarır (ekzotermik) ve ayrıca çözeltinin donma noktasını düşürerek 0°C altında bile sıvı kalmasını sağlar",
+        "Isı açığa çıkması kimyasal bir tepkime olduğunu, donma noktası düşüşü ise fiziksel olduğunu gösterir; bu yüzden olay hem kimyasal hem fizikseldir",
+        "Donma noktası düşüşü, çözünmenin endotermik olduğunun kanıtıdır",
+        "İki etki birbirini geçersiz kılar; biri ısıtırken diğeri soğutur, net sonuç sıfırdır",
+        "Isı açığa çıkması yalnızca sıcaklık termometreyle ölçüldüğünde gerçek kabul edilebilir, donma noktası değişimi ayrı bir olaydır"
       ],
-      "correct": 4,
-      "explain": "Isı alışverişinin yönünü belirleyen, sürecin ortama ısı verip vermediğidir; bu sürecin binlerce yılda mı yoksa saniyeler içinde mi gerçekleştiği sınıflandırmayı değiştirmez. Her iki süreçte de (kalsiyum bileşiklerinin çökelmesi) ortama ısı verildiği için ikisi de ekzotermik kabul edilir; süre yalnızca sürecin hızını gösterir."
+      "correct": 0,
+      "explain": "Kalsiyum klorürün suda çözünmesi tek bir fiziksel olaydır ve iki gözlenebilir sonucu vardır: çözünme sırasında ısı açığa çıkması (ekzotermik olduğunu gösterir) ve oluşan derişik çözeltinin donma noktasının saf sudan daha düşük olması (bu yüzden 0°C altında bile donmadan kalabilir). İkisi de aynı çözünme olayının farklı sonuçlarıdır; biri ısı yönüyle, diğeri hâl değişimi sıcaklığıyla ilgilidir ve birbirini geçersiz kılmaz, tam tersine buzlanmayla mücadelede birlikte işe yarar."
     },
     {
       "difficulty": "zor",
@@ -2032,6 +2032,7 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
+      "peDiagram": { "reactant": 180, "peak": 220, "product": 90, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Potansiyel enerji-tepkime koordinatı grafiğinde ürünün enerji düzeyi tepkenlerin enerji düzeyinden daha düşükse bu tepkime nasıl sınıflandırılır?",
       "options": [
         "Yavaş",
@@ -2045,6 +2046,7 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
+      "peDiagram": { "reactant": 90, "peak": 200, "product": 170, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Potansiyel enerji-tepkime koordinatı grafiğinde ürünün enerji düzeyi tepkenlerin enerji düzeyinden daha yüksekse bu tepkime nasıl sınıflandırılır?",
       "options": [
         "Endotermik",
@@ -2286,6 +2288,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "peDiagram": { "reactant": 150, "peak": 210, "product": 155, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Bir tepkimenin potansiyel enerji-tepkime koordinatı grafiğinde tepken ve ürün enerji düzeyleri neredeyse aynı yükseklikte çiziliyor. Bu, ΔH_tepkime değeri hakkında ne düşündürür?",
       "options": [
         "ΔH büyük ve negatiftir",
@@ -3800,6 +3803,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "peDiagram": { "reactant": 0, "peak": 120, "product": 40, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Bir tepkimenin ileri aktivasyon enerjisi 120 kJ, geri aktivasyon enerjisi 80 kJ olarak ölçülüyor. Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir ve tepkime türü nedir?",
       "options": [
         "-40 kJ, ekzotermik",
@@ -3813,6 +3817,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "peDiagram": { "reactant": 100, "peak": 160, "product": 10, "unit": "Potansiyel Enerji (kJ)" },
       "text": "Bir tepkimenin ileri aktivasyon enerjisi 60 kJ, geri aktivasyon enerjisi 150 kJ olarak ölçülüyor. Bu tepkimenin ΔH_tepkime değeri kaç kJ'dir ve tepkime türü nedir?",
       "options": [
         "-90 kJ, ekzotermik",
@@ -4001,6 +4006,7 @@ const QUIZ = {
     },
     {
       "difficulty": "zor",
+      "peDiagram": { "reactant": 60, "peak": 220, "product": 30, "unit": "Potansiyel Enerji (kJ)", "firstLabel": "1. yol (katalizörsüz)", "second": { "peak": 110, "label": "2. yol (katalizörlü)" } },
       "text": "Bir araştırmacı aynı iki tepken kullanılan iki farklı tepkime yolunu karşılaştırıyor: 1. yolda aktivasyon enerjisi çok yüksek, 2. yolda (bir katalizör kullanılarak) aktivasyon enerjisi daha düşük. Her iki yolun da aynı ürünlere ve aynı ΔH değerine sahip olduğu biliniyor. Bu bilgiye dayanarak en doğru çıkarım hangisidir?",
       "options": [
         "Katalizör kullanımı tepkimenin türünü (endo/ekzotermik) değiştirir",
@@ -4118,6 +4124,7 @@ const QUIZ = {
     },
     {
       "difficulty": "zor",
+      "peDiagram": { "reactant": 20, "peak": 70, "product": 20, "unit": "Potansiyel Enerji (kJ)", "firstLabel": "1. tepkime (Ea=50 kJ)", "second": { "peak": 170, "label": "2. tepkime (Ea=150 kJ)" } },
       "text": "İki farklı katalizörsüz tepkime karşılaştırılıyor: 1. tepkimenin aktivasyon enerjisi 50 kJ, 2. tepkimenin aktivasyon enerjisi 150 kJ'dir. Aynı sıcaklıkta, hangi tepkimede etkin çarpışma yapabilecek tanecik oranının daha yüksek olması ve dolayısıyla tepkimenin daha hızlı ilerlemesi beklenir?",
       "options": [
         "2. tepkime, çünkü aktivasyon enerjisi daha yüksektir",
@@ -4983,6 +4990,13 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
+      "particleBox": {
+        "vessels": [
+          { "label": "Seyreltik", "particles": [{ "color": "var(--rate)", "count": 4 }] },
+          { "label": "Derişik", "particles": [{ "color": "var(--rate)", "count": 12 }] }
+        ],
+        "note": "Aynı hacimli 2 özdeş kap, aynı sıcaklık"
+      },
       "text": "Derişimin tepkime hızına etkisiyle ilgili aşağıdakilerden hangisi doğrudur?",
       "options": [
         "Derişim yalnızca katı maddelerde etkilidir",
@@ -5061,16 +5075,20 @@ const QUIZ = {
     },
     {
       "difficulty": "kolay",
-      "text": "Araç egzoz sistemlerinde kullanılan katalitik konvertörler hangi metalleri katalizör olarak içerir?",
+      "illustration": {
+        "viewBox": "0 0 285 120",
+        "svg": "<rect x='18' y='72' width='120' height='30' rx='10' fill='var(--ink-soft)'/><rect x='42' y='50' width='62' height='26' rx='10' fill='var(--ink-soft)'/><rect x='50' y='55' width='20' height='14' rx='2' fill='#eef1f4'/><rect x='74' y='55' width='20' height='14' rx='2' fill='#eef1f4'/><circle cx='50' cy='104' r='13' fill='#2c2c33'/><circle cx='50' cy='104' r='5' fill='#8a8f99'/><circle cx='112' cy='104' r='13' fill='#2c2c33'/><circle cx='112' cy='104' r='5' fill='#8a8f99'/><rect x='6' y='90' width='14' height='8' rx='2' fill='#6b6f78'/><circle cx='30' cy='94' r='4' fill='var(--exo)' opacity='.55'/><circle cx='42' cy='88' r='5' fill='var(--exo)' opacity='.6'/><circle cx='56' cy='93' r='4' fill='var(--exo)' opacity='.55'/><text x='43' y='16' text-anchor='middle' font-size='10' style='fill:var(--exo)' font-weight='700'>CO, NOx, HC</text><rect x='148' y='86' width='56' height='26' rx='5' fill='var(--bg-panel)' stroke='var(--ink-soft)' stroke-width='2'/><text x='176' y='99' text-anchor='middle' font-size='8.5' style='fill:var(--ink)'>Katalitik</text><text x='176' y='109' text-anchor='middle' font-size='8.5' style='fill:var(--ink)'>Konvertör</text><line x1='70' y1='94' x2='146' y2='97' stroke='var(--ink-soft)' stroke-width='2' stroke-dasharray='3 3'/><circle cx='222' cy='90' r='4' fill='var(--rate)' opacity='.6'/><circle cx='236' cy='84' r='5' fill='var(--rate)' opacity='.65'/><circle cx='250' cy='90' r='4' fill='var(--rate)' opacity='.6'/><circle cx='264' cy='83' r='4.5' fill='var(--rate)' opacity='.6'/><line x1='206' y1='94' x2='270' y2='86' stroke='var(--ink-soft)' stroke-width='2' stroke-dasharray='3 3' marker-end='url(#exharrow)'/><text x='243' y='16' text-anchor='middle' font-size='10' style='fill:var(--rate)' font-weight='700'>CO2, H2O, N2</text><defs><marker id='exharrow' markerWidth='8' markerHeight='8' refX='4' refY='4' orient='auto'><path d='M0,0 L4,4 L0,8 Z' fill='var(--ink-soft)'/></marker></defs>"
+      },
+      "text": "Araç egzoz sistemindeki katalitik konvertör, zararlı egzoz gazlarının daha az zararlı gazlara dönüşme tepkimesini hızlandırır. Bu hızlanmanın nedeni nedir?",
       "options": [
-        "Platin, paladyum, rodyum",
-        "Demir, bakır, çinko",
-        "Karbon, azot, oksijen",
-        "Altın, gümüş, kurşun",
-        "Sodyum, potasyum, kalsiyum"
+        "Konvertör, tepkimenin aktivasyon enerjisini düşürerek eşik değerini aşabilen tanecik oranını artırır",
+        "Konvertör, tepkimenin ΔH değerini sıfıra indirir",
+        "Konvertör, egzoz gazlarının derişimini seyrelterek hızı artırır",
+        "Konvertör, egzoz sıcaklığını düşürerek tepkimeyi hızlandırır",
+        "Konvertör kendisi tepkimeye girip tükenir, bu yüzden hız artar"
       ],
       "correct": 0,
-      "explain": "Katalitik konvertörler; platin, paladyum ve rodyum gibi metaller aracılığıyla egzoz gazlarındaki zararlı bileşikleri (CO, hidrokarbonlar, NOx) daha az zararlı bileşiklere (CO2, H2O, N2, O2) dönüştürür."
+      "explain": "Katalitik konvertör içindeki katalizör, tepkimenin izlediği yolu değiştirerek aktivasyon enerjisini düşürür; bu da eşik değerini aşabilen tanecik oranını artırarak tepkimeyi hızlandırır. Katalizör tepkime sonunda değişmeden kalır — tükenmez, bu yüzden E yanlıştır."
     },
     {
       "difficulty": "kolay",
@@ -5328,6 +5346,7 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "peDiagram": { "reactant": 80, "peak": 220, "product": 40, "unit": "Potansiyel Enerji (kJ)", "firstLabel": "Katalizörsüz", "second": { "peak": 120, "label": "Katalizörlü" } },
       "text": "Bir kimyager, katalizörlü ve katalizörsüz aynı tepkimenin potansiyel enerji-tepkime koordinatı grafiklerini üst üste çiziyor. İki eğri arasında beklenen fark nedir?",
       "options": [
         "Katalizörlü eğrinin tepe noktası (aktivasyon enerjisi zirvesi) daha düşük olur, ama tepken ve ürün enerji düzeyleri aynı kalır",
@@ -5354,6 +5373,15 @@ const QUIZ = {
     },
     {
       "difficulty": "orta",
+      "particleBox": {
+        "vessels": [
+          { "label": "1", "particles": [{ "color": "var(--endo)", "count": 3 }, { "color": "var(--exo)", "count": 3 }] },
+          { "label": "2", "particles": [{ "color": "var(--endo)", "count": 6 }, { "color": "var(--exo)", "count": 6 }] },
+          { "label": "3", "particles": [{ "color": "var(--endo)", "count": 10 }, { "color": "var(--exo)", "count": 10 }] }
+        ],
+        "legend": [{ "color": "var(--endo)", "name": "H2" }, { "color": "var(--exo)", "name": "Cl2" }],
+        "note": "Aynı hacimli 3 özdeş kap, aynı sıcaklık"
+      },
       "text": "Direkt sentez yöntemiyle H2(g) + Cl2(g) → 2HCl(g) tepkimesinde üç özdeş kapta aynı koşullarda farklı derişimlerde H2 ve Cl2 gazları bulunuyor. En yüksek derişime sahip kapta beklenen sonuç nedir?",
       "options": [
         "En yavaş tepkime ve en az HCl üretimi",
@@ -5668,7 +5696,7 @@ const QUIZ = {
         "Katalizör yalnızca laboratuvar ölçeğinde kullanılabilir, endüstride kullanılamaz"
       ],
       "correct": 2,
-      "explain": "Yüksek sıcaklık ve basınç uygulamak enerji yoğun ve ekipman açısından maliyetli/riskli olabilir. Katalizör kullanmak, bu zorlu koşullara ihtiyaç duymadan aktivasyon enerjisini düşürerek tepkimeyi hızlandırabildiğinden, birçok endüstriyel süreçte (örneğin Haber-Bosch amonyak sentezi, katalitik konvertörler) tercih edilen, enerji ve maliyet açısından daha verimli bir yoldur."
+      "explain": "Yüksek sıcaklık ve basınç uygulamak enerji yoğun ve ekipman açısından maliyetli/riskli olabilir. Katalizör kullanmak, bu zorlu koşullara ihtiyaç duymadan aktivasyon enerjisini düşürerek tepkimeyi hızlandırabildiğinden, birçok endüstriyel süreçte tercih edilen, enerji ve maliyet açısından daha verimli bir yoldur."
     }
   ],
   "m8": [

@@ -46,28 +46,33 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Keşfet: Hız Denklemi Dedektifi</h2>
+    <h2><span class="num">2</span>Deney İstasyonu: Hız Denklemi Dedektifi</h2>
     <p class="block-lead">Bir tepkime seç; deney verilerini karşılaştırarak her tepkenin derecesini, tepkimenin
       hız denklemini ve hız sabitini adım adım bul.</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="rxn8-select">Tepkime:</label>
         <select id="rxn8-select"></select>
+        <button id="rxn8-analyze" class="btn primary" type="button">🔍 Analiz Et</button>
       </div>
-      <div id="rxn8-detail"></div>
+      <div id="rxn8-table"></div>
+      <div id="rxn8-steps"></div>
     </div>
   </div>
 </section>
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">3</span>Keşfet: Çok Basamaklı Tepkime ve Yavaş Basamak</h2>
+    <h2><span class="num">3</span>Deney İstasyonu: Çok Basamaklı Tepkime ve Yavaş Basamak</h2>
     <p class="block-lead">2H2O2(suda) → 2H2O(s) + O2(g) tepkimesi iyodür iyonu (I⁻) katalizörlüğünde iki basamakta
       gerçekleşir. Potansiyel enerji grafiğinde hangi basamağın daha yavaş olduğunu (daha yüksek aktivasyon
       enerjisine sahip olduğunu) incele.</p>
     <div class="lab">
+      <div class="lab-controls">
+        <button id="mech-play" class="btn primary" type="button">▶ Reaksiyonu Oynat</button>
+      </div>
       <div class="lab-stage" style="min-height:300px"><svg id="mech-svg" viewBox="0 0 520 280" style="width:100%;max-width:520px"></svg></div>
-      <div class="lab-readout">
+      <div class="lab-readout" id="mech-readout">
         <div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻</div>
         <div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻</div>
       </div>
@@ -164,59 +169,94 @@
     return null;
   }
 
-  function renderRxn8(idx) {
+  function explainFor(pair, rows, labelSelf, labelOther, n) {
+    if (pair) {
+      const i1 = rows.indexOf(pair[0]) + 1, i2 = rows.indexOf(pair[1]) + 1;
+      const ratio = (pair[1].r / pair[0].r).toFixed(0);
+      return `Deney ${i1} → ${i2}'de ${labelOther} sabitken ${labelSelf} değişimi hızı ${ratio} katına çıkarıyor → derece = <b style="color:var(--energy)">${n}</b>`;
+    }
+    return `Hiçbir deney çiftinde ${labelOther} sabit tutulmadığından, üç deneyin tamamı bir arada matematiksel olarak çözülerek derece = <b style="color:var(--energy)">${n}</b> bulunur (diğer değişkenin bilinen etkisi denklemden çıkarılarak).`;
+  }
+
+  function renderRxn8Table(idx) {
     const rx = RXN8[idx];
+    document.getElementById("rxn8-table").innerHTML = `
+      <table class="viz-table" id="rxn8-table-el">
+        <thead><tr><th>Deney</th><th>${rx.labelA} (M)</th><th>${rx.labelB} (M)</th><th>Başlangıç Hızı (M/s)</th></tr></thead>
+        <tbody>
+          ${rx.rows.map((d, i) => `<tr data-row="${i}"><td>${i + 1}</td><td>${d.a}</td><td>${d.b}</td><td>${d.r}</td></tr>`).join("")}
+        </tbody>
+      </table>
+    `;
+    document.getElementById("rxn8-steps").innerHTML = "";
+  }
+
+  function highlightRows(pair, rows) {
+    document.querySelectorAll("#rxn8-table-el tbody tr").forEach((tr) => tr.classList.remove("row-highlight"));
+    if (!pair) return;
+    const i1 = rows.indexOf(pair[0]), i2 = rows.indexOf(pair[1]);
+    document.querySelector(`#rxn8-table-el tr[data-row="${i1}"]`)?.classList.add("row-highlight");
+    document.querySelector(`#rxn8-table-el tr[data-row="${i2}"]`)?.classList.add("row-highlight");
+  }
+
+  function runRxn8Analysis(idx) {
+    const rx = RXN8[idx];
+    const btn = document.getElementById("rxn8-analyze");
+    btn.disabled = true;
     const [nA, nB] = solveOrders(rx.rows);
     const totalOrder = nA + nB;
     const kVals = rx.rows.map((d) => d.r / (Math.pow(d.a, nA) * Math.pow(d.b, nB)));
     const kAvg = kVals.reduce((a, b) => a + b, 0) / kVals.length;
-
     const pairA = findCleanPair(rx.rows, "b", "a");
     const pairB = findCleanPair(rx.rows, "a", "b");
     const nameA = rx.labelA.slice(1, -1), nameB = rx.labelB.slice(1, -1);
+    const steps = document.getElementById("rxn8-steps");
+    steps.innerHTML = "";
 
-    function explainFor(pair, rows, labelSelf, labelOther, n) {
-      if (pair) {
-        const i1 = rows.indexOf(pair[0]) + 1, i2 = rows.indexOf(pair[1]) + 1;
-        const ratio = (pair[1].r / pair[0].r).toFixed(0);
-        return `Deney ${i1} → ${i2}'de ${labelOther} sabitken ${labelSelf} değişimi hızı ${ratio} katına çıkarıyor → derece = <b style="color:var(--energy)">${n}</b>`;
-      }
-      return `Hiçbir deney çiftinde ${labelOther} sabit tutulmadığından, üç deneyin tamamı bir arada matematiksel olarak çözülerek derece = <b style="color:var(--energy)">${n}</b> bulunur (diğer değişkenin bilinen etkisi denklemden çıkarılarak).`;
-    }
-
-    document.getElementById("rxn8-detail").innerHTML = `
-      <table class="viz-table">
-        <thead><tr><th>Deney</th><th>${rx.labelA} (M)</th><th>${rx.labelB} (M)</th><th>Başlangıç Hızı (M/s)</th></tr></thead>
-        <tbody>
-          ${rx.rows.map((d, i) => `<tr><td>${i + 1}</td><td>${d.a}</td><td>${d.b}</td><td>${d.r}</td></tr>`).join("")}
-        </tbody>
-      </table>
-      <div class="grid-2" style="margin-top:10px">
-        <div class="card">
-          <p style="margin:0"><b>${nameA} derecesi:</b> ${explainFor(pairA, rx.rows, rx.labelA, rx.labelB, nA)}</p>
-        </div>
-        <div class="card">
-          <p style="margin:0"><b>${nameB} derecesi:</b> ${explainFor(pairB, rx.rows, rx.labelB, rx.labelA, nB)}</p>
-        </div>
-      </div>
-      <div class="card" style="margin-top:10px;text-align:center">
-        <p style="margin:0;font-size:1.05rem">Hız denklemi: <b>r = k${rx.labelA}<sup>${nA}</sup>${rx.labelB}<sup>${nB}</sup></b>
-          &nbsp;·&nbsp; Tepkime derecesi = <b>${totalOrder}</b>
-          &nbsp;·&nbsp; k ≈ <b style="color:var(--rate)">${kAvg.toFixed(3)}</b></p>
-      </div>
-    `;
+    highlightRows(pairA, rx.rows);
+    setTimeout(() => {
+      steps.innerHTML += `<div class="card"><p style="margin:0"><b>${nameA} derecesi:</b> ${explainFor(pairA, rx.rows, rx.labelA, rx.labelB, nA)}</p></div>`;
+      highlightRows(pairB, rx.rows);
+      setTimeout(() => {
+        steps.innerHTML += `<div class="card" style="margin-top:10px"><p style="margin:0"><b>${nameB} derecesi:</b> ${explainFor(pairB, rx.rows, rx.labelB, rx.labelA, nB)}</p></div>`;
+        highlightRows(null, rx.rows);
+        setTimeout(() => {
+          steps.innerHTML += `
+            <div class="card" style="margin-top:10px;text-align:center">
+              <p style="margin:0;font-size:1.05rem">Hız denklemi: <b>r = k${rx.labelA}<sup>${nA}</sup>${rx.labelB}<sup>${nB}</sup></b>
+                &nbsp;·&nbsp; Tepkime derecesi = <b>${totalOrder}</b>
+                &nbsp;·&nbsp; k ≈ <b style="color:var(--rate)">${kAvg.toFixed(3)}</b></p>
+            </div>`;
+          btn.disabled = false;
+        }, 900);
+      }, 900);
+    }, 900);
   }
 
   function buildRxn8Lab() {
     const sel = document.getElementById("rxn8-select");
     RXN8.forEach((r, i) => sel.appendChild(new Option(r.name, i)));
-    sel.addEventListener("change", () => renderRxn8(sel.value));
-    renderRxn8(0);
+    sel.addEventListener("change", () => renderRxn8Table(Number(sel.value)));
+    document.getElementById("rxn8-analyze").addEventListener("click", () => runRxn8Analysis(Number(sel.value)));
+    renderRxn8Table(0);
   }
 
-  function drawMechanism() {
-    const svgEl = document.getElementById("mech-svg");
-    svgEl.innerHTML = `
+  function bezierPoint(p0, p1, p2, t) {
+    const x = (1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * p1[0] + t ** 2 * p2[0];
+    const y = (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * p1[1] + t ** 2 * p2[1];
+    return [x, y];
+  }
+
+  function mechanismSVG(ballT) {
+    let ball = "";
+    if (ballT != null) {
+      const seg1 = [[130, 200], [180, 70], [230, 150]];
+      const seg2 = [[230, 150], [340, 120], [400, 90]];
+      const t2 = ballT <= 0.5 ? ballT * 2 : (ballT - 0.5) * 2;
+      const pt = ballT <= 0.5 ? bezierPoint(...seg1, t2) : bezierPoint(...seg2, t2);
+      ball = `<circle cx="${pt[0].toFixed(1)}" cy="${pt[1].toFixed(1)}" r="7" fill="var(--rate)" stroke="#fff" stroke-width="1.6"/>`;
+    }
+    return `
       <line x1="50" y1="260" x2="50" y2="30" stroke="var(--ink-soft)" stroke-width="1.5"/>
       <text x="10" y="25" font-size="12" fill="var(--ink-soft)">Potansiyel Enerji</text>
       <text x="380" y="275" font-size="12" fill="var(--ink-soft)">Tepkime Koordinatı</text>
@@ -230,11 +270,45 @@
       <path d="M300,150 Q 340,120 400,90" fill="none" stroke="var(--endo)" stroke-width="2.4"/>
       <text x="150" y="60" font-size="11" fill="var(--exo)" font-weight="700">Ea1 (büyük → yavaş)</text>
       <text x="330" y="115" font-size="11" fill="var(--endo)" font-weight="700">Ea2 (küçük → hızlı)</text>
+      ${ball}
     `;
+  }
+
+  function drawMechanism() {
+    document.getElementById("mech-svg").innerHTML = mechanismSVG(null);
+  }
+
+  let mechTimer = null;
+  function playMechanism() {
+    if (mechTimer) { clearInterval(mechTimer); mechTimer = null; }
+    const btn = document.getElementById("mech-play");
+    btn.disabled = true;
+    const steps = 50;
+    let i = 0;
+    mechTimer = setInterval(() => {
+      i++;
+      const t = i / steps;
+      document.getElementById("mech-svg").innerHTML = mechanismSVG(t);
+      const readout = document.getElementById("mech-readout");
+      if (t < 0.5) {
+        readout.innerHTML = `<div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻ — yüksek Ea1'i aşıyor</div>`;
+      } else {
+        readout.innerHTML = `<div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻ — daha alçak Ea2'yi aşıyor</div>`;
+      }
+      if (i >= steps) {
+        clearInterval(mechTimer);
+        mechTimer = null;
+        btn.disabled = false;
+        readout.innerHTML = `
+          <div><b>I. basamak (yavaş):</b> H2O2 + I⁻ → H2O + IO⁻</div>
+          <div><b>II. basamak (hızlı):</b> H2O2 + IO⁻ → H2O + O2 + I⁻</div>`;
+      }
+    }, 40);
   }
 
   buildRxn8Lab();
   drawMechanism();
+  document.getElementById("mech-play").addEventListener("click", playMechanism);
   mountNav(MODKEY);
   mountNextModule(MODKEY);
   markVisited(MODKEY);

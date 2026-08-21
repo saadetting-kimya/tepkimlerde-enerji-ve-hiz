@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enerji Kaynağı Olma Potansiyeli · Kimya 11</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three/three.module.js",
+  "three/addons/": "../assets/vendor/three/examples/jsm/"
+} }
+</script>
 </head>
 <body>
 <div id="nav-root"></div>
@@ -44,35 +50,54 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Keşfet: Yakıtları Karşılaştır</h2>
-    <p class="block-lead">Bazı yakıtların 1 gramının tam yanması sonucu açığa çıkan ısı değerleri aşağıda
-      verilmiştir. İki yakıt seçerek birim kütle başına verdikleri enerjiyi karşılaştır.</p>
+    <h2><span class="num">2</span>Deney İstasyonu: Kalorimetre Odası</h2>
+    <p class="block-lead">Bir yakıt seç, 1 gramını yak; kalorimetredeki ısı göstergesinin nasıl yükseldiğini izle.
+      Birkaç farklı yakıtı sırayla yakarak sağdaki karşılaştırma grafiğini kendin oluştur.</p>
     <div class="lab">
       <div class="lab-controls">
-        <label for="fuel-a">1. Yakıt:</label>
-        <select id="fuel-a"></select>
-        <label for="fuel-b">2. Yakıt:</label>
-        <select id="fuel-b"></select>
+        <label for="fuel-select">Yakıt:</label>
+        <select id="fuel-select"></select>
+        <button id="fuel-burn" class="btn primary" type="button">🔥 Yak</button>
       </div>
-      <div class="lab-stage" style="min-height:300px"><svg id="fuel-svg" viewBox="0 0 520 260" style="width:100%;max-width:520px"></svg></div>
-      <div class="lab-readout" id="fuel-readout"></div>
+      <div class="exp-stage">
+        <div class="exp-scene-wrap">
+          <div class="exp-3d-frame">
+            <div id="fuel-scene-3d" class="exp-3d-host"></div>
+            <span id="fuel-flame" class="exp-3d-flame">🔥</span>
+          </div>
+          <p class="exp-3d-hint">🖱️ Fareyle sürükleyerek kalorimetre kabını döndürebilir, tekerlekle yakınlaştırabilirsin.</p>
+          <div class="exp-readout" id="fuel-readout">Bir yakıt seçip yakmak için düğmeye bas</div>
+        </div>
+        <div class="exp-chart-wrap">
+          <svg id="fuel-chart" viewBox="0 0 440 240" class="viz-chart"></svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">3</span>Keşfet: Kütle Arttıkça Açığa Çıkan Isı</h2>
-    <p class="block-lead">Bir yakıtın toplam olarak verdiği ısı, kütlesiyle birlikte artar. Aşağıda iki yakıtın
-      kütle arttıkça açığa çıkardığı toplam ısının nasıl değiştiğini gösteren grafiği incele; kütle kaydırıcısını
-      hareket ettirerek belirli bir kütlede açığa çıkan ısıyı oku.</p>
+    <h2><span class="num">3</span>Deney İstasyonu: Tart ve Yak</h2>
+    <p class="block-lead">Terazide bir kütle ayarla, o kadar yakıtı yak ve açığa çıkan toplam ısıyı oku. Farklı
+      kütlelerde birkaç kez deneyerek kütle arttıkça ısının nasıl doğrusal arttığını grafikte gözlemle.</p>
     <div class="lab">
       <div class="lab-controls">
+        <label for="mass-fuel-select">Yakıt:</label>
+        <select id="mass-fuel-select"></select>
         <label for="mass-range">Kütle: <span id="mass-label">5</span> g</label>
         <input type="range" id="mass-range" min="1" max="10" value="5" step="1">
+        <button id="mass-burn" class="btn primary" type="button">🔥 Yak</button>
       </div>
-      <div class="lab-stage" style="min-height:340px"><svg id="mass-svg" viewBox="0 0 560 300" style="width:100%;max-width:560px"></svg></div>
-      <div class="lab-readout" id="mass-readout"></div>
+      <div class="exp-stage">
+        <div class="exp-scene-wrap">
+          <svg id="mass-scene" viewBox="0 0 300 220"></svg>
+          <div class="exp-readout" id="mass-readout">Kütleyi ayarlayıp yakmak için düğmeye bas</div>
+        </div>
+        <div class="exp-chart-wrap">
+          <svg id="mass-chart" viewBox="0 0 440 240" class="viz-chart"></svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -105,65 +130,174 @@
     { name: "Hidrojen gazı", value: 142.9, group: "Temiz enerji adayı" },
   ];
 
-  function drawFuelCompare() {
-    const a = FUELS[document.getElementById("fuel-a").value];
-    const b = FUELS[document.getElementById("fuel-b").value];
-    const svgEl = document.getElementById("fuel-svg");
-    const maxV = Math.max(a.value, b.value) * 1.15;
-    const barH = (v) => (v / maxV) * 180;
-    svgEl.innerHTML = `
-      <line x1="60" y1="220" x2="480" y2="220" stroke="var(--ink-soft)" stroke-width="1.5"/>
-      <rect x="140" y="${220 - barH(a.value)}" width="90" height="${barH(a.value)}" fill="var(--energy)" rx="4"/>
-      <text x="185" y="${220 - barH(a.value) - 10}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--energy)">${a.value} kJ/g</text>
-      <text x="185" y="240" text-anchor="middle" font-size="12" fill="var(--ink)">${a.name}</text>
-      <rect x="330" y="${220 - barH(b.value)}" width="90" height="${barH(b.value)}" fill="var(--rate)" rx="4"/>
-      <text x="375" y="${220 - barH(b.value) - 10}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--rate)">${b.value} kJ/g</text>
-      <text x="375" y="240" text-anchor="middle" font-size="12" fill="var(--ink)">${b.name}</text>
+  /* ---------- ortak deney istasyonu motifleri ---------- */
+  function digitalReadout(x, y, w, h, valueText, unitText) {
+    return `
+      <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="#1c2733" stroke="#0e161f" stroke-width="2"/>
+      <text x="${x + w / 2}" y="${y + h / 2 + 6}" text-anchor="middle" font-size="19" font-family="monospace" fill="#7be0a8">${valueText}</text>
+      <text x="${x + w / 2}" y="${y + h - 8}" text-anchor="middle" font-size="10" fill="#8fa3b3">${unitText}</text>
     `;
-    const ratio = (Math.max(a.value, b.value) / Math.min(a.value, b.value)).toFixed(1);
-    document.getElementById("fuel-readout").innerHTML = `
-      <div><b>${a.value > b.value ? a.name : b.name}</b>Birim kütlede daha fazla ısı verir</div>
-      <div><b>${ratio}×</b>Aradaki oran</div>
+  }
+  function flame(cx, baseY, frac) {
+    if (frac <= 0.02) return "";
+    const h = 20 + frac * 55;
+    return `
+      <path d="M${cx} ${baseY} Q${cx - 13} ${baseY - h * 0.55} ${cx} ${baseY - h} Q${cx + 13} ${baseY - h * 0.55} ${cx} ${baseY}" fill="#ff8a3d" opacity="${(0.6 + frac * 0.4).toFixed(2)}"/>
+      <path d="M${cx} ${baseY} Q${cx - 7} ${baseY - h * 0.4} ${cx} ${baseY - h * 0.62} Q${cx + 7} ${baseY - h * 0.4} ${cx} ${baseY}" fill="#ffd23d" opacity="${(0.7 + frac * 0.3).toFixed(2)}"/>
     `;
   }
 
-  function buildFuelLab() {
-    const selA = document.getElementById("fuel-a");
-    const selB = document.getElementById("fuel-b");
-    FUELS.forEach((f, i) => {
-      selA.appendChild(new Option(f.name, i));
-      selB.appendChild(new Option(f.name, i));
+  /* ---------- 3B kalorimetre kabı ---------- */
+  let calorimeter3D = null;
+  let calorimeter3DLoading = null;
+  function ensureCalorimeter3D() {
+    if (calorimeter3D) return Promise.resolve(calorimeter3D);
+    if (calorimeter3DLoading) return calorimeter3DLoading;
+    calorimeter3DLoading = import("../assets/js/scene3d.js").then(({ createBeakerScene }) => {
+      calorimeter3D = createBeakerScene(document.getElementById("fuel-scene-3d"), { liquidColor: 0xbcdcf6 });
+      calorimeter3D.setLiquid(0.55, 0xbcdcf6);
+      return calorimeter3D;
     });
-    selA.value = 1; // çam odunu
-    selB.value = 6; // doğal gaz
-    selA.addEventListener("change", drawFuelCompare);
-    selB.addEventListener("change", drawFuelCompare);
-    drawFuelCompare();
+    return calorimeter3DLoading;
+  }
+  function sceneCombustion(frac) {
+    ensureCalorimeter3D();
+    const flameEl = document.getElementById("fuel-flame");
+    flameEl.style.opacity = frac <= 0.02 ? "0" : Math.min(1, 0.5 + frac * 0.5).toFixed(2);
+    flameEl.style.transform = `translateX(-50%) scale(${(0.7 + frac * 0.5).toFixed(2)})`;
+  }
+
+  const testedFuels = {};
+
+  function drawFuelBarChart() {
+    const names = Object.keys(testedFuels);
+    const svgEl = document.getElementById("fuel-chart");
+    if (names.length === 0) {
+      svgEl.innerHTML = `<text x="20" y="120" font-size="12" fill="var(--ink-soft)">Henüz yakılan yakıt yok — sonuçlar burada birikecek.</text>`;
+      return;
+    }
+    const chart = renderChart({ labels: names, values: names.map((n) => testedFuels[n]), unit: "kJ/g" });
+    chart.id = "fuel-chart";
+    svgEl.replaceWith(chart);
+  }
+
+  function runFuelBurn(fuel) {
+    const btn = document.getElementById("fuel-burn");
+    btn.disabled = true;
+    const steps = 12;
+    let i = 0;
+    const timer = setInterval(() => {
+      i++;
+      const frac = i / steps;
+      const kj = fuel.value * frac;
+      sceneCombustion(frac < 1 ? frac : 0.15);
+      document.getElementById("fuel-readout").innerHTML = `<b>${kj.toFixed(1)} kJ/g</b><span>${fuel.name} yanıyor…</span>`;
+      if (i >= steps) {
+        clearInterval(timer);
+        btn.disabled = false;
+        document.getElementById("fuel-readout").innerHTML = `<b>${fuel.value} kJ/g</b><span>${fuel.name} — 1 g'ın tam yanma ısısı</span>`;
+        testedFuels[fuel.name] = fuel.value;
+        drawFuelBarChart();
+      }
+    }, 90);
+  }
+
+  function buildFuelLab() {
+    const sel = document.getElementById("fuel-select");
+    FUELS.forEach((f, i) => sel.appendChild(new Option(f.name, i)));
+    sel.value = 1;
+    document.getElementById("fuel-burn").addEventListener("click", () => runFuelBurn(FUELS[sel.value]));
+    sceneCombustion(0);
+    drawFuelBarChart();
   }
 
   const MASS_FUELS = [
     { name: "Çam odunu", value: 21.2, color: "var(--energy)" },
     { name: "Doğal gaz", value: 49.5, color: "var(--rate)" },
   ];
+  const massTestPoints = { "Çam odunu": [], "Doğal gaz": [] };
+
+  function sceneScale(mass, kj, frac) {
+    const pileW = 14 + mass * 3;
+    return `
+      <rect x="90" y="150" width="120" height="14" rx="4" fill="#8a8f99"/>
+      <rect x="140" y="130" width="20" height="20" fill="#6b6f78"/>
+      <rect x="${150 - pileW / 2}" y="${128 - mass}" width="${pileW}" height="${mass}" rx="3" fill="#a9764f" opacity="0.85"/>
+      ${flame(150, 128 - mass, frac)}
+      <text x="150" y="205" text-anchor="middle" font-size="12" fill="var(--ink-soft)">${mass} g yakıt terazide</text>
+      ${digitalReadout(228, 55, 60, 62, kj.toFixed(0), "kJ açığa çıktı")}
+    `;
+  }
 
   function drawMassChart() {
-    const mass = Number(document.getElementById("mass-range").value);
-    document.getElementById("mass-label").textContent = mass;
-    const xLabels = Array.from({ length: 10 }, (_, i) => `${i + 1} g`);
-    const series = MASS_FUELS.map((f) => ({
-      name: f.name,
-      values: xLabels.map((_, i) => Math.round(f.value * (i + 1))),
-      color: f.color,
-    }));
-    const newChart = renderCompareLineChart({ xLabels, series });
-    newChart.id = "mass-svg";
-    document.getElementById("mass-svg").replaceWith(newChart);
-    const readout = document.getElementById("mass-readout");
-    readout.innerHTML = MASS_FUELS.map((f) => `<div><b>${Math.round(f.value * mass)} kJ</b>${f.name} · ${mass} g</div>`).join("");
+    const svgEl = document.getElementById("mass-chart");
+    const W = 440, H = 240, padL = 44, padB = 30, padT = 14, padR = 14;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+    const allKj = MASS_FUELS.flatMap((f) => massTestPoints[f.name].map((p) => p.kj));
+    const yMax = Math.max(50, ...allKj) * 1.15;
+    const xMax = 10;
+    const xAt = (m) => padL + (plotW * m) / xMax;
+    const yAt = (v) => padT + plotH - (v / yMax) * plotH;
+    let grid = "";
+    for (let i = 0; i <= 4; i++) {
+      const y = padT + (plotH * i) / 4;
+      grid += `<line x1="${padL}" x2="${W - padR}" y1="${y}" y2="${y}" class="gridline"/>`;
+      grid += `<text x="${padL - 6}" y="${y + 3}" text-anchor="end" font-size="9">${Math.round(yMax - (yMax * i) / 4)}</text>`;
+    }
+    let body = "", legend = "", lx = padL + 4;
+    MASS_FUELS.forEach((f) => {
+      const pts = massTestPoints[f.name].slice().sort((a, b) => a.mass - b.mass);
+      if (pts.length > 1) {
+        const line = pts.map((p) => `${xAt(p.mass)},${yAt(p.kj)}`).join(" ");
+        body += `<polyline points="${line}" class="line" style="stroke:${f.color}"/>`;
+      }
+      body += pts.map((p) => `<circle cx="${xAt(p.mass)}" cy="${yAt(p.kj)}" r="3.5" style="fill:${f.color}"/>`).join("");
+      legend += `<circle cx="${lx}" cy="${padT}" r="4" style="fill:${f.color}"/><text x="${lx + 8}" y="${padT + 4}" font-size="9">${f.name}</text>`;
+      lx += f.name.length * 6 + 24;
+    });
+    svgEl.innerHTML = `
+      ${grid}
+      <line x1="${padL}" x2="${padL}" y1="${padT}" y2="${H - padB}" class="axis"/>
+      <line x1="${padL}" x2="${W - padR}" y1="${H - padB}" y2="${H - padB}" class="axis"/>
+      ${body}${legend}
+      <text x="${padL}" y="${H - 6}" font-size="9">kütle (g) →</text>
+    `;
+  }
+
+  function runMassBurn(fuel, mass) {
+    const btn = document.getElementById("mass-burn");
+    btn.disabled = true;
+    const target = fuel.value * mass;
+    const steps = 12;
+    let i = 0;
+    const timer = setInterval(() => {
+      i++;
+      const frac = i / steps;
+      document.getElementById("mass-scene").innerHTML = sceneScale(mass, target * frac, frac < 1 ? frac : 0.15);
+      document.getElementById("mass-readout").innerHTML = `<b>${(target * frac).toFixed(0)} kJ</b><span>${fuel.name} yanıyor…</span>`;
+      if (i >= steps) {
+        clearInterval(timer);
+        btn.disabled = false;
+        document.getElementById("mass-readout").innerHTML = `<b>${target.toFixed(0)} kJ</b><span>${mass} g ${fuel.name} tam yandı</span>`;
+        massTestPoints[fuel.name] = massTestPoints[fuel.name].filter((p) => p.mass !== mass);
+        massTestPoints[fuel.name].push({ mass, kj: target });
+        drawMassChart();
+      }
+    }, 90);
   }
 
   function buildMassSim() {
-    document.getElementById("mass-range").addEventListener("input", drawMassChart);
+    const fuelSel = document.getElementById("mass-fuel-select");
+    MASS_FUELS.forEach((f, i) => fuelSel.appendChild(new Option(f.name, i)));
+    const range = document.getElementById("mass-range");
+    range.addEventListener("input", () => {
+      document.getElementById("mass-label").textContent = range.value;
+      document.getElementById("mass-scene").innerHTML = sceneScale(Number(range.value), 0, 0);
+    });
+    document.getElementById("mass-burn").addEventListener("click", () => {
+      runMassBurn(MASS_FUELS[fuelSel.value], Number(range.value));
+    });
+    document.getElementById("mass-scene").innerHTML = sceneScale(5, 0, 0);
     drawMassChart();
   }
 
