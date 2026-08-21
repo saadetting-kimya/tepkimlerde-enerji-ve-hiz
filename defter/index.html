@@ -62,10 +62,11 @@
   .bank-q .options { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
   .bank-q .opt { display: flex; gap: 8px; align-items: flex-start; font-size: .86rem; padding: 2px 0; }
   .bank-q .opt .letter { flex: none; width: 19px; height: 19px; border-radius: 50%; background: var(--bg-panel); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .68rem; }
-  .bank-q .opt.correct { color: var(--rate); font-weight: 700; }
-  .bank-q .opt.correct .letter { background: var(--rate); color: #fff; }
-  .bank-q .explain { font-size: .84rem; color: var(--ink-soft); background: #f1f8f4; border: 1px solid #cfe8d8; border-radius: 6px; padding: 8px 10px; margin: 0; }
-  .bank-q .explain b { color: var(--rate); }
+  .qbank-key { margin-top: 18px; padding-top: 14px; border-top: 2px dashed var(--line); }
+  .qbank-key h3 { margin: 0 0 8px; font-size: 1rem; }
+  .qbank-key-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; font-size: .82rem; }
+  .qbank-key-grid span { display: flex; gap: 4px; justify-content: center; color: var(--ink-soft); }
+  .qbank-key-grid b { color: var(--rate); }
 
   .viz-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin: 6px 0 10px; }
   .viz-table th, .viz-table td { border: 1px solid var(--line); padding: 5px 8px; text-align: center; }
@@ -196,8 +197,9 @@
 
 <div class="page page-break">
   <h2 style="margin-top:0">Soru Bankası — Modül 1 (50 Soru)</h2>
-  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı, doğru cevabı ve açıklamasıyla birlikte.</p>
+  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı burada listelenir. Önce kendin çöz; cevap anahtarı bölüm sonunda ayrıca verilmiştir.</p>
   <div id="bank-m1"></div>
+  <div id="answerkey-m1"></div>
 </div>
 
 <!-- MODÜL 2 -->
@@ -258,8 +260,9 @@
 
 <div class="page page-break">
   <h2 style="margin-top:0">Soru Bankası — Modül 2 (50 Soru)</h2>
-  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı, doğru cevabı ve açıklamasıyla birlikte.</p>
+  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı burada listelenir. Önce kendin çöz; cevap anahtarı bölüm sonunda ayrıca verilmiştir.</p>
   <div id="bank-m2"></div>
+  <div id="answerkey-m2"></div>
 </div>
 
 <!-- MODÜL 3 -->
@@ -318,8 +321,9 @@
 
 <div class="page page-break">
   <h2 style="margin-top:0">Soru Bankası — Modül 3 (50 Soru)</h2>
-  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı, doğru cevabı ve açıklamasıyla birlikte.</p>
+  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı burada listelenir. Önce kendin çöz; cevap anahtarı bölüm sonunda ayrıca verilmiştir.</p>
   <div id="bank-m3"></div>
+  <div id="answerkey-m3"></div>
 </div>
 
 <!-- MODÜL 4 -->
@@ -378,8 +382,9 @@
 
 <div class="page page-break">
   <h2 style="margin-top:0">Soru Bankası — Modül 4 (50 Soru)</h2>
-  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı, doğru cevabı ve açıklamasıyla birlikte.</p>
+  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı burada listelenir. Önce kendin çöz; cevap anahtarı bölüm sonunda ayrıca verilmiştir.</p>
   <div id="bank-m4"></div>
+  <div id="answerkey-m4"></div>
 </div>
 
 <!-- MODÜL 5 -->
@@ -429,8 +434,9 @@
 
 <div class="page page-break">
   <h2 style="margin-top:0">Soru Bankası — Modül 5 (50 Soru)</h2>
-  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı, doğru cevabı ve açıklamasıyla birlikte.</p>
+  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı burada listelenir. Önce kendin çöz; cevap anahtarı bölüm sonunda ayrıca verilmiştir.</p>
   <div id="bank-m5"></div>
+  <div id="answerkey-m5"></div>
 </div>
 
 <!-- MODÜL 6 -->
@@ -477,8 +483,9 @@
 
 <div class="page page-break">
   <h2 style="margin-top:0">Soru Bankası — Modül 6 (50 Soru)</h2>
-  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı, doğru cevabı ve açıklamasıyla birlikte.</p>
+  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı burada listelenir. Önce kendin çöz; cevap anahtarı bölüm sonunda ayrıca verilmiştir.</p>
   <div id="bank-m6"></div>
+  <div id="answerkey-m6"></div>
 </div>
 
 <!-- MODÜL 7 -->
@@ -533,8 +540,9 @@
 
 <div class="page page-break">
   <h2 style="margin-top:0">Soru Bankası — Modül 7 (50 Soru)</h2>
-  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı, doğru cevabı ve açıklamasıyla birlikte.</p>
+  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı burada listelenir. Önce kendin çöz; cevap anahtarı bölüm sonunda ayrıca verilmiştir.</p>
   <div id="bank-m7"></div>
+  <div id="answerkey-m7"></div>
 </div>
 
 <!-- MODÜL 8 -->
@@ -593,8 +601,9 @@
 
 <div class="page page-break">
   <h2 style="margin-top:0">Soru Bankası — Modül 8 (50 Soru)</h2>
-  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı, doğru cevabı ve açıklamasıyla birlikte.</p>
+  <p class="bank-intro">Modülün soru havuzundaki 50 sorunun tamamı burada listelenir. Önce kendin çöz; cevap anahtarı bölüm sonunda ayrıca verilmiştir.</p>
   <div id="bank-m8"></div>
+  <div id="answerkey-m8"></div>
 </div>
 
 <script src="../assets/js/quiz-engine.js"></script>
@@ -614,22 +623,35 @@
     card.appendChild(el("div", { class: "qtext" }, q.text));
     const opts = el("div", { class: "options" });
     q.options.forEach((optText, i) => {
-      opts.appendChild(el("div", { class: "opt" + (i === q.correct ? " correct" : "") }, [
+      opts.appendChild(el("div", { class: "opt" }, [
         el("span", { class: "letter" }, LETTERS[i]),
         el("span", {}, optText),
       ]));
     });
     card.appendChild(opts);
-    card.appendChild(el("div", { class: "explain" }, [el("b", {}, "Açıklama: "), el("span", {}, q.explain)]));
     return card;
+  }
+
+  function renderAnswerKey(questions) {
+    const wrap = el("div", { class: "qbank-key" });
+    wrap.appendChild(el("h3", {}, "Cevap Anahtarı"));
+    const grid = el("div", { class: "qbank-key-grid" });
+    questions.forEach((q, idx) => {
+      grid.appendChild(el("span", {}, [`${idx + 1}. `, el("b", {}, LETTERS[q.correct])]));
+    });
+    wrap.appendChild(grid);
+    return wrap;
   }
 
   ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"].forEach((key) => {
     const host = document.getElementById(`bank-${key}`);
     if (!host) return;
     const frag = document.createDocumentFragment();
-    (QUIZ[key] || []).forEach((q, idx) => frag.appendChild(renderBankQuestion(q, idx)));
+    const questions = QUIZ[key] || [];
+    questions.forEach((q, idx) => frag.appendChild(renderBankQuestion(q, idx)));
     host.appendChild(frag);
+    const keyHost = document.getElementById(`answerkey-${key}`);
+    if (keyHost) keyHost.appendChild(renderAnswerKey(questions));
   });
 </script>
 </body>
