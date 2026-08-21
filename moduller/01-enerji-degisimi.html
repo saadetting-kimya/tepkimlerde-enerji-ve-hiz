@@ -44,9 +44,10 @@
 
 <section class="block">
   <div class="container">
-    <h2><span class="num">2</span>Deney İstasyonu: Ölçer Odası</h2>
-    <p class="block-lead">Bir olay seç ve deneyi başlat; ölçüm cihazındaki değişimi ve çizilen grafiği izle.
-      Deney bitince olayı SEN sınıflandır — cevabını işaretledikten sonra doğru olup olmadığını göreceksin.</p>
+    <h2><span class="num">2</span>Deney İstasyonu: Laboratuvar Masası</h2>
+    <p class="block-lead">Bir olay seç ve deneyi başlat; deney düzeneğinde gerçekleşeni ve ölçüm cihazındaki
+      değişimi birlikte izle. Deney bitince olayı SEN sınıflandır — cevabını işaretledikten sonra doğru olup
+      olmadığını göreceksin.</p>
     <div class="lab">
       <div class="lab-controls">
         <label for="exp-select">Olay:</label>
@@ -54,8 +55,8 @@
         <button id="exp-start" class="btn primary" type="button">▶ Deneyi Başlat</button>
       </div>
       <div class="exp-stage">
-        <div class="exp-gauge-wrap">
-          <svg id="exp-gauge" viewBox="0 0 140 260"></svg>
+        <div class="exp-scene-wrap">
+          <svg id="exp-scene" viewBox="0 0 300 220"></svg>
           <div class="exp-readout" id="exp-readout">Deneyi başlatmak için düğmeye bas</div>
         </div>
         <div class="exp-chart-wrap">
@@ -95,42 +96,42 @@
      capped: true → ölçüm cihazının üst sınırını aşan (termit) deney. */
   const EXPERIMENTS = [
     {
-      id: "soğutma", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60,
+      id: "soğutma", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, scene: "beaker",
       label: "Tıbbi soğutma paketi (amonyum klorür + su)",
       start: 25, end: 12,
       physical: "Fiziksel", thermic: "Endotermik",
       why: "Amonyum klorürün suda çözünmesi bir çözünme (fiziksel) olayıdır; madde kimliği değişmez. Çözünen katı çevresinden (sudan) ısı aldığı için deneyde su 25°C'den 12°C'ye kadar soğur — bu yüzden endotermiktir.",
     },
     {
-      id: "sobası", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60,
+      id: "sobası", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, scene: "pouch",
       label: "Jel bazlı cep sobası (sodyum asetatın kristalleşmesi)",
       start: 24, end: 53,
       physical: "Fiziksel", thermic: "Ekzotermik",
       why: "Kristalleşme bir hâl/yapı değişimidir (fiziksel); madde kimliği değişmez. Sodyum asetat trihidrat kristalleşirken biriktirdiği enerjiyi çevreye verir; sıcaklık yaklaşık 50-55°C'ye kadar yükselir — bu yüzden ekzotermiktir.",
     },
     {
-      id: "termit", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, capped: true,
+      id: "termit", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, capped: true, scene: "crucible",
       label: "Termit tepkimesi (Fe2O3 + 2Al → Al2O3 + 2Fe + ısı)",
       start: 24, end: 900,
       physical: "Kimyasal", thermic: "Ekzotermik",
       why: "Fe2O3 ve alüminyumdan alüminyum oksit ile demir gibi kimliği farklı yeni maddeler oluşur; bu kimyasaldır. Açığa çıkan ısı, tren raylarını eritecek kadar yüksektir — ölçer bu deneyde üst sınırını aşar; tepkime güçlü bir ekzotermik tepkimedir.",
     },
     {
-      id: "ateşböceği", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, tiny: true,
+      id: "ateşböceği", kind: "temp", unit: "°C", gaugeMin: 0, gaugeMax: 60, tiny: true, scene: "firefly",
       label: "Ateş böceğinin karnında ışık üretmesi (biyolüminesans)",
       start: 24, end: 24.3,
       physical: "Kimyasal", thermic: "Ekzotermik",
       why: "Karın bölgesindeki maddenin enzim yardımıyla oksijenle tepkimeye girip kimliği farklı ürünler oluşturması kimyasaldır. Işıkla birlikte az da olsa ısı açığa çıkması (ölçer neredeyse hiç kımıldamaz) tepkimenin yine de ekzotermik olduğunu gösterir; bu yüzden 'soğuk ışık' denir.",
     },
     {
-      id: "fotosel", kind: "energy", unit: "birim", gaugeMin: 0, gaugeMax: 100, pop: true,
+      id: "fotosel", kind: "energy", unit: "birim", gaugeMin: 0, gaugeMax: 100, pop: true, scene: "photocell",
       label: "Fotoselli batarya (ışığın metal yüzeyden elektron koparması)",
       start: 0, end: 100,
       physical: "Fiziksel", thermic: "Endotermik",
       why: "Elektronun atomdan kopması madde kimliğini değiştirmez; bu fizikseldir. Gösterge, elektronun atoma bağlayan çekim kuvvetini yenip kopabilmesi için fotondan enerji almasını gösterir — enerji dışarıdan sisteme aktarıldığı için endotermiktir.",
     },
     {
-      id: "cacl2", kind: "temp", unit: "°C", gaugeMin: -20, gaugeMax: 60,
+      id: "cacl2", kind: "temp", unit: "°C", gaugeMin: -20, gaugeMax: 60, scene: "ice",
       label: "Kalsiyum klorürün karda/buzda serpilip çözünmesi",
       start: -3, end: 5,
       physical: "Fiziksel", thermic: "Ekzotermik",
@@ -152,32 +153,157 @@
     return out;
   }
 
-  function drawGauge(exp, value) {
-    const svgEl = document.getElementById("exp-gauge");
-    const frac = Math.max(0, Math.min(1, (value - exp.gaugeMin) / (exp.gaugeMax - exp.gaugeMin)));
-    const overflow = exp.capped && value >= exp.gaugeMax;
-    const tubeTop = 26, tubeBottom = 210, tubeH = tubeBottom - tubeTop;
-    const fillH = tubeH * (overflow ? 1 : frac);
-    const fillY = tubeBottom - fillH;
-    const color = exp.kind === "energy" ? "var(--energy)" : value >= exp.start ? "var(--exo)" : "var(--endo)";
+  /* ---------- ortak sahne motifleri ---------- */
+  function miniThermometer(x, y, h, frac, color, overflow) {
+    const bulbCy = y + h + 14;
+    const fillH = h * (overflow ? 1 : Math.max(0, Math.min(1, frac)));
+    const fillY = y + h - fillH;
+    return `
+      <rect x="${x}" y="${y}" width="14" height="${h}" rx="7" fill="#fff" stroke="var(--line)" stroke-width="1.6"/>
+      <circle cx="${x + 7}" cy="${bulbCy}" r="13" fill="#fff" stroke="var(--line)" stroke-width="1.6"/>
+      <rect x="${x + 2.5}" y="${fillY}" width="9" height="${y + h - fillY + 14}" rx="4.5" fill="${color}"/>
+      <circle cx="${x + 7}" cy="${bulbCy}" r="9" fill="${color}"/>
+      ${overflow ? `<text x="${x + 7}" y="${y - 6}" text-anchor="middle" font-size="13" fill="var(--bad)">⚠</text>` : ""}
+    `;
+  }
+  function mistWisps(cx, cy, opacity) {
+    if (opacity <= 0.02) return "";
+    return [0, 1, 2]
+      .map((i) => {
+        const dx = (i - 1) * 16;
+        return `<path d="M${cx + dx} ${cy} q -6 -12 0 -22 q 6 -10 0 -20" stroke="#bcd7f2" stroke-width="3" fill="none" stroke-linecap="round" opacity="${(opacity * (0.55 + 0.15 * i)).toFixed(2)}"/>`;
+      })
+      .join("");
+  }
+  function heatWaves(cx, cy, opacity) {
+    if (opacity <= 0.02) return "";
+    return [0, 1, 2]
+      .map((i) => {
+        const dx = (i - 1) * 18;
+        return `<path d="M${cx + dx} ${cy} q 5 -10 0 -20 q -5 -10 0 -20" stroke="#f2b199" stroke-width="3" fill="none" stroke-linecap="round" opacity="${(opacity * (0.55 + 0.15 * i)).toFixed(2)}"/>`;
+      })
+      .join("");
+  }
+  function sparkBurst(cx, cy, opacity, scale) {
+    if (opacity <= 0.02) return "";
+    const r = 10 * scale;
+    return [0, 60, 120, 180, 240, 300]
+      .map((deg) => {
+        const rad = (deg * Math.PI) / 180;
+        const x2 = cx + Math.cos(rad) * r, y2 = cy + Math.sin(rad) * r;
+        return `<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#ffb020" stroke-width="2" opacity="${opacity.toFixed(2)}"/>`;
+      })
+      .join("");
+  }
 
-    if (exp.kind === "temp") {
-      svgEl.innerHTML = `
-        <rect x="55" y="${tubeTop}" width="30" height="${tubeH}" rx="15" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
-        <circle cx="70" cy="228" r="26" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
-        <rect x="58" y="${fillY}" width="24" height="${tubeBottom - fillY + 26}" rx="12" fill="${color}"/>
-        <circle cx="70" cy="228" r="20" fill="${color}"/>
-        ${overflow ? `<text x="70" y="14" text-anchor="middle" font-size="18" fill="var(--bad)">⚠</text>` : ""}
-        ${[0, 0.25, 0.5, 0.75, 1].map((f) => `<line x1="86" y1="${tubeBottom - tubeH * f}" x2="94" y2="${tubeBottom - tubeH * f}" stroke="var(--ink-soft)" stroke-width="1.5"/>`).join("")}
-      `;
-    } else {
-      svgEl.innerHTML = `
-        <rect x="50" y="${tubeTop}" width="40" height="${tubeH}" rx="8" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
-        <rect x="52" y="${fillY}" width="36" height="${tubeBottom - fillY}" rx="6" fill="${color}"/>
-        <text x="70" y="18" text-anchor="middle" font-size="16">⚡</text>
-        ${exp.pop && frac >= 1 ? `<circle cx="70" cy="${tubeTop - 6}" r="6" fill="var(--endo)"><animate attributeName="cy" from="${tubeTop - 6}" to="-20" dur="0.6s" fill="freeze"/><animate attributeName="opacity" from="1" to="0" dur="0.6s" fill="freeze"/></circle><text x="70" y="${tubeTop - 16}" text-anchor="middle" font-size="10" fill="var(--endo)">e⁻</text>` : ""}
-      `;
-    }
+  function sceneBeaker(exp, progress, value, tempColor) {
+    /* soğutma paketi: beher + çözünen kristaller + daldırılmış termometre */
+    const crystalOpacity = Math.max(0, 1 - progress * 1.6);
+    return `
+      <path d="M105 60 L105 165 Q105 185 125 185 L195 185 Q215 185 215 165 L215 60" fill="none" stroke="var(--ink-soft)" stroke-width="2.5"/>
+      <path d="M108 90 L212 90 L212 163 Q212 180 195 180 L125 180 Q108 180 108 163 Z" fill="#cfe4fb" opacity="0.8"/>
+      ${mistWisps(160, 55, progress)}
+      <rect x="145" y="115" width="9" height="9" fill="#fff" stroke="#9fb6cc" opacity="${crystalOpacity.toFixed(2)}"/>
+      <rect x="163" y="128" width="7" height="7" fill="#fff" stroke="#9fb6cc" opacity="${crystalOpacity.toFixed(2)}"/>
+      <rect x="178" y="112" width="8" height="8" fill="#fff" stroke="#9fb6cc" opacity="${crystalOpacity.toFixed(2)}"/>
+      <text x="160" y="205" text-anchor="middle" font-size="11" fill="var(--ink-soft)">NH₄Cl + H₂O</text>
+      ${miniThermometer(200, 40, 90, (value - exp.gaugeMin) / (exp.gaugeMax - exp.gaugeMin), tempColor, false)}
+    `;
+  }
+
+  function scenePouch(exp, progress, value, tempColor) {
+    /* cep sobası: sıvıdan katıya kristalleşen jel paket */
+    return `
+      <path d="M60 90 Q60 55 110 55 L190 55 Q240 55 240 90 L240 150 Q240 185 190 185 L110 185 Q60 185 60 150 Z"
+        fill="${progress < 0.5 ? "#fff3c4" : "#f4f1ea"}" stroke="var(--ink-soft)" stroke-width="2.5" opacity="0.95"/>
+      ${progress > 0.25 ? `<g opacity="${Math.min(1, (progress - 0.25) * 1.6).toFixed(2)}">
+        <line x1="90" y1="90" x2="130" y2="130" stroke="#c9c2ac" stroke-width="2"/>
+        <line x1="150" y1="80" x2="120" y2="150" stroke="#c9c2ac" stroke-width="2"/>
+        <line x1="180" y1="90" x2="150" y2="170" stroke="#c9c2ac" stroke-width="2"/>
+        <line x1="210" y1="100" x2="170" y2="160" stroke="#c9c2ac" stroke-width="2"/>
+      </g>` : ""}
+      ${heatWaves(150, 48, progress)}
+      <text x="150" y="205" text-anchor="middle" font-size="11" fill="var(--ink-soft)">CH₃COONa (jel)</text>
+      ${miniThermometer(255, 60, 80, (value - exp.gaugeMin) / (exp.gaugeMax - exp.gaugeMin), tempColor, false)}
+    `;
+  }
+
+  function sceneCrucible(exp, progress, value, overflow) {
+    /* termit: pota içinde tutuşan toz + sıçrayan kıvılcımlar */
+    const glow = Math.max(0, Math.min(1, (progress - 0.15) / 0.6));
+    return `
+      <path d="M90 90 L90 150 Q90 180 150 180 Q210 180 210 150 L210 90 Z" fill="#4a4a52" stroke="#2c2c33" stroke-width="2.5"/>
+      <ellipse cx="150" cy="90" rx="60" ry="12" fill="#6b6b74"/>
+      <ellipse cx="150" cy="140" rx="${30 + glow * 24}" ry="${10 + glow * 9}" fill="${glow > 0.05 ? "#ff7a1a" : "#8a8a8a"}" opacity="${0.55 + glow * 0.4}"/>
+      ${glow > 0.2 ? sparkBurst(150, 120, Math.min(1, glow), 1.6) : ""}
+      ${glow > 0.2 ? sparkBurst(175, 130, Math.min(1, glow) * 0.8, 1.1) : ""}
+      ${glow >= 0.9 ? `<path d="M150 178 q4 14 -2 22" stroke="#ff9a3d" stroke-width="4" fill="none" stroke-linecap="round"/>` : ""}
+      ${progress < 0.2 ? `<text x="150" y="70" text-anchor="middle" font-size="16">🔥</text>` : ""}
+      <text x="150" y="205" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Fe₂O₃ + 2Al (pota)</text>
+      ${miniThermometer(250, 55, 85, glow, glow > 0.05 ? "var(--exo)" : "#c8c8c8", overflow)}
+    `;
+  }
+
+  function sceneFirefly(exp, progress, value) {
+    /* ateş böceği: karanlıkta parlayan biyolüminesans */
+    const glow = 0.35 + 0.55 * Math.sin(progress * Math.PI);
+    return `
+      <rect x="30" y="30" width="240" height="160" rx="10" fill="#181c33"/>
+      <ellipse cx="150" cy="105" rx="26" ry="12" fill="#2b2f4a"/>
+      <ellipse cx="122" cy="98" rx="16" ry="7" fill="#33375a" opacity="0.8"/>
+      <ellipse cx="122" cy="112" rx="16" ry="7" fill="#33375a" opacity="0.8"/>
+      <circle cx="176" cy="105" r="9" fill="#ffe27a" opacity="${glow.toFixed(2)}"/>
+      <circle cx="176" cy="105" r="16" fill="#ffe27a" opacity="${(glow * 0.35).toFixed(2)}"/>
+      <text x="150" y="205" text-anchor="middle" font-size="11" fill="#c9cdE6">Luciferin + O₂ (enzimle)</text>
+      ${miniThermometer(250, 60, 80, (value - exp.gaugeMin) / (exp.gaugeMax - exp.gaugeMin), "var(--exo)", false)}
+    `;
+  }
+
+  function scenePhotocell(exp, progress) {
+    /* fotoselli batarya: fotonlar metal levhaya çarpıyor, elektron kopuyor */
+    const rays = [0, 1, 2].map((i) => {
+      const t = (progress * 3 + i * 0.33) % 1;
+      const x = 40 + t * 130;
+      return `<line x1="${x}" y1="${70 + i * 30}" x2="${x + 22}" y2="${85 + i * 30}" stroke="#ffb020" stroke-width="3" stroke-linecap="round"/>`;
+    }).join("");
+    return `
+      <rect x="205" y="45" width="26" height="140" fill="#8b93a6" stroke="#5b6274" stroke-width="2"/>
+      <text x="218" y="200" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Metal levha</text>
+      ${rays}
+      <text x="70" y="55" font-size="11" fill="var(--ink-soft)">ışık (foton)</text>
+      ${progress >= 0.92 ? `<circle cx="220" cy="60" r="6" fill="var(--endo)"><animate attributeName="cy" from="60" to="20" dur="0.5s" fill="freeze"/><animate attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"/></circle><text x="220" y="14" text-anchor="middle" font-size="11" fill="var(--endo)">e⁻</text>` : ""}
+      <rect x="255" y="45" width="16" height="140" rx="6" fill="#fff" stroke="var(--line)" stroke-width="1.6"/>
+      <rect x="257.5" y="${185 - 140 * progress}" width="11" height="${140 * progress}" rx="4.5" fill="var(--energy)"/>
+    `;
+  }
+
+  function sceneIce(exp, progress, value, tempColor) {
+    /* CaCl2: buzlu zemine serpilen tuz, erime gölcükleri büyüyor */
+    const melt = Math.max(0, progress - 0.15);
+    return `
+      <rect x="30" y="120" width="240" height="60" fill="#e3f1fb" stroke="#bcd7ee" stroke-width="2"/>
+      <circle cx="95" cy="145" r="${6 + melt * 14}" fill="#8fc1e8" opacity="${(0.35 + melt * 0.4).toFixed(2)}"/>
+      <circle cx="150" cy="155" r="${5 + melt * 12}" fill="#8fc1e8" opacity="${(0.35 + melt * 0.4).toFixed(2)}"/>
+      <circle cx="200" cy="140" r="${5 + melt * 13}" fill="#8fc1e8" opacity="${(0.35 + melt * 0.4).toFixed(2)}"/>
+      <circle cx="95" cy="145" r="4" fill="#fff" stroke="#b7b7b7"/>
+      <circle cx="150" cy="155" r="3.5" fill="#fff" stroke="#b7b7b7"/>
+      <circle cx="200" cy="140" r="4" fill="#fff" stroke="#b7b7b7"/>
+      <text x="150" y="205" text-anchor="middle" font-size="11" fill="var(--ink-soft)">CaCl₂ tuzu / buz</text>
+      ${miniThermometer(150, 40, 70, (value - exp.gaugeMin) / (exp.gaugeMax - exp.gaugeMin), tempColor, false)}
+    `;
+  }
+
+  function drawScene(exp, value, progress) {
+    const svgEl = document.getElementById("exp-scene");
+    const overflow = exp.capped && value >= exp.gaugeMax;
+    const tempColor = value >= exp.start ? "var(--exo)" : "var(--endo)";
+
+    if (exp.scene === "beaker") svgEl.innerHTML = sceneBeaker(exp, progress, value, tempColor);
+    else if (exp.scene === "pouch") svgEl.innerHTML = scenePouch(exp, progress, value, tempColor);
+    else if (exp.scene === "crucible") svgEl.innerHTML = sceneCrucible(exp, progress, value, overflow);
+    else if (exp.scene === "firefly") svgEl.innerHTML = sceneFirefly(exp, progress, value);
+    else if (exp.scene === "photocell") svgEl.innerHTML = scenePhotocell(exp, progress);
+    else if (exp.scene === "ice") svgEl.innerHTML = sceneIce(exp, progress, value, tempColor);
 
     const readoutEl = document.getElementById("exp-readout");
     if (overflow) {
@@ -224,7 +350,7 @@
   function resetStage(exp) {
     if (animTimer) clearInterval(animTimer);
     chartPoints = [];
-    drawGauge(exp, exp.start);
+    drawScene(exp, exp.start, 0);
     drawChart(exp, []);
     document.getElementById("exp-readout").innerHTML = "Deneyi başlatmak için düğmeye bas";
     document.getElementById("exp-classify").innerHTML = "";
@@ -240,7 +366,7 @@
     animTimer = setInterval(() => {
       const v = steps[i];
       chartPoints.push(v);
-      drawGauge(exp, v);
+      drawScene(exp, v, i / (steps.length - 1));
       drawChart(exp, chartPoints);
       i++;
       if (i >= steps.length) {
